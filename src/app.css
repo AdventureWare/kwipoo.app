@@ -1,1 +1,29 @@
-@import 'tailwindcss';
+/* src/app.css */
+@import "tailwindcss";
+
+/* Define your custom colors and design tokens */
+@theme {
+  --color-primary: #329f9b;
+  --color-secondary: #dbb658;
+  --font-family-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+}
+
+/* Import Inter font - add this to your app.html head if you want to use it */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: theme(fontFamily.sans);
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
