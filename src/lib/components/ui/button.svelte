@@ -35,7 +35,7 @@
     primary:
       "bg-[#329F9B] hover:bg-[#2a8480] text-white focus:ring-[#329F9B]/50 shadow-sm hover:shadow-md",
     secondary:
-      "bg-[#DBB658] hover:bg-[#d4ac47] text-white focus:ring-[#DBB658]/50 shadow-sm hover:shadow-md",
+      "bg-secondary-500 hover:bg-[#d4ac47] text-white focus:ring-secondary-500/50 shadow-sm hover:shadow-md",
     outline:
       "border border-[#329F9B] text-[#329F9B] hover:bg-[#329F9B] hover:text-white focus:ring-[#329F9B]/50",
     ghost: "text-[#329F9B] hover:bg-[#329F9B]/10 focus:ring-[#329F9B]/50",

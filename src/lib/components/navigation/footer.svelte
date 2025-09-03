@@ -10,10 +10,15 @@
   interface FooterLink {
     label: string;
     href: string;
+    external?: boolean;
   }
 
   const companyLinks: FooterLink[] = [
-    { label: "AdventureWare", href: "https://www.adventureware.com/" },
+    {
+      label: "AdventureWare",
+      href: "https://www.adventureware.com/",
+      external: true,
+    },
     { label: "About Us", href: "/about-us" },
   ];
 
@@ -39,7 +44,7 @@
   ];
 </script>
 
-<footer class=" border-t border-gray-200">
+<footer class=" border-t border-neutral-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       <!-- Left Section - Logo placeholder -->
@@ -47,18 +52,16 @@
         <div class="flex items-center">
           <!-- Placeholder for logo - you'll add the image here -->
           <div
-            class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center"
+            class="w-20 h-20 bg-neutral-200 rounded flex items-center justify-center"
           >
-            <span class="text-gray-500 text-xs">Logo</span>
+            <img src="assets/logos/logo.svg" alt="Kwipoo Logo" />
           </div>
         </div>
       </div>
 
       <!-- Middle Section - Company Links -->
       <div class="col-span-1">
-        <h3
-          class="text-sm font-semibold text-black uppercase tracking-wider mb-4"
-        >
+        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
           Company
         </h3>
         <ul class="space-y-3">
@@ -66,7 +69,10 @@
             <li>
               <a
                 href={link.href}
-                class="text-black hover:text-gray-600 transition-colors duration-200"
+                class="hover:text-netral-600 transition-colors duration-200"
+                {...link.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {}}
               >
                 {link.label}
               </a>
@@ -77,9 +83,7 @@
 
       <!-- Middle Section - Resources Links -->
       <div class="col-span-1">
-        <h3
-          class="text-sm font-semibold text-black uppercase tracking-wider mb-4"
-        >
+        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
           Resources
         </h3>
         <ul class="space-y-3">
@@ -87,7 +91,7 @@
             <li>
               <a
                 href={link.href}
-                class="text-black hover:text-gray-600 transition-colors duration-200"
+                class=" hover:text-neutral-950 transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -98,16 +102,14 @@
 
       <!-- Right Section - Social Media Icons -->
       <div class="col-span-1">
-        <h3
-          class="text-sm font-semibold text-black uppercase tracking-wider mb-4"
-        >
+        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
           Follow Us
         </h3>
-        <div class="flex space-x-4">
+        <div class="flex flex-wrap gap-3 sm:gap-4">
           {#each socialLinks as social}
             <a
               href={social.href}
-              class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-black hover:bg-gray-200 transition-colors duration-200"
+              class="w-10 h-10 bg-primary-500 text-white rounded-full flex flex-shrink-0 items-center justify-center hover:bg-primary-700 transition-colors duration-200"
               aria-label={social.label}
               target="_blank"
               rel="noopener noreferrer"
@@ -120,8 +122,8 @@
     </div>
 
     <!-- Bottom section - Copyright -->
-    <div class="mt-12 pt-8 border-t border-gray-200">
-      <p class="text-center text-black text-sm">
+    <div class="mt-12 pt-8">
+      <p class="text-center text-sm">
         Copyright © {new Date().getFullYear()} AdventureWare.
       </p>
     </div>
