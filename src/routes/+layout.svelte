@@ -12,7 +12,7 @@
 
 <div class="min-h-screen bg-surface flex flex-col">
   <Header />
-  <main class="flex-grow">
+  <main class="flex-grow m-8 xl:mx-auto xl:max-w-7xl">
     {@render children()}
   </main>
   <Footer />

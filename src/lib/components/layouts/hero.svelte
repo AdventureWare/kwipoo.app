@@ -1,12 +1,10 @@
 <!-- src/lib/components/hero-section.svelte -->
 <script lang="ts">
-  import AppStoreButtons from "../ui/app-store-buttons.svelte";
-  import Button from "../ui/button.svelte";
+  import AppStoreButtons from "../molecules/app-store-buttons.svelte";
+  import Button from "../atoms/buttons/button.svelte";
 </script>
 
-<section
-  class="relative bg-neutral-100 rounded-4xl m-8 xl:mx-auto xl:max-w-7xl"
->
+<section class="relative bg-neutral-100 rounded-4xl mb-12">
   <div class="px-8 sm:px-6 lg:px-8">
     <div
       class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center overflow-hidden"
