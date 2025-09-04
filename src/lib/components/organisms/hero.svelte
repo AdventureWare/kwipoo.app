@@ -5,12 +5,14 @@
 </script>
 
 <section
-  class="relative bg-neutral-100 rounded-4xl m-4 py-16 sm:py-20 lg:py-24 xl:mx-auto xl:max-w-7xl"
+  class="relative bg-neutral-100 rounded-4xl m-8 xl:mx-auto xl:max-w-7xl"
 >
   <div class="px-8 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center overflow-hidden"
+    >
       <!-- Left Content -->
-      <div class="text-left">
+      <div class="text-left py-16 sm:py-20 lg:py-24">
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
           Life is busy. <br />
           Your stuff shouldn't make it busier
@@ -24,7 +26,7 @@
         </p>
 
         <div class="flex flex-col gap-4">
-          <div class="max-w-1/2">
+          <div class="w-full sm:max-w-2/5 lg:max-w-1/2">
             <Button
               variant="primary"
               size="lg"
@@ -37,7 +39,13 @@
       </div>
 
       <!-- Right Content - Phone Mockup (Hidden on mobile) -->
-      <div class="hidden lg:flex justify-end"></div>
+      <div class="hidden lg:block relative h-full">
+        <img
+          src="/assets/product_Feature.png"
+          alt="Kwipoo app interface"
+          class="absolute bottom-0 right-0 w-80 h-auto transform translate-y-20 -translate-x-20"
+        />
+      </div>
     </div>
   </div>
 </section>
