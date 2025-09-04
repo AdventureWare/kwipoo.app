@@ -3,7 +3,7 @@
   import { page } from "$app/state";
   import { slide } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
-  import Button from "../atoms/buttons/button.svelte";
+  import Button from "../../ui/buttons/button.svelte";
   import { List, X } from "phosphor-svelte";
 
   interface NavItem {

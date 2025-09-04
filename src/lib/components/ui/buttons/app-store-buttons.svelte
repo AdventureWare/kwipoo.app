@@ -1,7 +1,7 @@
 <!-- src/lib/components/ui/app-store-buttons.svelte -->
 <script lang="ts">
-  import AppleStore from "../atoms/buttons/apple-store.svelte";
-  import GooglePlay from "../atoms/buttons/google-play.svelte";
+  import AppleStore from "./apple-store.svelte";
+  import GooglePlay from "./google-play.svelte";
 
   const appStoreUrl = "https://apps.apple.com/us/app/kwipoo/id6505006728";
 </script>
