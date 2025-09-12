@@ -10,6 +10,7 @@
   } from "phosphor-svelte";
   import { HeroSection, QuoteCallout } from "$lib/components";
   import ProblemSolution from "$lib/components/layouts/sections/problem-solution.svelte";
+  import Switchbacks from "$lib/components/layouts/sections/switchbacks.svelte";
 
   const problemSolutionData = [
     {
@@ -49,6 +50,119 @@
         "Kwipoo makes sure you always pack what you need and leave nothing behind. Instead of scrambling at the last minute, you can track what’s in your bags, storage, or car and check items off as you pack. And when planning for future trips, you can review what you brought last time to fine-tune your packing list.",
     },
   ];
+
+  const switchbackItems = [
+    {
+      tag: "Things",
+      title: "Keep track of what you own—all on one platform.",
+      description:
+        "Know exactly what you have, where it is, and what it’s worth—so you spend less time searching, avoid unnecessary repurchases, and make smarter decisions about what to keep, use, or replace. Whether it’s everyday essentials or hobby gear, Kwipoo helps you stay organized without the mental load.",
+      image: {
+        src: "/assets/thingsFeatureAsset@2x.png",
+        alt: "Kwipoo inventory management interface showing organized items",
+      },
+      showButton: true,
+      buttonText: "Learn More",
+      buttonVariant: "primary",
+      buttonSize: "md",
+      buttonHref: "https://kwipoo.vercel.app/login",
+    },
+    {
+      tag: "Sets",
+      title:
+        "Group the right things together—so they’re always ready when you need them.",
+      description:
+        "Create reusable Sets for trips, hobbies, or recurring routines. Whether it’s a backpacking kit, a photography setup, or a go-bag, Kwipoo helps you pack faster, plan smarter, and avoid forgetting essentials.",
+      image: {
+        src: "/assets/backpack@2x.png",
+        alt: "Event planning and packing list features in Kwipoo",
+      },
+      showButton: true,
+      buttonText: "Learn More",
+      buttonVariant: "primary",
+      buttonSize: "md",
+      buttonHref: "https://kwipoo.vercel.app/login",
+    },
+    {
+      tag: "Places",
+      title:
+        "Map out where your stuff lives—across home, storage, and anywhere else.",
+      description:
+        "A Place represents a real-world location (home, storage unit, office), giving you a clear, structured way to track what’s stored where—so you never have to dig through the wrong spot again.",
+      image: {
+        src: "/assets/placesFeatureAsset@2x.png",
+        alt: "Privacy controls and sharing features in Kwipoo",
+      },
+      showButton: true,
+      buttonText: "Learn More",
+      buttonVariant: "primary",
+      buttonSize: "md",
+      buttonHref: "https://kwipoo.vercel.app/login",
+    },
+    {
+      tag: "Spots",
+      title:
+        "Pinpoint exactly where things are stored—down to the shelf, bin, or drawer.",
+      description:
+        "Spots let you track specific locations within Places (like “Bedroom” or “Basement”), so you can find what you need instantly instead of tearing through storage.",
+      image: {
+        src: "/assets/spotsFeatureAsset@2x.png",
+        alt: "Kwipoo inventory management interface showing organized items",
+      },
+      showButton: true,
+      buttonText: "Learn More",
+      buttonVariant: "primary",
+      buttonSize: "md",
+      buttonHref: "https://kwipoo.vercel.app/login",
+    },
+    {
+      tag: "Events",
+      title: "Plan trips and events without last-minute scrambling.",
+      description:
+        "Assign gear to upcoming trips, events, or projects—whether you’re packing solo or coordinating with a group. Check off what’s ready, see what’s missing, and ensure no one forgets the essentials.",
+      image: {
+        src: "/assets/eventsFeatureAsset@2x.png",
+        alt: "Event planning and packing list features in Kwipoo",
+      },
+      showButton: true,
+      buttonText: "Learn More",
+      buttonVariant: "primary",
+      buttonSize: "md",
+      buttonHref: "https://kwipoo.vercel.app/login",
+    },
+    {
+      tag: "Social",
+      title: "Borrow, lend, and collaborate—without the back-and-forth.",
+      description:
+        "See what your friends own, avoid unnecessary duplicate purchases, and coordinate gear-sharing seamlessly. Whether for hobbies, outdoor trips, or shared projects, Kwipoo makes it easy to stay connected and prepared.",
+      image: {
+        src: "/assets/socialFeatureAsset@2x.png",
+        alt: "Privacy controls and sharing features in Kwipoo",
+      },
+      showButton: true,
+      buttonText: "Learn More",
+      buttonVariant: "primary",
+      buttonSize: "md",
+      buttonHref: "https://kwipoo.vercel.app/login",
+    },
+
+    {
+      tag: "Profile",
+      title:
+        "Customize your inventory, control privacy, and make Kwipoo work for you.",
+      description:
+        "Set visibility preferences, manage your personal inventory, and tailor how you track and organize things to fit your lifestyle. Your stuff, your rules.",
+      image: {
+        src: "/assets/logos/logo.svg",
+        alt: "Privacy controls and sharing features in Kwipoo",
+      },
+      showButton: true,
+      buttonText: "Learn More",
+      buttonVariant: "primary",
+      buttonSize: "md",
+      buttonHref: "https://kwipoo.vercel.app/login",
+    },
+  ];
 </script>
 
 <svelte:head>
@@ -80,6 +194,8 @@
   description="We all want to live our best lives, but too often, we spend more time and energy managing and keeping up with everything we own, need, and use than actually living. Kwipoo is here to help—a platform that keeps track of your stuff so you can stay prepared, make smarter decisions, and remove the guesswork. Focus on what you love instead of getting caught up in the hassle."
   items={problemSolutionData}
 />
+
+<Switchbacks items={switchbackItems} />
 
 <QuoteCallout
   quoteText="We all have better things to do than hunt for missing stuff or panic over last-minute errands. Kwipoo gives you back that time and headspace—so you can actually enjoy your hobbies, family events, or just day-to-day life without  the frantic scramble."

@@ -23,7 +23,7 @@
 </script>
 
 <div
-  class="bg-white py-8 px-12 mb-30 text-lg rounded-2xl shadow-md border border-gray-200"
+  class="bg-white py-8 px-12 mb-30 text-lg rounded-2xl shadow-md border border-neutral-100"
 >
   <p>
     "{quoteText}"

@@ -17,12 +17,14 @@
   let { title, description, items }: Props = $props();
 </script>
 
-<section class="bg-neutral-100 p-8 rounded-2xl mb-30">
+<section class="bg-neutral-50 p-8 rounded-2xl mb-30">
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
-    <div class="text-left sm:text-center mb-12">
+    <div class="text-left md:text-center mb-8">
       <h2 class="text-3xl font-bold text-color mb-4">{title}</h2>
-      <p class="text-lg text-gray-600 sm:max-w-4/5 mx-auto">{description}</p>
+      <p class="text-lg text-neutral-950 md:max-w-4/5 md:mx-auto">
+        {description}
+      </p>
     </div>
 
     <!-- Grid -->
