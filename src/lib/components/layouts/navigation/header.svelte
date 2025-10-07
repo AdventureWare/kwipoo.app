@@ -4,19 +4,19 @@
   import { slide } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
   import Button from "../../ui/buttons/button.svelte";
-  import { List, X } from "phosphor-svelte";
+  // import { List, X } from "phosphor-svelte";
 
   interface NavItem {
     label: string;
     href: string;
   }
 
-  const navItems: NavItem[] = [
-    { label: "Blogs", href: "/blogs" },
-    { label: "Guides", href: "/guides" },
-    { label: "Documentation", href: "/documentation" },
-    { label: "About Us", href: "/about-us" },
-  ];
+  // const navItems: NavItem[] = [
+  //   { label: "Blogs", href: "/blogs" },
+  //   { label: "Guides", href: "/guides" },
+  //   { label: "Documentation", href: "/documentation" },
+  //   { label: "About Us", href: "/about-us" },
+  // ];
 
   let mobileMenuOpen = $state(false);
 
@@ -40,7 +40,7 @@
       </div>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-8">
+      <!-- <div class="hidden md:flex items-center space-x-8">
         {#each navItems as item}
           <a
             href={item.href}
@@ -53,7 +53,7 @@
             {item.label}
           </a>
         {/each}
-      </div>
+      </div> -->
 
       <!-- Desktop CTA -->
       <div class="hidden md:flex items-center">
@@ -67,7 +67,7 @@
         <Button href="https://kwipoo.vercel.app/login" variant="secondary">
           Get Started
         </Button>
-        <button
+        <!-- <button
           type="button"
           class="text-neutral-950 hover:text-primary focus:outline-none focus:text-primary transition-colors duration-200"
           onclick={toggleMobileMenu}
@@ -85,7 +85,7 @@
               <List size={24} weight="regular" />
             {/if}
           </div>
-        </button>
+        </button> -->
       </div>
     </div>
 
@@ -95,7 +95,7 @@
         class="md:hidden border-t border-neutral-100 bg-white overflow-hidden"
         transition:slide={{ duration: 300, easing: cubicOut }}
       >
-        <div class="px-2 pt-2 pb-3 space-y-1">
+        <!-- <div class="px-2 pt-2 pb-3 space-y-1">
           {#each navItems as item}
             <a
               href={item.href}
@@ -109,7 +109,7 @@
               {item.label}
             </a>
           {/each}
-        </div>
+        </div> -->
       </div>
     {/if}
   </nav>
