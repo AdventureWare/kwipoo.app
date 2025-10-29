@@ -1,10 +1,12 @@
 <!-- src/lib/components/navigation/header.svelte -->
 <script lang="ts">
+  import { posthog } from "posthog-js";
   import { page } from "$app/state";
   import { slide } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
   import Button from "../../ui/buttons/button.svelte";
   import { List, X } from "phosphor-svelte";
+  import { browser } from "$app/environment";
 
   interface NavItem {
     label: string;
@@ -22,10 +24,44 @@
 
   function toggleMobileMenu() {
     mobileMenuOpen = !mobileMenuOpen;
+
+    if (browser && window.posthog) {
+      window.posthog.capture("mobile_menu_toggled", {
+        action: mobileMenuOpen ? "opened" : "closed",
+      });
+    }
   }
 
   function closeMobileMenu() {
     mobileMenuOpen = false;
+  }
+
+  function trackNavClick(item: string) {
+    if (browser && window.posthog) {
+      window.posthog.capture("navigation_clicked", {
+        item_label: item,
+        location: "header",
+        is_mobile: window.innerWidth < 768,
+      });
+    }
+  }
+
+  function trackCTAClick(location: "desktop" | "mobile") {
+    if (browser && window.posthog) {
+      window.posthog.capture("get_started_clicked", {
+        location: "header",
+        device_type: location,
+        source_page: page.url.pathname,
+      });
+    }
+  }
+
+  function trackLogoClick() {
+    if (browser && window.posthog) {
+      window.posthog.capture("logo_clicked", {
+        from_page: page.url.pathname,
+      });
+    }
   }
 </script>
 
@@ -34,7 +70,7 @@
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <a href="/" class="flex items-center">
+        <a href="/" class="flex items-center" onclick={() => trackLogoClick()}>
           <span class="text-2xl font-monoton text-primary-500">Kwipoo</span>
         </a>
       </div>
@@ -44,6 +80,7 @@
         {#each navItems as item}
           <a
             href={item.href}
+            onclick={() => trackNavClick(item.label)}
             class="px-3 py-1 rounded-md hover:text-primary-600 transition-colors duration-200 font-medium {page
               .url.pathname === item.href
               ? 'bg-primary/10'
@@ -57,16 +94,20 @@
 
       <!-- Desktop CTA -->
       <div class="hidden md:flex items-center">
-        <Button href="https://kwipoo.vercel.app/login" variant="secondary">
-          Get Started
-        </Button>
+        <div onclick={() => trackCTAClick("desktop")}>
+          <Button href="https://kwipoo.vercel.app/login" variant="secondary">
+            Get Started
+          </Button>
+        </div>
       </div>
 
       <!-- Mobile menu button -->
       <div class="md:hidden flex justify-between items-center gap-4">
-        <Button href="https://kwipoo.vercel.app/login" variant="secondary">
-          Get Started
-        </Button>
+        <div onclick={() => trackCTAClick("mobile")}>
+          <Button href="https://kwipoo.vercel.app/login" variant="secondary">
+            Get Started
+          </Button>
+        </div>
         <button
           type="button"
           class="text-neutral-950 hover:text-primary focus:outline-none focus:text-primary transition-colors duration-200"
