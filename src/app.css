@@ -114,7 +114,8 @@
   /* Semantic colors */
   --color-surface: #ffffff;
   --color-background: var(--color-neutral-200);
-  --color-text: #1B1B1B
+  --color-text: #1b1b1b;
+  --color-link: var(--color-info-500);
   --color-muted: #64748b;
   --font-monoton: "Monoton", cursive;
   --font-jost: "Jost", sans-serif;
