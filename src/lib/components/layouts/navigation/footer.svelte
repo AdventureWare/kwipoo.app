@@ -19,17 +19,18 @@
       href: "https://www.adventureware.com/",
       external: true,
     },
-    { label: "About Us", href: "/about-us" },
   ];
 
   const resourceLinks: FooterLink[] = [
-    { label: "Blog", href: "/blog" },
-    { label: "Terms and Conditions", href: "/support" },
     { label: "Privacy Policy", href: "/privacy-policy" },
   ];
 
   const socialLinks = [
-    { icon: TwitterLogo, href: "https://twitter.com/kwipoo", label: "Twitter" },
+    {
+      icon: TwitterLogo,
+      href: "https://twitter.com/KwipooApp",
+      label: "Twitter",
+    },
     {
       icon: LinkedinLogo,
       href: "https://linkedin.com/company/kwipoo",
@@ -40,7 +41,6 @@
       href: "https://instagram.com/kwipoo",
       label: "Instagram",
     },
-    { icon: GithubLogo, href: "https://github.com/kwipoo", label: "GitHub" },
   ];
 </script>
 
