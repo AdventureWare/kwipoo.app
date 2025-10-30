@@ -25,7 +25,7 @@
   const resourceLinks: FooterLink[] = [
     { label: "Blog", href: "/blog" },
     { label: "Terms and Conditions", href: "/support" },
-    { label: "Privacy Policy", href: "/community" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
   ];
 
   const socialLinks = [
