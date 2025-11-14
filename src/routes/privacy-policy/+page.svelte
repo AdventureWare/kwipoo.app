@@ -1,7 +1,7 @@
 <article class="">
   <div class="mb-6">
     <h1 class="text-3xl font-bold text-color uppercase">Privacy Policy</h1>
-    <p class=" text-neutral-950 pb-4">Last updated January 25, 2024</p>
+    <p class=" text-neutral-950 pb-4">Last updated November 14, 2025</p>
     <div>
       <p>
         This privacy policy ("policy") describes how AdventureWare, llc and its

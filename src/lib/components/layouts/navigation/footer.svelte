@@ -23,6 +23,7 @@
 
   const resourceLinks: FooterLink[] = [
     { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms & Conditions", href: "/terms-and-conditions"}
   ];
 
   const socialLinks = [
