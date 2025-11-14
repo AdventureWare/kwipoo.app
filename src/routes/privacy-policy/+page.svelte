@@ -1008,7 +1008,7 @@
     <p class=" text-neutral-950 pb-4">
       If you have questions or comments about this notice, you may email us at
       kwipoo-support@adventureware.com or contact us by post at: AdventureWare,
-      llc 1942 broadway st. Ste 314c boulder, co 80302 united states.
+      llc 2840 Dwight Ave Dayton, Ohio 45420
     </p>
   </section>
   <section class="mb-4">
@@ -1018,7 +1018,7 @@
     <p class=" text-neutral-950 pb-4">
       You have the right to request access to the personal information we
       collect from you, change that information, or delete it. To request to
-      review, update, or delete your personal information, please visit:
+      review, update, or delete your personal information, please send request to:
       kwipoo-support@adventureware.com.
     </p>
   </section>
