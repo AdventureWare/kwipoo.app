@@ -35,6 +35,7 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 - For user-facing changes intended for release, add a Changesets entry with `npm run changeset` unless the change is clearly docs-only, CI-only, or internal repo maintenance.
 - If the task is to promote `develop` into `main`, do not push a merge commit directly to `main`. Create a linear branch from `origin/main`, replay the `develop`-only commits onto it, and open a PR to `main` instead.
 - Keep release-promotion commit messages conventional-commit compliant and prefer `Rebase and merge` when landing that PR.
+- After a Changesets release PR merges to `main`, prefer the automated sync PR back into `develop` over manual cherry-picks of `chore: version packages`, unless that automation has clearly failed.
 
 ## Validation
 
