@@ -20,9 +20,11 @@ npm run dev
 Useful validation commands:
 
 ```sh
+npm run test:unit
 npm run check
 npm run lint
 npm run build
+npm run test:e2e:smoke
 ```
 
 ## Project Structure
@@ -51,15 +53,15 @@ npm run build
 2. Read `docs/design-ui-guidelines.md` for any design/UI/UX change.
 3. Use `.agents/skills/marketing-site-maintainer` for general website work and `.agents/skills/marketing-site-design-review` for visual design or UX polish.
 4. After changing Svelte files, run `svelte-autofixer` if the Svelte MCP tools are available.
-5. Finish with `npm run check` and `npm run lint`.
-6. For meaningful layout or visual changes, run `npm run test:e2e`.
+5. Finish with `npm run check`, `npm run lint`, and `npm run test:unit`.
+6. For meaningful layout or visual changes, run `npm run test:e2e:smoke` locally and keep `npm run test:e2e` for broader cross-viewport coverage.
 7. Treat responsive work as incomplete until desktop, mobile, and narrow-mobile behavior have been checked.
 
 ## CI/CD
 
 - GitHub Actions validates pushes and pull requests to `develop` and `main`.
-- CI runs Prettier, ESLint, Svelte typechecking, a production build, and Playwright smoke tests.
-- Playwright coverage includes desktop, mobile, and narrow-mobile viewport projects so responsive regressions surface in CI.
+- The `Quality` workflow runs Prettier, ESLint, Svelte typechecking, and fast Vitest checks on every protected-branch push and pull request.
+- The `E2E` workflow runs a production build plus desktop Playwright smoke tests on pull requests, then expands to desktop, mobile, and narrow-mobile smoke coverage on pushes to `develop` and `main`.
 - Commit messages are checked against the repository's conventional-commit policy.
 - Deployment is expected to flow through Netlify using this repo and `netlify.toml` rather than a separate GitHub deploy workflow.
 
