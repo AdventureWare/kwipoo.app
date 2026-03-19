@@ -66,6 +66,11 @@ export interface DocsNavSection {
   }>;
 }
 
+export interface DocsTocItem {
+  id: string;
+  label: string;
+}
+
 export const docsCategoryDescriptions: Record<DocsCategory, string> = {
   "Start here":
     "Foundational guides for getting your account set up and building a system you will actually use.",
@@ -525,44 +530,37 @@ export function getDocsNavSections(): DocsNavSection[] {
   ];
 }
 
+export const docsLandingTocItems: DocsTocItem[] = [
+  { id: "overview", label: "Overview" },
+  { id: "start-here", label: "Start Here" },
+  { id: "browse-topics", label: "Browse Topics" },
+  { id: "content-roadmap", label: "Content Roadmap" },
+] as const;
+
+export function getDocsHref(slug: string): string {
+  return slug === "getting-started" ? "/docs" : `/docs/${slug}`;
+}
+
+export function getDocsSectionId(heading: string): string {
+  return heading
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function getDocsTocItems(docPage: DocsPage): DocsTocItem[] {
+  return docPage.sections.map((section) => ({
+    id: getDocsSectionId(section.heading),
+    label: section.heading,
+  }));
+}
+
 export function getDocsPageLabel(slug: string): string {
   return (
     docsFeatureNavItems.find((item) => item.slug === slug)?.label ??
     getDocsPage(slug)?.title ??
     "Documentation"
   );
-}
-
-export function getDocsPlaceholderSummary(title: string): string {
-  return `Placeholder introduction for ${title}. This page is where the section-specific documentation for ${title.toLowerCase()} will live.`;
-}
-
-export function getDocsPlaceholderSections(title: string): DocsSection[] {
-  return [
-    {
-      heading: `${title} Overview`,
-      paragraphs: [
-        `${title} overview placeholder. Use this section for a short explanation of what this part of the product does and when someone should use it.`,
-      ],
-    },
-    {
-      heading: `Using ${title}`,
-      paragraphs: [
-        `Usage placeholder for ${title}. This area can later hold the main instructions, workflows, or feature details people need in order to use ${title.toLowerCase()} confidently.`,
-      ],
-      bullets: [
-        "Placeholder point for the primary workflow.",
-        "Placeholder point for important behavior or context.",
-        "Placeholder point for future screenshots or examples.",
-      ],
-    },
-    {
-      heading: `${title} Reference`,
-      paragraphs: [
-        `Reference placeholder for ${title}. This section can later hold edge cases, FAQs, screenshots, or any additional notes that belong on this page.`,
-      ],
-    },
-  ];
 }
 
 export function getRelatedDocsPages(docPage: DocsPage): DocsPage[] {
