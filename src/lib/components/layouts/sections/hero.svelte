@@ -1,15 +1,16 @@
 <!-- src/lib/components/hero-section.svelte -->
 <script lang="ts">
+  import { asset } from "$app/paths";
   import { APP_LOGIN_URL } from "$lib/config/site";
   import AppStoreButtons from "../../ui/buttons/app-store-buttons.svelte";
   import Button from "../../ui/buttons/button.svelte";
 </script>
 
-<section class="relative mb-30 overflow-hidden rounded-4xl bg-neutral-100">
+<section
+  class="card relative mb-30 overflow-hidden border border-surface-200 bg-surface-100 shadow-sm"
+>
   <div class="px-6 sm:px-8 lg:px-10">
-    <div
-      class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16"
-    >
+    <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
       <div class="py-12 text-left sm:py-16 lg:py-20">
         <h1 class="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
           Life is busy. <br />
@@ -25,10 +26,8 @@
 
         <div class="flex flex-col gap-4">
           <div class="w-full sm:max-w-xs">
-            <Button
-              variant="primary"
-              size="lg"
-              href={APP_LOGIN_URL}>Open in Browser</Button
+            <Button variant="primary" size="lg" href={APP_LOGIN_URL}
+              >Open in Browser</Button
             >
           </div>
 
@@ -37,7 +36,9 @@
       </div>
 
       <div class="flex justify-center pb-10 sm:pb-12 lg:justify-end lg:py-12">
-        <div class="hero-phone-wrap relative w-full max-w-[18rem] sm:max-w-[20rem]">
+        <div
+          class="hero-phone-wrap relative w-full max-w-[18rem] sm:max-w-[20rem]"
+        >
           <div
             class="absolute inset-x-5 bottom-4 top-10 rounded-full bg-primary-200/65 blur-3xl"
           ></div>
@@ -54,7 +55,7 @@
                 ></div>
 
                 <img
-                  src="/assets/product_Feature.png"
+                  src={asset("/assets/product_Feature.png")}
                   alt="Kwipoo app interface"
                   class="block w-full"
                 />
