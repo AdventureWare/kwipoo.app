@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { asset } from "$app/paths";
   import Button from "../buttons/button.svelte";
   import Tag from "../tag.svelte";
   interface Props {
@@ -34,26 +33,24 @@
   }: Props = $props();
 </script>
 
-<div
-  class="card grid grid-cols-1 items-center gap-8 border border-brand-border bg-brand-canvas px-5 py-6 shadow-sm sm:gap-10 sm:px-6 sm:py-7 md:grid-cols-3 md:gap-12 lg:px-8 lg:py-8"
->
+<div class="grid grid-cols-1 items-center gap-8 sm:gap-10 md:grid-cols-3 md:gap-12">
   {#if imageOnLeft}
     <div
-      class="card relative order-first mx-auto w-full max-w-md border border-brand-border bg-brand-panel p-3 shadow-sm sm:p-4 md:col-span-1 md:max-w-none"
+      class="relative order-first mx-auto w-full max-w-md rounded-2xl bg-neutral-50 p-3 shadow-xl sm:p-4 md:col-span-1 md:max-w-none"
     >
       <img
-        src={asset(image.src)}
+        src={image.src}
         alt={image.alt}
-        class="card aspect-[4/3] w-full object-cover shadow-md"
+        class="aspect-[4/3] w-full rounded-xl object-cover shadow-md"
         loading="lazy"
       />
     </div>
     <div class="order-last space-y-5 md:col-span-2 md:mr-12 md:space-y-6">
       <Tag text={tag} />
-      <h3 class="mb-3 text-xl font-bold text-primary-950 sm:text-2xl">
+      <h3 class="text-xl font-bold text-color sm:text-2xl mb-3">
         {title}
       </h3>
-      <p class="max-w-2xl text-base leading-relaxed text-brand-body">
+      <p class="max-w-2xl text-base leading-relaxed text-neutral-900">
         {description}
       </p>
       {#if showButton}
@@ -70,14 +67,12 @@
       {/if}
     </div>
   {:else}
-    <div
-      class="order-last space-y-5 md:order-first md:col-span-2 md:ml-12 md:space-y-6"
-    >
+    <div class="order-last space-y-5 md:order-first md:col-span-2 md:ml-12 md:space-y-6">
       <Tag text={tag} />
-      <h3 class="mb-3 text-xl font-bold text-primary-950 sm:text-2xl">
+      <h3 class="text-xl font-bold text-color sm:text-2xl mb-3">
         {title}
       </h3>
-      <p class="max-w-2xl text-base leading-relaxed text-brand-body">
+      <p class="max-w-2xl text-base leading-relaxed text-neutral-900">
         {description}
       </p>
       {#if showButton}
@@ -94,12 +89,12 @@
       {/if}
     </div>
     <div
-      class="card relative order-first mx-auto w-full max-w-md border border-brand-border bg-brand-panel p-3 shadow-sm sm:p-4 md:order-last md:col-span-1 md:max-w-none"
+      class="relative order-first mx-auto w-full max-w-md rounded-2xl bg-neutral-50 p-3 shadow-xl sm:p-4 md:order-last md:col-span-1 md:max-w-none"
     >
       <img
-        src={asset(image.src)}
+        src={image.src}
         alt={image.alt}
-        class="card aspect-[4/3] w-full object-cover shadow-md"
+        class="aspect-[4/3] w-full rounded-xl object-cover shadow-md"
         loading="lazy"
       />
     </div>
