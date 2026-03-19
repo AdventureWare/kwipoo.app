@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { asset } from "$app/paths";
   import Button from "../buttons/button.svelte";
   import Tag from "../tag.svelte";
   interface Props {
@@ -39,7 +40,7 @@
       class="relative order-first mx-auto w-full max-w-md rounded-2xl bg-neutral-50 p-3 shadow-xl sm:p-4 md:col-span-1 md:max-w-none"
     >
       <img
-        src={image.src}
+        src={asset(image.src)}
         alt={image.alt}
         class="aspect-[4/3] w-full rounded-xl object-cover shadow-md"
         loading="lazy"
@@ -92,7 +93,7 @@
       class="relative order-first mx-auto w-full max-w-md rounded-2xl bg-neutral-50 p-3 shadow-xl sm:p-4 md:order-last md:col-span-1 md:max-w-none"
     >
       <img
-        src={image.src}
+        src={asset(image.src)}
         alt={image.alt}
         class="aspect-[4/3] w-full rounded-xl object-cover shadow-md"
         loading="lazy"

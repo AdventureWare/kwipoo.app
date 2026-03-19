@@ -1,7 +1,7 @@
 <script lang="ts">
   import { asset, resolve } from "$app/paths";
   import { TwitterLogo, LinkedinLogo, InstagramLogo } from "phosphor-svelte";
-  import { COMPANY_NAME } from "$lib/config/site";
+  import { COMPANY_NAME, DOCS_ENABLED } from "$lib/config/site";
 </script>
 
 <footer class="border-t border-neutral-200 bg-white">
@@ -40,6 +40,16 @@
           Resources
         </h3>
         <ul class="space-y-3">
+          {#if DOCS_ENABLED}
+            <li>
+              <a
+                href={resolve("/docs")}
+                class="hover:text-neutral-950 transition-colors duration-200"
+              >
+                Documentation
+              </a>
+            </li>
+          {/if}
           <li>
             <a
               href={resolve("/privacy-policy")}
