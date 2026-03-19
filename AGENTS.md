@@ -33,6 +33,8 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 - Treat legal copy as high-risk content. Make mechanical fixes freely, but do not invent policy or terms language unless the user explicitly asks for legal copy work.
 - When a task is really about the application, say so and keep the change in the website layer only.
 - For user-facing changes intended for release, add a Changesets entry with `npm run changeset` unless the change is clearly docs-only, CI-only, or internal repo maintenance.
+- If the task is to promote `develop` into `main`, do not push a merge commit directly to `main`. Create a linear branch from `origin/main`, replay the `develop`-only commits onto it, and open a PR to `main` instead.
+- Keep release-promotion commit messages conventional-commit compliant and prefer `Rebase and merge` when landing that PR.
 
 ## Validation
 
