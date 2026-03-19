@@ -7,11 +7,9 @@
   let {
     sections,
     currentHref,
-    variant = "panel",
   }: {
     sections: DocsNavSection[];
     currentHref: string;
-    variant?: "panel" | "shell";
   } = $props();
 
   function normalizePathname(pathname: string): string {
@@ -40,52 +38,23 @@
 
     return null;
   });
-
-  let shellVariant = $derived(variant === "shell");
 </script>
 
 <nav aria-label="Documentation index">
   <Navigation
     layout="sidebar"
-    class={[
-      "docs-directory-sidebar w-full",
-      shellVariant
-        ? "bg-transparent p-0"
-        : "card preset-filled-surface-50-950 border border-surface-200-800 shadow-sm",
-    ]}
+    class="docs-directory-sidebar w-full rounded-[1.75rem] border border-surface-200 bg-white shadow-sm"
   >
-    <Navigation.Header
-      class={[
-        "border-b border-surface-200-800 pb-5",
-        shellVariant ? "mb-1" : "",
-      ]}
-    >
-      <p
-        class={[
-          "text-[0.92rem] font-semibold uppercase tracking-[0.18em]",
-          shellVariant ? "text-brand-muted" : "text-surface-300",
-        ]}
-      >
+    <Navigation.Header class="docs-directory-header">
+      <p class="text-[0.92rem] font-semibold uppercase tracking-[0.18em] text-neutral-600">
         Documentation
       </p>
-      <p
-        class={[
-          "mt-3 font-semibold leading-tight",
-          shellVariant ? "text-color" : "text-surface-50",
-          shellVariant ? "text-[1.15rem]" : "text-[1.45rem]",
-        ]}
-      >
+      <p class="mt-3 text-[1.45rem] font-semibold leading-tight text-primary-950">
         {currentItem?.label ?? "Browse docs"}
       </p>
-      <p
-        class={[
-          "mt-3 leading-6",
-          shellVariant ? "text-brand-body" : "text-surface-100",
-          shellVariant ? "text-[0.92rem]" : "text-[0.98rem]",
-        ]}
-      >
+      <p class="mt-3 text-[0.98rem] leading-6 text-neutral-700">
         {#if currentItem}
-          In {currentItem.sectionTitle}, with the rest of the docs available below.
+          In {currentItem.sectionTitle}, with the rest of the guides available below.
         {:else}
           Move through the docs from a persistent directory instead of drilling through accordions.
         {/if}
@@ -95,14 +64,12 @@
     <Navigation.Content class="pt-5">
       {#each sections as section (section.title)}
         <Navigation.Group class="gap-3">
-          <Navigation.Label
-            class={[
-              "px-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em]",
-              shellVariant ? "text-brand-muted" : "text-surface-300",
-            ]}
-          >
+          <Navigation.Label class="docs-directory-section-label px-2">
             <span class="block">{section.title}</span>
-
+            <span class="mt-2 block text-[0.95rem] font-normal normal-case tracking-normal text-neutral-700">
+              {section.items.length}
+              {section.items.length === 1 ? " guide" : " guides"}
+            </span>
           </Navigation.Label>
 
           <Navigation.Menu class="gap-2">
@@ -114,26 +81,16 @@
                 href={resolve(item.href as Pathname)}
                 aria-current={isCurrent ? "page" : undefined}
                 class={[
-                  "card-hover rounded-[1rem] border px-4 py-3 text-left shadow-none",
-                  shellVariant
-                    ? "border-transparent bg-transparent text-surface-950"
-                    : "preset-filled-surface-50-950 border-surface-200-800 text-surface-50",
-                  shellVariant && !isCurrent && "hover:preset-tonal-primary",
-                  !shellVariant && !isCurrent && "hover:border-primary-200-800",
-                  isCurrent &&
-                    (shellVariant
-                      ? "preset-filled-primary-500 border-transparent text-surface-950 shadow-sm"
-                      : "preset-filled-primary-500 border-transparent text-surface-950 shadow-sm"),
+                  "docs-directory-link rounded-[1rem] border px-4 py-3 text-left shadow-none transition-all",
+                  isCurrent && "docs-directory-link-current",
                 ]}
               >
                 <Navigation.TriggerText class="min-w-0">
-                  <span
-                    class={[
-                      "block font-semibold leading-5 text-current",
-                      shellVariant ? "text-[0.95rem]" : "text-[1rem]",
-                    ]}
-                  >
+                  <span class="block text-[1rem] font-semibold leading-5">
                     {item.label}
+                  </span>
+                  <span class="mt-1 block text-[0.92rem] leading-5 text-current/75">
+                    {isCurrent ? "Current page" : "Open guide"}
                   </span>
                 </Navigation.TriggerText>
               </Navigation.TriggerAnchor>
@@ -144,3 +101,60 @@
     </Navigation.Content>
   </Navigation>
 </nav>
+
+<style>
+  :global(.docs-directory-sidebar) {
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, white 86%, var(--color-primary-50)) 0%,
+        white 34%,
+        color-mix(in srgb, white 92%, var(--color-surface-100)) 100%
+      );
+  }
+
+  :global(.docs-directory-header) {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-surface-200) 80%, white);
+    padding-bottom: 1.25rem;
+  }
+
+  :global(.docs-directory-section-label) {
+    color: var(--color-primary-900);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  :global(.docs-directory-link) {
+    width: 100%;
+    justify-content: flex-start;
+    border-color: color-mix(in srgb, var(--color-surface-200) 85%, white);
+    background:
+      color-mix(in srgb, white 72%, var(--color-primary-50));
+    color: var(--color-primary-950);
+  }
+
+  :global(.docs-directory-link:hover) {
+    background:
+      color-mix(in srgb, white 28%, var(--color-primary-50));
+    border-color: color-mix(in srgb, var(--color-primary-200) 65%, white);
+  }
+
+  :global(.docs-directory-link-current) {
+    border-color: color-mix(in srgb, var(--color-primary-500) 70%, white);
+    background: var(--color-primary-950);
+    color: var(--color-primary-50);
+    box-shadow:
+      0 20px 45px -30px color-mix(
+        in srgb,
+        var(--color-primary-950) 85%,
+        transparent
+      );
+  }
+
+  :global(.docs-directory-link[data-focus]) {
+    outline: 2px solid color-mix(in srgb, var(--color-primary-300) 60%, white);
+    outline-offset: 2px;
+  }
+</style>
