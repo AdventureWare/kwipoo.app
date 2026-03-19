@@ -14,10 +14,10 @@
 {#if items.length > 0}
   <nav
     aria-label={title}
-    class="rounded-[1.5rem] border border-neutral-200 bg-white p-5 shadow-sm"
+    class="card preset-filled-surface-50-950 rounded-[1.5rem] border border-surface-200-800 p-5 shadow-sm"
   >
     <p
-      class="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600"
+      class="text-xs font-semibold uppercase tracking-[0.18em] text-surface-700-300"
     >
       {title}
     </p>
@@ -26,7 +26,7 @@
       {#each items as item (item.id)}
         <a
           href={`#${item.id}`}
-          class="block rounded-xl px-3 py-2 text-sm leading-6 text-neutral-800 transition-colors hover:bg-primary-50 hover:text-primary-900"
+          class="btn btn-sm preset-tonal-surface hover:preset-tonal-primary block w-full justify-start rounded-xl px-3 py-2 text-sm leading-6 text-surface-900-100"
         >
           {item.label}
         </a>
