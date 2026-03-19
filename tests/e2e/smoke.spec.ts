@@ -1,9 +1,25 @@
-import { expect, test, type APIRequestContext } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
-async function docsAreAvailable(request: APIRequestContext): Promise<boolean> {
-  const response = await request.get("/docs");
+const docsEnabled = parseBooleanFlag(process.env.PUBLIC_FEATURE_DOCS) ?? false;
 
-  return response.status() === 200;
+function parseBooleanFlag(value: string | undefined): boolean | undefined {
+  if (value === undefined || value.trim() === "") {
+    return undefined;
+  }
+
+  const normalizedValue = value.trim().toLowerCase();
+
+  if (["1", "true", "yes", "on"].includes(normalizedValue)) {
+    return true;
+  }
+
+  if (["0", "false", "no", "off"].includes(normalizedValue)) {
+    return false;
+  }
+
+  throw new Error(
+    `Invalid PUBLIC_FEATURE_DOCS value in Playwright test environment: "${value}"`,
+  );
 }
 
 test("@smoke homepage renders primary marketing content", async ({ page }) => {
@@ -54,14 +70,13 @@ test("@smoke homepage keeps the primary CTA and product proof available without 
 
 test("@smoke docs and legal pages render the expected headings", async ({
   page,
-  request,
 }) => {
-  if (await docsAreAvailable(request)) {
+  if (docsEnabled) {
     await page.goto("/docs");
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: /^documentation$/i,
+        name: /welcome to kwipoo documentation/i,
       }),
     ).toBeVisible();
 
@@ -93,14 +108,13 @@ test("@smoke docs and legal pages render the expected headings", async ({
 
 test("@smoke homepage footer links and social actions remain accessible on narrow screens", async ({
   page,
-  request,
 }) => {
   await page.goto("/");
   await page.getByRole("contentinfo").scrollIntoViewIfNeeded();
 
   const docsLink = page.getByRole("link", { name: /documentation/i });
 
-  if (await docsAreAvailable(request)) {
+  if (docsEnabled) {
     await expect(docsLink).toBeVisible();
   } else {
     await expect(docsLink).toHaveCount(0);
