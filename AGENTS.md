@@ -1,23 +1,51 @@
-You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
+# Kwipoo Website
 
-## Available MCP Tools:
+This repository is the public marketing website for Kwipoo. It is separate from the product application. Prioritize landing-page content, brand presentation, CTA flows, legal pages, and route-safe site behavior. Do not treat this repo like the app itself.
 
-### 1. list-sections
+## First Read
 
-Use this FIRST to discover all available documentation sections. Returns a structured list with titles, use_cases, and paths.
-When asked about Svelte or SvelteKit topics, ALWAYS use this tool at the start of the chat to find relevant sections.
+- `README.md`
+- `docs/design-ui-guidelines.md`
+- `src/lib/config/site.ts`
+- `src/routes/+page.svelte`
+- `src/lib/components/layouts/navigation/*`
+- `src/lib/components/layouts/sections/*`
 
-### 2. get-documentation
+## Project Map
 
-Retrieves full documentation content for specific sections. Accepts single or multiple sections.
-After calling the list-sections tool, you MUST analyze the returned documentation sections (especially the use_cases field) and then use the get-documentation tool to fetch ALL documentation sections that are relevant for the user's task.
+- `src/routes/+page.svelte`: homepage metadata plus most marketing content data.
+- `src/lib/components/layouts/navigation/`: header and footer.
+- `src/lib/components/layouts/sections/`: reusable landing-page sections.
+- `src/routes/privacy-policy/+page.svelte`: privacy page.
+- `src/routes/terms-and-conditions/+page.svelte`: terms page.
+- `static/assets/`: marketing imagery and logos.
+- `src/lib/config/site.ts`: shared URLs, support email, and site constants.
 
-### 3. svelte-autofixer
+## Working Rules
 
-Analyzes Svelte code and returns issues and suggestions.
-You MUST use this tool whenever writing Svelte code before sending it to the user. Keep calling it until no issues or suggestions are returned.
+- Reuse `src/lib/config/site.ts` for app URLs, public-site URLs, and support contact data instead of hardcoding new copies.
+- Use `resolve()` for internal route links and `asset()` for static asset URLs referenced from Svelte components.
+- Keep edits scoped. This repo is mostly copy, layout, and asset wiring.
+- Preserve the current visual language unless the user asks for a redesign.
+- For design-heavy work, read `docs/design-ui-guidelines.md` before editing. It is the repo's design brief for hierarchy, spacing, CTA behavior, and responsive expectations.
+- Prefer improving design through tokens, reusable patterns, and clearer component structure rather than one-off hardcoded colors or spacing.
+- Treat `320px` to `390px` mobile widths as a real target, not an afterthought. Responsive work should account for narrow phones, tablet widths, and desktop.
+- Treat legal copy as high-risk content. Make mechanical fixes freely, but do not invent policy or terms language unless the user explicitly asks for legal copy work.
+- When a task is really about the application, say so and keep the change in the website layer only.
 
-### 4. playground-link
+## Validation
 
-Generates a Svelte Playground link with the provided code.
-After completing the code, ask the user if they want a playground link. Only call this tool after user confirmation and NEVER if code was written to files in their project.
+- Run `npm run check`
+- Run `npm run lint`
+- For meaningful UI or layout changes, run `npm run test:e2e`
+- When the change is responsive-layout sensitive, make sure mobile coverage is part of the run, especially the narrow-mobile project
+- If the Svelte MCP server is available:
+  - use `list-sections` first for Svelte/SvelteKit documentation discovery
+  - fetch all relevant docs with `get-documentation`
+  - run `svelte-autofixer` on every edited `.svelte` file until it returns no issues or suggestions
+- If the MCP tools are not exposed in the current runtime, fall back to local validation and note that in the handoff.
+
+## Local Skill
+
+- Use `.agents/skills/marketing-site-maintainer` for recurring work in this repo.
+- Use `.agents/skills/marketing-site-design-review` for visual design, UX polish, and responsive-layout work.

@@ -1,38 +1,71 @@
-# sv
+# Kwipoo Website
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Public-facing marketing website for Kwipoo, built with SvelteKit. This repo is for landing-page content, brand presentation, CTA flows, and legal pages. It is not the product application itself.
 
-## Creating a project
+## Stack
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Svelte 5
+- SvelteKit 2
+- Tailwind CSS 4
+- TypeScript
+- Phosphor Svelte
 
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Local Development
 
 ```sh
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
+Useful validation commands:
 
 ```sh
+npm run check
+npm run lint
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## Project Structure
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- `docs/design-ui-guidelines.md`: design and UX brief for future contributors and agents.
+- `src/routes/+page.svelte`: homepage metadata and the main marketing-content arrays.
+- `src/lib/components/layouts/navigation/`: header and footer.
+- `src/lib/components/layouts/sections/`: homepage sections such as hero, problem/solution, and switchbacks.
+- `src/routes/privacy-policy/+page.svelte`: privacy policy page.
+- `src/routes/terms-and-conditions/+page.svelte`: terms and conditions page.
+- `static/assets/`: screenshots, product imagery, and brand assets.
+- `src/lib/config/site.ts`: source of truth for site/app URLs and support contact info.
+
+## Content Conventions
+
+- This site should speak as the marketing site for Kwipoo, not as the application runtime.
+- Reuse values from `src/lib/config/site.ts` for repeated URLs and contact information.
+- Use `resolve()` for internal links and `asset()` for static assets referenced from Svelte components.
+- Use `docs/design-ui-guidelines.md` as the source of truth for visual hierarchy, section rhythm, CTA behavior, and responsive polish.
+- Treat `320px` to `390px` widths as a required review surface for layout, CTA visibility, screenshot treatment, and any future forms.
+- Be conservative with the legal pages. They are static-content heavy and should get human review for substantive wording changes.
+
+## AI Agent Workflow
+
+1. Read `AGENTS.md`, then `src/lib/config/site.ts`, then the route/component files you plan to touch.
+2. Read `docs/design-ui-guidelines.md` for any design/UI/UX change.
+3. Use `.agents/skills/marketing-site-maintainer` for general website work and `.agents/skills/marketing-site-design-review` for visual design or UX polish.
+4. After changing Svelte files, run `svelte-autofixer` if the Svelte MCP tools are available.
+5. Finish with `npm run check` and `npm run lint`.
+6. For meaningful layout or visual changes, run `npm run test:e2e`.
+7. Treat responsive work as incomplete until desktop, mobile, and narrow-mobile behavior have been checked.
+
+## CI/CD
+
+- GitHub Actions validates pushes and pull requests to `develop` and `main`.
+- CI runs Prettier, ESLint, Svelte typechecking, a production build, and Playwright smoke tests.
+- Playwright coverage includes desktop, mobile, and narrow-mobile viewport projects so responsive regressions surface in CI.
+- Commit messages are checked against the repository's conventional-commit policy.
+- Deployment is expected to flow through Netlify using this repo and `netlify.toml` rather than a separate GitHub deploy workflow.
+
+## Current Notes
+
+- The public site URL is `https://kwipoo.app`.
+- The CTA/login destination currently points at the app URL configured in `src/lib/config/site.ts`.
+- The design brief for agents lives in `docs/design-ui-guidelines.md`.
+- The legal pages still contain some long generated sections and should receive a human legal/content review before relying on them as final copy.
