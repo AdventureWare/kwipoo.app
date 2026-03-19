@@ -17,7 +17,7 @@
     class="card preset-filled-surface-50-950 rounded-[1.5rem] border border-surface-200-800 p-5 shadow-sm"
   >
     <p
-      class="text-xs font-semibold uppercase tracking-[0.18em] text-surface-300"
+      class="text-xs font-semibold uppercase tracking-[0.18em] text-surface-700-300"
     >
       {title}
     </p>
@@ -26,7 +26,7 @@
       {#each items as item (item.id)}
         <a
           href={`#${item.id}`}
-          class="btn btn-sm block w-full justify-start rounded-xl border border-surface-700 bg-surface-900 px-3 py-2 text-sm leading-6 text-surface-50 shadow-none hover:border-surface-600 hover:bg-surface-800 hover:text-surface-50"
+          class="btn btn-sm preset-tonal-surface hover:preset-tonal-primary block w-full justify-start rounded-xl px-3 py-2 text-sm leading-6 text-surface-900-100"
         >
           {item.label}
         </a>
