@@ -16,11 +16,10 @@
   }: Props = $props();
 
   const variantClasses = {
-    primary: "border border-primary-200 bg-brand-canvas/90 text-primary-800",
-    secondary:
-      "border border-secondary-300 bg-brand-panel text-secondary-800",
-    outline: "border border-brand-border bg-brand-canvas text-brand-muted",
-    neutral: "bg-brand-panel text-brand-muted",
+    primary: "preset-outlined-primary-500 bg-white/90 text-primary-700",
+    secondary: "preset-outlined-secondary-500 bg-white/90 text-secondary-700",
+    outline: "preset-outlined-surface-300-700 bg-white text-neutral-700",
+    neutral: "preset-tonal-surface text-neutral-700",
   };
 
   const sizeClasses = {

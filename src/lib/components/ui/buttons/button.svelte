@@ -5,6 +5,7 @@
   import { isExternalHref } from "$lib/config/site";
   import type { Snippet } from "svelte";
   import type {
+    ClassValue,
     HTMLButtonAttributes,
     HTMLAnchorAttributes,
   } from "svelte/elements";
@@ -14,7 +15,7 @@
 
   interface SharedProps {
     children: Snippet;
-    class?: string;
+    class?: ClassValue;
     variant?: ButtonVariant;
     size?: ButtonSize;
     href?: string;
@@ -30,23 +31,29 @@
 
   type Props = LinkProps | NativeButtonProps;
 
-  const baseClasses =
-    "w-full inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
+  const baseClasses = [
+    "btn",
+    "w-full",
+    "font-medium",
+    "shadow-sm",
+    "focus-visible:outline-2",
+    "focus-visible:outline-offset-2",
+    "focus-visible:outline-primary-300",
+    "disabled:opacity-50",
+    "disabled:cursor-not-allowed",
+  ];
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary:
-      "bg-[#329F9B] hover:bg-[#2a8480] text-white focus:ring-[#329F9B]/50 shadow-sm hover:shadow-md",
-    secondary:
-      "bg-secondary-500 hover:bg-[#d4ac47] text-white focus:ring-secondary-500/50 shadow-sm hover:shadow-md",
-    outline:
-      "border border-[#329F9B] text-[#329F9B] hover:bg-[#329F9B] hover:text-white focus:ring-[#329F9B]/50",
-    ghost: "text-[#329F9B] hover:bg-[#329F9B]/10 focus:ring-[#329F9B]/50",
+    primary: "preset-filled-primary-500",
+    secondary: "preset-filled-secondary-500",
+    outline: "preset-outlined-primary-500 bg-white text-primary-700",
+    ghost: "preset-tonal-primary",
   };
 
   const sizeClasses: Record<ButtonSize, string> = {
-    sm: "min-h-10 px-3 py-2 text-xs",
-    md: "min-h-11 px-4 py-2.5 text-sm",
-    lg: "min-h-12 px-6 py-3 text-base",
+    sm: "btn-sm min-h-10",
+    md: "btn-base min-h-11",
+    lg: "btn-lg min-h-12",
   };
 
   let {
@@ -60,9 +67,13 @@
     ...restProps
   }: Props = $props();
 
-  let classes = $derived(
-    `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim(),
-  );
+  let classes = $derived([
+    baseClasses,
+    variantClasses[variant],
+    sizeClasses[size],
+    disabled && "pointer-events-none",
+    className,
+  ]);
   let resolvedHref = $derived(
     href
       ? isExternalHref(href)
@@ -75,9 +86,11 @@
 {#if href}
   <!-- eslint-disable svelte/no-navigation-without-resolve -->
   <a
-    {...(restProps as Omit<HTMLAnchorAttributes, "class" | "href" | "type">)}
+    {...restProps as Omit<HTMLAnchorAttributes, "class" | "href" | "type">}
     href={resolvedHref}
     class={classes}
+    aria-disabled={disabled}
+    tabindex={disabled ? -1 : undefined}
     role="button"
   >
     {@render children()}
@@ -85,7 +98,7 @@
   <!-- eslint-enable svelte/no-navigation-without-resolve -->
 {:else}
   <button
-    {...(restProps as Omit<HTMLButtonAttributes, "class" | "href" | "type">)}
+    {...restProps as Omit<HTMLButtonAttributes, "class" | "href" | "type">}
     {type}
     {disabled}
     class={classes}
