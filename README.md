@@ -63,6 +63,14 @@ npm run build
 - Commit messages are checked against the repository's conventional-commit policy.
 - Deployment is expected to flow through Netlify using this repo and `netlify.toml` rather than a separate GitHub deploy workflow.
 
+## Releases
+
+- This repo uses Changesets to manage website version bumps on the private `kwipoo.app` package.
+- For any user-facing change that should be included in the next release, run `npm run changeset` and commit the generated file in `.changeset/`.
+- `main` runs a release workflow that opens or updates a version PR using Changesets.
+- Merge that release PR to apply the version bump and changelog updates after the underlying changes are already on `main`.
+- CI-only, docs-only, and repo-maintenance changes do not always need a changeset.
+
 ## Current Notes
 
 - The public site URL is `https://kwipoo.app`.

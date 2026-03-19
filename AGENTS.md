@@ -32,6 +32,7 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 - Treat `320px` to `390px` mobile widths as a real target, not an afterthought. Responsive work should account for narrow phones, tablet widths, and desktop.
 - Treat legal copy as high-risk content. Make mechanical fixes freely, but do not invent policy or terms language unless the user explicitly asks for legal copy work.
 - When a task is really about the application, say so and keep the change in the website layer only.
+- For user-facing changes intended for release, add a Changesets entry with `npm run changeset` unless the change is clearly docs-only, CI-only, or internal repo maintenance.
 
 ## Validation
 
