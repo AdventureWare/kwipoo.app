@@ -1,19 +1,16 @@
 <script lang="ts">
   import { asset, resolve } from "$app/paths";
   import { TwitterLogo, LinkedinLogo, InstagramLogo } from "phosphor-svelte";
-  import { isFeatureEnabled } from "$lib/config/feature-flags";
-  import { COMPANY_NAME, COMPANY_WEBSITE_URL } from "$lib/config/site";
-
-  const docsEnabled = isFeatureEnabled("docs");
+  import { COMPANY_NAME } from "$lib/config/site";
 </script>
 
-<footer class="border-t border-brand-border bg-brand-panel">
+<footer class="border-t border-neutral-200 bg-white">
   <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-8 text-center md:grid-cols-4 md:text-left">
       <div class="col-span-1">
         <div class="flex items-center justify-center md:justify-start">
           <div
-            class="card flex h-20 w-20 items-center justify-center border border-brand-border bg-brand-canvas"
+            class="flex h-20 w-20 items-center justify-center rounded bg-neutral-200"
           >
             <img src={asset("/assets/logos/logo.svg")} alt="Kwipoo Logo" />
           </div>
@@ -25,18 +22,16 @@
           Company
         </h3>
         <ul class="space-y-3">
-          <!-- eslint-disable svelte/no-navigation-without-resolve -->
           <li>
             <a
-              href={COMPANY_WEBSITE_URL}
-              class="transition-colors duration-200 hover:text-primary-800"
+              href="https://www.adventureware.com/"
+              class="hover:text-neutral-600 transition-colors duration-200"
               target="_blank"
               rel="noopener noreferrer"
             >
               {COMPANY_NAME}
             </a>
           </li>
-          <!-- eslint-enable svelte/no-navigation-without-resolve -->
         </ul>
       </div>
 
@@ -45,20 +40,10 @@
           Resources
         </h3>
         <ul class="space-y-3">
-          {#if docsEnabled}
-            <li>
-              <a
-                href={resolve("/docs")}
-                class="transition-colors duration-200 hover:text-primary-800"
-              >
-                Documentation
-              </a>
-            </li>
-          {/if}
           <li>
             <a
               href={resolve("/privacy-policy")}
-              class="transition-colors duration-200 hover:text-primary-800"
+              class="hover:text-neutral-950 transition-colors duration-200"
             >
               Privacy Policy
             </a>
@@ -66,7 +51,7 @@
           <li>
             <a
               href={resolve("/terms-and-conditions")}
-              class="transition-colors duration-200 hover:text-primary-800"
+              class="hover:text-neutral-950 transition-colors duration-200"
             >
               Terms & Conditions
             </a>
@@ -78,13 +63,10 @@
         <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider">
           Follow Us
         </h3>
-        <!-- eslint-disable svelte/no-navigation-without-resolve -->
-        <div
-          class="flex flex-wrap justify-center gap-3 sm:gap-4 md:justify-start"
-        >
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:justify-start">
           <a
             href="https://twitter.com/KwipooApp"
-            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
+            class="w-10 h-10 bg-primary-500 text-white rounded-full flex flex-shrink-0 items-center justify-center hover:bg-primary-700 transition-colors duration-200"
             aria-label="Twitter"
             target="_blank"
             rel="noopener noreferrer"
@@ -93,7 +75,7 @@
           </a>
           <a
             href="https://linkedin.com/company/kwipoo"
-            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
+            class="w-10 h-10 bg-primary-500 text-white rounded-full flex flex-shrink-0 items-center justify-center hover:bg-primary-700 transition-colors duration-200"
             aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
@@ -102,7 +84,7 @@
           </a>
           <a
             href="https://instagram.com/kwipoo"
-            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
+            class="w-10 h-10 bg-primary-500 text-white rounded-full flex flex-shrink-0 items-center justify-center hover:bg-primary-700 transition-colors duration-200"
             aria-label="Instagram"
             target="_blank"
             rel="noopener noreferrer"
@@ -110,14 +92,12 @@
             <InstagramLogo size={20} />
           </a>
         </div>
-        <!-- eslint-enable svelte/no-navigation-without-resolve -->
       </div>
     </div>
 
-    <div class="mt-12 border-t border-brand-border pt-8">
+    <div class="mt-12 border-t border-neutral-200 pt-8">
       <p class="text-center text-sm">
-        Copyright © {new Date().getFullYear()}
-        {COMPANY_NAME}.
+        Copyright © {new Date().getFullYear()} {COMPANY_NAME}.
       </p>
     </div>
   </div>
