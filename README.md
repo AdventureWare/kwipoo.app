@@ -71,6 +71,7 @@ npm run test:e2e:smoke
 - For any user-facing change that should be included in the next release, run `npm run changeset` and commit the generated file in `.changeset/`.
 - `main` runs a release workflow that opens or updates a version PR using Changesets.
 - Merge that release PR to apply the version bump and changelog updates after the underlying changes are already on `main`.
+- After that release PR lands on `main`, GitHub Actions automatically opens a follow-up PR that syncs the generated `chore: version packages` commit back into `develop`.
 - CI-only, docs-only, and repo-maintenance changes do not always need a changeset.
 
 ## Promoting `develop` to `main`
@@ -78,6 +79,7 @@ npm run test:e2e:smoke
 - Treat `main` as a protected release branch, not a branch that accepts direct pushes or local merge commits.
 - `main` currently requires changes to land through a pull request and rejects merge commits on the branch.
 - When the goal is to move the current `develop` state to `main`, create a linear branch from `origin/main`, replay the `develop`-only commits onto it, and open a PR into `main`.
+- After that `main` PR merges, let the automated release PR land and then let the automated `develop` sync PR bring the version bump back downstream.
 - Before opening that PR, confirm the promotion branch matches `develop` at the tree level, for example with `git diff --stat develop..HEAD`.
 - Keep commit messages conventional-commit compliant because `commitlint` runs on protected-branch PRs and pushes.
 - When merging the PR, prefer `Rebase and merge`. If `Squash and merge` is used instead, edit the squash commit title so it still follows the conventional-commit format.
