@@ -1,8 +1,8 @@
 import { error } from "@sveltejs/kit";
-import { DOCS_ENABLED } from "$lib/config/site";
+import { isFeatureEnabled } from "$lib/config/feature-flags";
 
 export function load() {
-  if (!DOCS_ENABLED) {
+  if (!isFeatureEnabled("docs")) {
     error(404, "Page not found");
   }
 }

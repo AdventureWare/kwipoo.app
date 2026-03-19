@@ -1,5 +1,26 @@
 import { expect, test } from "@playwright/test";
-import { DOCS_ENABLED } from "../../src/lib/config/site";
+
+const docsEnabled = parseBooleanFlag(process.env.PUBLIC_FEATURE_DOCS) ?? false;
+
+function parseBooleanFlag(value: string | undefined): boolean | undefined {
+  if (value === undefined || value.trim() === "") {
+    return undefined;
+  }
+
+  const normalizedValue = value.trim().toLowerCase();
+
+  if (["1", "true", "yes", "on"].includes(normalizedValue)) {
+    return true;
+  }
+
+  if (["0", "false", "no", "off"].includes(normalizedValue)) {
+    return false;
+  }
+
+  throw new Error(
+    `Invalid PUBLIC_FEATURE_DOCS value in Playwright test environment: "${value}"`,
+  );
+}
 
 test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await page.goto("/");
@@ -50,7 +71,7 @@ test("@smoke homepage keeps the primary CTA and product proof available without 
 test("@smoke docs and legal pages render the expected headings", async ({
   page,
 }) => {
-  if (DOCS_ENABLED) {
+  if (docsEnabled) {
     await page.goto("/docs");
     await expect(
       page.getByRole("heading", {
@@ -93,7 +114,7 @@ test("@smoke homepage footer links and social actions remain accessible on narro
 
   const docsLink = page.getByRole("link", { name: /documentation/i });
 
-  if (DOCS_ENABLED) {
+  if (docsEnabled) {
     await expect(docsLink).toBeVisible();
   } else {
     await expect(docsLink).toHaveCount(0);
