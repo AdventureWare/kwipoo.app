@@ -27,6 +27,17 @@ npm run build
 npm run test:e2e:smoke
 ```
 
+## Feature Flags
+
+Feature flags live in `src/lib/config/feature-flags.ts`.
+
+- Use `PUBLIC_FEATURE_*` environment variables for flags that need to be read by both routes and Svelte components.
+- Boolean env values accept `1`, `true`, `yes`, `on`, `0`, `false`, `no`, and `off`.
+- `docs` currently defaults to `true` in development and `false` in production, and can be overridden with `PUBLIC_FEATURE_DOCS`.
+- Public flags are appropriate for UI and route gating. They are not appropriate for secrets or server-only access control.
+
+Create a local `.env` from `.env.example` when you want to override a flag locally.
+
 ## Project Structure
 
 - `docs/design-ui-guidelines.md`: design and UX brief for future contributors and agents.

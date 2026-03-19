@@ -1,11 +1,13 @@
 <!-- src/lib/components/navigation/header.svelte -->
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import { APP_LOGIN_URL, DOCS_ENABLED } from "$lib/config/site";
+  import { isFeatureEnabled } from "$lib/config/feature-flags";
+  import { APP_LOGIN_URL } from "$lib/config/site";
   import Button from "../../ui/buttons/button.svelte";
 
   const navLinkClass =
     "text-sm font-medium text-neutral-800 transition-colors hover:text-primary-700";
+  const docsEnabled = isFeatureEnabled("docs");
 </script>
 
 <header class="bg-white border-b border-neutral-100 sticky top-0 z-50">
@@ -18,7 +20,7 @@
 
         <div class="hidden md:flex items-center gap-6">
           <a href={resolve("/")} class={navLinkClass}>Home</a>
-          {#if DOCS_ENABLED}
+          {#if docsEnabled}
             <a href={resolve("/docs")} class={navLinkClass}>Docs</a>
           {/if}
         </div>
@@ -31,7 +33,7 @@
       </div>
 
       <div class="md:hidden flex items-center gap-4">
-        {#if DOCS_ENABLED}
+        {#if docsEnabled}
           <a href={resolve("/docs")} class={navLinkClass}>Docs</a>
         {/if}
         <Button href={APP_LOGIN_URL} variant="secondary" size="sm" class="w-auto">

@@ -1,11 +1,10 @@
 <script lang="ts">
   import { asset, resolve } from "$app/paths";
   import { TwitterLogo, LinkedinLogo, InstagramLogo } from "phosphor-svelte";
-  import {
-    COMPANY_NAME,
-    COMPANY_WEBSITE_URL,
-    DOCS_ENABLED,
-  } from "$lib/config/site";
+  import { isFeatureEnabled } from "$lib/config/feature-flags";
+  import { COMPANY_NAME, COMPANY_WEBSITE_URL } from "$lib/config/site";
+
+  const docsEnabled = isFeatureEnabled("docs");
 </script>
 
 <footer class="border-t border-surface-200 bg-white">
@@ -46,7 +45,7 @@
           Resources
         </h3>
         <ul class="space-y-3">
-          {#if DOCS_ENABLED}
+          {#if docsEnabled}
             <li>
               <a
                 href={resolve("/docs")}
