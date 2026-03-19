@@ -4,17 +4,17 @@
     <p class=" text-neutral-950 pb-4">Last updated November 14, 2025</p>
     <div>
       <p>
-        This privacy policy ("policy") describes how AdventureWare, llc and its
+        This Privacy Policy ("Policy") describes how AdventureWare, LLC and its
         related companies ("we," "us," or "our") collect, use, and share
         personal information of consumer users of this website, <a
           class="text-link hover:underline"
-          href="https://kwipoo.vercel.app/"
-          aria-label="Kwipoo App">kwipoo.vercel.app</a
+          href="https://kwipoo.app"
+          aria-label="Kwipoo App">kwipoo.app</a
         > (the "site"). This policy applies to all users of the site and our services.
       </p>
       <ul class="list-disc list-inside pl-6 my-4">
         <li>
-          visit our website at kwipoo.vercel.app, or any website of ours that
+          visit our website at kwipoo.app, or any website of ours that
           links to this privacy notice
         </li>
         <li>
@@ -27,13 +27,13 @@
         </li>
       </ul>
       <p>
-        reading this privacy notice will help you understand your privacy rights
+        Reading this privacy notice will help you understand your privacy rights
         and choices. If you do not agree with our policies and practices, please
         do not use our services. If you still have any questions or concerns,
         please email us at <a
           class="text-link hover:underline"
           href="mailto:kwipoo-support@adventureware.com">Kwipoo Support</a
-        >
+        >.
       </p>
     </div>
   </div>
@@ -116,9 +116,9 @@
     </ul>
     <p class=" text-neutral-950 pb-4">
       We collect personal information that you voluntarily provide to us when
-      you register on the services an interest in obtaining information about us
-      or our products and services, when you participate in activities on the
-      services, or otherwise when you contact us. We do not process sensitive
+      you register on the services, express an interest in obtaining information
+      about us or our products and services, participate in activities on the
+      services, or otherwise contact us. We do not process sensitive
       information.
     </p>
     <h4 class="text-lg font-bold text-color mb-2">Social media login data</h4>
@@ -335,10 +335,10 @@
         subpoena, warrant, court order, or rules of the court relating to the
         production of records, if it was produced by an individual in the course
         of their employment, business, or profession and the collection is
-        consistent with the purposes for which the information was produced • if
+        consistent with the purposes for which the information was produced; if
         the collection is solely for journalistic, artistic, or literary
-        purposes, if the information is publicly available and is specified by
-        the regulations
+        purposes; or if the information is publicly available and is specified
+        by the regulations
       </li>
     </ul>
   </section>
@@ -485,18 +485,21 @@
       However, please note that this will not affect the lawfulness of the
       processing before its withdrawal nor, when applicable law allows, will it
       affect the processing of your personal information conducted in reliance
-      on lawful processing grounds other than consent. Opting out of marketing
-      and promotional communications:you can unsubscribe from our marketing and
-      promotional communications at any time by clicking on the unsubscribe link
-      in the emails that we send, or by contacting us using the details provided
-      in the section "how can you contact us about this notice?" below. You will
-      then be removed from the marketing lists. However, we may still
-      communicate with you — for example, to send you service-related messages
-      that are necessary for the administration and use of your account, to
-      respond to service requests, or for other non-marketing purposes. Account
-      information if you would at any time like to review or change the
-      information in your account or terminate your account, you can: • log in
-      to your account settings and update your user account. • contact us using
+      on lawful processing grounds other than consent.
+
+      Opting out of marketing and promotional communications: you can
+      unsubscribe from our marketing and promotional communications at any time
+      by clicking on the unsubscribe link in the emails that we send, or by
+      contacting us using the details provided in the section "how can you
+      contact us about this notice?" below. You will then be removed from the
+      marketing lists. However, we may still communicate with you, for example,
+      to send you service-related messages that are necessary for the
+      administration and use of your account, to respond to service requests, or
+      for other non-marketing purposes.
+
+      Account information: if you would at any time like to review or change
+      the information in your account or terminate your account, you can log in
+      to your account settings and update your user account, or contact us using
       the contact information provided. Upon your request to terminate your
       account, we will deactivate or delete your account and information from
       our active databases. However, we may retain some information in our files
@@ -738,14 +741,15 @@
       Upon receiving an opt-out request, we will act upon the request as soon as
       feasibly possible, but no later than fifteen (15) days from the date of
       the request submission. To exercise these rights, you can contact us by
-      visiting kwipoo-support@adventureware.com, by email at
-      kwipoo-support@adventureware.com, by visiting http://www.kwipoo.app, or by
-      referring to the contact details at the bottom of this document. If you
-      have a complaint about how we handle your data, we would like to hear from
-      you. Financial incentives "financial incentive" means a program, benefit,
-      or other offering, including payments to consumers as compensation, for
-      the disclosure, deletion, sale, or sharing of personal information. The
-      law permits financial incentives or a price or service difference if it is
+      email at kwipoo-support@adventureware.com, by visiting
+      https://kwipoo.app, or by referring to the contact details at the bottom
+      of this document. If you have a complaint about how we handle your data,
+      we would like to hear from you.
+
+      Financial incentives: "financial incentive" means a program, benefit, or
+      other offering, including payments to consumers as compensation, for the
+      disclosure, deletion, sale, or sharing of personal information. The law
+      permits financial incentives or a price or service difference if it is
       reasonably related to the value of the consumer’s data. A business must be
       able to explain how the financial incentive or price or service difference
       is reasonably related to the value of the consumer’s data. The explanation
@@ -773,12 +777,12 @@
       service difference. If you choose to participate in the financial
       incentive you can withdraw from the financial incentive at any time by
       emailing us at kwipoo-support@adventureware.com, by visiting
-      http://www.kwipoo.app, or by referring to the contact details at the
-      bottom of this document.
+      https://kwipoo.app, or by referring to the contact details at the bottom
+      of this document.
     </p>
     <p class=" text-neutral-950 pb-4">
-      Colorado residents this section applies only to colorado residents. Under
-      the colorado privacy act (cpa), you have the rights listed below. However,
+      Colorado residents. This section applies only to Colorado residents. Under
+      the Colorado Privacy Act (CPA), you have the rights listed below. However,
       these rights are not absolute, and in certain cases, we may decline your
       request as permitted by law.
     </p>
@@ -797,9 +801,9 @@
         right to opt out of the processing of your personal data if it is used
         for targeted advertising, the sale of personal data, or profiling in
         furtherance of decisions that produce legal or similarly significant
-        effects ("profiling") to submit a request to exercise these rights
+        effects ("profiling"). To submit a request to exercise these rights
         described above, please email kwipoo-support@adventureware.com or visit
-        kwipoo-support@adventureware.com.
+        https://kwipoo.app.
       </li>
     </ul>
 
@@ -809,10 +813,11 @@
       forty-five (45) days of receipt of an appeal, we will inform you in
       writing of any action taken or not taken in response to the appeal,
       including a written explanation of the reasons for the decisions.
-      Connecticut residents this section applies only to connecticut residents.
-      Under the connecticut data privacy act (ctdpa), you have the rights listed
-      below. However, these rights are not absolute, and in certain cases, we
-      may decline your request as permitted by law.
+
+      Connecticut residents. This section applies only to Connecticut
+      residents. Under the Connecticut Data Privacy Act (CTDPA), you have the
+      rights listed below. However, these rights are not absolute, and in
+      certain cases, we may decline your request as permitted by law.
     </p>
     <ul class="list-disc list-inside pl-6 my-4">
       <li>
@@ -829,9 +834,9 @@
         right to opt out of the processing of your personal data if it is used
         for targeted advertising, the sale of personal data, or profiling in
         furtherance of decisions that produce legal or similarly significant
-        effects ("profiling") to submit a request to exercise these rights
+        effects ("profiling"). To submit a request to exercise these rights
         described above, please email kwipoo-support@adventureware.com or visit
-        kwipoo-support@adventureware.com.
+        https://kwipoo.app.
       </li>
     </ul>
     <p class=" text-neutral-950 pb-4">
@@ -839,80 +844,22 @@
       our decision, please email us at kwipoo-support@adventureware.com. Within
       sixty (60) days of receipt of an appeal, we will inform you in writing of
       any action taken or not taken in response to the appeal, including a
-      written explanation of the reasons for the decisions. Utah residents this
-      section applies only to utah residents. Under the utah consumer privacy
-      act (ucpa), you have the rights listed below. However, these rights are
-      not absolute, and in certain cases, we may decline your request as
-      permitted by law. • • • • • Virginia residents under the virginia consumer
-      data protection act (vcdpa): "consumer" means a natural person who is a
-      resident of the commonwealth acting only in an individual or household
-      context. It does not include a natural person acting in a commercial or
-      employment context. "personal data" means any information that is linked
-      or reasonably linkable to an identified or identifiable natural person.
-      "personal data" does not include de-identified data or publicly available
-      information. "sale of personal data" means the exchange of personal data
-      for monetary consideration. If this definition of "consumer" applies to
-      you, we must adhere to certain rights and obligations regarding your
-      personal data. Your rights with respect to your personal data • right to
-      be informed whether or not we are processing your personal data • right to
-      access your personal data • right to correct inaccuracies in your personal
-      data • right to request deletion of your personal data • right to obtain a
-      copy of the personal data you previously shared with us • right to opt out
-      of the processing of your personal data if it is used for targeted
-      advertising, the sale of personal data, or profiling in furtherance of
-      decisions that produce legal or similarly significant effects
-      ("profiling") exercise your rights provided under the virginia vcdpa you
-      may contact us by email at kwipoo-support@adventureware.com or visit
-      kwipoo-support@adventureware.com. If you are using an authorized agent to
-      exercise your rights, we may deny a request if the authorized agent does
-      not submit proof that they have been validly authorized to act on your
-      behalf. Verification process we may request that you provide additional
-      information reasonably necessary to verify you and your consumer's
-      request. If you submit the request through an authorized agent, we may
-      need to collect additional information to verify your identity before
-      processing your request. Upon receiving your request, we will respond
-      without undue delay, but in all cases, within forty-five (45) days of
-      receipt. The response period may be extended once by forty-five (45)
-      additional days when reasonably necessary. We will inform you of any such
-      extension within the initial 45-day response period, together with the
-      reason for the extension. Right to appeal if we decline to take action
-      regarding your request, we will inform you of our decision and reasoning
-      behind it. If you wish to appeal our decision, please email us at
-      kwipoo-support@adventureware.com. Within sixty (60) days of receipt of an
-      appeal, we will inform you in writing of any action taken or not taken in
-      response to the appeal, including a written explanation of the reasons for
-      the decisions. If your appeal is denied, you may contact the attorney
-      general to submit a complaint.
+      written explanation of the reasons for the decisions.
+
+      Utah residents. This section applies only to Utah residents. Under the
+      Utah Consumer Privacy Act (UCPA), you have the rights listed below.
+      However, these rights are not absolute, and in certain cases, we may
+      decline your request as permitted by law.
     </p>
-    <ul class="list-disc list-inside pl-6 my-4">
-      <li>
-        right to be informed whether or not we are processing your personal data
-      </li>
-      <li>right to access your personal data</li>
-      <li>right to correct inaccuracies in your personal data</li>
-      <li>right to request deletion of your personal data</li>
-      <li>
-        right to obtain a copy of the personal data you previously shared with
-        us
-      </li>
-      <li>
-        right to opt out of the processing of your personal data if it is used
-        for targeted advertising, the sale of personal data, or profiling in
-        furtherance of decisions that produce legal or similarly significant
-        effects ("profiling") to submit a request to exercise these rights
-        described above, please email kwipoo-support@adventureware.com or visit
-        kwipoo-support@adventureware.com.
-      </li>
-    </ul>
     <p class=" text-neutral-950 pb-4">
-      Virginia residents under the virginia consumer data protection act
-      (vcdpa): "consumer" means a natural person who is a resident of the
-      commonwealth acting only in an individual or household context. It does
+      Virginia residents. Under the Virginia Consumer Data Protection Act
+      (VCDPA), "consumer" means a natural person who is a resident of the
+      Commonwealth acting only in an individual or household context. It does
       not include a natural person acting in a commercial or employment context.
-      "personal data" means any information that is linked or reasonably
-      linkable to an identified or identifiable natural person. "personal data"
+      "Personal data" means any information that is linked or reasonably
+      linkable to an identified or identifiable natural person. "Personal data"
       does not include de-identified data or publicly available information.
-      "sale of personal data" means the exchange of personal data for monetary
+      "Sale of personal data" means the exchange of personal data for monetary
       consideration. If this definition of "consumer" applies to you, we must
       adhere to certain rights and obligations regarding your personal data.
     </p>
@@ -931,31 +878,35 @@
         right to opt out of the processing of your personal data if it is used
         for targeted advertising, the sale of personal data, or profiling in
         furtherance of decisions that produce legal or similarly significant
-        effects ("profiling") to submit a request to exercise these rights
+        effects ("profiling"). To submit a request to exercise these rights
         described above, please email kwipoo-support@adventureware.com or visit
-        kwipoo-support@adventureware.com.
+        https://kwipoo.app.
       </li>
     </ul>
     <p class=" text-neutral-950 pb-4">
       If you are using an authorized agent to exercise your rights, we may deny
       a request if the authorized agent does not submit proof that they have
-      been validly authorized to act on your behalf. Verification process we may
-      request that you provide additional information reasonably necessary to
-      verify you and your consumer's request. If you submit the request through
-      an authorized agent, we may need to collect additional information to
-      verify your identity before processing your request. Upon receiving your
-      request, we will respond without undue delay, but in all cases, within
-      forty-five (45) days of receipt. The response period may be extended once
-      by forty-five (45) additional days when reasonably necessary. We will
-      inform you of any such extension within the initial 45-day response
-      period, together with the reason for the extension. Right to appeal if we
-      decline to take action regarding your request, we will inform you of our
-      decision and reasoning behind it. If you wish to appeal our decision,
-      please email us at kwipoo-support@adventureware.com. Within sixty (60)
-      days of receipt of an appeal, we will inform you in writing of any action
-      taken or not taken in response to the appeal, including a written
-      explanation of the reasons for the decisions. If your appeal is denied,
-      you may contact the attorney general to submit a complaint.
+      been validly authorized to act on your behalf.
+
+      Verification process: we may request that you provide additional
+      information reasonably necessary to verify you and your consumer's
+      request. If you submit the request through an authorized agent, we may
+      need to collect additional information to verify your identity before
+      processing your request. Upon receiving your request, we will respond
+      without undue delay, but in all cases, within forty-five (45) days of
+      receipt. The response period may be extended once by forty-five (45)
+      additional days when reasonably necessary. We will inform you of any such
+      extension within the initial 45-day response period, together with the
+      reason for the extension.
+
+      Right to appeal: if we decline to take action regarding your request, we
+      will inform you of our decision and reasoning behind it. If you wish to
+      appeal our decision, please email us at kwipoo-support@adventureware.com.
+      Within sixty (60) days of receipt of an appeal, we will inform you in
+      writing of any action taken or not taken in response to the appeal,
+      including a written explanation of the reasons for the decisions. If your
+      appeal is denied, you may contact the attorney general to submit a
+      complaint.
     </p>
   </section>
   <section class="mb-4">
@@ -963,27 +914,30 @@
       Do other regions have specific privacy rights?
     </h3>
     <p class=" text-neutral-950 pb-4">
-      In short you may have additional rights based on the country you reside
-      in. Australia and new zealand we collect and process your personal
-      information under the obligations and conditions set by australia's
-      privacy act 1988 and new zealand's privacy act 2020 (privacy act). This
+      In short, you may have additional rights based on the country in which you
+      reside.
+
+      Australia and New Zealand: we collect and process your personal
+      information under the obligations and conditions set by Australia's
+      Privacy Act 1988 and New Zealand's Privacy Act 2020 (Privacy Act). This
       privacy notice satisfies the notice requirements defined in both privacy
-      acts, in particular: what personal information we collect from you, from
-      which sources, for which purposes, and other recipients of your personal
-      information. If you do not wish to provide the personal information
-      necessary to fulfill their applicable purpose, it may affect our ability
-      to provide our services, in particular: • offer you the products or
-      services that you want • respond to or help with your requests • manage
-      your account with us • confirm your identity and protect your account at
-      any time, you have the right to request access to or correction of your
-      personal information. You can make such a request by contacting us by
-      using the contact details provided in the section "how can you review,
-      update, or delete the data we collect from you?" if you believe we are
-      unlawfully processing your personal information, you have the right to
-      submit a complaint about a breach of the australian privacy principles to
-      the office of the australian information commissioner and a breach of new
-      zealand's privacy principles to the office of new zealand privacy
-      commissioner.
+      acts, in particular what personal information we collect from you, from
+      which sources, for which purposes, and the other recipients of your
+      personal information. If you do not wish to provide the personal
+      information necessary to fulfill the applicable purpose, it may affect our
+      ability to provide our services, in particular to offer you the products
+      or services that you want, respond to or help with your requests, manage
+      your account with us, and confirm your identity and protect your account.
+
+      At any time, you have the right to request access to or correction of
+      your personal information. You can make such a request by using the
+      contact details provided in the section "how can you review, update, or
+      delete the data we collect from you?" If you believe we are unlawfully
+      processing your personal information, you have the right to submit a
+      complaint about a breach of the Australian Privacy Principles to the
+      Office of the Australian Information Commissioner and a breach of New
+      Zealand's privacy principles to the Office of New Zealand Privacy
+      Commissioner.
     </p>
   </section>
   <section class="mb-4">
@@ -991,7 +945,7 @@
       Do we make updates to this notice?
     </h3>
     <p class=" text-neutral-950 pb-4">
-      In short yes, we will update this notice as necessary to stay compliant
+      In short, yes, we will update this notice as necessary to stay compliant
       with relevant laws. We may update this privacy notice from time to time.
       The updated version will be indicated by an updated "revised" date and the
       updated version will be effective as soon as it is accessible. If we make
@@ -1008,7 +962,7 @@
     <p class=" text-neutral-950 pb-4">
       If you have questions or comments about this notice, you may email us at
       kwipoo-support@adventureware.com or contact us by post at: AdventureWare,
-      llc 2840 Dwight Ave Dayton, Ohio 45420
+      LLC, 2840 Dwight Ave, Dayton, Ohio 45420.
     </p>
   </section>
   <section class="mb-4">
@@ -1018,8 +972,8 @@
     <p class=" text-neutral-950 pb-4">
       You have the right to request access to the personal information we
       collect from you, change that information, or delete it. To request to
-      review, update, or delete your personal information, please send request to:
-      kwipoo-support@adventureware.com.
+      review, update, or delete your personal information, please send a
+      request to kwipoo-support@adventureware.com.
     </p>
   </section>
 </article>

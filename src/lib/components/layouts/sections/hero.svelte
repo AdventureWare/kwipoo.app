@@ -1,34 +1,34 @@
 <!-- src/lib/components/hero-section.svelte -->
 <script lang="ts">
+  import { APP_LOGIN_URL } from "$lib/config/site";
   import AppStoreButtons from "../../ui/buttons/app-store-buttons.svelte";
   import Button from "../../ui/buttons/button.svelte";
 </script>
 
-<section class="relative bg-neutral-100 rounded-4xl mb-30">
-  <div class="px-8 sm:px-6 lg:px-8">
+<section class="relative mb-30 overflow-hidden rounded-4xl bg-neutral-100">
+  <div class="px-6 sm:px-8 lg:px-10">
     <div
-      class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center overflow-hidden"
+      class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16"
     >
-      <!-- Left Content -->
-      <div class="text-left py-16 sm:py-20 lg:py-24">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+      <div class="py-12 text-left sm:py-16 lg:py-20">
+        <h1 class="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
           Life is busy. <br />
           Your stuff shouldn't make it busier
         </h1>
 
         <p
-          class="mb-6 text-lg sm:text-xl text-slate-600 leading-relaxed max-w-xl mx-0"
+          class="mx-0 mb-6 max-w-lg text-lg leading-relaxed text-slate-600 sm:text-xl"
         >
           Track what you own, where you keep it, and what you need for any
           occasion—all in one app.
         </p>
 
         <div class="flex flex-col gap-4">
-          <div class="w-full sm:max-w-2/5 lg:max-w-1/2">
+          <div class="w-full sm:max-w-xs">
             <Button
               variant="primary"
               size="lg"
-              href="https://kwipoo.vercel.app/login">Open in Browser</Button
+              href={APP_LOGIN_URL}>Open in Browser</Button
             >
           </div>
 
@@ -36,13 +36,16 @@
         </div>
       </div>
 
-      <!-- Right Content - Phone Mockup (Hidden on mobile) -->
-      <div class="hidden lg:block relative h-full">
-        <img
-          src="/assets/product_Feature.png"
-          alt="Kwipoo app interface"
-          class="absolute bottom-0 right-0 w-80 h-auto transform translate-y-20 -translate-x-20"
-        />
+      <div class="flex justify-center pb-10 sm:pb-12 lg:justify-end lg:py-12">
+        <div
+          class="w-full max-w-sm rounded-[2rem] bg-white/75 p-3 shadow-xl ring-1 ring-black/5 backdrop-blur sm:max-w-md sm:p-4 lg:max-w-lg"
+        >
+          <img
+            src="/assets/product_Feature.png"
+            alt="Kwipoo app interface"
+            class="aspect-[4/3] w-full rounded-[1.5rem] object-cover shadow-md"
+          />
+        </div>
       </div>
     </div>
   </div>

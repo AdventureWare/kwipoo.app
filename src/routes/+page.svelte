@@ -1,6 +1,5 @@
-<script>
+<script lang="ts">
   import {
-    Archive,
     MagnifyingGlass,
     EyeSlash,
     Table,
@@ -8,6 +7,7 @@
     CurrencyDollar,
     Prohibit,
   } from "phosphor-svelte";
+  import { APP_LOGIN_URL, MARKETING_SITE_URL } from "$lib/config/site";
   import { HeroSection, QuoteCallout } from "$lib/components";
   import ProblemSolution from "$lib/components/layouts/sections/problem-solution.svelte";
   import Switchbacks from "$lib/components/layouts/sections/switchbacks.svelte";
@@ -65,7 +65,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: "https://kwipoo.vercel.app/login",
+      buttonHref: APP_LOGIN_URL,
     },
     {
       tag: "Sets",
@@ -81,7 +81,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: "https://kwipoo.vercel.app/login",
+      buttonHref: APP_LOGIN_URL,
     },
     {
       tag: "Places",
@@ -97,7 +97,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: "https://kwipoo.vercel.app/login",
+      buttonHref: APP_LOGIN_URL,
     },
     {
       tag: "Spots",
@@ -113,7 +113,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: "https://kwipoo.vercel.app/login",
+      buttonHref: APP_LOGIN_URL,
     },
     {
       tag: "Events",
@@ -128,7 +128,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: "https://kwipoo.vercel.app/login",
+      buttonHref: APP_LOGIN_URL,
     },
     {
       tag: "Social",
@@ -143,7 +143,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: "https://kwipoo.vercel.app/login",
+      buttonHref: APP_LOGIN_URL,
     },
 
     {
@@ -160,9 +160,22 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: "https://kwipoo.vercel.app/login",
+      buttonHref: APP_LOGIN_URL,
     },
-  ];
+  ] satisfies Array<{
+    tag: string;
+    title: string;
+    description: string;
+    image: {
+      src: string;
+      alt: string;
+    };
+    showButton?: boolean;
+    buttonText?: string;
+    buttonVariant?: "primary" | "secondary" | "outline" | "ghost";
+    buttonSize?: "sm" | "md" | "lg";
+    buttonHref?: string;
+  }>;
 </script>
 
 <svelte:head>
@@ -180,7 +193,7 @@
     content="The smarter way to manage your personal inventory. Track, organize, and find your belongings instantly."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kwipoo.app" />
+  <meta property="og:url" content={MARKETING_SITE_URL} />
 </svelte:head>
 
 <HeroSection />
@@ -203,5 +216,5 @@
   buttonText="Create a Free Account Today"
   buttonVariant="primary"
   buttonSize="lg"
-  buttonHref="https://kwipoo.vercel.app/login"
+  buttonHref={APP_LOGIN_URL}
 />

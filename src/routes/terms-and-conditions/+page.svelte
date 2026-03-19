@@ -5,7 +5,7 @@
     <div>
       <p>
         These Legal Terms (“Terms and Conditions”) constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”), and AdventureWare, LLC (“Company,” “we,” “us,” or “our”), governing your access to and use of the website
-        <a class="text-link hover:underline" href="https://kwipoo.vercel.app" aria-label="Kwipoo App">kwipoo.vercel.app</a>, the Kwipoo mobile application (the “App”), and any other related products and services that refer or link to these Legal Terms (collectively, the “Services”).
+        <a class="text-link hover:underline" href="https://kwipoo.app" aria-label="Kwipoo App">kwipoo.app</a>, the Kwipoo mobile application (the “App”), and any other related products and services that refer or link to these Legal Terms (collectively, the “Services”).
       </p>
       <p class="text-neutral-950 pb-4 mt-4">
         By accessing the Services, you acknowledge that you have read, understood, and agree to be bound by all of these Legal Terms. <strong>IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND MUST DISCONTINUE USE IMMEDIATELY.</strong>
