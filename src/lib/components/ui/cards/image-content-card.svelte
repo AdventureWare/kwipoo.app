@@ -12,7 +12,7 @@
     showButton?: boolean;
     buttonText?: string;
     buttonVariant?: "primary" | "secondary" | "outline" | "ghost";
-    buttonSize?: "sm" | "md" | "md";
+    buttonSize?: "sm" | "md" | "lg";
     buttonHref?: string;
     onButtonClick?: () => void;
     imageOnLeft?: boolean;
@@ -33,11 +33,10 @@
   }: Props = $props();
 </script>
 
-<div class="grid grid-cols-1 gap-12 items-center md:grid-cols-3">
+<div class="grid grid-cols-1 items-center gap-8 sm:gap-10 md:grid-cols-3 md:gap-12">
   {#if imageOnLeft}
-    <!-- Image on left (1/3), content on right (2/3) -->
     <div
-      class="relative order-first md:col-span-1 p-4 shadow-2xl rounded-2xl bg-neutral-50"
+      class="relative order-first mx-auto w-full max-w-md rounded-2xl bg-neutral-50 p-3 shadow-xl sm:p-4 md:col-span-1 md:max-w-none"
     >
       <img
         src={image.src}
@@ -46,16 +45,16 @@
         loading="lazy"
       />
     </div>
-    <div class="space-y-6 order-last md:col-span-2 md:mr-12">
+    <div class="order-last space-y-5 md:col-span-2 md:mr-12 md:space-y-6">
       <Tag text={tag} />
       <h3 class="text-xl font-bold text-color sm:text-2xl mb-3">
         {title}
       </h3>
-      <p class="text-md leading-relaxed text-neutral-900">
+      <p class="max-w-2xl text-base leading-relaxed text-neutral-900">
         {description}
       </p>
       {#if showButton}
-        <div class="mt-4 sm:w-1/2 md:w-1/3">
+        <div class="mt-4 w-full sm:max-w-xs">
           <Button
             variant={buttonVariant}
             size={buttonSize}
@@ -68,17 +67,16 @@
       {/if}
     </div>
   {:else}
-    <!-- Content on left (2/3), image on right (1/3) -->
-    <div class="space-y-6 order-last md:order-first md:col-span-2 md:ml-12">
+    <div class="order-last space-y-5 md:order-first md:col-span-2 md:ml-12 md:space-y-6">
       <Tag text={tag} />
       <h3 class="text-xl font-bold text-color sm:text-2xl mb-3">
         {title}
       </h3>
-      <p class="text-md leading-relaxed text-neutral-900">
+      <p class="max-w-2xl text-base leading-relaxed text-neutral-900">
         {description}
       </p>
       {#if showButton}
-        <div class="mt-4 sm:w-1/2 md:w-1/3">
+        <div class="mt-4 w-full sm:max-w-xs">
           <Button
             variant={buttonVariant}
             size={buttonSize}
@@ -91,7 +89,7 @@
       {/if}
     </div>
     <div
-      class="relative order-first md:order-last md:col-span-1 p-4 shadow-2xl rounded-2xl bg-neutral-50"
+      class="relative order-first mx-auto w-full max-w-md rounded-2xl bg-neutral-50 p-3 shadow-xl sm:p-4 md:order-last md:col-span-1 md:max-w-none"
     >
       <img
         src={image.src}

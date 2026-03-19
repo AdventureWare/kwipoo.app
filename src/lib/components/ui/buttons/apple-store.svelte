@@ -6,10 +6,11 @@
   href={appStoreUrl}
   target="_blank"
   rel="noopener noreferrer"
-  class="block w-full md:w-auto hover:opacity-80 transition-opacity duration-200"
+  aria-label="Download Kwipoo on the App Store"
+  class="block w-full max-w-[180px] transition-opacity duration-200 hover:opacity-80"
 >
   <svg
-    class="h-12 w-auto"
+    class="h-auto w-full"
     viewBox="0 0 119.66407 40"
     xmlns="http://www.w3.org/2000/svg"
   >

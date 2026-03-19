@@ -8,10 +8,10 @@
   target="_blank"
   rel="noopener noreferrer"
   aria-label="Get Kwipoo on Google Play"
-  class="block hover:opacity-80 transition-opacity duration-200"
+  class="block w-full max-w-[180px] transition-opacity duration-200 hover:opacity-80"
 >
   <svg
-    class="h-12 w-auto"
+    class="h-auto w-full"
     viewBox="0 0 135 41"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

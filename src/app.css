@@ -10,7 +10,7 @@
 }
 
 @font-face {
-  font-family: "Jost-Rgular";
+  font-family: "Jost";
   src: url("/fonts/Jost-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
@@ -129,9 +129,16 @@
 
   body {
     font-family: var(--font-jost);
+    background-color: var(--color-background);
     color: var(--color-text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 }
 
-@layer components {
+@layer utilities {
+  .text-color {
+    color: var(--color-text);
+  }
 }

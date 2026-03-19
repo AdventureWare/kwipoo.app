@@ -23,14 +23,14 @@
 </script>
 
 <div
-  class="bg-white py-8 px-12 mb-30 text-lg rounded-2xl shadow-md border border-neutral-100"
+  class="mb-30 rounded-2xl border border-neutral-100 bg-white px-5 py-8 text-base shadow-md sm:px-8 sm:text-lg lg:px-12"
 >
-  <p>
+  <p class="leading-relaxed text-neutral-900">
     "{quoteText}"
   </p>
 
   {#if showButton}
-    <div class="mt-4 sm:w-1/2 lg:w-1/3 mx-auto">
+    <div class="mt-5 w-full sm:mx-auto sm:max-w-xs lg:max-w-sm">
       <Button
         variant={buttonVariant}
         size={buttonSize}

@@ -1,131 +1,103 @@
 <script lang="ts">
-  import {
-    GithubLogo,
-    TwitterLogo,
-    LinkedinLogo,
-    InstagramLogo,
-    YoutubeLogo,
-  } from "phosphor-svelte";
-
-  interface FooterLink {
-    label: string;
-    href: string;
-    external?: boolean;
-  }
-
-  const companyLinks: FooterLink[] = [
-    {
-      label: "AdventureWare",
-      href: "https://www.adventureware.com/",
-      external: true,
-    },
-  ];
-
-  const resourceLinks: FooterLink[] = [
-    { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Terms & Conditions", href: "/terms-and-conditions"}
-  ];
-
-  const socialLinks = [
-    {
-      icon: TwitterLogo,
-      href: "https://twitter.com/KwipooApp",
-      label: "Twitter",
-    },
-    {
-      icon: LinkedinLogo,
-      href: "https://linkedin.com/company/kwipoo",
-      label: "LinkedIn",
-    },
-    {
-      icon: InstagramLogo,
-      href: "https://instagram.com/kwipoo",
-      label: "Instagram",
-    },
-  ];
+  import { asset, resolve } from "$app/paths";
+  import { TwitterLogo, LinkedinLogo, InstagramLogo } from "phosphor-svelte";
+  import { COMPANY_NAME } from "$lib/config/site";
 </script>
 
-<footer class=" border-t border-neutral-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <!-- Left Section - Logo placeholder -->
+<footer class="border-t border-neutral-200 bg-white">
+  <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-8 text-center md:grid-cols-4 md:text-left">
       <div class="col-span-1">
-        <div class="flex items-center">
-          <!-- Placeholder for logo - you'll add the image here -->
+        <div class="flex items-center justify-center md:justify-start">
           <div
-            class="w-20 h-20 bg-neutral-200 rounded flex items-center justify-center"
+            class="flex h-20 w-20 items-center justify-center rounded bg-neutral-200"
           >
-            <img src="assets/logos/logo.svg" alt="Kwipoo Logo" />
+            <img src={asset("/assets/logos/logo.svg")} alt="Kwipoo Logo" />
           </div>
         </div>
       </div>
 
-      <!-- Middle Section - Company Links -->
       <div class="col-span-1">
-        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider">
           Company
         </h3>
         <ul class="space-y-3">
-          {#each companyLinks as link}
-            <li>
-              <a
-                href={link.href}
-                class="hover:text-netral-600 transition-colors duration-200"
-                {...link.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {}}
-              >
-                {link.label}
-              </a>
-            </li>
-          {/each}
-        </ul>
-      </div>
-
-      <!-- Middle Section - Resources Links -->
-      <div class="col-span-1">
-        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
-          Resources
-        </h3>
-        <ul class="space-y-3">
-          {#each resourceLinks as link}
-            <li>
-              <a
-                href={link.href}
-                class=" hover:text-neutral-950 transition-colors duration-200"
-              >
-                {link.label}
-              </a>
-            </li>
-          {/each}
-        </ul>
-      </div>
-
-      <!-- Right Section - Social Media Icons -->
-      <div class="col-span-1">
-        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
-          Follow Us
-        </h3>
-        <div class="flex flex-wrap gap-3 sm:gap-4">
-          {#each socialLinks as social}
+          <li>
             <a
-              href={social.href}
-              class="w-10 h-10 bg-primary-500 text-white rounded-full flex flex-shrink-0 items-center justify-center hover:bg-primary-700 transition-colors duration-200"
-              aria-label={social.label}
+              href="https://www.adventureware.com/"
+              class="hover:text-neutral-600 transition-colors duration-200"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <svelte:component this={social.icon} size={20} />
+              {COMPANY_NAME}
             </a>
-          {/each}
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-span-1">
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider">
+          Resources
+        </h3>
+        <ul class="space-y-3">
+          <li>
+            <a
+              href={resolve("/privacy-policy")}
+              class="hover:text-neutral-950 transition-colors duration-200"
+            >
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a
+              href={resolve("/terms-and-conditions")}
+              class="hover:text-neutral-950 transition-colors duration-200"
+            >
+              Terms & Conditions
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-span-1">
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider">
+          Follow Us
+        </h3>
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:justify-start">
+          <a
+            href="https://twitter.com/KwipooApp"
+            class="w-10 h-10 bg-primary-500 text-white rounded-full flex flex-shrink-0 items-center justify-center hover:bg-primary-700 transition-colors duration-200"
+            aria-label="Twitter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <TwitterLogo size={20} />
+          </a>
+          <a
+            href="https://linkedin.com/company/kwipoo"
+            class="w-10 h-10 bg-primary-500 text-white rounded-full flex flex-shrink-0 items-center justify-center hover:bg-primary-700 transition-colors duration-200"
+            aria-label="LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LinkedinLogo size={20} />
+          </a>
+          <a
+            href="https://instagram.com/kwipoo"
+            class="w-10 h-10 bg-primary-500 text-white rounded-full flex flex-shrink-0 items-center justify-center hover:bg-primary-700 transition-colors duration-200"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <InstagramLogo size={20} />
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Bottom section - Copyright -->
-    <div class="mt-12 pt-8">
+    <div class="mt-12 border-t border-neutral-200 pt-8">
       <p class="text-center text-sm">
-        Copyright © {new Date().getFullYear()} AdventureWare.
+        Copyright © {new Date().getFullYear()} {COMPANY_NAME}.
       </p>
     </div>
   </div>
