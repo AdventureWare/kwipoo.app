@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
+import { DOCS_ENABLED } from "../../src/lib/config/site";
 
-test("homepage renders primary marketing content", async ({ page }) => {
+test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await page.goto("/");
 
   await expect(page).toHaveTitle(/Kwipoo/i);
@@ -15,7 +16,7 @@ test("homepage renders primary marketing content", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("homepage keeps the primary CTA and product proof available without horizontal overflow", async ({
+test("@smoke homepage keeps the primary CTA and product proof available without horizontal overflow", async ({
   page,
 }, testInfo) => {
   await page.goto("/");
@@ -46,9 +47,33 @@ test("homepage keeps the primary CTA and product proof available without horizon
   }
 });
 
-test("legal pages render and expose the expected headings", async ({
+test("@smoke docs and legal pages render the expected headings", async ({
   page,
 }) => {
+  if (DOCS_ENABLED) {
+    await page.goto("/docs");
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /welcome to kwipoo documentation/i,
+      }),
+    ).toBeVisible();
+
+    await page.goto("/docs/getting-started");
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /getting started with kwipoo/i,
+      }),
+    ).toBeVisible();
+  } else {
+    const docsResponse = await page.goto("/docs");
+    expect(docsResponse?.status()).toBe(404);
+
+    const guideResponse = await page.goto("/docs/getting-started");
+    expect(guideResponse?.status()).toBe(404);
+  }
+
   await page.goto("/privacy-policy");
   await expect(
     page.getByRole("heading", { level: 1, name: /privacy policy/i }),
@@ -60,11 +85,19 @@ test("legal pages render and expose the expected headings", async ({
   ).toBeVisible();
 });
 
-test("homepage footer links and social actions remain accessible on narrow screens", async ({
+test("@smoke homepage footer links and social actions remain accessible on narrow screens", async ({
   page,
 }) => {
   await page.goto("/");
   await page.getByRole("contentinfo").scrollIntoViewIfNeeded();
+
+  const docsLink = page.getByRole("link", { name: /documentation/i });
+
+  if (DOCS_ENABLED) {
+    await expect(docsLink).toBeVisible();
+  } else {
+    await expect(docsLink).toHaveCount(0);
+  }
 
   await expect(
     page.getByRole("link", { name: /privacy policy/i }),
