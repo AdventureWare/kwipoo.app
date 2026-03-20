@@ -77,23 +77,21 @@
     aria-label="Breadcrumb"
     class="flex flex-wrap items-center gap-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
   >
-    <a href={resolve("/")} class="transition-colors hover:text-primary-800-200">
+    <a href={resolve("/")} class="transition-colors hover:text-color">
       Home
     </a>
     <span aria-hidden="true">/</span>
     <a
       href={resolve("/docs")}
-      class="transition-colors hover:text-primary-800-200"
+      class="transition-colors hover:text-color"
     >
       Docs
     </a>
     <span aria-hidden="true">/</span>
-    <span class="text-primary-800-200">{data.docPage.title}</span>
+    <span class="text-brand-body">{data.docPage.title}</span>
   </nav>
 
-  <p
-    class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
-  >
+  <p class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted">
     {data.docPage.eyebrow}
   </p>
   <h1
@@ -119,7 +117,7 @@
     <section class="grid gap-5">
       <div class="space-y-3">
         <p
-          class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+          class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
         >
           Continue Exploring
         </p>
@@ -138,14 +136,14 @@
             class="card card-hover preset-filled-surface-50-950 rounded-[1.2rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
           >
             <p
-              class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+              class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
             >
               {docPage.eyebrow}
             </p>
-            <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-color">
+            <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-50">
               {docPage.title}
             </h3>
-            <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
+            <p class="mt-2 text-[0.95rem] leading-6 text-surface-100">
               {docPage.summary}
             </p>
           </a>

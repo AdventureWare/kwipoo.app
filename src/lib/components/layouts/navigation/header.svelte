@@ -19,7 +19,7 @@
   const mobileLinks = docsEnabled ? [{ href: docsHref, label: "Docs" }] : [];
 
   const navLinkBaseClass =
-    "rounded-full px-2.5 py-1.5 text-sm font-semibold tracking-[0.01em] transition-colors md:px-3 md:py-2";
+    "rounded-full px-3 py-2 text-base font-semibold tracking-[0.01em] transition-colors md:px-4 md:py-2.5 md:text-[1.02rem]";
 
   function isCurrent(href: string): boolean {
     return (
@@ -49,8 +49,8 @@
             class={[
               navLinkBaseClass,
               isCurrent(item.href)
-                ? "preset-tonal-primary text-primary-800"
-                : "text-surface-800-200 hover:preset-tonal-surface hover:text-primary-700",
+                ? "bg-primary-800 text-surface-50 hover:bg-primary-900 hover:text-surface-50"
+                : "text-surface-950 hover:bg-primary-50 hover:text-surface-950",
             ]}
           >
             <Navigation.TriggerText>{item.label}</Navigation.TriggerText>
@@ -75,8 +75,8 @@
               class={[
                 navLinkBaseClass,
                 isCurrent(item.href)
-                  ? "preset-tonal-primary text-primary-800"
-                  : "text-surface-800-200 hover:preset-tonal-surface hover:text-primary-700",
+                  ? "bg-primary-800 text-surface-50 hover:bg-primary-900 hover:text-surface-50"
+                  : "text-surface-950 hover:bg-primary-50 hover:text-surface-950",
               ]}
             >
               <Navigation.TriggerText>{item.label}</Navigation.TriggerText>
