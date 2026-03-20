@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+  import type { Pathname } from "$app/types";
   import {
     MagnifyingGlass,
     EyeSlash,
@@ -10,6 +12,7 @@
   import {
     isFeatureEnabled,
   } from "$lib/config/feature-flags";
+  import { getDocsHref } from "$lib/content/docs";
   import {
     APP_LOGIN_URL,
     MARKETING_SITE_URL,
@@ -28,6 +31,14 @@
     WEBSITE_ID,
     toSeoJsonLd,
   } from "$lib/seo";
+
+  function resolveFeatureDocsHref(slug: string): string {
+    if (!isFeatureEnabled("docs")) {
+      return APP_LOGIN_URL;
+    }
+
+    return resolve(getDocsHref(slug) as Pathname);
+  }
 
   const problemSolutionData = [
     {
@@ -82,7 +93,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: APP_LOGIN_URL,
+      buttonHref: resolveFeatureDocsHref("things"),
     },
     {
       tag: "Sets",
@@ -98,7 +109,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: APP_LOGIN_URL,
+      buttonHref: resolveFeatureDocsHref("sets"),
     },
     {
       tag: "Places",
@@ -114,7 +125,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: APP_LOGIN_URL,
+      buttonHref: resolveFeatureDocsHref("places"),
     },
     {
       tag: "Spots",
@@ -130,7 +141,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: APP_LOGIN_URL,
+      buttonHref: resolveFeatureDocsHref("spots"),
     },
     {
       tag: "Events",
@@ -145,7 +156,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: APP_LOGIN_URL,
+      buttonHref: resolveFeatureDocsHref("events"),
     },
     {
       tag: "Social",
@@ -160,7 +171,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: APP_LOGIN_URL,
+      buttonHref: resolveFeatureDocsHref("social"),
     },
 
     {
@@ -177,7 +188,7 @@
       buttonText: "Learn More",
       buttonVariant: "primary",
       buttonSize: "md",
-      buttonHref: APP_LOGIN_URL,
+      buttonHref: resolveFeatureDocsHref("profile"),
     },
   ] satisfies Array<{
     tag: string;
