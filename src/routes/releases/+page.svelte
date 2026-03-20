@@ -7,64 +7,51 @@
   } from "$lib/seo";
   import { SITE_NAME } from "$lib/config/site";
 
-  type ScaffoldSection = {
+  type ReleasePageSection = {
     title: string;
     description: string;
   };
 
-  type ReleaseChannel = {
-    title: string;
-    description: string;
-  };
-
-  type ReleaseEntry = {
+  type ReleaseNoteEntry = {
     version: string;
     date: string;
     summary: string;
-    notes: string[];
+    changes: string[];
   };
 
   const releaseTitle = "Kwipoo Release History | App Updates and Changelog";
   const releaseDescription =
     "Follow the Kwipoo app release history for shipped updates, version notes, and changelog details as they become available.";
 
-  const scaffoldSections: ScaffoldSection[] = [
+  const releasePageSections: ReleasePageSection[] = [
     {
-      title: "Version-by-version timeline",
+      title: "Version and date",
       description:
-        "Each release will get a dated entry so product changes can be reviewed in order.",
+        "Each release note will clearly show the version number and when it shipped.",
     },
     {
-      title: "Plain-language release notes",
+      title: "What changed",
       description:
-        "Updates will be grouped by what changed, why it matters, and what to look for after updating.",
+        "New features, improvements, and fixes can be grouped into short readable bullets.",
     },
     {
-      title: "Stable shareable archive",
+      title: "Important notes",
       description:
-        "This page is being structured as a permanent history, not a short-lived launch announcement.",
-    },
-  ];
-
-  const releaseChannels: ReleaseChannel[] = [
-    {
-      title: "Major launches",
-      description:
-        "Milestones, broad product shifts, and feature families worth calling out at the top level.",
-    },
-    {
-      title: "Regular improvements",
-      description:
-        "Smaller product refinements, workflow updates, and polish that still affects day-to-day use.",
-    },
-    {
-      title: "Fixes and reliability work",
-      description:
-        "Targeted bug fixes and quality improvements that deserve a durable changelog record.",
+        "If a release needs setup details or follow-up guidance, that can live inside the entry.",
     },
   ];
 
-  const releaseEntries: ReleaseEntry[] = [];
+  const placeholderReleaseNote: ReleaseNoteEntry = {
+    version: "Version 0.0.0",
+    date: "Release date",
+    summary:
+      "Each release note can open with a short summary of the update and why it matters.",
+    changes: [
+      "New features and improvements will be listed here.",
+      "Bug fixes and polish can be called out in separate bullets.",
+      "Important follow-up notes or upgrade guidance can be added at the end of the entry.",
+    ],
+  };
 
   const releaseStructuredData = toSeoJsonLd({
     "@context": "https://schema.org",
@@ -173,19 +160,19 @@
       <p
         class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
-        Planned Structure
+        Release Notes Format
       </p>
       <h2 class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color">
-        The page is ready for real release content.
+        A simple page for version-by-version updates.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        The initial scaffold focuses on durable structure so release notes can be
-        added without revisiting navigation, metadata, or route gating.
+        The goal here is straightforward: publish a release, add a short entry,
+        and make the main changes easy to scan.
       </p>
     </div>
 
     <div class="grid gap-4 md:grid-cols-3">
-      {#each scaffoldSections as section (section.title)}
+      {#each releasePageSections as section (section.title)}
         <article
           class="card rounded-[1.35rem] border border-surface-200 bg-surface-50 p-5 shadow-sm"
         >
@@ -200,69 +187,59 @@
     </div>
   </section>
 
-  <section class="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+  <section class="grid gap-5">
+    <div class="space-y-3">
+      <p
+        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+      >
+        Placeholder Entry
+      </p>
+      <h2 class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color">
+        Example release note layout.
+      </h2>
+      <p class="max-w-4xl text-lg leading-8 text-brand-body">
+        This placeholder shows the basic shape of a release notes entry while
+        the page is still gated off.
+      </p>
+    </div>
+
     <article
       class="card rounded-[1.5rem] border border-surface-200 bg-surface-50 p-6 shadow-sm"
     >
-      <p
-        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
-      >
-        Release Coverage
-      </p>
-      <div class="mt-4 grid gap-4">
-        {#each releaseChannels as channel (channel.title)}
-          <div class="rounded-[1.1rem] border border-surface-200 bg-white p-4">
-            <h3 class="text-[1.08rem] font-semibold text-surface-950">
-              {channel.title}
-            </h3>
-            <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
-              {channel.description}
-            </p>
-          </div>
-        {/each}
-      </div>
-    </article>
-
-    <article
-      class="card rounded-[1.5rem] border border-dashed border-surface-300 bg-brand-panel p-6 shadow-sm"
-    >
-      <p
-        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
-      >
-        First Entries
-      </p>
-      {#if releaseEntries.length === 0}
-        <div class="mt-4 space-y-3">
-          <h3 class="text-[1.3rem] font-semibold leading-tight text-surface-950">
-            No public release entries yet.
-          </h3>
-          <p class="text-[0.98rem] leading-7 text-brand-body">
-            Once this feature is enabled, this column can turn into the first
-            published release cards or a reverse-chronological timeline.
+      <div class="flex flex-wrap items-start justify-between gap-4 border-b border-surface-200 pb-5">
+        <div class="space-y-2">
+          <p
+            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+          >
+            {placeholderReleaseNote.date}
           </p>
+          <h3 class="text-[1.5rem] font-semibold leading-tight text-surface-950">
+            {placeholderReleaseNote.version}
+          </h3>
         </div>
-      {:else}
-        <div class="mt-4 grid gap-4">
-          {#each releaseEntries as entry (entry.version)}
-            <section class="rounded-[1.1rem] border border-surface-200 bg-white p-4">
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-brand-muted">
-                {entry.date}
-              </p>
-              <h3 class="mt-2 text-[1.15rem] font-semibold text-surface-950">
-                {entry.version}
-              </h3>
-              <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
-                {entry.summary}
-              </p>
-              <ul class="mt-3 grid gap-2 pl-5 text-[0.96rem] leading-7 text-brand-body">
-                {#each entry.notes as note (note)}
-                  <li class="list-disc">{note}</li>
-                {/each}
-              </ul>
-            </section>
+        <span
+          class="rounded-full border border-primary-200 bg-primary-50 px-3 py-1 text-sm font-semibold text-primary-700"
+        >
+          Placeholder
+        </span>
+      </div>
+
+      <p class="mt-5 text-[1rem] leading-7 text-brand-body">
+        {placeholderReleaseNote.summary}
+      </p>
+
+      <div class="mt-5 rounded-[1.15rem] border border-surface-200 bg-white p-5">
+        <p
+          class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+        >
+          Changes in this release
+        </p>
+        <ul class="mt-4 grid gap-3 pl-5 text-[0.98rem] leading-7 text-brand-body">
+          {#each placeholderReleaseNote.changes as change (change)}
+            <li class="list-disc">{change}</li>
           {/each}
-        </div>
-      {/if}
+        </ul>
+      </div>
     </article>
   </section>
 </div>
