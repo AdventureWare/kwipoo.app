@@ -43,6 +43,11 @@ export const FEATURE_FLAGS = {
     env.PUBLIC_FEATURE_DOCS,
     true,
   ),
+  resources: resolveBooleanFlag(
+    "PUBLIC_FEATURE_RESOURCES",
+    env.PUBLIC_FEATURE_RESOURCES,
+    false,
+  ),
   releaseHistory: resolveBooleanFlag(
     "PUBLIC_FEATURE_RELEASE_HISTORY",
     env.PUBLIC_FEATURE_RELEASE_HISTORY,

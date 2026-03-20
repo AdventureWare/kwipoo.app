@@ -9,18 +9,22 @@
 
   const homeHref = resolve("/");
   const docsHref = resolve("/docs");
+  const resourcesHref = resolve("/resources");
   const releasesHref = resolve("/releases");
   const docsEnabled = isFeatureEnabled("docs");
+  const resourcesEnabled = isFeatureEnabled("resources");
   const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
 
   const desktopLinks = [
     { href: homeHref, label: "Home" },
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
+    ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
     ...(releaseHistoryEnabled ? [{ href: releasesHref, label: "Releases" }] : []),
   ];
 
   const mobileLinks = [
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
+    ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
     ...(releaseHistoryEnabled
       ? [{ href: releasesHref, label: "Releases" }]
       : []),
