@@ -45,11 +45,11 @@
           class="card preset-filled-surface-50-950 rounded-[1.5rem] border border-surface-200-800 p-5 shadow-sm"
         >
           <p
-            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
           >
             Docs Workspace
           </p>
-          <p class="mt-3 text-[0.98rem] leading-6 text-brand-body">
+          <p class="mt-3 text-[0.98rem] leading-6 text-surface-100">
             Read the guide here, then open Kwipoo alongside it while the docs
             expand into deeper walkthroughs and screenshots.
           </p>
@@ -57,13 +57,13 @@
             <!-- eslint-disable svelte/no-navigation-without-resolve -->
             <a
               href={APP_LOGIN_URL}
-              class="btn btn-sm preset-filled-primary-500 w-full justify-center"
+              class="btn btn-sm preset-filled-primary-500 w-full justify-center text-surface-950"
             >
               Open Kwipoo
             </a>
             <a
               href={SUPPORT_EMAIL_MAILTO}
-              class="btn btn-sm preset-outlined-surface-200-800 hover:preset-tonal-surface w-full justify-center"
+              class="btn btn-sm preset-outlined-surface-200-800 w-full justify-center border-surface-700 text-surface-50 hover:border-surface-600 hover:preset-tonal-surface hover:text-surface-50"
             >
               Contact support
             </a>

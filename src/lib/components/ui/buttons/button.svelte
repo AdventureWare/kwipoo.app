@@ -46,12 +46,12 @@
 
   const variantClasses: Record<ButtonVariant, string> = {
     primary:
-      "border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] hover:border-primary-700 hover:bg-primary-700",
+      "border border-primary-600 bg-primary-600 text-surface-950 hover:border-primary-700 hover:bg-primary-700",
     secondary:
-      "border border-secondary-500 bg-secondary-500 text-[var(--color-secondary-contrast-500)] hover:border-secondary-600 hover:bg-secondary-600",
+      "border border-secondary-500 bg-secondary-500 text-surface-950 hover:border-secondary-600 hover:bg-secondary-600",
     outline:
-      "border border-primary-300 bg-brand-canvas text-primary-800 hover:bg-primary-50",
-    ghost: "bg-primary-50 text-primary-800 hover:bg-primary-100",
+      "border border-primary-300 bg-brand-canvas text-surface-950 hover:bg-primary-50",
+    ghost: "bg-primary-50 text-surface-950 hover:bg-primary-100",
   };
 
   const sizeClasses: Record<ButtonSize, string> = {
