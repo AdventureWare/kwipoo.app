@@ -23,9 +23,9 @@
 </script>
 
 <div
-  class="card mb-30 border border-surface-200 bg-white px-5 py-8 text-base shadow-sm sm:px-8 sm:text-lg lg:px-12"
+  class="card mb-30 border border-brand-border bg-brand-canvas px-5 py-8 text-base shadow-sm sm:px-8 sm:text-lg lg:px-12"
 >
-  <p class="leading-relaxed text-neutral-900">
+  <p class="leading-relaxed text-brand-body">
     "{quoteText}"
   </p>
 

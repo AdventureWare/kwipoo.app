@@ -269,7 +269,7 @@
 <Switchbacks items={switchbackItems} />
 
 <section
-  class="card mb-30 border border-surface-200 bg-surface-50 px-5 py-8 sm:p-8 lg:px-10"
+  class="card mb-30 border border-brand-border bg-brand-canvas px-5 py-8 sm:p-8 lg:px-10"
 >
   <div class="max-w-6xl mx-auto">
     <div class="mb-8 text-left md:mb-10 md:text-center">
@@ -282,7 +282,7 @@
         What people usually want to know before using Kwipoo
       </h2>
       <p
-        class="text-base leading-relaxed text-neutral-950 md:mx-auto md:max-w-4/5 md:text-lg"
+        class="text-base leading-relaxed text-brand-body md:mx-auto md:max-w-4/5 md:text-lg"
       >
         This is the short version: Kwipoo helps you build a searchable personal
         inventory, organize where things live, and reuse plans for trips,
@@ -293,7 +293,7 @@
     <div class="grid gap-4 md:grid-cols-2">
       {#each faqItems as item (item.question)}
         <article
-          class="rounded-[1.5rem] border border-surface-200 bg-white p-6 shadow-sm"
+          class="rounded-[1.5rem] border border-brand-border bg-brand-canvas p-6 shadow-sm"
         >
           <h3 class="text-xl font-semibold text-surface-950-50">
             {item.question}

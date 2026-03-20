@@ -36,6 +36,7 @@
     "w-full",
     "font-medium",
     "shadow-sm",
+    "transition-colors",
     "focus-visible:outline-2",
     "focus-visible:outline-offset-2",
     "focus-visible:outline-primary-300",
@@ -44,10 +45,13 @@
   ];
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary: "preset-filled-primary-500",
-    secondary: "preset-filled-secondary-500",
-    outline: "preset-outlined-primary-500 bg-white text-primary-700",
-    ghost: "preset-tonal-primary",
+    primary:
+      "border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] hover:border-primary-700 hover:bg-primary-700",
+    secondary:
+      "border border-secondary-500 bg-secondary-500 text-[var(--color-secondary-contrast-500)] hover:border-secondary-600 hover:bg-secondary-600",
+    outline:
+      "border border-primary-300 bg-brand-canvas text-primary-800 hover:bg-primary-50",
+    ghost: "bg-primary-50 text-primary-800 hover:bg-primary-100",
   };
 
   const sizeClasses: Record<ButtonSize, string> = {

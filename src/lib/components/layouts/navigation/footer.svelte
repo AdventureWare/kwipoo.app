@@ -7,13 +7,13 @@
   const docsEnabled = isFeatureEnabled("docs");
 </script>
 
-<footer class="border-t border-surface-200 bg-white">
+<footer class="border-t border-brand-border bg-brand-panel">
   <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-8 text-center md:grid-cols-4 md:text-left">
       <div class="col-span-1">
         <div class="flex items-center justify-center md:justify-start">
           <div
-            class="card flex h-20 w-20 items-center justify-center border border-surface-200 bg-surface-100"
+            class="card flex h-20 w-20 items-center justify-center border border-brand-border bg-brand-canvas"
           >
             <img src={asset("/assets/logos/logo.svg")} alt="Kwipoo Logo" />
           </div>
@@ -29,7 +29,7 @@
           <li>
             <a
               href={COMPANY_WEBSITE_URL}
-              class="hover:text-neutral-600 transition-colors duration-200"
+              class="transition-colors duration-200 hover:text-primary-800"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -49,7 +49,7 @@
             <li>
               <a
                 href={resolve("/docs")}
-                class="hover:text-neutral-950 transition-colors duration-200"
+                class="transition-colors duration-200 hover:text-primary-800"
               >
                 Documentation
               </a>
@@ -58,7 +58,7 @@
           <li>
             <a
               href={resolve("/privacy-policy")}
-              class="hover:text-neutral-950 transition-colors duration-200"
+              class="transition-colors duration-200 hover:text-primary-800"
             >
               Privacy Policy
             </a>
@@ -66,7 +66,7 @@
           <li>
             <a
               href={resolve("/terms-and-conditions")}
-              class="hover:text-neutral-950 transition-colors duration-200"
+              class="transition-colors duration-200 hover:text-primary-800"
             >
               Terms & Conditions
             </a>
@@ -84,7 +84,7 @@
         >
           <a
             href="https://twitter.com/KwipooApp"
-            class="btn-icon preset-filled-primary-500 h-10 w-10 rounded-full shadow-sm"
+            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
             aria-label="Twitter"
             target="_blank"
             rel="noopener noreferrer"
@@ -93,7 +93,7 @@
           </a>
           <a
             href="https://linkedin.com/company/kwipoo"
-            class="btn-icon preset-filled-primary-500 h-10 w-10 rounded-full shadow-sm"
+            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
             aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
@@ -102,7 +102,7 @@
           </a>
           <a
             href="https://instagram.com/kwipoo"
-            class="btn-icon preset-filled-primary-500 h-10 w-10 rounded-full shadow-sm"
+            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
             aria-label="Instagram"
             target="_blank"
             rel="noopener noreferrer"
@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <div class="mt-12 border-t border-surface-200 pt-8">
+    <div class="mt-12 border-t border-brand-border pt-8">
       <p class="text-center text-sm">
         Copyright © {new Date().getFullYear()}
         {COMPANY_NAME}.
