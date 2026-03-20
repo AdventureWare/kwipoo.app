@@ -11,7 +11,7 @@
   let { icon: IconComponent, title, description }: Props = $props();
 </script>
 
-<div class="flex h-full flex-col gap-4 bg-white p-5 sm:p-6">
+<div class="flex h-full flex-col gap-4 bg-brand-canvas p-5 sm:p-6">
   <div class="flex shrink-0">
     <div
       class="badge-icon preset-tonal-primary flex h-11 w-11 items-center justify-center sm:h-12 sm:w-12"
@@ -25,7 +25,7 @@
     <h3 class="mb-2 text-lg font-semibold text-primary-950">
       {title}
     </h3>
-    <p class="text-sm leading-relaxed text-neutral-800 sm:text-base">
+    <p class="text-sm leading-relaxed text-brand-body sm:text-base">
       {description}
     </p>
   </div>

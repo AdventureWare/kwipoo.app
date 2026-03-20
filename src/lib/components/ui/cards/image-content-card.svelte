@@ -35,11 +35,11 @@
 </script>
 
 <div
-  class="card grid grid-cols-1 items-center gap-8 border border-surface-200 bg-white px-5 py-6 shadow-sm sm:gap-10 sm:px-6 sm:py-7 md:grid-cols-3 md:gap-12 lg:px-8 lg:py-8"
+  class="card grid grid-cols-1 items-center gap-8 border border-brand-border bg-brand-canvas px-5 py-6 shadow-sm sm:gap-10 sm:px-6 sm:py-7 md:grid-cols-3 md:gap-12 lg:px-8 lg:py-8"
 >
   {#if imageOnLeft}
     <div
-      class="card relative order-first mx-auto w-full max-w-md border border-surface-200 bg-surface-100 p-3 shadow-sm sm:p-4 md:col-span-1 md:max-w-none"
+      class="card relative order-first mx-auto w-full max-w-md border border-brand-border bg-brand-panel p-3 shadow-sm sm:p-4 md:col-span-1 md:max-w-none"
     >
       <img
         src={asset(image.src)}
@@ -53,7 +53,7 @@
       <h3 class="mb-3 text-xl font-bold text-primary-950 sm:text-2xl">
         {title}
       </h3>
-      <p class="max-w-2xl text-base leading-relaxed text-neutral-900">
+      <p class="max-w-2xl text-base leading-relaxed text-brand-body">
         {description}
       </p>
       {#if showButton}
@@ -77,7 +77,7 @@
       <h3 class="mb-3 text-xl font-bold text-primary-950 sm:text-2xl">
         {title}
       </h3>
-      <p class="max-w-2xl text-base leading-relaxed text-neutral-900">
+      <p class="max-w-2xl text-base leading-relaxed text-brand-body">
         {description}
       </p>
       {#if showButton}
@@ -94,7 +94,7 @@
       {/if}
     </div>
     <div
-      class="card relative order-first mx-auto w-full max-w-md border border-surface-200 bg-surface-100 p-3 shadow-sm sm:p-4 md:order-last md:col-span-1 md:max-w-none"
+      class="card relative order-first mx-auto w-full max-w-md border border-brand-border bg-brand-panel p-3 shadow-sm sm:p-4 md:order-last md:col-span-1 md:max-w-none"
     >
       <img
         src={asset(image.src)}
