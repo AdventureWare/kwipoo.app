@@ -19,7 +19,7 @@
   const mobileLinks = docsEnabled ? [{ href: docsHref, label: "Docs" }] : [];
 
   const navLinkBaseClass =
-    "rounded-full px-3 py-2 text-base font-semibold tracking-[0.01em] transition-colors md:px-4 md:py-2.5 md:text-[1.02rem]";
+    "rounded-full px-3 py-2 text-[1.04rem] font-semibold tracking-[0.01em] transition-colors md:px-4 md:py-2.5 md:text-[1.1rem]";
 
   function isCurrent(href: string): boolean {
     return (
