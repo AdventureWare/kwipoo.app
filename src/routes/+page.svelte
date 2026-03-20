@@ -8,6 +8,9 @@
     Prohibit,
   } from "phosphor-svelte";
   import {
+    isFeatureEnabled,
+  } from "$lib/config/feature-flags";
+  import {
     APP_LOGIN_URL,
     MARKETING_SITE_URL,
     SITE_DESCRIPTION,
@@ -20,6 +23,9 @@
     getOrganizationJsonLd,
     getSoftwareApplicationJsonLd,
     getWebSiteJsonLd,
+    DEFAULT_OG_IMAGE_URL,
+    SOFTWARE_APPLICATION_ID,
+    WEBSITE_ID,
     toSeoJsonLd,
   } from "$lib/seo";
 
@@ -212,13 +218,35 @@
   ] as const;
 
   const homeTitle = "Personal Inventory App for Tracking What You Own | Kwipoo";
+  const docsUrl = isFeatureEnabled("docs")
+    ? `${MARKETING_SITE_URL}/docs`
+    : undefined;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const homeStructuredData = toSeoJsonLd({
     "@context": "https://schema.org",
     "@graph": [
       getOrganizationJsonLd(),
       getWebSiteJsonLd(),
-      getSoftwareApplicationJsonLd(),
+      getSoftwareApplicationJsonLd({ softwareHelpUrl: docsUrl }),
+      {
+        "@type": "WebPage",
+        name: homeTitle,
+        url: MARKETING_SITE_URL,
+        description: SITE_DESCRIPTION,
+        isPartOf: {
+          "@id": WEBSITE_ID,
+        },
+        mainEntity: {
+          "@id": SOFTWARE_APPLICATION_ID,
+        },
+        about: [
+          "Personal inventory",
+          "Home organization",
+          "Packing lists",
+          "Shared gear planning",
+        ],
+        primaryImageOfPage: DEFAULT_OG_IMAGE_URL,
+      },
       {
         "@type": "FAQPage",
         mainEntity: faqItems.map((item) => ({
