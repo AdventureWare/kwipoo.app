@@ -61,13 +61,13 @@
       ]}
     >
       <p
-        class="text-[0.92rem] font-semibold uppercase tracking-[0.18em] text-surface-700-300"
+        class="text-[0.92rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
         Documentation
       </p>
       <p
         class={[
-          "mt-3 font-semibold leading-tight text-surface-950-50",
+          "mt-3 font-semibold leading-tight text-color",
           shellVariant ? "text-[1.15rem]" : "text-[1.45rem]",
         ]}
       >
@@ -75,7 +75,7 @@
       </p>
       <p
         class={[
-          "mt-3 leading-6 text-surface-800-200",
+          "mt-3 leading-6 text-brand-body",
           shellVariant ? "text-[0.92rem]" : "text-[0.98rem]",
         ]}
       >
@@ -94,8 +94,8 @@
             class="px-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
           >
             <span class="block">{section.title}</span>
-              <span
-              class="mt-2 block text-[0.95rem] font-normal normal-case tracking-normal text-surface-800-200"
+            <span
+              class="mt-2 block text-[0.95rem] font-normal normal-case tracking-normal text-brand-body"
             >
               {section.items.length}
               {section.items.length === 1 ? " guide" : " guides"}
@@ -114,7 +114,7 @@
                   "card-hover rounded-[1rem] border px-4 py-3 text-left shadow-none",
                   shellVariant
                     ? "border-transparent bg-transparent"
-                    : "preset-tonal-surface border-surface-200-800",
+                    : "preset-filled-surface-50-950 border-surface-200-800",
                   shellVariant && !isCurrent && "hover:preset-tonal-primary",
                   !shellVariant && !isCurrent && "hover:border-primary-200-800",
                   isCurrent &&

@@ -75,7 +75,7 @@
 <header class="space-y-4">
   <nav
     aria-label="Breadcrumb"
-    class="flex flex-wrap items-center gap-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-surface-600-400"
+    class="flex flex-wrap items-center gap-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
   >
     <a href={resolve("/")} class="transition-colors hover:text-primary-800-200">
       Home
@@ -97,17 +97,17 @@
     {data.docPage.eyebrow}
   </p>
   <h1
-    class="text-[2.5rem] font-semibold leading-tight tracking-tight text-surface-950-50 md:text-[3.2rem]"
+    class="text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.2rem]"
   >
     {data.docPage.title}
   </h1>
-  <p class="max-w-4xl text-lg leading-8 text-surface-800-200">
+  <p class="max-w-4xl text-lg leading-8 text-brand-body">
     {data.docPage.description}
   </p>
 </header>
 
 <article class="mt-8 grid gap-10">
-  <p class="max-w-4xl text-lg leading-8 text-surface-900-100">
+  <p class="max-w-4xl text-lg leading-8 text-color">
     {data.docPage.summary}
   </p>
 
@@ -124,7 +124,7 @@
           Continue Exploring
         </p>
         <h2
-          class="text-[1.9rem] font-semibold leading-tight tracking-tight text-surface-950-50"
+          class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
         >
           Related guides
         </h2>
@@ -142,10 +142,10 @@
             >
               {docPage.eyebrow}
             </p>
-            <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-950-50">
+            <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-color">
               {docPage.title}
             </h3>
-            <p class="mt-2 text-[0.95rem] leading-6 text-surface-800-200">
+            <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
               {docPage.summary}
             </p>
           </a>
