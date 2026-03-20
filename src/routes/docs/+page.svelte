@@ -175,17 +175,17 @@
 
       <a
         href={APP_LOGIN_URL}
-        class="card card-hover preset-filled-primary-950-50 flex h-full flex-col gap-3 rounded-[1.35rem] border border-primary-700-300 p-5 shadow-sm"
+        class="card card-hover flex h-full flex-col gap-3 rounded-[1.35rem] border border-primary-300 bg-primary-50 p-5 shadow-sm hover:border-primary-400"
       >
         <p
-          class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
+          class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
         >
           Product Access
         </p>
-        <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-50">
+        <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-950">
           Open Kwipoo while you read.
         </h3>
-        <p class="text-[0.98rem] leading-6 text-surface-100">
+        <p class="text-[0.98rem] leading-6 text-brand-body">
           The docs are designed to sit next to the actual product while you
           build out or review your setup.
         </p>
