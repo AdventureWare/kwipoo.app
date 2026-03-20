@@ -7,7 +7,12 @@
     getDocsCategoryGroups,
     getDocsHref,
   } from "$lib/content/docs";
-  import { APP_LOGIN_URL, MARKETING_SITE_URL } from "$lib/config/site";
+  import { APP_LOGIN_URL, SITE_NAME } from "$lib/config/site";
+  import {
+    getBreadcrumbJsonLd,
+    toAbsoluteMarketingUrl,
+    toSeoJsonLd,
+  } from "$lib/seo";
 
   const categoryGroups = getDocsCategoryGroups();
   const startHerePages =
@@ -19,21 +24,48 @@
   function resolveDocsHref(slug: string): string {
     return resolve(getDocsHref(slug) as Pathname);
   }
+
+  const docsTitle = "Kwipoo Documentation | Inventory, Storage, and Packing Guides";
+  const docsDescription =
+    "Browse the Kwipoo documentation for setup guidance, inventory structure, storage concepts, and feature walkthroughs.";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const docsStructuredData = toSeoJsonLd({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: "Kwipoo Documentation",
+        url: toAbsoluteMarketingUrl("/docs"),
+        description: docsDescription,
+        about: docsPages.map((page) => page.title),
+        isPartOf: {
+          "@type": "WebSite",
+          name: SITE_NAME,
+          url: toAbsoluteMarketingUrl("/"),
+        },
+      },
+      getBreadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Docs", path: "/docs" },
+      ]),
+    ],
+  });
 </script>
 
 <svelte:head>
-  <title>Documentation | Kwipoo</title>
+  <title>{docsTitle}</title>
+  <meta name="description" content={docsDescription} />
   <meta
-    name="description"
-    content="Browse the Kwipoo documentation for setup guidance, inventory structure, and feature walkthroughs."
+    name="robots"
+    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
   />
-  <meta property="og:title" content="Kwipoo Documentation" />
-  <meta
-    property="og:description"
-    content="Browse the Kwipoo documentation for setup guidance, inventory structure, and feature walkthroughs."
-  />
+  <meta property="og:title" content={docsTitle} />
+  <meta property="og:description" content={docsDescription} />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content={`${MARKETING_SITE_URL}/docs`} />
+  <meta property="og:url" content={toAbsoluteMarketingUrl("/docs")} />
+  <meta name="twitter:title" content={docsTitle} />
+  <meta name="twitter:description" content={docsDescription} />
+  <script type="application/ld+json">{docsStructuredData}</script>
 </svelte:head>
 
 <header class="space-y-4">

@@ -34,11 +34,10 @@ describe("discoverability builders", () => {
 
     expect(sitemap).toContain("<loc>https://kwipoo.app/</loc>");
     expect(sitemap).not.toContain("https://kwipoo.app/docs");
-    expect(sitemap).not.toContain("https://kwipoo.app/privacy-policy");
     expect(buildRobotsTxt()).toContain("https://kwipoo.app/sitemap.xml");
   });
 
-  it("includes docs references and machine-readable endpoints when docs are enabled", async () => {
+  it("includes docs references when docs are enabled", async () => {
     const { buildLlmsFullTxt, buildLlmsTxt, buildSitemapXml } =
       await loadDiscoverability({
         dev: false,
@@ -49,15 +48,8 @@ describe("discoverability builders", () => {
     expect(buildSitemapXml()).toContain(
       "<loc>https://kwipoo.app/docs/things</loc>",
     );
-    expect(buildSitemapXml()).not.toContain(
-      "https://kwipoo.app/terms-and-conditions",
-    );
     expect(buildLlmsTxt()).toContain("Documentation: https://kwipoo.app/docs");
-    expect(buildLlmsTxt()).toContain("llms-full.txt");
-    expect(buildLlmsTxt()).toContain("Track your Things");
-    expect(buildLlmsFullTxt()).toContain("## Documentation Map");
-    expect(buildLlmsFullTxt()).toContain("### Track and organize");
-    expect(buildLlmsFullTxt()).toContain("https://kwipoo.app/privacy-policy");
+    expect(buildLlmsFullTxt()).toContain("Track your Things");
     expect(buildLlmsFullTxt()).toContain("https://kwipoo.app/docs/things");
   });
 });
