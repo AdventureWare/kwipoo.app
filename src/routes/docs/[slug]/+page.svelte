@@ -6,7 +6,11 @@
     getDocsHref,
     getDocsSectionId,
   } from "$lib/content/docs";
-  import { MARKETING_SITE_URL } from "$lib/config/site";
+  import {
+    getBreadcrumbJsonLd,
+    toAbsoluteMarketingUrl,
+    toSeoJsonLd,
+  } from "$lib/seo";
   import type { PageData } from "./$types";
 
   let { data }: { data: PageData } = $props();
@@ -21,18 +25,51 @@
   function resolveDocsHref(slug: string): string {
     return resolve(getDocsHref(slug) as Pathname);
   }
+
+  let docUrl = $derived(toAbsoluteMarketingUrl(getDocsHref(data.docPage.slug)));
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let docsStructuredData = $derived(
+    toSeoJsonLd({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "TechArticle",
+          headline: data.docPage.title,
+          description: data.docPage.description,
+          url: docUrl,
+          image: toAbsoluteMarketingUrl(data.docPage.image.src),
+          articleSection: data.docPage.category,
+          about: [data.docPage.eyebrow, data.docPage.title],
+          isPartOf: {
+            "@type": "CollectionPage",
+            name: "Kwipoo Documentation",
+            url: toAbsoluteMarketingUrl("/docs"),
+          },
+        },
+        getBreadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Docs", path: "/docs" },
+          { name: data.docPage.title, path: getDocsHref(data.docPage.slug) },
+        ]),
+      ],
+    }),
+  );
 </script>
 
 <svelte:head>
   <title>{data.docPage.title} | Kwipoo Docs</title>
   <meta name="description" content={data.docPage.description} />
+  <meta
+    name="robots"
+    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+  />
   <meta property="og:title" content={`${data.docPage.title} | Kwipoo Docs`} />
   <meta property="og:description" content={data.docPage.description} />
   <meta property="og:type" content="article" />
-  <meta
-    property="og:url"
-    content={`${MARKETING_SITE_URL}/docs/${data.docPage.slug}`}
-  />
+  <meta property="og:url" content={docUrl} />
+  <meta name="twitter:title" content={`${data.docPage.title} | Kwipoo Docs`} />
+  <meta name="twitter:description" content={data.docPage.description} />
+  <script type="application/ld+json">{docsStructuredData}</script>
 </svelte:head>
 
 <header class="space-y-4">

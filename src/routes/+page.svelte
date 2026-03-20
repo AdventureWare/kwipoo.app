@@ -7,10 +7,21 @@
     CurrencyDollar,
     Prohibit,
   } from "phosphor-svelte";
-  import { APP_LOGIN_URL, MARKETING_SITE_URL } from "$lib/config/site";
+  import {
+    APP_LOGIN_URL,
+    MARKETING_SITE_URL,
+    SITE_DESCRIPTION,
+    SITE_KEYWORDS,
+  } from "$lib/config/site";
   import { HeroSection, QuoteCallout } from "$lib/components";
   import ProblemSolution from "$lib/components/layouts/sections/problem-solution.svelte";
   import Switchbacks from "$lib/components/layouts/sections/switchbacks.svelte";
+  import {
+    getOrganizationJsonLd,
+    getSoftwareApplicationJsonLd,
+    getWebSiteJsonLd,
+    toSeoJsonLd,
+  } from "$lib/seo";
 
   const problemSolutionData = [
     {
@@ -176,24 +187,71 @@
     buttonSize?: "sm" | "md" | "lg";
     buttonHref?: string;
   }>;
+
+  const faqItems = [
+    {
+      question: "What is Kwipoo?",
+      answer:
+        "Kwipoo is a personal inventory and planning app for tracking what you own, where it is stored, and what you need for trips, hobbies, events, and day-to-day life.",
+    },
+    {
+      question: "What can I track in Kwipoo?",
+      answer:
+        "You can track individual Things, organize them inside Places and Spots, group them into reusable Sets, and prepare for Events without rebuilding the same list every time.",
+    },
+    {
+      question: "Who is Kwipoo for?",
+      answer:
+        "Kwipoo is useful for households, hobbyists, travelers, organizers, and anyone who wants a searchable home inventory instead of relying on memory, notes, or scattered spreadsheets.",
+    },
+    {
+      question: "How does Kwipoo help me avoid duplicate purchases or forgotten items?",
+      answer:
+        "Because your inventory is searchable and tied to real storage locations, you can check what you already own, see where it lives, and reuse past packing or event setups before you buy or leave something behind.",
+    },
+  ] as const;
+
+  const homeTitle = "Personal Inventory App for Tracking What You Own | Kwipoo";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const homeStructuredData = toSeoJsonLd({
+    "@context": "https://schema.org",
+    "@graph": [
+      getOrganizationJsonLd(),
+      getWebSiteJsonLd(),
+      getSoftwareApplicationJsonLd(),
+      {
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  });
 </script>
 
 <svelte:head>
-  <title>Kwipoo - The Smarter Way to Manage Your Things</title>
+  <title>{homeTitle}</title>
+  <meta name="description" content={SITE_DESCRIPTION} />
+  <meta name="keywords" content={SITE_KEYWORDS} />
   <meta
-    name="description"
-    content="Stop wasting time searching for your things or rebuying what you already have. Kwipoo helps you track, organize, and actually use your belongings."
+    name="robots"
+    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
   />
-  <meta
-    property="og:title"
-    content="Kwipoo - Life is busy. Your stuff shouldn't make it busier"
-  />
+  <meta property="og:title" content={homeTitle} />
   <meta
     property="og:description"
-    content="The smarter way to manage your personal inventory. Track, organize, and find your belongings instantly."
+    content={SITE_DESCRIPTION}
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={MARKETING_SITE_URL} />
+  <meta name="twitter:title" content={homeTitle} />
+  <meta name="twitter:description" content={SITE_DESCRIPTION} />
+  <script type="application/ld+json">{homeStructuredData}</script>
 </svelte:head>
 
 <HeroSection />
@@ -209,6 +267,45 @@
 />
 
 <Switchbacks items={switchbackItems} />
+
+<section
+  class="card mb-30 border border-surface-200 bg-surface-50 px-5 py-8 sm:p-8 lg:px-10"
+>
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-8 text-left md:mb-10 md:text-center">
+      <p
+        class="mb-3 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+      >
+        Common Questions
+      </p>
+      <h2 class="mb-4 text-3xl font-bold text-primary-950 sm:text-4xl">
+        What people usually want to know before using Kwipoo
+      </h2>
+      <p
+        class="text-base leading-relaxed text-neutral-950 md:mx-auto md:max-w-4/5 md:text-lg"
+      >
+        This is the short version: Kwipoo helps you build a searchable personal
+        inventory, organize where things live, and reuse plans for trips,
+        events, and recurring routines.
+      </p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {#each faqItems as item (item.question)}
+        <article
+          class="rounded-[1.5rem] border border-surface-200 bg-white p-6 shadow-sm"
+        >
+          <h3 class="text-xl font-semibold text-surface-950-50">
+            {item.question}
+          </h3>
+          <p class="mt-3 text-base leading-7 text-surface-800-200">
+            {item.answer}
+          </p>
+        </article>
+      {/each}
+    </div>
+  </div>
+</section>
 
 <QuoteCallout
   quoteText="We all have better things to do than hunt for missing stuff or panic over last-minute errands. Kwipoo gives you back that time and headspace—so you can actually enjoy your hobbies, family events, or just day-to-day life without  the frantic scramble."

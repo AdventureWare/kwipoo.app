@@ -1,3 +1,32 @@
+<script lang="ts">
+  import { toAbsoluteMarketingUrl, toSeoJsonLd } from "$lib/seo";
+
+  const privacyTitle = "Privacy Policy | Kwipoo";
+  const privacyDescription =
+    "Read the Kwipoo privacy policy for details about account information, data handling, device permissions, and contact options.";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const privacyStructuredData = toSeoJsonLd({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: privacyTitle,
+    description: privacyDescription,
+    url: toAbsoluteMarketingUrl("/privacy-policy"),
+  });
+</script>
+
+<svelte:head>
+  <title>{privacyTitle}</title>
+  <meta name="description" content={privacyDescription} />
+  <meta name="robots" content="noindex,follow" />
+  <meta property="og:title" content={privacyTitle} />
+  <meta property="og:description" content={privacyDescription} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={toAbsoluteMarketingUrl("/privacy-policy")} />
+  <meta name="twitter:title" content={privacyTitle} />
+  <meta name="twitter:description" content={privacyDescription} />
+  <script type="application/ld+json">{privacyStructuredData}</script>
+</svelte:head>
+
 <article class="">
   <div class="mb-6">
     <h1 class="text-3xl font-bold text-color uppercase">Privacy Policy</h1>
