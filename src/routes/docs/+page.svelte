@@ -71,7 +71,7 @@
 <header class="space-y-4">
   <nav
     aria-label="Breadcrumb"
-    class="flex flex-wrap items-center gap-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-surface-600-400"
+    class="flex flex-wrap items-center gap-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
   >
     <a href={resolve("/")} class="transition-colors hover:text-primary-800-200">
       Home
@@ -86,11 +86,11 @@
     Documentation
   </p>
   <h1
-    class="text-[2.5rem] font-semibold leading-tight tracking-tight text-surface-950-50 md:text-[3.2rem]"
+    class="text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.2rem]"
   >
     Documentation
   </h1>
-  <p class="max-w-4xl text-lg leading-8 text-surface-800-200">
+  <p class="max-w-4xl text-lg leading-8 text-brand-body">
     Use this documentation to understand how Kwipoo is structured, how the core
     inventory model fits together, and where each feature belongs in a real
     workflow.
@@ -99,7 +99,7 @@
 
 <article class="mt-8 grid gap-10">
   <section id={docsLandingTocItems[0].id} class="grid gap-5">
-    <p class="text-lg leading-8 text-surface-900-100">
+    <p class="text-lg leading-8 text-color">
       Start with the foundational guides if you are new to Kwipoo. Once the
       model feels clear, move into the feature pages for the parts of the
       product you actually use day to day.
@@ -113,7 +113,7 @@
       >
         Recommended flow
       </p>
-      <p class="mt-3 text-[1.15rem] leading-7 text-surface-950-50">
+      <p class="mt-3 text-[1.15rem] leading-7 text-color">
         Learn Things, Places, Spots, Sets, and Events in the same order they
         become useful in real life.
       </p>
@@ -144,11 +144,11 @@
         Start Here
       </p>
       <h2
-        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-surface-950-50"
+        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
         Foundational guides first.
       </h2>
-      <p class="max-w-4xl text-lg leading-8 text-surface-800-200">
+      <p class="max-w-4xl text-lg leading-8 text-brand-body">
         These pages establish the vocabulary and habits that the rest of the
         documentation builds on.
       </p>
@@ -166,10 +166,10 @@
           >
             {docPage.eyebrow}
           </p>
-          <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-950-50">
+          <h3 class="text-[1.25rem] font-semibold leading-tight text-color">
             {docPage.title}
           </h3>
-          <p class="text-[0.98rem] leading-6 text-surface-800-200">
+          <p class="text-[0.98rem] leading-6 text-brand-body">
             {docPage.summary}
           </p>
         </a>
@@ -204,11 +204,11 @@
         Browse Topics
       </p>
       <h2
-        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-surface-950-50"
+        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
         Move through the docs by category.
       </h2>
-      <p class="max-w-4xl text-lg leading-8 text-surface-800-200">
+      <p class="max-w-4xl text-lg leading-8 text-brand-body">
         The topic groups below match the directory in the left sidebar, so the
         landing page and the rest of the docs stay in the same mental model.
       </p>
@@ -225,7 +225,7 @@
             >
               {group.category}
             </p>
-            <h3 class="text-[1.35rem] font-semibold leading-tight text-surface-950-50">
+            <h3 class="text-[1.35rem] font-semibold leading-tight text-color">
               {group.description}
             </h3>
           </div>
@@ -235,7 +235,7 @@
             {#each group.pages as docPage (docPage.slug)}
               <a
                 href={resolveDocsHref(docPage.slug)}
-                class="card card-hover preset-tonal-surface rounded-[1.2rem] border border-surface-200-800 p-4 hover:border-primary-200-800"
+                class="card card-hover preset-filled-surface-50-950 rounded-[1.2rem] border border-surface-200-800 p-4 hover:border-primary-200-800"
               >
                 <p
                   class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
@@ -243,11 +243,11 @@
                   {docPage.eyebrow}
                 </p>
                 <h4
-                  class="mt-2 text-[1.1rem] font-semibold leading-tight text-surface-950-50"
+                  class="mt-2 text-[1.1rem] font-semibold leading-tight text-color"
                 >
                   {docPage.title}
                 </h4>
-                <p class="mt-2 text-[0.95rem] leading-6 text-surface-800-200">
+                <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
                   {docPage.summary}
                 </p>
               </a>
@@ -267,11 +267,11 @@
         Content Roadmap
       </p>
       <h2
-        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-surface-950-50"
+        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
         The structure is ready for deeper pages.
       </h2>
-      <p class="max-w-4xl text-lg leading-8 text-surface-800-200">
+      <p class="max-w-4xl text-lg leading-8 text-brand-body">
         As this documentation set expands, the next layer should be more
         screenshots, more concrete workflows, and tighter troubleshooting notes.
       </p>
@@ -289,10 +289,10 @@
           >
             {docPage.eyebrow}
           </p>
-          <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-950-50">
+          <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-color">
             {docPage.title}
           </h3>
-          <p class="mt-2 text-[0.95rem] leading-6 text-surface-800-200">
+          <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
             {docPage.summary}
           </p>
         </a>
