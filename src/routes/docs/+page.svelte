@@ -73,16 +73,14 @@
     aria-label="Breadcrumb"
     class="flex flex-wrap items-center gap-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
   >
-    <a href={resolve("/")} class="transition-colors hover:text-primary-800-200">
+    <a href={resolve("/")} class="transition-colors hover:text-color">
       Home
     </a>
     <span aria-hidden="true">/</span>
-    <span class="text-primary-800-200">Docs</span>
+    <span class="text-brand-body">Docs</span>
   </nav>
 
-  <p
-    class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
-  >
+  <p class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted">
     Documentation
   </p>
   <h1
@@ -109,7 +107,7 @@
       class="card preset-filled-surface-100-900 rounded-[1.5rem] border border-primary-200-800 p-6 shadow-sm"
     >
       <p
-        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
         Recommended flow
       </p>
@@ -121,13 +119,13 @@
         <!-- eslint-disable svelte/no-navigation-without-resolve -->
         <a
           href={`#${docsLandingTocItems[1].id}`}
-          class="btn btn-sm preset-filled-primary-500 w-auto"
+          class="btn btn-sm preset-filled-primary-500 w-auto text-surface-950"
         >
           Start here
         </a>
         <a
           href={`#${docsLandingTocItems[2].id}`}
-          class="btn btn-sm preset-outlined-surface-200-800 hover:preset-tonal-surface w-auto"
+          class="btn btn-sm preset-outlined-surface-200-800 w-auto text-surface-950 hover:preset-tonal-surface hover:text-surface-950"
         >
           Browse topics
         </a>
@@ -139,7 +137,7 @@
   <section id={docsLandingTocItems[1].id} class="grid gap-5">
     <div class="space-y-3">
       <p
-        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
         Start Here
       </p>
@@ -162,14 +160,14 @@
           class="card card-hover preset-filled-surface-50-950 flex h-full flex-col gap-3 rounded-[1.35rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
         >
           <p
-            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
           >
             {docPage.eyebrow}
           </p>
-          <h3 class="text-[1.25rem] font-semibold leading-tight text-color">
+          <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-50">
             {docPage.title}
           </h3>
-          <p class="text-[0.98rem] leading-6 text-brand-body">
+          <p class="text-[0.98rem] leading-6 text-surface-100">
             {docPage.summary}
           </p>
         </a>
@@ -180,14 +178,14 @@
         class="card card-hover preset-filled-primary-950-50 flex h-full flex-col gap-3 rounded-[1.35rem] border border-primary-700-300 p-5 shadow-sm"
       >
         <p
-          class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-200-800"
+          class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
         >
           Product Access
         </p>
-        <h3 class="text-[1.25rem] font-semibold leading-tight">
+        <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-50">
           Open Kwipoo while you read.
         </h3>
-        <p class="text-[0.98rem] leading-6 text-primary-50-950">
+        <p class="text-[0.98rem] leading-6 text-surface-100">
           The docs are designed to sit next to the actual product while you
           build out or review your setup.
         </p>
@@ -199,7 +197,7 @@
   <section id={docsLandingTocItems[2].id} class="grid gap-5">
     <div class="space-y-3">
       <p
-        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
         Browse Topics
       </p>
@@ -221,11 +219,11 @@
         >
           <div class="space-y-3 border-b border-surface-200-800 pb-5">
             <p
-              class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+              class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
             >
               {group.category}
             </p>
-            <h3 class="text-[1.35rem] font-semibold leading-tight text-color">
+            <h3 class="text-[1.35rem] font-semibold leading-tight text-surface-50">
               {group.description}
             </h3>
           </div>
@@ -238,16 +236,16 @@
                 class="card card-hover preset-filled-surface-50-950 rounded-[1.2rem] border border-surface-200-800 p-4 hover:border-primary-200-800"
               >
                 <p
-                  class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+                  class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
                 >
                   {docPage.eyebrow}
                 </p>
                 <h4
-                  class="mt-2 text-[1.1rem] font-semibold leading-tight text-color"
+                  class="mt-2 text-[1.1rem] font-semibold leading-tight text-surface-50"
                 >
                   {docPage.title}
                 </h4>
-                <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
+                <p class="mt-2 text-[0.95rem] leading-6 text-surface-100">
                   {docPage.summary}
                 </p>
               </a>
@@ -285,14 +283,14 @@
           class="card card-hover preset-filled-surface-50-950 rounded-[1.2rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
         >
           <p
-            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
           >
             {docPage.eyebrow}
           </p>
-          <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-color">
+          <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-50">
             {docPage.title}
           </h3>
-          <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
+          <p class="mt-2 text-[0.95rem] leading-6 text-surface-100">
             {docPage.summary}
           </p>
         </a>
