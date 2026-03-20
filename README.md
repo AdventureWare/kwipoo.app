@@ -98,12 +98,10 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 
 - Treat `main` as a protected release branch, not a branch that accepts direct pushes or local merge commits.
 - `main` currently requires changes to land through a pull request and rejects merge commits on the branch.
-- When the goal is to move the current `develop` state to `main`, create a linear branch from `origin/main`, replay the `develop`-only commits onto it, and open a PR into `main`.
+- When the goal is to move the current `develop` state to `main`, open a pull request directly from `develop` to `main`.
 - After that `main` PR merges, let the automated release PR land and then let the automated `develop` sync PR bring the version bump back downstream.
-- Before opening that PR, confirm the promotion branch matches `develop` at the tree level, for example with `git diff --stat develop..HEAD`.
 - Keep commit messages conventional-commit compliant because `commitlint` runs on protected-branch PRs and pushes.
 - When merging the PR, prefer `Rebase and merge`. If `Squash and merge` is used instead, edit the squash commit title so it still follows the conventional-commit format.
-- Do not leave a local-only merge commit on `main` after a rejected push. Reset local `main` back to `origin/main` and continue from the PR branch instead.
 
 ## Current Notes
 
