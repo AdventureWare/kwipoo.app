@@ -85,7 +85,7 @@
         ]}
       >
         {#if currentItem}
-          In {currentItem.sectionTitle}, with the rest of the guides available below.
+          In {currentItem.sectionTitle}, with the rest of the docs available below.
         {:else}
           Move through the docs from a persistent directory instead of drilling through accordions.
         {/if}
