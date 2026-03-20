@@ -6,9 +6,6 @@
   import {
     DEFAULT_OG_IMAGE_ALT,
     DEFAULT_OG_IMAGE_URL,
-    LLMS_FULL_TXT_URL,
-    LLMS_TXT_URL,
-    SITEMAP_XML_URL,
     toAbsoluteMarketingUrl,
   } from "$lib/seo";
 
@@ -18,19 +15,6 @@
 
 <svelte:head>
   <link rel="canonical" href={canonicalUrl} />
-  <link rel="sitemap" type="application/xml" href={SITEMAP_XML_URL} />
-  <link
-    rel="alternate"
-    type="text/plain"
-    title="Kwipoo LLM summary"
-    href={LLMS_TXT_URL}
-  />
-  <link
-    rel="alternate"
-    type="text/plain"
-    title="Kwipoo LLM full summary"
-    href={LLMS_FULL_TXT_URL}
-  />
   <meta property="og:site_name" content={SITE_NAME} />
   <meta property="og:locale" content="en_US" />
   <meta property="og:image" content={DEFAULT_OG_IMAGE_URL} />
