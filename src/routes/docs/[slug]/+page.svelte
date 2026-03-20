@@ -1,60 +1,166 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+  import type { Pathname } from "$app/types";
+  import DocsSectionContent from "$lib/components/ui/docs-section-content.svelte";
   import {
-    getDocsPageLabel,
-    getDocsPlaceholderSections,
-    getDocsPlaceholderSummary,
+    getDocsHref,
+    getDocsSectionId,
   } from "$lib/content/docs";
-  import { MARKETING_SITE_URL } from "$lib/config/site";
+  import {
+    ORGANIZATION_ID,
+    getBreadcrumbJsonLd,
+    toAbsoluteMarketingUrl,
+    toSeoJsonLd,
+  } from "$lib/seo";
   import type { PageData } from "./$types";
 
   let { data }: { data: PageData } = $props();
 
-  let pageLabel = $derived(getDocsPageLabel(data.docPage.slug));
-  let placeholderSummary = $derived(getDocsPlaceholderSummary(pageLabel));
-  let placeholderSections = $derived(getDocsPlaceholderSections(pageLabel));
+  let sectionEntries = $derived(
+    data.docPage.sections.map((section) => ({
+      id: getDocsSectionId(section.heading),
+      section,
+    })),
+  );
+
+  function resolveDocsHref(slug: string): string {
+    return resolve(getDocsHref(slug) as Pathname);
+  }
+
+  let docUrl = $derived(toAbsoluteMarketingUrl(getDocsHref(data.docPage.slug)));
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let docsStructuredData = $derived(
+    toSeoJsonLd({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "TechArticle",
+          headline: data.docPage.title,
+          description: data.docPage.description,
+          url: docUrl,
+          mainEntityOfPage: docUrl,
+          image: toAbsoluteMarketingUrl(data.docPage.image.src),
+          articleSection: data.docPage.category,
+          about: [data.docPage.eyebrow, data.docPage.title],
+          publisher: {
+            "@id": ORGANIZATION_ID,
+          },
+          isPartOf: {
+            "@type": "CollectionPage",
+            name: "Kwipoo Documentation",
+            url: toAbsoluteMarketingUrl("/docs"),
+          },
+        },
+        getBreadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Docs", path: "/docs" },
+          { name: data.docPage.title, path: getDocsHref(data.docPage.slug) },
+        ]),
+      ],
+    }),
+  );
 </script>
 
 <svelte:head>
-  <title>{pageLabel} | Kwipoo Docs</title>
-  <meta name="description" content={placeholderSummary} />
-  <meta property="og:title" content={`${pageLabel} | Kwipoo Docs`} />
-  <meta property="og:description" content={placeholderSummary} />
-  <meta property="og:type" content="article" />
+  <title>{data.docPage.title} | Kwipoo Docs</title>
+  <meta name="description" content={data.docPage.description} />
   <meta
-    property="og:url"
-    content={`${MARKETING_SITE_URL}/docs/${data.docPage.slug}`}
+    name="robots"
+    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
   />
+  <meta property="og:title" content={`${data.docPage.title} | Kwipoo Docs`} />
+  <meta property="og:description" content={data.docPage.description} />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={docUrl} />
+  <meta
+    property="og:image"
+    content={toAbsoluteMarketingUrl(data.docPage.image.src)}
+  />
+  <meta property="og:image:alt" content={data.docPage.image.alt} />
+  <meta property="article:section" content={data.docPage.category} />
+  <meta name="twitter:title" content={`${data.docPage.title} | Kwipoo Docs`} />
+  <meta name="twitter:description" content={data.docPage.description} />
+  <script type="application/ld+json">{docsStructuredData}</script>
 </svelte:head>
 
-<article class="space-y-14">
-  <section class="space-y-6">
-    <h1 class="text-[3.75rem] font-semibold leading-none tracking-tight text-primary-950 xl:text-[4.5rem]">
-      {pageLabel}
-    </h1>
-    <p class="max-w-[60rem] text-[1.65rem] leading-[1.55] text-neutral-900">
-      {placeholderSummary}
-    </p>
-  </section>
+<header class="space-y-4">
+  <nav
+    aria-label="Breadcrumb"
+    class="flex flex-wrap items-center gap-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+  >
+    <a href={resolve("/")} class="transition-colors hover:text-color">
+      Home
+    </a>
+    <span aria-hidden="true">/</span>
+    <a
+      href={resolve("/docs")}
+      class="transition-colors hover:text-color"
+    >
+      Docs
+    </a>
+    <span aria-hidden="true">/</span>
+    <span class="text-brand-body">{data.docPage.title}</span>
+  </nav>
 
-  {#each placeholderSections as section (section.heading)}
-    <section class="space-y-6">
-      <h2 class="text-[3rem] font-semibold leading-none tracking-tight text-primary-950 xl:text-[3.5rem]">
-        {section.heading}
-      </h2>
+  <p class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted">
+    {data.docPage.eyebrow}
+  </p>
+  <h1
+    class="text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.2rem]"
+  >
+    {data.docPage.title}
+  </h1>
+  <p class="max-w-4xl text-lg leading-8 text-brand-body">
+    {data.docPage.description}
+  </p>
+</header>
 
-      {#each section.paragraphs as paragraph (paragraph)}
-        <p class="max-w-[60rem] text-[1.65rem] leading-[1.55] text-neutral-900">
-          {paragraph}
-        </p>
-      {/each}
+<article class="mt-8 grid gap-10">
+  <p class="max-w-4xl text-lg leading-8 text-color">
+    {data.docPage.summary}
+  </p>
 
-      {#if section.bullets}
-        <ul class="max-w-[60rem] list-disc space-y-5 pl-10 text-[1.65rem] leading-[1.55] text-neutral-900">
-          {#each section.bullets as bullet (bullet)}
-            <li>{bullet}</li>
-          {/each}
-        </ul>
-      {/if}
-    </section>
+  {#each sectionEntries as entry (entry.id)}
+    <DocsSectionContent id={entry.id} section={entry.section} />
   {/each}
+
+  {#if data.relatedDocs.length > 0}
+    <section class="grid gap-5">
+      <div class="space-y-3">
+        <p
+          class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+        >
+          Continue Exploring
+        </p>
+        <h2
+          class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
+        >
+          Related guides
+        </h2>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <!-- eslint-disable svelte/no-navigation-without-resolve -->
+        {#each data.relatedDocs as docPage (docPage.slug)}
+          <a
+            href={resolveDocsHref(docPage.slug)}
+            class="card card-hover preset-filled-surface-50-950 rounded-[1.2rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
+          >
+            <p
+              class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
+            >
+              {docPage.eyebrow}
+            </p>
+            <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-50">
+              {docPage.title}
+            </h3>
+            <p class="mt-2 text-[0.95rem] leading-6 text-surface-100">
+              {docPage.summary}
+            </p>
+          </a>
+        {/each}
+        <!-- eslint-enable svelte/no-navigation-without-resolve -->
+      </div>
+    </section>
+  {/if}
 </article>
