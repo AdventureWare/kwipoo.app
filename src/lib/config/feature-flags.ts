@@ -1,4 +1,3 @@
-import { dev } from "$app/environment";
 import { env } from "$env/dynamic/public";
 
 const TRUE_FLAG_VALUES = new Set(["1", "true", "yes", "on"]);
@@ -39,7 +38,11 @@ function resolveBooleanFlag(
 }
 
 export const FEATURE_FLAGS = {
-  docs: resolveBooleanFlag("PUBLIC_FEATURE_DOCS", env.PUBLIC_FEATURE_DOCS, dev),
+  docs: resolveBooleanFlag(
+    "PUBLIC_FEATURE_DOCS",
+    env.PUBLIC_FEATURE_DOCS,
+    true,
+  ),
 } as const;
 
 export type FeatureFlagName = keyof typeof FEATURE_FLAGS;
