@@ -7,6 +7,7 @@
     getDocsSectionId,
   } from "$lib/content/docs";
   import {
+    ORGANIZATION_ID,
     getBreadcrumbJsonLd,
     toAbsoluteMarketingUrl,
     toSeoJsonLd,
@@ -37,9 +38,13 @@
           headline: data.docPage.title,
           description: data.docPage.description,
           url: docUrl,
+          mainEntityOfPage: docUrl,
           image: toAbsoluteMarketingUrl(data.docPage.image.src),
           articleSection: data.docPage.category,
           about: [data.docPage.eyebrow, data.docPage.title],
+          publisher: {
+            "@id": ORGANIZATION_ID,
+          },
           isPartOf: {
             "@type": "CollectionPage",
             name: "Kwipoo Documentation",
@@ -67,6 +72,12 @@
   <meta property="og:description" content={data.docPage.description} />
   <meta property="og:type" content="article" />
   <meta property="og:url" content={docUrl} />
+  <meta
+    property="og:image"
+    content={toAbsoluteMarketingUrl(data.docPage.image.src)}
+  />
+  <meta property="og:image:alt" content={data.docPage.image.alt} />
+  <meta property="article:section" content={data.docPage.category} />
   <meta name="twitter:title" content={`${data.docPage.title} | Kwipoo Docs`} />
   <meta name="twitter:description" content={data.docPage.description} />
   <script type="application/ld+json">{docsStructuredData}</script>
