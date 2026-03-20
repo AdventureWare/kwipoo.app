@@ -5,6 +5,7 @@
   import { COMPANY_NAME, COMPANY_WEBSITE_URL } from "$lib/config/site";
 
   const docsEnabled = isFeatureEnabled("docs");
+  const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
 </script>
 
 <footer class="border-t border-brand-border bg-brand-panel">
@@ -52,6 +53,16 @@
                 class="transition-colors duration-200 hover:text-primary-800"
               >
                 Documentation
+              </a>
+            </li>
+          {/if}
+          {#if releaseHistoryEnabled}
+            <li>
+              <a
+                href={resolve("/releases")}
+                class="transition-colors duration-200 hover:text-primary-800"
+              >
+                Release History
               </a>
             </li>
           {/if}

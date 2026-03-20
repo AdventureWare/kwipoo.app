@@ -9,14 +9,22 @@
 
   const homeHref = resolve("/");
   const docsHref = resolve("/docs");
+  const releasesHref = resolve("/releases");
   const docsEnabled = isFeatureEnabled("docs");
+  const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
 
   const desktopLinks = [
     { href: homeHref, label: "Home" },
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
+    ...(releaseHistoryEnabled ? [{ href: releasesHref, label: "Releases" }] : []),
   ];
 
-  const mobileLinks = docsEnabled ? [{ href: docsHref, label: "Docs" }] : [];
+  const mobileLinks = [
+    ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
+    ...(releaseHistoryEnabled
+      ? [{ href: releasesHref, label: "Releases" }]
+      : []),
+  ];
 
   const navLinkBaseClass =
     "rounded-full px-3 py-2 text-[1.04rem] font-semibold tracking-[0.01em] transition-colors md:px-4 md:py-2.5 md:text-[1.1rem]";
