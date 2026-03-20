@@ -5,7 +5,9 @@ import {
   DEFAULT_OG_IMAGE_ALT,
   DEFAULT_OG_IMAGE_PATH,
   MARKETING_SITE_URL,
+  SITE_CATEGORY,
   SITE_DESCRIPTION,
+  SITE_KEYWORDS,
   SITE_NAME,
   SITE_TAGLINE,
   SOCIAL_PROFILE_URLS,
@@ -36,6 +38,10 @@ export const SOFTWARE_APPLICATION_ID = `${MARKETING_SITE_URL}#software`;
 export const DEFAULT_OG_IMAGE_URL = toAbsoluteMarketingUrl(
   DEFAULT_OG_IMAGE_PATH,
 );
+export const ROBOTS_TXT_URL = toAbsoluteMarketingUrl("/robots.txt");
+export const SITEMAP_XML_URL = toAbsoluteMarketingUrl("/sitemap.xml");
+export const LLMS_TXT_URL = toAbsoluteMarketingUrl("/llms.txt");
+export const LLMS_FULL_TXT_URL = toAbsoluteMarketingUrl("/llms-full.txt");
 
 export function toSeoJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
@@ -55,6 +61,14 @@ export function getOrganizationJsonLd() {
     email: SUPPORT_EMAIL,
     logo: toAbsoluteMarketingUrl("/assets/logos/logo.svg"),
     sameAs: [...SOCIAL_PROFILE_URLS],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: SUPPORT_EMAIL,
+        url: MARKETING_SITE_URL,
+      },
+    ],
     parentOrganization: {
       "@type": "Organization",
       name: COMPANY_NAME,
@@ -71,23 +85,32 @@ export function getWebSiteJsonLd() {
     alternateName: SITE_TAGLINE,
     url: MARKETING_SITE_URL,
     description: SITE_DESCRIPTION,
+    keywords: SITE_KEYWORDS,
     publisher: {
       "@id": ORGANIZATION_ID,
     },
   };
 }
 
-export function getSoftwareApplicationJsonLd() {
+export function getSoftwareApplicationJsonLd({
+  softwareHelpUrl,
+}: {
+  softwareHelpUrl?: string;
+} = {}) {
   return {
     "@type": "SoftwareApplication",
     "@id": SOFTWARE_APPLICATION_ID,
     name: SITE_NAME,
+    applicationSubCategory: "Home Inventory & Planning",
     applicationCategory: "UtilitiesApplication",
+    genre: SITE_CATEGORY,
     operatingSystem: "Web, iOS, Android",
     url: MARKETING_SITE_URL,
     downloadUrl: APP_URL,
     description: SITE_DESCRIPTION,
     image: DEFAULT_OG_IMAGE_URL,
+    keywords: SITE_KEYWORDS,
+    ...(softwareHelpUrl ? { softwareHelp: softwareHelpUrl } : {}),
     featureList: [
       "Track what you own",
       "Store item details and locations",
