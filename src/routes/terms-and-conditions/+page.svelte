@@ -1,3 +1,35 @@
+<script lang="ts">
+  import { toAbsoluteMarketingUrl, toSeoJsonLd } from "$lib/seo";
+
+  const termsTitle = "Terms and Conditions | Kwipoo";
+  const termsDescription =
+    "Read the Kwipoo terms and conditions for account use, licenses, user responsibilities, dispute terms, and service policies.";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const termsStructuredData = toSeoJsonLd({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: termsTitle,
+    description: termsDescription,
+    url: toAbsoluteMarketingUrl("/terms-and-conditions"),
+  });
+</script>
+
+<svelte:head>
+  <title>{termsTitle}</title>
+  <meta name="description" content={termsDescription} />
+  <meta name="robots" content="noindex,follow" />
+  <meta property="og:title" content={termsTitle} />
+  <meta property="og:description" content={termsDescription} />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content={toAbsoluteMarketingUrl("/terms-and-conditions")}
+  />
+  <meta name="twitter:title" content={termsTitle} />
+  <meta name="twitter:description" content={termsDescription} />
+  <script type="application/ld+json">{termsStructuredData}</script>
+</svelte:head>
+
 <article class="">
   <div class="mb-6">
     <h1 class="text-3xl font-bold text-color uppercase">Terms and Conditions</h1>
