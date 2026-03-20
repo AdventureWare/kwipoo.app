@@ -1,5 +1,13 @@
 # kwipoo.app
 
+## 0.0.13
+
+### Patch Changes
+
+- 1f04f34: Enable the docs section by default unless `PUBLIC_FEATURE_DOCS` explicitly disables it.
+- 1f04f34: Update the homepage feature sections so their Learn More buttons open the matching documentation pages.
+- 335c339: Update the docs to use the current visibility labels: Public, Friends Only, and Owner Only.
+
 ## 0.0.12
 
 ### Patch Changes
