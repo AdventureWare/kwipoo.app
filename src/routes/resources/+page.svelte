@@ -1,24 +1,16 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import FeatureStatusBadge from "$lib/components/ui/feature-status-badge.svelte";
-  import { getResourcesHref, resourceGuides } from "$lib/content/resources";
-  import {
-    type FeatureBadge,
-    FEATURE_BADGE_PRESETS,
-  } from "$lib/types/feature-badges";
   import {
     getBreadcrumbJsonLd,
     toAbsoluteMarketingUrl,
     toSeoJsonLd,
   } from "$lib/seo";
   import { SITE_NAME } from "$lib/config/site";
-  const resolvePath = resolve as unknown as (path: string) => string;
 
   type ResourceFormat = {
     title: string;
     description: string;
     cadence: string;
-    badge?: FeatureBadge;
   };
 
   type ResourceTrack = {
@@ -28,17 +20,15 @@
   };
 
   type ResourceEntry = {
-    slug: string;
-    audience: string;
     title: string;
     format: string;
-    readTime: string;
+    duration: string;
     summary: string;
   };
 
   const resourcesTitle = "Kwipoo Resources | Articles, Videos, and Tutorials";
   const resourcesDescription =
-    "Browse Kwipoo resource guides for households, outdoor setups, travel prep, and other real-world inventory workflows.";
+    "Browse planned Kwipoo resources for articles, tutorial guides, product walkthroughs, and video explainers as the content library grows.";
 
   const resourceFormats: ResourceFormat[] = [
     {
@@ -46,53 +36,43 @@
       description:
         "Written pieces for workflows, feature introductions, and practical organization ideas.",
       cadence: "Evergreen references and updates",
-      badge: FEATURE_BADGE_PRESETS.comingSoon,
     },
     {
       title: "Videos",
       description:
         "Short visual walkthroughs that show the product in motion and explain real setup patterns.",
       cadence: "Product demos and guided explainers",
-      badge: FEATURE_BADGE_PRESETS.comingSoon,
     },
     {
       title: "Tutorials",
       description:
         "Step-by-step learning paths for getting started, building inventory structure, and improving routines.",
       cadence: "Hands-on, follow-along teaching",
-      badge: FEATURE_BADGE_PRESETS.comingSoon,
     },
   ];
 
   const resourceTracks: ResourceTrack[] = [
     {
-      title: "Outdoor adventures",
-      audience: "Camping, hiking, and gear-heavy hobbies",
+      title: "Getting started",
+      audience: "New users",
       summary:
-        "Organize gear, build reusable kits, and make sure trips do not fall apart because something critical stayed behind.",
+        "Foundational content for understanding the model, core terms, and where to begin.",
     },
     {
-      title: "Home organization",
-      audience: "Families, couples, and roommates",
+      title: "Real-world setups",
+      audience: "Active organizers",
       summary:
-        "Bring order to shared household items, seasonal storage, and the everyday essentials that tend to disappear into drawers and bins.",
+        "Examples for homes, storage spaces, travel prep, hobby kits, and recurring event planning.",
     },
     {
-      title: "Travel and moving",
-      audience: "Frequent travelers and multi-location lives",
+      title: "Product education",
+      audience: "Evaluators and returning users",
       summary:
-        "Keep belongings visible across suitcases, storage, temporary stays, and repeat packing workflows.",
+        "Guided content that explains new workflows, recent improvements, and how features fit together.",
     },
   ];
 
-  const featuredResources: ResourceEntry[] = resourceGuides.map((guide) => ({
-    slug: guide.slug,
-    audience: guide.audience,
-    title: guide.title,
-    format: guide.format,
-    readTime: guide.readTime,
-    summary: guide.summary,
-  }));
+  const featuredResources: ResourceEntry[] = [];
 
   const resourcesStructuredData = toSeoJsonLd({
     "@context": "https://schema.org",
@@ -116,10 +96,6 @@
   });
 
   void resourcesStructuredData;
-
-  function resolveResourceHref(slug: string): string {
-    return resolvePath(getResourcesHref(slug));
-  }
 </script>
 
 <svelte:head>
@@ -135,9 +111,7 @@
   <meta property="og:url" content={toAbsoluteMarketingUrl("/resources")} />
   <meta name="twitter:title" content={resourcesTitle} />
   <meta name="twitter:description" content={resourcesDescription} />
-  <script type="application/ld+json">
-{resourcesStructuredData}
-  </script>
+  <script type="application/ld+json">{resourcesStructuredData}</script>
 </svelte:head>
 
 <div class="grid gap-10 pb-10">
@@ -161,13 +135,12 @@
         <h1
           class="max-w-4xl text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.15rem]"
         >
-          Practical guides for organizing real life with Kwipoo.
+          A home for articles, videos, tutorials, and product learning.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
-          Start with audience-specific guides for outdoor gear, shared
-          households, and travel-heavy routines. Each guide focuses on a
-          specific setup problem so people can see how Kwipoo fits into daily
-          life, not just how the feature list reads on paper.
+          This page is being prepared as the public resource hub for Kwipoo.
+          Once enabled, it can collect educational content, walkthroughs, and
+          practical examples in one browsable archive.
         </p>
       </div>
 
@@ -178,29 +151,23 @@
           <p
             class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
           >
-            Available Now
+            Current Status
           </p>
-          <h2
-            class="text-[1.4rem] font-semibold leading-tight text-surface-950"
-          >
-            Start with three practical guides.
+          <h2 class="text-[1.4rem] font-semibold leading-tight text-surface-950">
+            Scaffolded behind a feature flag.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            These guides are organized around real households, trips, and gear
-            setups so the advice stays concrete from the first read.
+            The route exists, but it stays off until there is real content and a
+            publishing cadence to support it.
           </p>
         </div>
 
-        <div
-          class="rounded-[1.15rem] border border-primary-200 bg-white/80 p-4"
-        >
-          <p
-            class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-700"
-          >
-            Live now
+        <div class="rounded-[1.15rem] border border-primary-200 bg-white/80 p-4">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-700">
+            Flag
           </p>
-          <p class="mt-2 text-sm leading-6 text-surface-950">
-            Outdoor adventurers, households, and frequent travelers or movers.
+          <p class="mt-2 font-mono text-sm text-surface-950">
+            PUBLIC_FEATURE_RESOURCES
           </p>
         </div>
       </aside>
@@ -214,14 +181,12 @@
       >
         Formats
       </p>
-      <h2
-        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
-      >
-        The library is designed to support more than one way of learning.
+      <h2 class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color">
+        The page is shaped for mixed-format learning content.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        Written guides are available now, with videos and tutorials planned for
-        the same practical, real-world workflows.
+        The initial scaffold is designed to support multiple content types
+        without making the page feel like a generic blog index.
       </p>
     </div>
 
@@ -235,14 +200,9 @@
           >
             {format.cadence}
           </p>
-          <div class="mt-3 flex flex-wrap items-center gap-2">
-            <h3 class="text-[1.2rem] font-semibold leading-tight text-surface-950">
-              {format.title}
-            </h3>
-            {#if format.badge}
-              <FeatureStatusBadge badge={format.badge} />
-            {/if}
-          </div>
+          <h3 class="mt-3 text-[1.2rem] font-semibold leading-tight text-surface-950">
+            {format.title}
+          </h3>
           <p class="mt-3 text-[0.98rem] leading-7 text-brand-body">
             {format.description}
           </p>
@@ -258,7 +218,7 @@
       <p
         class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
-        Guide Tracks
+        Editorial Tracks
       </p>
       <div class="mt-4 grid gap-4">
         {#each resourceTracks as track (track.title)}
@@ -285,33 +245,37 @@
       <p
         class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
-        Available Guides
+        Featured Content
       </p>
-      <div class="mt-4 grid gap-4">
-        {#each featuredResources as resource (resource.slug)}
-          <!-- eslint-disable svelte/no-navigation-without-resolve -->
-          <a
-            href={resolveResourceHref(resource.slug)}
-            class="card card-hover rounded-[1.1rem] border border-surface-200 bg-white p-4 shadow-sm hover:border-primary-200"
-          >
-            <p
-              class="text-sm font-semibold uppercase tracking-[0.16em] text-brand-muted"
-            >
-              {resource.format} • {resource.readTime}
-            </p>
-            <h3 class="mt-2 text-[1.15rem] font-semibold text-surface-950">
-              {resource.title}
-            </h3>
-            <p class="mt-2 text-sm font-medium text-primary-700">
-              {resource.audience}
-            </p>
-            <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
-              {resource.summary}
-            </p>
-          </a>
-          <!-- eslint-enable svelte/no-navigation-without-resolve -->
-        {/each}
-      </div>
+      {#if featuredResources.length === 0}
+        <div class="mt-4 space-y-3">
+          <h3 class="text-[1.3rem] font-semibold leading-tight text-surface-950">
+            No public resources yet.
+          </h3>
+          <p class="text-[0.98rem] leading-7 text-brand-body">
+            Once the flag is enabled, this area can hold featured tutorials,
+            latest videos, or a hand-picked reading path.
+          </p>
+        </div>
+      {:else}
+        <div class="mt-4 grid gap-4">
+          {#each featuredResources as resource (resource.title)}
+            <section class="rounded-[1.1rem] border border-surface-200 bg-white p-4">
+              <p
+                class="text-sm font-semibold uppercase tracking-[0.16em] text-brand-muted"
+              >
+                {resource.format} • {resource.duration}
+              </p>
+              <h3 class="mt-2 text-[1.15rem] font-semibold text-surface-950">
+                {resource.title}
+              </h3>
+              <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
+                {resource.summary}
+              </p>
+            </section>
+          {/each}
+        </div>
+      {/if}
     </article>
   </section>
 </div>

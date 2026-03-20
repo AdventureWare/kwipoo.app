@@ -5,6 +5,7 @@
   import { COMPANY_NAME, COMPANY_WEBSITE_URL } from "$lib/config/site";
 
   const docsEnabled = isFeatureEnabled("docs");
+  const resourcesEnabled = isFeatureEnabled("resources");
   const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
 </script>
 
@@ -53,6 +54,16 @@
                 class="transition-colors duration-200 hover:text-primary-800"
               >
                 Documentation
+              </a>
+            </li>
+          {/if}
+          {#if resourcesEnabled}
+            <li>
+              <a
+                href={resolve("/resources")}
+                class="transition-colors duration-200 hover:text-primary-800"
+              >
+                Resources
               </a>
             </li>
           {/if}
