@@ -21,11 +21,23 @@ Useful validation commands:
 
 ```sh
 npm run test:unit
+npm run theme:sync
 npm run check
 npm run lint
 npm run build
 npm run test:e2e:smoke
 ```
+
+## Feature Flags
+
+Feature flags live in `src/lib/config/feature-flags.ts`.
+
+- Use `PUBLIC_FEATURE_*` environment variables for flags that need to be read by both routes and Svelte components.
+- Boolean env values accept `1`, `true`, `yes`, `on`, `0`, `false`, `no`, and `off`.
+- `docs` currently defaults to `true` in development and `false` in production, and can be overridden with `PUBLIC_FEATURE_DOCS`.
+- Public flags are appropriate for UI and route gating. They are not appropriate for secrets or server-only access control.
+
+Create a local `.env` from `.env.example` when you want to override a flag locally.
 
 ## Project Structure
 
@@ -46,6 +58,14 @@ npm run test:e2e:smoke
 - Use `docs/design-ui-guidelines.md` as the source of truth for visual hierarchy, section rhythm, CTA behavior, and responsive polish.
 - Treat `320px` to `390px` widths as a required review surface for layout, CTA visibility, screenshot treatment, and any future forms.
 - Be conservative with the legal pages. They are static-content heavy and should get human review for substantive wording changes.
+
+## Brand Theme
+
+- Shared brand ramps live in `src/lib/styles/kwipoo-brand-theme.generated.css`.
+- That file is generated from the app theme source, not edited by hand.
+- Run `npm run theme:sync` after changing the app theme.
+- The website keeps its own semantic surface and presentation tokens in `src/app.css`.
+- See `docs/brand-theme-workflow.md` for the maintenance workflow.
 
 ## AI Agent Workflow
 

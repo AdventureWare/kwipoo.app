@@ -1,10 +1,12 @@
 {
   "name": "Kwipoo",
   "short_name": "Kwipoo",
+  "description": "Personal inventory and planning for the things you own, where they are stored, and what you need for trips, hobbies, and daily life.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#329F9B",
+  "categories": ["productivity", "utilities", "lifestyle"],
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
