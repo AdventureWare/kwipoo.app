@@ -61,13 +61,17 @@
       ]}
     >
       <p
-        class="text-[0.92rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+        class={[
+          "text-[0.92rem] font-semibold uppercase tracking-[0.18em]",
+          shellVariant ? "text-brand-muted" : "text-surface-300",
+        ]}
       >
         Documentation
       </p>
       <p
         class={[
-          "mt-3 font-semibold leading-tight text-color",
+          "mt-3 font-semibold leading-tight",
+          shellVariant ? "text-color" : "text-surface-50",
           shellVariant ? "text-[1.15rem]" : "text-[1.45rem]",
         ]}
       >
@@ -75,7 +79,8 @@
       </p>
       <p
         class={[
-          "mt-3 leading-6 text-brand-body",
+          "mt-3 leading-6",
+          shellVariant ? "text-brand-body" : "text-surface-100",
           shellVariant ? "text-[0.92rem]" : "text-[0.98rem]",
         ]}
       >
@@ -91,11 +96,17 @@
       {#each sections as section (section.title)}
         <Navigation.Group class="gap-3">
           <Navigation.Label
-            class="px-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+            class={[
+              "px-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em]",
+              shellVariant ? "text-brand-muted" : "text-surface-300",
+            ]}
           >
             <span class="block">{section.title}</span>
             <span
-              class="mt-2 block text-[0.95rem] font-normal normal-case tracking-normal text-brand-body"
+              class={[
+                "mt-2 block text-[0.95rem] font-normal normal-case tracking-normal",
+                shellVariant ? "text-brand-body" : "text-surface-100",
+              ]}
             >
               {section.items.length}
               {section.items.length === 1 ? " guide" : " guides"}
@@ -111,10 +122,10 @@
                 href={resolve(item.href as Pathname)}
                 aria-current={isCurrent ? "page" : undefined}
                 class={[
-                  "card-hover rounded-[1rem] border px-4 py-3 text-left text-surface-950 shadow-none",
+                  "card-hover rounded-[1rem] border px-4 py-3 text-left shadow-none",
                   shellVariant
-                    ? "border-transparent bg-transparent"
-                    : "preset-filled-surface-50-950 border-surface-200-800",
+                    ? "border-transparent bg-transparent text-surface-950"
+                    : "preset-filled-surface-50-950 border-surface-200-800 text-surface-50",
                   shellVariant && !isCurrent && "hover:preset-tonal-primary",
                   !shellVariant && !isCurrent && "hover:border-primary-200-800",
                   isCurrent &&

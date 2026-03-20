@@ -107,11 +107,11 @@
       class="card preset-filled-surface-100-900 rounded-[1.5rem] border border-primary-200-800 p-6 shadow-sm"
     >
       <p
-        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
       >
         Recommended flow
       </p>
-      <p class="mt-3 text-[1.15rem] leading-7 text-color">
+      <p class="mt-3 text-[1.15rem] leading-7 text-surface-50">
         Learn Things, Places, Spots, Sets, and Events in the same order they
         become useful in real life.
       </p>
@@ -125,7 +125,7 @@
         </a>
         <a
           href={`#${docsLandingTocItems[2].id}`}
-          class="btn btn-sm preset-outlined-surface-200-800 w-auto text-surface-950 hover:preset-tonal-surface hover:text-surface-950"
+          class="btn btn-sm preset-outlined-surface-200-800 w-auto border-surface-600 text-surface-50 hover:border-surface-500 hover:bg-surface-800 hover:text-surface-50"
         >
           Browse topics
         </a>
