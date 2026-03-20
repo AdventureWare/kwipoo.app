@@ -102,15 +102,7 @@
             ]}
           >
             <span class="block">{section.title}</span>
-            <span
-              class={[
-                "mt-2 block text-[0.95rem] font-normal normal-case tracking-normal",
-                shellVariant ? "text-brand-body" : "text-surface-100",
-              ]}
-            >
-              {section.items.length}
-              {section.items.length === 1 ? " guide" : " guides"}
-            </span>
+
           </Navigation.Label>
 
           <Navigation.Menu class="gap-2">
