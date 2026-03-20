@@ -295,10 +295,10 @@
         <article
           class="rounded-[1.5rem] border border-brand-border bg-brand-canvas p-6 shadow-sm"
         >
-          <h3 class="text-xl font-semibold text-surface-950-50">
+          <h3 class="text-xl font-semibold text-color">
             {item.question}
           </h3>
-          <p class="mt-3 text-base leading-7 text-surface-800-200">
+          <p class="mt-3 text-base leading-7 text-brand-body">
             {item.answer}
           </p>
         </article>

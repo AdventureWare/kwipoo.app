@@ -91,7 +91,7 @@
       {#each sections as section (section.title)}
         <Navigation.Group class="gap-3">
           <Navigation.Label
-            class="px-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
+            class="px-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
           >
             <span class="block">{section.title}</span>
             <span
@@ -111,7 +111,7 @@
                 href={resolve(item.href as Pathname)}
                 aria-current={isCurrent ? "page" : undefined}
                 class={[
-                  "card-hover rounded-[1rem] border px-4 py-3 text-left shadow-none",
+                  "card-hover rounded-[1rem] border px-4 py-3 text-left text-surface-950 shadow-none",
                   shellVariant
                     ? "border-transparent bg-transparent"
                     : "preset-filled-surface-50-950 border-surface-200-800",
@@ -119,8 +119,8 @@
                   !shellVariant && !isCurrent && "hover:border-primary-200-800",
                   isCurrent &&
                     (shellVariant
-                      ? "preset-filled-primary-500 border-transparent shadow-sm"
-                      : "preset-filled-primary-500 border-transparent shadow-sm"),
+                      ? "preset-filled-primary-500 border-transparent text-surface-950 shadow-sm"
+                      : "preset-filled-primary-500 border-transparent text-surface-950 shadow-sm"),
                 ]}
               >
                 <Navigation.TriggerText class="min-w-0">
