@@ -201,7 +201,7 @@ Spots
           "Centralized Inventory: Keep a complete record of what you own in one place so you can check before buying, understand what you already have, and make smarter decisions about replacing, upgrading, or downsizing.",
           "Location Tracking: Assign each Thing to a specific Spot so you always know where it is.",
           "Detailed Item Data: Keep notes on source, cost, condition, weight, and more for planning, insurance, maintenance, repair, or sale.",
-          "Privacy & Sharing: Set each Thing to public, private, or hidden depending on what you are comfortable sharing.",
+          "Privacy & Sharing: Set each Thing to Public, Friends Only, or Owner Only depending on what you are comfortable sharing.",
         ],
       },
       {
@@ -244,7 +244,7 @@ Spots
             ],
             [
               "Visibility",
-              "Who can see this Thing: public, private, or hidden.",
+              "Who can see this Thing: Public, Friends Only, or Owner Only.",
               "No",
               "Public",
             ],
@@ -285,8 +285,8 @@ Spots
         heading: "Privacy & Visibility",
         bullets: [
           "Public: Anyone can see this Thing if your profile is also public.",
-          "Private: Only your Kwipoo friends can view it.",
-          "Hidden: Visible to you alone, even if the rest of your profile is public.",
+          "Friends Only: Only your Kwipoo friends can view it.",
+          "Owner Only: Visible to you alone, even if the rest of your profile is public.",
         ],
       },
       {
@@ -450,9 +450,9 @@ Spots
             ["Type", "The Place type from preset options.", "Yes", "House"],
             [
               "Visibility",
-              "Who can see this Place: public, private, or hidden.",
+              "Who can see this Place: Public, Friends Only, or Owner Only.",
               "Yes",
-              "Private",
+              "Friends Only",
             ],
             [
               "Description",
@@ -500,8 +500,8 @@ Spots
         heading: "Privacy & Visibility",
         bullets: [
           "Public: Anyone can see this Place if your profile is public.",
-          "Private: Only your Kwipoo friends can view this Place.",
-          "Hidden: The Place is visible only to you.",
+          "Friends Only: Only your Kwipoo friends can view this Place.",
+          "Owner Only: The Place is visible only to you.",
         ],
       },
       {
@@ -571,9 +571,9 @@ Spots
             ],
             [
               "Visibility",
-              "Who can see this Spot: public, private, or hidden.",
+              "Who can see this Spot: Public, Friends Only, or Owner Only.",
               "Yes",
-              "Private",
+              "Friends Only",
             ],
           ],
         },
@@ -614,8 +614,8 @@ Spots
         heading: "Privacy & Visibility",
         bullets: [
           "Public: Anyone can see this Spot if your profile is public.",
-          "Private: Only your Kwipoo friends can view this Spot.",
-          "Hidden: The Spot is visible only to you.",
+          "Friends Only: Only your Kwipoo friends can view this Spot.",
+          "Owner Only: The Spot is visible only to you.",
         ],
       },
       {
@@ -688,9 +688,9 @@ Spots
             ["Type", "A text field for the Set's purpose.", "No", "Travel"],
             [
               "Visibility",
-              "Who can see this Set: public, private, or hidden.",
+              "Who can see this Set: Public, Friends Only, or Owner Only.",
               "Yes",
-              "Private",
+              "Friends Only",
             ],
           ],
         },
@@ -749,8 +749,8 @@ Spots
         heading: "Privacy & Visibility",
         bullets: [
           "Public: Anyone can see this Set if your profile is public.",
-          "Private: Only your Kwipoo friends can see the Set.",
-          "Hidden: The Set is visible only to you.",
+          "Friends Only: Only your Kwipoo friends can see the Set.",
+          "Owner Only: The Set is visible only to you.",
         ],
       },
       {
@@ -841,9 +841,9 @@ Spots
             ["End Date", "When the Event ends.", "Yes", "2025-06-18"],
             [
               "Visibility",
-              "Who can see this Event: public, private, or hidden.",
+              "Who can see this Event: Public, Friends Only, or Owner Only.",
               "Yes",
-              "Private",
+              "Friends Only",
             ],
           ],
         },
@@ -928,8 +928,8 @@ Spots
         heading: "Privacy & Visibility",
         bullets: [
           "Public: Anyone can see the Event if your profile is public.",
-          "Private: Only invited attendees can view it.",
-          "Hidden: The Event is visible only to you.",
+          "Friends Only: Only invited attendees can view it.",
+          "Owner Only: The Event is visible only to you.",
         ],
       },
       {
@@ -987,7 +987,7 @@ Spots
             heading: "Sending a Friend Request",
             bullets: [
               "If the user is not already your friend, use the `Send Friend Request` action on their profile.",
-              "If their profile is private, you will not see their Things, Sets, or Places until they accept.",
+              "If their profile is set to Friends Only, you will not see their Things, Sets, or Places until they accept.",
             ],
           },
           {
@@ -1016,7 +1016,7 @@ Spots
             heading: "Viewing a Friend's Profile",
             bullets: [
               "Open a friend's name from your friends list to view their profile.",
-              "If they shared Things, Sets, or Places with friend visibility, you will be able to see them.",
+              "If they shared Things, Sets, or Places with Friends Only visibility, you will be able to see them.",
             ],
           },
           {
@@ -1024,7 +1024,7 @@ Spots
             bullets: [
               "If you find a user through `Find Friends`, you can view their profile.",
               "If their account is public, you can see their visible Things, Sets, and Places.",
-              "If their account is private, you will only see the friend request action until they accept.",
+              "If their account is set to Friends Only, you will only see the friend request action until they accept.",
             ],
           },
         ],
@@ -1069,14 +1069,14 @@ Spots
         ],
         bullets: [
           "Public: Anyone can view your profile and visible items.",
-          "Private: Only friends can see your profile and items.",
-          "Hidden: No one else can see your profile or items.",
+          "Friends Only: Only friends can see your profile and items.",
+          "Owner Only: No one else can see your profile or items.",
         ],
       },
       {
         heading: "Pro Tips",
         bullets: [
-          "Use private visibility if you want friend-only sharing without broadcasting your inventory more broadly.",
+          "Use Friends Only visibility if you want friend-only sharing without broadcasting your inventory more broadly.",
           "Check friends' gear before buying something yourself.",
           "Use inventory visibility to make gift-giving easier and more informed.",
           "Use chat for quick coordination when you want to borrow, ask questions, or plan together.",
@@ -1150,8 +1150,8 @@ Spots
             ],
             bullets: [
               "Public: Anyone can view your profile if it is public.",
-              "Private: Only your Kwipoo friends can see your profile.",
-              "Hidden: Your profile is invisible to others.",
+              "Friends Only: Only your Kwipoo friends can see your profile.",
+              "Owner Only: Your profile is invisible to others.",
             ],
           },
           {
