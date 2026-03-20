@@ -7,7 +7,7 @@
 </script>
 
 <section
-  class="card relative mb-30 overflow-hidden border border-surface-200 bg-surface-100 shadow-sm"
+  class="card relative mb-30 overflow-hidden border border-brand-border bg-brand-panel shadow-sm"
 >
   <div class="px-6 sm:px-8 lg:px-10">
     <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
@@ -18,7 +18,7 @@
         </h1>
 
         <p
-          class="mx-0 mb-6 max-w-lg text-lg leading-relaxed text-slate-600 sm:text-xl"
+          class="mx-0 mb-6 max-w-lg text-lg leading-relaxed text-brand-muted sm:text-xl"
         >
           Keep track of what you own, where it lives, and what you need next in
           one personal inventory app.
@@ -40,18 +40,18 @@
           class="hero-phone-wrap relative w-full max-w-[18rem] sm:max-w-[20rem]"
         >
           <div
-            class="absolute inset-x-5 bottom-4 top-10 rounded-full bg-primary-200/65 blur-3xl"
+            class="absolute inset-x-5 bottom-4 top-10 rounded-full bg-brand-glow blur-3xl"
           ></div>
 
           <div
-            class="relative rounded-[3.25rem] bg-primary-950 p-2 shadow-[0_30px_80px_-30px_rgba(12,37,39,0.65)] ring-1 ring-primary-900/30"
+            class="relative rounded-[3.25rem] bg-brand-shell p-2 shadow-2xl ring-1 ring-primary-900/25"
           >
-            <div class="rounded-[2.8rem] bg-slate-950 p-2">
+            <div class="rounded-[2.8rem] bg-brand-screen p-2">
               <div
                 class="relative overflow-hidden rounded-[2.35rem] bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.22),_rgba(255,255,255,0)_28%),linear-gradient(180deg,_#0f172a_0%,_#111827_100%)]"
               >
                 <div
-                  class="pointer-events-none absolute left-1/2 top-0 z-10 h-7 w-28 -translate-x-1/2 rounded-b-[1rem] bg-slate-950"
+                  class="pointer-events-none absolute left-1/2 top-0 z-10 h-7 w-28 -translate-x-1/2 rounded-b-[1rem] bg-brand-screen"
                 ></div>
 
                 <img

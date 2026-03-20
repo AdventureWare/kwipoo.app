@@ -31,14 +31,14 @@
 
 <Navigation
   layout="bar"
-  class="sticky top-0 z-50 border-b border-surface-200-800 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85"
+  class="sticky top-0 z-50 border-b border-brand-border bg-brand-canvas/95 backdrop-blur supports-[backdrop-filter]:bg-brand-canvas/88"
 >
   <div
     class="mx-auto flex min-h-14 max-w-7xl items-center gap-2 px-4 py-1.5 sm:px-6 md:min-h-16 md:gap-3 md:py-2.5 lg:px-8"
   >
     <Navigation.Header class="flex min-w-0 flex-1 items-center gap-4 md:gap-6">
       <a href={homeHref} class="shrink-0" aria-label="Kwipoo home">
-        <span class="text-2xl font-monoton text-primary-500">Kwipoo</span>
+        <span class="text-2xl font-monoton text-primary-600">Kwipoo</span>
       </a>
 
       <Navigation.Menu class="hidden items-center gap-2 md:flex">
