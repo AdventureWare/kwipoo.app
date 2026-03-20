@@ -13,9 +13,9 @@
   } = $props();
 
   const calloutToneClasses = {
-    note: "preset-tonal-tertiary border-tertiary-200-800 text-surface-900-100",
-    tip: "preset-tonal-success border-success-200-800 text-surface-900-100",
-    warning: "preset-tonal-warning border-warning-200-800 text-surface-900-100",
+    note: "preset-tonal-tertiary border-tertiary-200-800 text-color",
+    tip: "preset-tonal-success border-success-200-800 text-color",
+    warning: "preset-tonal-warning border-warning-200-800 text-color",
   } as const;
 
   function getExampleHref(href: string): string {
@@ -29,18 +29,18 @@
 >
   <div class="max-w-4xl">
     <h2
-      class="text-3xl font-semibold tracking-tight text-surface-950-50 sm:text-5xl"
+      class="text-3xl font-semibold tracking-tight text-color sm:text-5xl"
     >
       {section.heading}
     </h2>
 
     {#if section.summary}
-      <p class="mt-3 text-lg leading-8 text-surface-800-200">
+      <p class="mt-3 text-lg leading-8 text-brand-body">
         {section.summary}
       </p>
     {/if}
 
-    <div class="mt-5 space-y-4 text-lg leading-8 text-surface-900-100">
+    <div class="mt-5 space-y-4 text-lg leading-8 text-color">
       {#each section.paragraphs as paragraph (paragraph)}
         <p>{paragraph}</p>
       {/each}
@@ -48,7 +48,7 @@
 
     {#if section.bullets}
       <ul
-        class="mt-6 list-disc space-y-4 pl-8 text-lg leading-8 text-surface-900-100 marker:text-primary-500"
+        class="mt-6 list-disc space-y-4 pl-8 text-lg leading-8 text-color marker:text-primary-500"
       >
         {#each section.bullets as bullet (bullet)}
           <li>{bullet}</li>
@@ -62,11 +62,11 @@
           calloutToneClasses[section.callout.tone ?? "note"]
         }`}
       >
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] opacity-80">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-muted">
           {section.callout.tone ?? "note"}
         </p>
         <h3 class="mt-2 text-lg font-semibold">{section.callout.title}</h3>
-        <p class="mt-2 text-sm leading-6">{section.callout.body}</p>
+        <p class="mt-2 text-sm leading-6 text-color">{section.callout.body}</p>
       </div>
     {/if}
 
@@ -93,17 +93,17 @@
         class="card preset-filled-surface-50-950 mt-8 rounded-[1.25rem] border border-surface-200-800 px-5 py-4 shadow-sm"
       >
         <summary
-          class="cursor-pointer list-none text-base font-semibold text-surface-950-50"
+          class="cursor-pointer list-none text-base font-semibold text-color"
         >
           {section.example.title}
         </summary>
-        <p class="mt-3 text-sm leading-6 text-surface-900-100">
+        <p class="mt-3 text-sm leading-6 text-color">
           {section.example.summary}
         </p>
 
         <ol class="mt-4 space-y-3">
           {#each section.example.steps as step, index (step)}
-            <li class="flex gap-3 text-sm leading-6 text-surface-900-100">
+            <li class="flex gap-3 text-sm leading-6 text-color">
               <span
                 class="badge preset-filled-primary-500 mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold"
               >
