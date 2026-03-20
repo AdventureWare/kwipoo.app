@@ -21,6 +21,7 @@ Useful validation commands:
 
 ```sh
 npm run test:unit
+npm run theme:sync
 npm run check
 npm run lint
 npm run build
@@ -57,6 +58,14 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - Use `docs/design-ui-guidelines.md` as the source of truth for visual hierarchy, section rhythm, CTA behavior, and responsive polish.
 - Treat `320px` to `390px` widths as a required review surface for layout, CTA visibility, screenshot treatment, and any future forms.
 - Be conservative with the legal pages. They are static-content heavy and should get human review for substantive wording changes.
+
+## Brand Theme
+
+- Shared brand ramps live in `src/lib/styles/kwipoo-brand-theme.generated.css`.
+- That file is generated from the app theme source, not edited by hand.
+- Run `npm run theme:sync` after changing the app theme.
+- The website keeps its own semantic surface and presentation tokens in `src/app.css`.
+- See `docs/brand-theme-workflow.md` for the maintenance workflow.
 
 ## AI Agent Workflow
 
