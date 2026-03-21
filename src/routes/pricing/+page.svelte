@@ -1,9 +1,8 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { Button } from "$lib/components";
-  import { PREMIUM_SIGNUP_PATH } from "$lib/config/billing";
   import {
-    APP_SIGNUP_URL,
+    APP_LOGIN_URL,
     SUPPORT_EMAIL,
     SUPPORT_EMAIL_MAILTO,
   } from "$lib/config/site";
@@ -58,7 +57,7 @@
         "Self-serve setup for individuals or households testing the product",
       ],
       ctaLabel: "Start Free",
-      ctaHref: APP_SIGNUP_URL,
+      ctaHref: APP_LOGIN_URL,
       ctaVariant: "secondary",
       footnote:
         "Placeholder draft. Free-plan limits and included features are not final.",
@@ -77,11 +76,11 @@
         "Placeholder room for upgraded support, onboarding, or priority help",
         "Shaped for active households, hobby gear, storage management, and repeat trip planning",
       ],
-      ctaLabel: "Start Premium",
-      ctaHref: PREMIUM_SIGNUP_PATH,
+      ctaLabel: "Get Started",
+      ctaHref: APP_LOGIN_URL,
       ctaVariant: "primary",
       footnote:
-        "Starts the Premium signup handoff flow. The final billing destination is environment-configurable.",
+        "Placeholder only. Packaging, pricing model, and included capabilities will likely change.",
       featured: true,
     },
     {
@@ -205,15 +204,20 @@
 
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Button
-            href={APP_SIGNUP_URL}
+            href={APP_LOGIN_URL}
             variant="primary"
             size="lg"
             class="sm:w-auto"
           >
             Start Free
           </Button>
-          <Button href={PREMIUM_SIGNUP_PATH} variant="outline" size="lg" class="sm:w-auto">
-            Start Premium
+          <Button
+            href={customPricingHref}
+            variant="outline"
+            size="lg"
+            class="sm:w-auto"
+          >
+            Speak to Sales
           </Button>
         </div>
       </div>
