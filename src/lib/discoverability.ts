@@ -28,6 +28,10 @@ const REFERENCE_SITE_PATHS = ["/privacy-policy", "/terms-and-conditions"];
 const FEATURED_DOC_SLUGS = new Set(["things", "sets", "events", "social"]);
 const RESOURCES_PATH = "/resources";
 const RELEASE_HISTORY_PATH = "/releases";
+const OPTIONAL_INDEXABLE_PATHS = {
+  resources: false,
+  releaseHistory: false,
+} as const;
 
 function formatSourceList(items: string[]): string {
   if (items.length === 0) {
@@ -66,11 +70,16 @@ function getFeaturedDocsPages() {
 }
 
 function getLiveReleaseHistoryPaths(): string[] {
-  return isFeatureEnabled("releaseHistory") ? [RELEASE_HISTORY_PATH] : [];
+  return isFeatureEnabled("releaseHistory") &&
+    OPTIONAL_INDEXABLE_PATHS.releaseHistory
+    ? [RELEASE_HISTORY_PATH]
+    : [];
 }
 
 function getLiveResourcesPaths(): string[] {
-  return isFeatureEnabled("resources") ? [RESOURCES_PATH] : [];
+  return isFeatureEnabled("resources") && OPTIONAL_INDEXABLE_PATHS.resources
+    ? [RESOURCES_PATH]
+    : [];
 }
 
 export function getIndexableSitePaths(): string[] {

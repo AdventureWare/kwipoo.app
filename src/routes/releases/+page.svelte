@@ -82,10 +82,7 @@
 <svelte:head>
   <title>{releaseTitle}</title>
   <meta name="description" content={releaseDescription} />
-  <meta
-    name="robots"
-    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
-  />
+  <meta name="robots" content="noindex,nofollow" />
   <meta property="og:title" content={releaseTitle} />
   <meta property="og:description" content={releaseDescription} />
   <meta property="og:type" content="website" />

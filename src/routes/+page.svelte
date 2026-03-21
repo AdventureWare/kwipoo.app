@@ -239,7 +239,6 @@
   const docsUrl = isFeatureEnabled("docs")
     ? `${MARKETING_SITE_URL}/docs`
     : undefined;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const homeStructuredData = toSeoJsonLd({
     "@context": "https://schema.org",
     "@graph": [
@@ -278,6 +277,8 @@
       },
     ],
   });
+
+  void homeStructuredData;
 </script>
 
 <svelte:head>

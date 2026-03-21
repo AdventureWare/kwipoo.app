@@ -101,10 +101,7 @@
 <svelte:head>
   <title>{resourcesTitle}</title>
   <meta name="description" content={resourcesDescription} />
-  <meta
-    name="robots"
-    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
-  />
+  <meta name="robots" content="noindex,nofollow" />
   <meta property="og:title" content={resourcesTitle} />
   <meta property="og:description" content={resourcesDescription} />
   <meta property="og:type" content="website" />
