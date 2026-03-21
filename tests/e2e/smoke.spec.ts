@@ -130,6 +130,54 @@ test("@smoke pricing page renders the draft plan structure", async ({
   }
 });
 
+test("@smoke premium signup flow route resolves to either a wired handoff or a gated 404", async ({
+  page,
+  request,
+}) => {
+  if (await pricingIsAvailable(request)) {
+    await page.goto("/pricing/premium");
+
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /start the premium signup flow/i,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", {
+        name: /continue to checkout|create account and upgrade|contact us about premium/i,
+      }),
+    ).toBeVisible();
+  } else {
+    const premiumSignupResponse = await page.goto("/pricing/premium");
+    expect(premiumSignupResponse?.status()).toBe(404);
+  }
+});
+
+test("@smoke mock premium checkout route renders an interactive purchase shell", async ({
+  page,
+  request,
+}) => {
+  if (await pricingIsAvailable(request)) {
+    await page.goto("/pricing/premium/mock-checkout");
+
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /try the premium purchase process without taking a real payment/i,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /review mock purchase/i }),
+    ).toBeVisible();
+  } else {
+    const mockCheckoutResponse = await page.goto(
+      "/pricing/premium/mock-checkout",
+    );
+    expect(mockCheckoutResponse?.status()).toBe(404);
+  }
+});
+
 test("@smoke homepage footer links and social actions remain accessible on narrow screens", async ({
   page,
   request,
