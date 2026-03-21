@@ -1,10 +1,17 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-async function loadFeatureFlags({ docsOverride }: { docsOverride?: string }) {
+async function loadFeatureFlags({
+  docsOverride,
+  pricingOverride,
+}: {
+  docsOverride?: string;
+  pricingOverride?: string;
+}) {
   vi.resetModules();
   vi.doMock("$env/dynamic/public", () => ({
     env: {
       PUBLIC_FEATURE_DOCS: docsOverride,
+      PUBLIC_FEATURE_PRICING: pricingOverride,
     },
   }));
 
@@ -24,6 +31,13 @@ describe("feature flags", () => {
     expect(isFeatureEnabled("docs")).toBe(true);
   });
 
+  it("keeps pricing disabled by default", async () => {
+    const { FEATURE_FLAGS, isFeatureEnabled } = await loadFeatureFlags({});
+
+    expect(FEATURE_FLAGS.pricing).toBe(false);
+    expect(isFeatureEnabled("pricing")).toBe(false);
+  });
+
   it("allows explicit env overrides to disable docs", async () => {
     const { FEATURE_FLAGS } = await loadFeatureFlags({
       docsOverride: "false",
@@ -38,6 +52,14 @@ describe("feature flags", () => {
     });
 
     expect(FEATURE_FLAGS.docs).toBe(true);
+  });
+
+  it("allows pricing to be explicitly enabled", async () => {
+    const { FEATURE_FLAGS } = await loadFeatureFlags({
+      pricingOverride: "true",
+    });
+
+    expect(FEATURE_FLAGS.pricing).toBe(true);
   });
 
   it("rejects invalid env values", async () => {

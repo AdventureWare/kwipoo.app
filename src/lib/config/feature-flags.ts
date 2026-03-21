@@ -48,6 +48,11 @@ export const FEATURE_FLAGS = {
     env.PUBLIC_FEATURE_RESOURCES,
     false,
   ),
+  pricing: resolveBooleanFlag(
+    "PUBLIC_FEATURE_PRICING",
+    env.PUBLIC_FEATURE_PRICING,
+    false,
+  ),
   releaseHistory: resolveBooleanFlag(
     "PUBLIC_FEATURE_RELEASE_HISTORY",
     env.PUBLIC_FEATURE_RELEASE_HISTORY,

@@ -9,20 +9,26 @@
 
   const homeHref = resolve("/");
   const docsHref = resolve("/docs");
+  const pricingHref = resolve("/pricing");
   const resourcesHref = resolve("/resources");
   const releasesHref = resolve("/releases");
   const docsEnabled = isFeatureEnabled("docs");
+  const pricingEnabled = isFeatureEnabled("pricing");
   const resourcesEnabled = isFeatureEnabled("resources");
   const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
 
   const desktopLinks = [
     { href: homeHref, label: "Home" },
+    ...(pricingEnabled ? [{ href: pricingHref, label: "Pricing" }] : []),
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
     ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
-    ...(releaseHistoryEnabled ? [{ href: releasesHref, label: "Releases" }] : []),
+    ...(releaseHistoryEnabled
+      ? [{ href: releasesHref, label: "Releases" }]
+      : []),
   ];
 
   const mobileLinks = [
+    ...(pricingEnabled ? [{ href: pricingHref, label: "Pricing" }] : []),
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
     ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
     ...(releaseHistoryEnabled

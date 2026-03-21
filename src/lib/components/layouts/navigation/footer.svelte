@@ -5,6 +5,7 @@
   import { COMPANY_NAME, COMPANY_WEBSITE_URL } from "$lib/config/site";
 
   const docsEnabled = isFeatureEnabled("docs");
+  const pricingEnabled = isFeatureEnabled("pricing");
   const resourcesEnabled = isFeatureEnabled("resources");
   const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
 </script>
@@ -47,6 +48,16 @@
           Resources
         </h3>
         <ul class="space-y-3">
+          {#if pricingEnabled}
+            <li>
+              <a
+                href={resolve("/pricing")}
+                class="transition-colors duration-200 hover:text-primary-800"
+              >
+                Pricing
+              </a>
+            </li>
+          {/if}
           {#if docsEnabled}
             <li>
               <a
