@@ -1,8 +1,8 @@
 import { error } from "@sveltejs/kit";
-import { isSiteSectionEnabled } from "$lib/site-sections";
+import { isFeatureEnabled } from "$lib/config/feature-flags";
 
 export function load() {
-  if (!isSiteSectionEnabled("pricing")) {
+  if (!isFeatureEnabled("pricing")) {
     error(404, "Page not found");
   }
 }
