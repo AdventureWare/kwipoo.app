@@ -12,7 +12,7 @@
   import {
     isFeatureEnabled,
   } from "$lib/config/feature-flags";
-  import { getDocsHref } from "$lib/content/docs";
+  import { getDocsHref, getDocsPageBadge } from "$lib/content/docs";
   import {
     APP_LOGIN_URL,
     MARKETING_SITE_URL,
@@ -82,6 +82,7 @@
   const switchbackItems = [
     {
       tag: "Things",
+      featureBadge: getDocsPageBadge("things"),
       title: "Keep track of what you own—all on one platform.",
       description:
         "Know exactly what you have, where it is, and what it’s worth—so you spend less time searching, avoid unnecessary repurchases, and make smarter decisions about what to keep, use, or replace. Whether it’s everyday essentials or hobby gear, Kwipoo helps you stay organized without the mental load.",
@@ -97,6 +98,7 @@
     },
     {
       tag: "Sets",
+      featureBadge: getDocsPageBadge("sets"),
       title:
         "Group the right things together—so they’re always ready when you need them.",
       description:
@@ -113,6 +115,7 @@
     },
     {
       tag: "Places",
+      featureBadge: getDocsPageBadge("places"),
       title:
         "Map out where your stuff lives—across home, storage, and anywhere else.",
       description:
@@ -129,6 +132,7 @@
     },
     {
       tag: "Spots",
+      featureBadge: getDocsPageBadge("spots"),
       title:
         "Pinpoint exactly where things are stored—down to the shelf, bin, or drawer.",
       description:
@@ -145,6 +149,7 @@
     },
     {
       tag: "Events",
+      featureBadge: getDocsPageBadge("events"),
       title: "Plan trips and events without last-minute scrambling.",
       description:
         "Assign gear to upcoming trips, events, or projects—whether you’re packing solo or coordinating with a group. Check off what’s ready, see what’s missing, and ensure no one forgets the essentials.",
@@ -160,6 +165,7 @@
     },
     {
       tag: "Social",
+      featureBadge: getDocsPageBadge("social"),
       title: "Borrow, lend, and collaborate—without the back-and-forth.",
       description:
         "See what your friends own, avoid unnecessary duplicate purchases, and coordinate gear-sharing seamlessly. Whether for hobbies, outdoor trips, or shared projects, Kwipoo makes it easy to stay connected and prepared.",
@@ -176,6 +182,7 @@
 
     {
       tag: "Profile",
+      featureBadge: getDocsPageBadge("profile"),
       title:
         "Customize your inventory, control privacy, and make Kwipoo work for you.",
       description:
@@ -192,6 +199,7 @@
     },
   ] satisfies Array<{
     tag: string;
+    featureBadge?: import("$lib/types/feature-badges").FeatureBadge;
     title: string;
     description: string;
     image: {

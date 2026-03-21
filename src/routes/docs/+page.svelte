@@ -7,6 +7,7 @@
     getDocsCategoryGroups,
     getDocsHref,
   } from "$lib/content/docs";
+  import FeatureStatusBadge from "$lib/components/ui/feature-status-badge.svelte";
   import { APP_LOGIN_URL, SITE_NAME } from "$lib/config/site";
   import {
     getBreadcrumbJsonLd,
@@ -159,11 +160,16 @@
           href={resolveDocsHref(docPage.slug)}
           class="card card-hover preset-filled-surface-50-950 flex h-full flex-col gap-3 rounded-[1.35rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
         >
-          <p
-            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
-          >
-            {docPage.eyebrow}
-          </p>
+          <div class="flex flex-wrap items-center gap-2">
+            <p
+              class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
+            >
+              {docPage.eyebrow}
+            </p>
+            {#if docPage.badge}
+              <FeatureStatusBadge badge={docPage.badge} />
+            {/if}
+          </div>
           <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-50">
             {docPage.title}
           </h3>
@@ -235,11 +241,16 @@
                 href={resolveDocsHref(docPage.slug)}
                 class="card card-hover preset-filled-surface-50-950 rounded-[1.2rem] border border-surface-200-800 p-4 hover:border-primary-200-800"
               >
-                <p
-                  class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
-                >
-                  {docPage.eyebrow}
-                </p>
+                <div class="flex flex-wrap items-center gap-2">
+                  <p
+                    class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
+                  >
+                    {docPage.eyebrow}
+                  </p>
+                  {#if docPage.badge}
+                    <FeatureStatusBadge badge={docPage.badge} />
+                  {/if}
+                </div>
                 <h4
                   class="mt-2 text-[1.1rem] font-semibold leading-tight text-surface-50"
                 >
@@ -282,11 +293,16 @@
           href={resolveDocsHref(docPage.slug)}
           class="card card-hover preset-filled-surface-50-950 rounded-[1.2rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
         >
-          <p
-            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
-          >
-            {docPage.eyebrow}
-          </p>
+          <div class="flex flex-wrap items-center gap-2">
+            <p
+              class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
+            >
+              {docPage.eyebrow}
+            </p>
+            {#if docPage.badge}
+              <FeatureStatusBadge badge={docPage.badge} />
+            {/if}
+          </div>
           <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-50">
             {docPage.title}
           </h3>

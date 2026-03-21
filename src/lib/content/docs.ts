@@ -1,3 +1,6 @@
+import type { FeatureBadge } from "$lib/types/feature-badges";
+import { FEATURE_BADGE_PRESETS } from "$lib/types/feature-badges";
+
 export const docsCategoryOrder = [
   "Start here",
   "Track and organize",
@@ -53,6 +56,7 @@ export interface DocsPage {
   slug: string;
   category: DocsCategory;
   eyebrow: string;
+  badge?: FeatureBadge;
   title: string;
   summary: string;
   description: string;
@@ -76,6 +80,7 @@ export interface DocsNavSection {
     label: string;
     href: string;
     slug?: string;
+    badge?: FeatureBadge;
   }>;
 }
 
@@ -769,6 +774,7 @@ Spots
     slug: "events",
     category: "Plan and collaborate",
     eyebrow: "Upcoming plans",
+    badge: FEATURE_BADGE_PRESETS.beta,
     title: "Prepare for Events",
     summary:
       "Use Events to plan trips, projects, moves, and shared activities with clear lists, assigned gear, packing views, and weight tracking.",
@@ -1225,6 +1231,7 @@ export function getDocsNavSections(): DocsNavSection[] {
         label: item.label,
         href: `/docs/${item.slug}`,
         slug: item.slug,
+        badge: getDocsPage(item.slug)?.badge,
       })),
     },
   ];
@@ -1261,6 +1268,10 @@ export function getDocsPageLabel(slug: string): string {
     getDocsPage(slug)?.title ??
     "Documentation"
   );
+}
+
+export function getDocsPageBadge(slug: string): FeatureBadge | undefined {
+  return getDocsPage(slug)?.badge;
 }
 
 export function getRelatedDocsPages(docPage: DocsPage): DocsPage[] {

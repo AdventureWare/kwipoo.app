@@ -1,8 +1,10 @@
 <script lang="ts">
   import ImageContentCard from "$lib/components/ui/cards/image-content-card.svelte";
+  import type { FeatureBadge } from "$lib/types/feature-badges";
 
   interface SwitchbackItemData {
     tag: string;
+    featureBadge?: FeatureBadge;
     title: string;
     description: string;
     image: {
@@ -31,6 +33,7 @@
       <div class="mb-16 last:mb-0 sm:mb-20 lg:mb-24">
         <ImageContentCard
           tag={item.tag}
+          featureBadge={item.featureBadge}
           title={item.title}
           description={item.description}
           image={item.image}
