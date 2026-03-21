@@ -1,6 +1,7 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { Button } from "$lib/components";
+  import { PREMIUM_SIGNUP_PATH } from "$lib/config/billing";
   import {
     APP_LOGIN_URL,
     SUPPORT_EMAIL,
@@ -76,11 +77,11 @@
         "Placeholder room for upgraded support, onboarding, or priority help",
         "Shaped for active households, hobby gear, storage management, and repeat trip planning",
       ],
-      ctaLabel: "Get Started",
-      ctaHref: APP_LOGIN_URL,
+      ctaLabel: "Start Premium",
+      ctaHref: PREMIUM_SIGNUP_PATH,
       ctaVariant: "primary",
       footnote:
-        "Placeholder only. Packaging, pricing model, and included capabilities will likely change.",
+        "Starts the Premium signup handoff flow. The final billing destination is environment-configurable.",
       featured: true,
     },
     {
@@ -211,13 +212,8 @@
           >
             Start Free
           </Button>
-          <Button
-            href={customPricingHref}
-            variant="outline"
-            size="lg"
-            class="sm:w-auto"
-          >
-            Speak to Sales
+          <Button href={PREMIUM_SIGNUP_PATH} variant="outline" size="lg" class="sm:w-auto">
+            Start Premium
           </Button>
         </div>
       </div>

@@ -42,6 +42,14 @@ Feature flags live in `src/lib/config/feature-flags.ts`.
 
 Create a local `.env` from `.env.example` when you want to override a flag locally.
 
+## Premium Signup Wiring
+
+- `PUBLIC_PREMIUM_CHECKOUT_URL` can point at a hosted checkout or billing page when Premium payment is ready.
+- `PUBLIC_PREMIUM_SIGNUP_URL` can point at an app signup or upgrade screen when account creation should happen before payment.
+- If both values are blank, the Premium flow falls back to support contact so the CTA still has a live destination.
+- For local testing, you can point `PUBLIC_PREMIUM_CHECKOUT_URL` at `/pricing/premium/mock-checkout` to exercise the mock purchase flow end to end.
+- The marketing site should own the handoff and messaging, not the source of truth for billing state or subscription entitlements.
+
 ## Project Structure
 
 - `docs/design-ui-guidelines.md`: design and UX brief for future contributors and agents.
