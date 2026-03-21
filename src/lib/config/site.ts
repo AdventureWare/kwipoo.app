@@ -33,11 +33,13 @@ export const DEFAULT_OG_IMAGE_PATH = "/assets/product_Feature.png";
 export const DEFAULT_OG_IMAGE_ALT =
   "Kwipoo app interface showing personal inventory and planning tools";
 
-export const SOCIAL_PROFILE_URLS = [
-  "https://twitter.com/KwipooApp",
-  "https://linkedin.com/company/kwipoo",
-  "https://instagram.com/kwipoo",
-] as const;
+export const SOCIAL_PROFILE_HREFS = {
+  twitter: "https://twitter.com/KwipooApp",
+  linkedin: "https://linkedin.com/company/kwipoo",
+  instagram: "https://instagram.com/kwipoo",
+} as const;
+
+export const SOCIAL_PROFILE_URLS = Object.values(SOCIAL_PROFILE_HREFS);
 
 export function isExternalHref(href: string): boolean {
   return (
