@@ -1,6 +1,5 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import type { Pathname } from "$app/types";
   import {
     docsLandingTocItems,
     docsPages,
@@ -14,19 +13,22 @@
     toAbsoluteMarketingUrl,
     toSeoJsonLd,
   } from "$lib/seo";
+  const resolvePath = resolve as unknown as (path: string) => string;
 
   const categoryGroups = getDocsCategoryGroups();
   const startHerePages =
-    categoryGroups.find((group) => group.category === "Start here")?.pages ?? [];
+    categoryGroups.find((group) => group.category === "Start here")?.pages ??
+    [];
   const featuredPages = docsPages.filter((page) =>
     ["things", "sets", "events", "social"].includes(page.slug),
   );
 
   function resolveDocsHref(slug: string): string {
-    return resolve(getDocsHref(slug) as Pathname);
+    return resolvePath(getDocsHref(slug));
   }
 
-  const docsTitle = "Kwipoo Documentation | Inventory, Storage, and Packing Guides";
+  const docsTitle =
+    "Kwipoo Documentation | Inventory, Storage, and Packing Guides";
   const docsDescription =
     "Browse the Kwipoo documentation for setup guidance, inventory structure, storage concepts, and feature walkthroughs.";
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -66,7 +68,9 @@
   <meta property="og:url" content={toAbsoluteMarketingUrl("/docs")} />
   <meta name="twitter:title" content={docsTitle} />
   <meta name="twitter:description" content={docsDescription} />
-  <script type="application/ld+json">{docsStructuredData}</script>
+  <script type="application/ld+json">
+{docsStructuredData}
+  </script>
 </svelte:head>
 
 <header class="space-y-4">
@@ -74,14 +78,14 @@
     aria-label="Breadcrumb"
     class="flex flex-wrap items-center gap-2 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
   >
-    <a href={resolve("/")} class="transition-colors hover:text-color">
-      Home
-    </a>
+    <a href={resolve("/")} class="transition-colors hover:text-color"> Home </a>
     <span aria-hidden="true">/</span>
     <span class="text-brand-body">Docs</span>
   </nav>
 
-  <p class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted">
+  <p
+    class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+  >
     Documentation
   </p>
   <h1
@@ -170,7 +174,9 @@
               <FeatureStatusBadge badge={docPage.badge} />
             {/if}
           </div>
-          <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-50">
+          <h3
+            class="text-[1.25rem] font-semibold leading-tight text-surface-50"
+          >
             {docPage.title}
           </h3>
           <p class="text-[0.98rem] leading-6 text-surface-100">
@@ -229,7 +235,9 @@
             >
               {group.category}
             </p>
-            <h3 class="text-[1.35rem] font-semibold leading-tight text-surface-50">
+            <h3
+              class="text-[1.35rem] font-semibold leading-tight text-surface-50"
+            >
               {group.description}
             </h3>
           </div>
@@ -303,7 +311,9 @@
               <FeatureStatusBadge badge={docPage.badge} />
             {/if}
           </div>
-          <h3 class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-50">
+          <h3
+            class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-50"
+          >
             {docPage.title}
           </h3>
           <p class="mt-2 text-[0.95rem] leading-6 text-surface-100">

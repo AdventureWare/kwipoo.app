@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Navigation } from "@skeletonlabs/skeleton-svelte";
   import { resolve } from "$app/paths";
-  import type { Pathname } from "$app/types";
   import FeatureStatusBadge from "$lib/components/ui/feature-status-badge.svelte";
   import type { DocsNavSection } from "$lib/content/docs";
 
@@ -22,6 +21,7 @@
 
     return pathname;
   }
+  const resolvePath = resolve as unknown as (path: string) => string;
 
   let currentItem = $derived.by(() => {
     const normalizedHref = normalizePathname(currentHref);
@@ -86,9 +86,11 @@
         ]}
       >
         {#if currentItem}
-          In {currentItem.sectionTitle}, with the rest of the docs available below.
+          In {currentItem.sectionTitle}, with the rest of the docs available
+          below.
         {:else}
-          Move through the docs from a persistent directory instead of drilling through accordions.
+          Move through the docs from a persistent directory instead of drilling
+          through accordions.
         {/if}
       </p>
     </Navigation.Header>
@@ -103,7 +105,6 @@
             ]}
           >
             <span class="block">{section.title}</span>
-
           </Navigation.Label>
 
           <Navigation.Menu class="gap-2">
@@ -112,7 +113,7 @@
                 normalizePathname(item.href) === normalizePathname(currentHref)}
 
               <Navigation.TriggerAnchor
-                href={resolve(item.href as Pathname)}
+                href={resolvePath(item.href)}
                 aria-current={isCurrent ? "page" : undefined}
                 class={[
                   "card-hover rounded-[1rem] border px-4 py-3 text-left shadow-none",
@@ -138,7 +139,10 @@
                       {item.label}
                     </span>
                     {#if item.badge}
-                      <FeatureStatusBadge badge={item.badge} className="shrink-0" />
+                      <FeatureStatusBadge
+                        badge={item.badge}
+                        className="shrink-0"
+                      />
                     {/if}
                   </span>
                 </Navigation.TriggerText>
