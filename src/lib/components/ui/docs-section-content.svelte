@@ -1,6 +1,5 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import type { Pathname } from "$app/types";
   import type { DocsSection } from "$lib/content/docs";
   import { isExternalHref } from "$lib/config/site";
 
@@ -17,20 +16,16 @@
     tip: "preset-tonal-success border-success-200-800 text-color",
     warning: "preset-tonal-warning border-warning-200-800 text-color",
   } as const;
+  const resolvePath = resolve as unknown as (path: string) => string;
 
   function getExampleHref(href: string): string {
-    return isExternalHref(href) ? href : resolve(href as Pathname);
+    return isExternalHref(href) ? href : resolvePath(href);
   }
 </script>
 
-<section
-  {id}
-  class="scroll-mt-28 space-y-5"
->
+<section {id} class="scroll-mt-28 space-y-5">
   <div class="max-w-4xl">
-    <h2
-      class="text-3xl font-semibold tracking-tight text-color sm:text-5xl"
-    >
+    <h2 class="text-3xl font-semibold tracking-tight text-color sm:text-5xl">
       {section.heading}
     </h2>
 
@@ -62,7 +57,9 @@
       <div class="mt-8 space-y-8">
         {#each section.subsections as subsection (subsection.heading)}
           <section class="space-y-4">
-            <h3 class="text-[1.2rem] font-semibold leading-tight text-color sm:text-[1.35rem]">
+            <h3
+              class="text-[1.2rem] font-semibold leading-tight text-color sm:text-[1.35rem]"
+            >
               {subsection.heading}
             </h3>
 
@@ -93,11 +90,15 @@
         class="card preset-filled-surface-50-950 mt-8 overflow-hidden rounded-[1.25rem] border border-surface-200-800 shadow-sm"
       >
         <div class="overflow-x-auto">
-          <table class="min-w-full border-collapse text-left text-sm leading-6 text-surface-100">
+          <table
+            class="min-w-full border-collapse text-left text-sm leading-6 text-surface-100"
+          >
             <thead class="preset-tonal-surface border-b border-surface-200-800">
               <tr>
                 {#each section.table.columns as column (column)}
-                  <th class="px-4 py-3 font-semibold text-surface-50">{column}</th>
+                  <th class="px-4 py-3 font-semibold text-surface-50"
+                    >{column}</th
+                  >
                 {/each}
               </tr>
             </thead>
@@ -107,7 +108,9 @@
                   {#each row as cell, cellIndex (`${cellIndex}-${cell}`)}
                     <td
                       class={`align-top px-4 py-3 ${
-                        cellIndex === 0 ? "font-semibold text-surface-50" : "text-surface-100"
+                        cellIndex === 0
+                          ? "font-semibold text-surface-50"
+                          : "text-surface-100"
                       }`}
                     >
                       {cell}
@@ -127,7 +130,9 @@
           calloutToneClasses[section.callout.tone ?? "note"]
         }`}
       >
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-muted">
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-muted"
+        >
           {section.callout.tone ?? "note"}
         </p>
         <h3 class="mt-2 text-lg font-semibold">{section.callout.title}</h3>
@@ -143,7 +148,9 @@
           class="flex items-center justify-between gap-3 border-b border-surface-700-300 px-4 py-3"
         >
           <p class="text-sm font-semibold">{section.codeSample.label}</p>
-          <span class="text-xs uppercase tracking-[0.18em] text-surface-300-700">
+          <span
+            class="text-xs uppercase tracking-[0.18em] text-surface-300-700"
+          >
             {section.codeSample.language ?? "text"}
           </span>
         </div>

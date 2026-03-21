@@ -1,6 +1,5 @@
 <!-- src/lib/components/ui/button.svelte -->
 <script lang="ts">
-  import type { Pathname } from "$app/types";
   import { resolve } from "$app/paths";
   import { isExternalHref } from "$lib/config/site";
   import type { Snippet } from "svelte";
@@ -59,6 +58,7 @@
     md: "btn-base min-h-11",
     lg: "btn-lg min-h-12",
   };
+  const resolvePath = resolve as unknown as (path: string) => string;
 
   let {
     children,
@@ -79,11 +79,7 @@
     className,
   ]);
   let resolvedHref = $derived(
-    href
-      ? isExternalHref(href)
-        ? href
-        : resolve(href as Pathname)
-      : undefined,
+    href ? (isExternalHref(href) ? href : resolvePath(href)) : undefined,
   );
 </script>
 
