@@ -2,6 +2,7 @@
   import { Navigation } from "@skeletonlabs/skeleton-svelte";
   import { resolve } from "$app/paths";
   import type { Pathname } from "$app/types";
+  import FeatureStatusBadge from "$lib/components/ui/feature-status-badge.svelte";
   import type { DocsNavSection } from "$lib/content/docs";
 
   let {
@@ -127,13 +128,18 @@
                 ]}
               >
                 <Navigation.TriggerText class="min-w-0">
-                  <span
-                    class={[
-                      "block font-semibold leading-5 text-current",
-                      shellVariant ? "text-[0.95rem]" : "text-[1rem]",
-                    ]}
-                  >
-                    {item.label}
+                  <span class="flex flex-wrap items-center gap-2">
+                    <span
+                      class={[
+                        "block font-semibold leading-5 text-current",
+                        shellVariant ? "text-[0.95rem]" : "text-[1rem]",
+                      ]}
+                    >
+                      {item.label}
+                    </span>
+                    {#if item.badge}
+                      <FeatureStatusBadge badge={item.badge} className="shrink-0" />
+                    {/if}
                   </span>
                 </Navigation.TriggerText>
               </Navigation.TriggerAnchor>
