@@ -639,6 +639,7 @@ Spots
     slug: "sets",
     category: "Plan and collaborate",
     eyebrow: "Reusable groups",
+    badge: FEATURE_BADGE_PRESETS.beta,
     title: "Pack faster with Sets",
     summary:
       "Group Things into reusable Sets so recurring activities, outfits, travel kits, and gear setups are easier to assemble, review, and reuse.",
@@ -954,6 +955,7 @@ Spots
     slug: "social",
     category: "Plan and collaborate",
     eyebrow: "Shared coordination",
+    badge: FEATURE_BADGE_PRESETS.beta,
     title: "Coordinate through Social",
     summary:
       "Use Social to connect with friends, browse shared gear, coordinate plans, borrow instead of rebuying, and keep conversations tied to real inventory.",
@@ -1096,6 +1098,7 @@ Spots
     slug: "profile",
     category: "Start here",
     eyebrow: "Personal setup",
+    badge: FEATURE_BADGE_PRESETS.beta,
     title: "Manage your Profile",
     summary:
       "Use your Profile to present yourself on Kwipoo, review what you have added, manage friends, and control the settings that shape your account.",
