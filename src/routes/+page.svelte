@@ -1,6 +1,5 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import type { Pathname } from "$app/types";
   import {
     MagnifyingGlass,
     EyeSlash,
@@ -9,9 +8,7 @@
     CurrencyDollar,
     Prohibit,
   } from "phosphor-svelte";
-  import {
-    isFeatureEnabled,
-  } from "$lib/config/feature-flags";
+  import { isFeatureEnabled } from "$lib/config/feature-flags";
   import { getDocsHref, getDocsPageBadge } from "$lib/content/docs";
   import {
     APP_LOGIN_URL,
@@ -31,13 +28,14 @@
     WEBSITE_ID,
     toSeoJsonLd,
   } from "$lib/seo";
+  const resolvePath = resolve as unknown as (path: string) => string;
 
   function resolveFeatureDocsHref(slug: string): string {
     if (!isFeatureEnabled("docs")) {
       return APP_LOGIN_URL;
     }
 
-    return resolve(getDocsHref(slug) as Pathname);
+    return resolvePath(getDocsHref(slug));
   }
 
   const problemSolutionData = [
@@ -230,7 +228,8 @@
         "Kwipoo is useful for households, hobbyists, travelers, organizers, and anyone who wants a searchable home inventory instead of relying on memory, notes, or scattered spreadsheets.",
     },
     {
-      question: "How does Kwipoo help me avoid duplicate purchases or forgotten items?",
+      question:
+        "How does Kwipoo help me avoid duplicate purchases or forgotten items?",
       answer:
         "Because your inventory is searchable and tied to real storage locations, you can check what you already own, see where it lives, and reuse past packing or event setups before you buy or leave something behind.",
     },
@@ -290,15 +289,14 @@
     content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
   />
   <meta property="og:title" content={homeTitle} />
-  <meta
-    property="og:description"
-    content={SITE_DESCRIPTION}
-  />
+  <meta property="og:description" content={SITE_DESCRIPTION} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={MARKETING_SITE_URL} />
   <meta name="twitter:title" content={homeTitle} />
   <meta name="twitter:description" content={SITE_DESCRIPTION} />
-  <script type="application/ld+json">{homeStructuredData}</script>
+  <script type="application/ld+json">
+{homeStructuredData}
+  </script>
 </svelte:head>
 
 <HeroSection />
