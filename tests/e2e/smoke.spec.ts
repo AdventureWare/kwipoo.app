@@ -6,6 +6,14 @@ async function docsAreAvailable(request: APIRequestContext): Promise<boolean> {
   return response.status() === 200;
 }
 
+async function pricingIsAvailable(
+  request: APIRequestContext,
+): Promise<boolean> {
+  const response = await request.get("/pricing");
+
+  return response.status() === 200;
+}
+
 test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await page.goto("/");
 
@@ -91,6 +99,37 @@ test("@smoke docs and legal pages render the expected headings", async ({
   ).toBeVisible();
 });
 
+test("@smoke pricing page renders the draft plan structure", async ({
+  page,
+  request,
+}) => {
+  if (await pricingIsAvailable(request)) {
+    await page.goto("/pricing");
+
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /placeholder pricing scaffolding for free, premium, and custom plans/i,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { level: 3, name: /^free$/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { level: 3, name: /^premium$/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { level: 3, name: /^custom$/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /speak to sales/i }).first(),
+    ).toBeVisible();
+  } else {
+    const pricingResponse = await page.goto("/pricing");
+    expect(pricingResponse?.status()).toBe(404);
+  }
+});
+
 test("@smoke homepage footer links and social actions remain accessible on narrow screens", async ({
   page,
   request,
@@ -104,6 +143,16 @@ test("@smoke homepage footer links and social actions remain accessible on narro
     await expect(docsLink).toBeVisible();
   } else {
     await expect(docsLink).toHaveCount(0);
+  }
+
+  const footerPricingLink = page
+    .getByRole("contentinfo")
+    .getByRole("link", { name: /^pricing$/i });
+
+  if (await pricingIsAvailable(request)) {
+    await expect(footerPricingLink).toBeVisible();
+  } else {
+    await expect(footerPricingLink).toHaveCount(0);
   }
 
   await expect(

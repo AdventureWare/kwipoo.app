@@ -35,6 +35,7 @@ Feature flags live in `src/lib/config/feature-flags.ts`.
 - Use `PUBLIC_FEATURE_*` environment variables for flags that need to be read by both routes and Svelte components.
 - Boolean env values accept `1`, `true`, `yes`, `on`, `0`, `false`, `no`, and `off`.
 - `docs` defaults to `true` and can be overridden with `PUBLIC_FEATURE_DOCS`.
+- `pricing` defaults to `false` and can be overridden with `PUBLIC_FEATURE_PRICING`.
 - `resources` defaults to `false` and can be overridden with `PUBLIC_FEATURE_RESOURCES`.
 - `releaseHistory` defaults to `false` and can be overridden with `PUBLIC_FEATURE_RELEASE_HISTORY`.
 - Public flags are appropriate for UI and route gating. They are not appropriate for secrets or server-only access control.
