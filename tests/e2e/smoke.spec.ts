@@ -14,6 +14,14 @@ async function pricingIsAvailable(
   return response.status() === 200;
 }
 
+async function resourcesAreAvailable(
+  request: APIRequestContext,
+): Promise<boolean> {
+  const response = await request.get("/resources");
+
+  return response.status() === 200;
+}
+
 test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await page.goto("/");
 
@@ -97,6 +105,35 @@ test("@smoke docs and legal pages render the expected headings", async ({
   await expect(
     page.getByRole("heading", { level: 1, name: /terms and conditions/i }),
   ).toBeVisible();
+});
+
+test("@smoke resources landing page and guide routes resolve consistently", async ({
+  page,
+  request,
+}) => {
+  if (await resourcesAreAvailable(request)) {
+    await page.goto("/resources");
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /practical guides for organizing real life with kwipoo/i,
+      }),
+    ).toBeVisible();
+
+    await page.goto("/resources/outdoor-adventurers");
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /never lose track of your gear again/i,
+      }),
+    ).toBeVisible();
+  } else {
+    const resourcesResponse = await page.goto("/resources");
+    expect(resourcesResponse?.status()).toBe(404);
+
+    const guideResponse = await page.goto("/resources/outdoor-adventurers");
+    expect(guideResponse?.status()).toBe(404);
+  }
 });
 
 test("@smoke support page renders the support entry points", async ({
@@ -220,6 +257,16 @@ test("@smoke homepage footer links and social actions remain accessible on narro
     await expect(footerPricingLink).toBeVisible();
   } else {
     await expect(footerPricingLink).toHaveCount(0);
+  }
+
+  const resourcesLink = page
+    .getByRole("contentinfo")
+    .getByRole("link", { name: /^resources$/i });
+
+  if (await resourcesAreAvailable(request)) {
+    await expect(resourcesLink).toBeVisible();
+  } else {
+    await expect(resourcesLink).toHaveCount(0);
   }
 
   await expect(

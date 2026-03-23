@@ -15,6 +15,7 @@ import {
   docsPages,
   getDocsHref,
 } from "$lib/content/docs";
+import { getResourcesHref, resourceGuides } from "$lib/content/resources";
 import {
   LLMS_FULL_TXT_URL,
   LLMS_TXT_URL,
@@ -83,7 +84,10 @@ function getLiveReleaseHistoryPaths(): string[] {
 
 function getLiveResourcesPaths(): string[] {
   return isFeatureEnabled("resources") && OPTIONAL_INDEXABLE_PATHS.resources
-    ? [RESOURCES_PATH]
+    ? [
+        RESOURCES_PATH,
+        ...resourceGuides.map((guide) => getResourcesHref(guide.slug)),
+      ]
     : [];
 }
 
@@ -150,6 +154,12 @@ export function buildLlmsTxt(): string {
 
   if (resourcesEnabled) {
     lines.push(`- Resources: ${toAbsoluteMarketingUrl(RESOURCES_PATH)}`);
+
+    for (const guide of resourceGuides) {
+      lines.push(
+        `- ${guide.title}: ${toAbsoluteMarketingUrl(getResourcesHref(guide.slug))}`,
+      );
+    }
   }
 
   if (releaseHistoryEnabled) {
@@ -261,6 +271,18 @@ export function buildLlmsFullTxt(): string {
     lines.push(
       `- ${page.title}: ${page.summary} (${toAbsoluteMarketingUrl(getDocsHref(page.slug))})`,
     );
+  }
+
+  if (resourcesEnabled) {
+    lines.push("", "## Resource Guides");
+
+    for (const guide of resourceGuides) {
+      lines.push(
+        `- ${guide.title}: ${guide.summary} (${toAbsoluteMarketingUrl(
+          getResourcesHref(guide.slug),
+        )})`,
+      );
+    }
   }
 
   if (liveDocsPages.length > 0) {
