@@ -8,7 +8,6 @@
   import Button from "../../ui/buttons/button.svelte";
 
   const homeHref = resolve("/");
-  const supportHref = resolve("/support");
   const docsHref = resolve("/docs");
   const pricingHref = resolve("/pricing");
   const resourcesHref = resolve("/resources");
@@ -20,7 +19,6 @@
 
   const desktopLinks = [
     { href: homeHref, label: "Home" },
-    { href: supportHref, label: "Support" },
     ...(pricingEnabled ? [{ href: pricingHref, label: "Pricing" }] : []),
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
     ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
@@ -30,7 +28,6 @@
   ];
 
   const mobileLinks = [
-    { href: supportHref, label: "Support" },
     ...(pricingEnabled ? [{ href: pricingHref, label: "Pricing" }] : []),
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
     ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
