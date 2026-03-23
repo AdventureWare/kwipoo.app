@@ -8,6 +8,7 @@
   import Button from "../../ui/buttons/button.svelte";
 
   const homeHref = resolve("/");
+  const supportHref = resolve("/support");
   const docsHref = resolve("/docs");
   const pricingHref = resolve("/pricing");
   const resourcesHref = resolve("/resources");
@@ -19,6 +20,7 @@
 
   const desktopLinks = [
     { href: homeHref, label: "Home" },
+    { href: supportHref, label: "Support" },
     ...(pricingEnabled ? [{ href: pricingHref, label: "Pricing" }] : []),
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
     ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
@@ -28,6 +30,7 @@
   ];
 
   const mobileLinks = [
+    { href: supportHref, label: "Support" },
     ...(pricingEnabled ? [{ href: pricingHref, label: "Pricing" }] : []),
     ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
     ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
@@ -52,7 +55,7 @@
   class="sticky top-0 z-50 border-b border-brand-border bg-brand-canvas/95 backdrop-blur supports-[backdrop-filter]:bg-brand-canvas/88"
 >
   <div
-    class="mx-auto flex min-h-14 max-w-7xl items-center gap-2 px-4 py-1.5 sm:px-6 md:min-h-16 md:gap-3 md:py-2.5 lg:px-8"
+    class="mx-auto flex min-h-14 max-w-7xl flex-wrap items-center gap-2 px-4 py-1.5 sm:px-6 md:min-h-16 md:flex-nowrap md:gap-3 md:py-2.5 lg:px-8"
   >
     <Navigation.Header class="flex min-w-0 flex-1 items-center gap-4 md:gap-6">
       <a href={homeHref} class="shrink-0" aria-label="Kwipoo home">
@@ -83,9 +86,11 @@
       </Button>
     </Navigation.Group>
 
-    <Navigation.Group class="ml-auto flex items-center gap-2 md:hidden">
+    <Navigation.Group
+      class="ml-auto flex w-full flex-wrap items-center justify-end gap-2 md:hidden"
+    >
       {#if mobileLinks.length > 0}
-        <Navigation.Menu class="flex items-center gap-2">
+        <Navigation.Menu class="flex flex-wrap items-center justify-end gap-2">
           {#each mobileLinks as item (item.href)}
             <Navigation.TriggerAnchor
               href={item.href}

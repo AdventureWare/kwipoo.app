@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import { APP_LOGIN_URL, SUPPORT_EMAIL_MAILTO } from "$lib/config/site";
+  import { APP_LOGIN_URL } from "$lib/config/site";
   import DocsDirectoryNav from "$lib/components/ui/docs-directory-nav.svelte";
   import DocsTableOfContents from "$lib/components/ui/docs-table-of-contents.svelte";
   import type { LayoutData } from "./$types";
@@ -62,7 +63,7 @@
               Open Kwipoo
             </a>
             <a
-              href={SUPPORT_EMAIL_MAILTO}
+              href={resolve("/support")}
               class="btn btn-sm preset-outlined-surface-200-800 w-full justify-center border-surface-700 text-surface-50 hover:border-surface-600 hover:preset-tonal-surface hover:text-surface-50"
             >
               Contact support

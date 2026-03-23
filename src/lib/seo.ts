@@ -66,7 +66,7 @@ export function getOrganizationJsonLd() {
         "@type": "ContactPoint",
         contactType: "customer support",
         email: SUPPORT_EMAIL,
-        url: MARKETING_SITE_URL,
+        url: toAbsoluteMarketingUrl("/support"),
       },
     ],
     parentOrganization: {
