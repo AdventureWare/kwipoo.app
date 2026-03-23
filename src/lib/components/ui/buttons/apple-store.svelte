@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { trackCtaClick } from "$lib/analytics";
+
   const appStoreUrl = "https://apps.apple.com/us/app/kwipoo/id6505006728";
 </script>
 
@@ -8,6 +10,13 @@
   rel="noopener noreferrer"
   aria-label="Download Kwipoo on the App Store"
   class="block w-full max-w-[180px] transition-opacity duration-200 hover:opacity-80"
+  onclick={() =>
+    trackCtaClick({
+      location: "hero_app_store",
+      label: "App Store",
+      destination: appStoreUrl,
+      kind: "app_store",
+    })}
 >
   <svg
     class="h-auto w-full"

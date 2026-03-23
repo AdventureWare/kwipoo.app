@@ -24,6 +24,7 @@ export const COMPANY_NAME = "AdventureWare";
 export const MARKETING_SITE_URL = "https://kwipoo.app";
 export const APP_URL = "https://kwipoo.vercel.app";
 export const APP_LOGIN_URL = `${APP_URL}/login`;
+export const APP_SIGNUP_URL = `${APP_LOGIN_URL}?mode=sign_up&next=%2Fplaces`;
 
 export const SUPPORT_EMAIL = "kwipoo-support@adventureware.com";
 export const SUPPORT_EMAIL_MAILTO = `mailto:${SUPPORT_EMAIL}`;
