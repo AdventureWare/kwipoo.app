@@ -19,9 +19,13 @@
 
   const toneClasses: Record<FeatureBadgeTone, string> = {
     beta:
-      "border border-primary-300 bg-primary-50 text-primary-900 dark:border-primary-700 dark:bg-primary-950/70 dark:text-primary-100",
+      "border border-primary-300 bg-primary-50 text-primary-900",
     premium:
-      "border border-secondary-300 bg-secondary-50 text-secondary-900 dark:border-secondary-700 dark:bg-secondary-950/70 dark:text-secondary-100",
+      "border border-secondary-300 bg-secondary-50 text-secondary-900",
+    comingSoon:
+      "border border-warning-300 bg-warning-50 text-warning-900",
+    info: "border border-tertiary-200 bg-tertiary-50 text-tertiary-900",
+    neutral: "border border-surface-300 bg-surface-100 text-surface-800",
   };
 
   const sizeClasses = {
@@ -32,7 +36,7 @@
 
 <span
   class={[
-    "inline-flex items-center rounded-full font-semibold uppercase tracking-[0.16em]",
+    "badge inline-flex items-center rounded-full font-semibold uppercase tracking-[0.16em]",
     toneClasses[badge.tone],
     sizeClasses[size],
     className,
