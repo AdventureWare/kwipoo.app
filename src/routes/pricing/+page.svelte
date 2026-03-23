@@ -3,7 +3,7 @@
   import { Button } from "$lib/components";
   import { PREMIUM_SIGNUP_PATH } from "$lib/config/billing";
   import {
-    APP_LOGIN_URL,
+    APP_SIGNUP_URL,
     SUPPORT_EMAIL,
     SUPPORT_EMAIL_MAILTO,
   } from "$lib/config/site";
@@ -58,7 +58,7 @@
         "Self-serve setup for individuals or households testing the product",
       ],
       ctaLabel: "Start Free",
-      ctaHref: APP_LOGIN_URL,
+      ctaHref: APP_SIGNUP_URL,
       ctaVariant: "secondary",
       footnote:
         "Placeholder draft. Free-plan limits and included features are not final.",
@@ -205,7 +205,7 @@
 
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Button
-            href={APP_LOGIN_URL}
+            href={APP_SIGNUP_URL}
             variant="primary"
             size="lg"
             class="sm:w-auto"
