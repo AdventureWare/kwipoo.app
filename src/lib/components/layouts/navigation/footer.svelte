@@ -70,6 +70,14 @@
           Resources
         </h3>
         <ul class="space-y-3">
+          <li>
+            <a
+              href={resolve("/support")}
+              class="transition-colors duration-200 hover:text-primary-800"
+            >
+              Support
+            </a>
+          </li>
           {#if pricingEnabled}
             <li>
               <a

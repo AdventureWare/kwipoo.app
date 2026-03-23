@@ -23,8 +23,13 @@ import {
   toAbsoluteMarketingUrl,
 } from "$lib/seo";
 
-const INDEXABLE_SITE_PATHS = ["/"];
-const REFERENCE_SITE_PATHS = ["/privacy-policy", "/terms-and-conditions"];
+const SUPPORT_PATH = "/support";
+const INDEXABLE_SITE_PATHS = ["/", SUPPORT_PATH];
+const REFERENCE_SITE_PATHS = [
+  SUPPORT_PATH,
+  "/privacy-policy",
+  "/terms-and-conditions",
+];
 const FEATURED_DOC_SLUGS = new Set(["things", "sets", "events", "social"]);
 const RESOURCES_PATH = "/resources";
 const RELEASE_HISTORY_PATH = "/releases";
@@ -136,6 +141,7 @@ export function buildLlmsTxt(): string {
     "",
     "## Primary pages",
     `- Home: ${toAbsoluteMarketingUrl("/")}`,
+    `- Support: ${toAbsoluteMarketingUrl(SUPPORT_PATH)}`,
   ];
 
   if (docsEnabled) {
@@ -209,6 +215,7 @@ export function buildLlmsFullTxt(): string {
     "",
     "## Best Sources By Topic",
     `- Product overview and messaging: ${toAbsoluteMarketingUrl("/")}`,
+    `- Support and contact: ${toAbsoluteMarketingUrl(SUPPORT_PATH)}`,
     `- Privacy and data handling: ${toAbsoluteMarketingUrl("/privacy-policy")}`,
     `- Terms and service policies: ${toAbsoluteMarketingUrl("/terms-and-conditions")}`,
     "",
