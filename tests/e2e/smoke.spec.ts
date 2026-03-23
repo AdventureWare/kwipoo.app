@@ -42,7 +42,9 @@ test("@smoke homepage keeps the primary CTA and product proof available without 
 }, testInfo) => {
   await page.goto("/");
 
-  const primaryCta = page.getByRole("button", { name: /open in browser/i });
+  const primaryCta = page.getByRole("button", {
+    name: /create free account/i,
+  });
   const heroImage = page.getByRole("img", { name: /kwipoo app interface/i });
 
   await expect(primaryCta).toBeVisible();

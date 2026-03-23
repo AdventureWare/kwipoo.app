@@ -12,10 +12,12 @@
   import { getDocsHref, getDocsPageBadge } from "$lib/content/docs";
   import {
     APP_LOGIN_URL,
+    APP_SIGNUP_URL,
     MARKETING_SITE_URL,
     SITE_DESCRIPTION,
     SITE_KEYWORDS,
   } from "$lib/config/site";
+  import { trackCtaClick } from "$lib/analytics";
   import { HeroSection, QuoteCallout } from "$lib/components";
   import ProblemSolution from "$lib/components/layouts/sections/problem-solution.svelte";
   import Switchbacks from "$lib/components/layouts/sections/switchbacks.svelte";
@@ -359,5 +361,12 @@
   buttonText="Create a Free Account Today"
   buttonVariant="primary"
   buttonSize="lg"
-  buttonHref={APP_LOGIN_URL}
+  buttonHref={APP_SIGNUP_URL}
+  onButtonClick={() =>
+    trackCtaClick({
+      location: "homepage_close",
+      label: "Create a Free Account Today",
+      destination: APP_SIGNUP_URL,
+      kind: "signup",
+    })}
 />

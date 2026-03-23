@@ -1,7 +1,11 @@
 <!-- src/lib/components/hero-section.svelte -->
 <script lang="ts">
   import { asset } from "$app/paths";
-  import { APP_LOGIN_URL } from "$lib/config/site";
+  import {
+    ANALYTICS_EVENT_NAMES,
+    createMarketingCtaClickedProperties,
+  } from "$lib/analytics/schema";
+  import { APP_SIGNUP_URL } from "$lib/config/site";
   import AppStoreButtons from "../../ui/buttons/app-store-buttons.svelte";
   import Button from "../../ui/buttons/button.svelte";
 </script>
@@ -26,8 +30,15 @@
 
         <div class="flex flex-col gap-4">
           <div class="w-full sm:max-w-xs">
-            <Button variant="primary" size="lg" href={APP_LOGIN_URL}
-              >Open in Browser</Button
+            <Button variant="primary" size="lg" href={APP_SIGNUP_URL}
+              analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+              analyticsProperties={createMarketingCtaClickedProperties({
+                location: "hero",
+                label: "Create Free Account",
+                destination: APP_SIGNUP_URL,
+                kind: "signup",
+              })}
+              >Create Free Account</Button
             >
           </div>
 

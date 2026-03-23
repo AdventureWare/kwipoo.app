@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { trackCtaClick } from "$lib/analytics";
+
   const playStoreUrl =
     "https://play.google.com/store/apps/details?id=app.vercel.kwipoo.twa&hl=en_US";
 </script>
@@ -9,6 +11,13 @@
   rel="noopener noreferrer"
   aria-label="Get Kwipoo on Google Play"
   class="block w-full max-w-[180px] transition-opacity duration-200 hover:opacity-80"
+  onclick={() =>
+    trackCtaClick({
+      location: "hero_google_play",
+      label: "Google Play",
+      destination: playStoreUrl,
+      kind: "app_store",
+    })}
 >
   <svg
     class="h-auto w-full"

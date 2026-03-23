@@ -3,8 +3,12 @@
   import { Navigation } from "@skeletonlabs/skeleton-svelte";
   import { page } from "$app/state";
   import { resolve } from "$app/paths";
+  import {
+    ANALYTICS_EVENT_NAMES,
+    createMarketingCtaClickedProperties,
+  } from "$lib/analytics/schema";
   import { isFeatureEnabled } from "$lib/config/feature-flags";
-  import { APP_LOGIN_URL } from "$lib/config/site";
+  import { APP_SIGNUP_URL } from "$lib/config/site";
   import Button from "../../ui/buttons/button.svelte";
 
   const homeHref = resolve("/");
@@ -78,7 +82,18 @@
     </Navigation.Header>
 
     <Navigation.Group class="hidden items-center md:flex">
-      <Button href={APP_LOGIN_URL} variant="secondary" class="w-auto px-5">
+      <Button
+        href={APP_SIGNUP_URL}
+        variant="secondary"
+        class="w-auto px-5"
+        analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+        analyticsProperties={createMarketingCtaClickedProperties({
+          location: "header_desktop",
+          label: "Get Started",
+          destination: APP_SIGNUP_URL,
+          kind: "signup",
+        })}
+      >
         Get Started
       </Button>
     </Navigation.Group>
@@ -105,7 +120,19 @@
         </Navigation.Menu>
       {/if}
 
-      <Button href={APP_LOGIN_URL} variant="secondary" size="sm" class="w-auto">
+      <Button
+        href={APP_SIGNUP_URL}
+        variant="secondary"
+        size="sm"
+        class="w-auto"
+        analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+        analyticsProperties={createMarketingCtaClickedProperties({
+          location: "header_mobile",
+          label: "Get Started",
+          destination: APP_SIGNUP_URL,
+          kind: "signup",
+        })}
+      >
         Get Started
       </Button>
     </Navigation.Group>

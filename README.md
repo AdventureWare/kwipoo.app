@@ -35,8 +35,8 @@ Feature flags live in `src/lib/config/feature-flags.ts`.
 - Use `PUBLIC_FEATURE_*` environment variables for flags that need to be read by both routes and Svelte components.
 - Boolean env values accept `1`, `true`, `yes`, `on`, `0`, `false`, `no`, and `off`.
 - `docs` defaults to `true` and can be overridden with `PUBLIC_FEATURE_DOCS`.
+- `resources` defaults to `true` and can be overridden with `PUBLIC_FEATURE_RESOURCES`.
 - `pricing` defaults to `false` and can be overridden with `PUBLIC_FEATURE_PRICING`.
-- `resources` defaults to `false` and can be overridden with `PUBLIC_FEATURE_RESOURCES`.
 - `releaseHistory` defaults to `false` and can be overridden with `PUBLIC_FEATURE_RELEASE_HISTORY`.
 - Public flags are appropriate for UI and route gating. They are not appropriate for secrets or server-only access control.
 
@@ -49,6 +49,15 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - If both values are blank, the Premium flow falls back to support contact so the CTA still has a live destination.
 - For local testing, you can point `PUBLIC_PREMIUM_CHECKOUT_URL` at `/pricing/premium/mock-checkout` to exercise the mock purchase flow end to end.
 - The marketing site should own the handoff and messaging, not the source of truth for billing state or subscription entitlements.
+
+## Analytics
+
+- Marketing analytics are optional and configured through public env vars.
+- `PUBLIC_ANALYTICS_PROVIDER=posthog` enables the shared analytics layer.
+- `PUBLIC_POSTHOG_KEY` is the PostHog project key used by the adapter.
+- `PUBLIC_POSTHOG_HOST` overrides the PostHog API host and defaults to `https://us.i.posthog.com`.
+- `PUBLIC_ANALYTICS_SCRIPT_URL` can load the provider script if it is not already present on `window`.
+- The shared client layer tracks pageviews centrally from `src/routes/+layout.svelte` and supports CTA event hooks through the shared button component.
 
 ## Project Structure
 
