@@ -35,7 +35,7 @@ const FEATURED_DOC_SLUGS = new Set(["things", "sets", "events", "social"]);
 const RESOURCES_PATH = "/resources";
 const RELEASE_HISTORY_PATH = "/releases";
 const OPTIONAL_INDEXABLE_PATHS = {
-  resources: false,
+  resources: true,
   releaseHistory: false,
 } as const;
 
