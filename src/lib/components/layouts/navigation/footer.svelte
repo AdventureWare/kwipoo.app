@@ -67,7 +67,7 @@
 
       <div class="col-span-1">
         <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider">
-          Resources
+          More Info
         </h3>
         <ul class="space-y-3">
           <li>
