@@ -1,6 +1,11 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
+  import FeatureStatusBadge from "$lib/components/ui/feature-status-badge.svelte";
   import { getResourcesHref, resourceGuides } from "$lib/content/resources";
+  import {
+    type FeatureBadge,
+    FEATURE_BADGE_PRESETS,
+  } from "$lib/types/feature-badges";
   import {
     getBreadcrumbJsonLd,
     toAbsoluteMarketingUrl,
@@ -13,6 +18,7 @@
     title: string;
     description: string;
     cadence: string;
+    badge?: FeatureBadge;
   };
 
   type ResourceTrack = {
@@ -40,18 +46,21 @@
       description:
         "Written pieces for workflows, feature introductions, and practical organization ideas.",
       cadence: "Evergreen references and updates",
+      badge: FEATURE_BADGE_PRESETS.comingSoon,
     },
     {
       title: "Videos",
       description:
         "Short visual walkthroughs that show the product in motion and explain real setup patterns.",
       cadence: "Product demos and guided explainers",
+      badge: FEATURE_BADGE_PRESETS.comingSoon,
     },
     {
       title: "Tutorials",
       description:
         "Step-by-step learning paths for getting started, building inventory structure, and improving routines.",
       cadence: "Hands-on, follow-along teaching",
+      badge: FEATURE_BADGE_PRESETS.comingSoon,
     },
   ];
 
@@ -156,9 +165,9 @@
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
           Start with audience-specific guides for outdoor gear, shared
-          households, and travel-heavy routines. The resource library will grow
-          over time, but these first guides already focus on concrete setup
-          problems instead of abstract feature tours.
+          households, and travel-heavy routines. Each guide focuses on a
+          specific setup problem so people can see how Kwipoo fits into daily
+          life, not just how the feature list reads on paper.
         </p>
       </div>
 
@@ -169,16 +178,16 @@
           <p
             class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
           >
-            First Drop
+            Available Now
           </p>
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            Three real guides are live.
+            Start with three practical guides.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            Each guide is written around a real use case so people can see how
-            Kwipoo fits into their routines before they learn every feature.
+            These guides are organized around real households, trips, and gear
+            setups so the advice stays concrete from the first read.
           </p>
         </div>
 
@@ -211,9 +220,8 @@
         The library is designed to support more than one way of learning.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        The first release focuses on written guides, but the structure still
-        leaves room for walkthrough videos, product education, and step-by-step
-        tutorials as the resource hub expands.
+        Written guides are available now, with videos and tutorials planned for
+        the same practical, real-world workflows.
       </p>
     </div>
 
@@ -227,11 +235,14 @@
           >
             {format.cadence}
           </p>
-          <h3
-            class="mt-3 text-[1.2rem] font-semibold leading-tight text-surface-950"
-          >
-            {format.title}
-          </h3>
+          <div class="mt-3 flex flex-wrap items-center gap-2">
+            <h3 class="text-[1.2rem] font-semibold leading-tight text-surface-950">
+              {format.title}
+            </h3>
+            {#if format.badge}
+              <FeatureStatusBadge badge={format.badge} />
+            {/if}
+          </div>
           <p class="mt-3 text-[0.98rem] leading-7 text-brand-body">
             {format.description}
           </p>
