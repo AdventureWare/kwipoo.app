@@ -99,6 +99,25 @@ test("@smoke docs and legal pages render the expected headings", async ({
   ).toBeVisible();
 });
 
+test("@smoke support page renders the support entry points", async ({
+  page,
+}) => {
+  await page.goto("/support");
+
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: /contact kwipoo support when you need help/i,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /email support/i }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /kwipoo-support@adventureware\.com/i }),
+  ).toBeVisible();
+});
+
 test("@smoke pricing page renders the draft plan structure", async ({
   page,
   request,
@@ -205,6 +224,9 @@ test("@smoke homepage footer links and social actions remain accessible on narro
 
   await expect(
     page.getByRole("link", { name: /privacy policy/i }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("contentinfo").getByRole("link", { name: /^support$/i }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: /terms & conditions/i }),
