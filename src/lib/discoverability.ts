@@ -1,4 +1,3 @@
-import { isFeatureEnabled } from "$lib/config/feature-flags";
 import {
   APP_URL,
   COMPANY_NAME,
@@ -23,21 +22,17 @@ import {
   SITEMAP_XML_URL,
   toAbsoluteMarketingUrl,
 } from "$lib/seo";
+import {
+  getSitePathsByDiscoverability,
+  getSiteSection,
+  isSiteSectionEnabled,
+} from "$lib/site-sections";
 
-const SUPPORT_PATH = "/support";
-const INDEXABLE_SITE_PATHS = ["/", SUPPORT_PATH];
-const REFERENCE_SITE_PATHS = [
-  SUPPORT_PATH,
-  "/privacy-policy",
-  "/terms-and-conditions",
-];
+const SUPPORT_PATH = getSiteSection("support").href;
 const FEATURED_DOC_SLUGS = new Set(["things", "sets", "events", "social"]);
-const RESOURCES_PATH = "/resources";
-const RELEASE_HISTORY_PATH = "/releases";
-const OPTIONAL_INDEXABLE_PATHS = {
-  resources: true,
-  releaseHistory: false,
-} as const;
+const DOCS_PATH = getSiteSection("docs").href;
+const RESOURCES_PATH = getSiteSection("resources").href;
+const RELEASE_HISTORY_PATH = getSiteSection("releaseHistory").href;
 
 function formatSourceList(items: string[]): string {
   if (items.length === 0) {
@@ -56,7 +51,7 @@ function formatSourceList(items: string[]): string {
 }
 
 function getLiveDocsPaths(): string[] {
-  if (!isFeatureEnabled("docs")) {
+  if (!isSiteSectionEnabled("docs")) {
     return [];
   }
 
@@ -64,7 +59,7 @@ function getLiveDocsPaths(): string[] {
 }
 
 function getLiveDocsPages() {
-  if (!isFeatureEnabled("docs")) {
+  if (!isSiteSectionEnabled("docs")) {
     return [];
   }
 
@@ -76,14 +71,11 @@ function getFeaturedDocsPages() {
 }
 
 function getLiveReleaseHistoryPaths(): string[] {
-  return isFeatureEnabled("releaseHistory") &&
-    OPTIONAL_INDEXABLE_PATHS.releaseHistory
-    ? [RELEASE_HISTORY_PATH]
-    : [];
+  return isSiteSectionEnabled("releaseHistory") ? [RELEASE_HISTORY_PATH] : [];
 }
 
 function getLiveResourcesPaths(): string[] {
-  return isFeatureEnabled("resources") && OPTIONAL_INDEXABLE_PATHS.resources
+  return isSiteSectionEnabled("resources")
     ? [
         RESOURCES_PATH,
         ...resourceGuides.map((guide) => getResourcesHref(guide.slug)),
@@ -94,7 +86,7 @@ function getLiveResourcesPaths(): string[] {
 export function getIndexableSitePaths(): string[] {
   return [
     ...new Set([
-      ...INDEXABLE_SITE_PATHS,
+      ...getSitePathsByDiscoverability("indexable"),
       ...getLiveDocsPaths(),
       ...getLiveResourcesPaths(),
       ...getLiveReleaseHistoryPaths(),
@@ -103,7 +95,12 @@ export function getIndexableSitePaths(): string[] {
 }
 
 export function getDiscoverableSitePaths(): string[] {
-  return [...new Set([...getIndexableSitePaths(), ...REFERENCE_SITE_PATHS])];
+  return [
+    ...new Set([
+      ...getIndexableSitePaths(),
+      ...getSitePathsByDiscoverability("reference"),
+    ]),
+  ];
 }
 
 export function buildSitemapXml(): string {
@@ -129,9 +126,9 @@ export function buildRobotsTxt(): string {
 }
 
 export function buildLlmsTxt(): string {
-  const docsEnabled = isFeatureEnabled("docs");
-  const resourcesEnabled = isFeatureEnabled("resources");
-  const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
+  const docsEnabled = isSiteSectionEnabled("docs");
+  const resourcesEnabled = isSiteSectionEnabled("resources");
+  const releaseHistoryEnabled = isSiteSectionEnabled("releaseHistory");
   const featuredDocsPages = getFeaturedDocsPages();
   const lines = [
     `# ${SITE_NAME}`,
@@ -149,7 +146,7 @@ export function buildLlmsTxt(): string {
   ];
 
   if (docsEnabled) {
-    lines.push(`- Documentation: ${toAbsoluteMarketingUrl("/docs")}`);
+    lines.push(`- Documentation: ${toAbsoluteMarketingUrl(DOCS_PATH)}`);
   }
 
   if (resourcesEnabled) {
@@ -212,8 +209,8 @@ export function buildLlmsTxt(): string {
 
 export function buildLlmsFullTxt(): string {
   const liveDocsPages = getLiveDocsPages();
-  const resourcesEnabled = isFeatureEnabled("resources");
-  const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
+  const resourcesEnabled = isSiteSectionEnabled("resources");
+  const releaseHistoryEnabled = isSiteSectionEnabled("releaseHistory");
   const lines = [
     `# ${SITE_NAME}`,
     "",
@@ -241,7 +238,7 @@ export function buildLlmsFullTxt(): string {
     lines.splice(
       10,
       0,
-      `- Documentation and feature workflows: ${toAbsoluteMarketingUrl("/docs")}`,
+      `- Documentation and feature workflows: ${toAbsoluteMarketingUrl(DOCS_PATH)}`,
     );
   }
 

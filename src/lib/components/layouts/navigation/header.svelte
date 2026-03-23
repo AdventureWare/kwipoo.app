@@ -7,38 +7,13 @@
     ANALYTICS_EVENT_NAMES,
     createMarketingCtaClickedProperties,
   } from "$lib/analytics/schema";
-  import { isFeatureEnabled } from "$lib/config/feature-flags";
   import { APP_SIGNUP_URL } from "$lib/config/site";
+  import { getSiteLinksForSurface } from "$lib/site-sections";
   import Button from "../../ui/buttons/button.svelte";
 
   const homeHref = resolve("/");
-  const docsHref = resolve("/docs");
-  const pricingHref = resolve("/pricing");
-  const resourcesHref = resolve("/resources");
-  const releasesHref = resolve("/releases");
-  const docsEnabled = isFeatureEnabled("docs");
-  const pricingEnabled = isFeatureEnabled("pricing");
-  const resourcesEnabled = isFeatureEnabled("resources");
-  const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
-
-  const desktopLinks = [
-    { href: homeHref, label: "Home" },
-    ...(pricingEnabled ? [{ href: pricingHref, label: "Pricing" }] : []),
-    ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
-    ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
-    ...(releaseHistoryEnabled
-      ? [{ href: releasesHref, label: "Releases" }]
-      : []),
-  ];
-
-  const mobileLinks = [
-    ...(pricingEnabled ? [{ href: pricingHref, label: "Pricing" }] : []),
-    ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
-    ...(resourcesEnabled ? [{ href: resourcesHref, label: "Resources" }] : []),
-    ...(releaseHistoryEnabled
-      ? [{ href: releasesHref, label: "Releases" }]
-      : []),
-  ];
+  const desktopLinks = getSiteLinksForSurface("headerDesktop");
+  const mobileLinks = getSiteLinksForSurface("headerMobile");
 
   const navLinkBaseClass =
     "rounded-full px-3 py-2 text-[1.04rem] font-semibold tracking-[0.01em] transition-colors md:px-4 md:py-2.5 md:text-[1.1rem]";
@@ -64,9 +39,10 @@
       </a>
 
       <Navigation.Menu class="hidden items-center gap-2 md:flex">
+        <!-- eslint-disable svelte/no-navigation-without-resolve -->
         {#each desktopLinks as item (item.href)}
           <Navigation.TriggerAnchor
-            href={item.href}
+            href={resolve(item.href)}
             aria-current={isCurrent(item.href) ? "page" : undefined}
             class={[
               navLinkBaseClass,
@@ -78,6 +54,7 @@
             <Navigation.TriggerText>{item.label}</Navigation.TriggerText>
           </Navigation.TriggerAnchor>
         {/each}
+        <!-- eslint-enable svelte/no-navigation-without-resolve -->
       </Navigation.Menu>
     </Navigation.Header>
 
@@ -103,9 +80,10 @@
     >
       {#if mobileLinks.length > 0}
         <Navigation.Menu class="flex flex-wrap items-center justify-end gap-2">
+          <!-- eslint-disable svelte/no-navigation-without-resolve -->
           {#each mobileLinks as item (item.href)}
             <Navigation.TriggerAnchor
-              href={item.href}
+              href={resolve(item.href)}
               aria-current={isCurrent(item.href) ? "page" : undefined}
               class={[
                 navLinkBaseClass,
@@ -117,6 +95,7 @@
               <Navigation.TriggerText>{item.label}</Navigation.TriggerText>
             </Navigation.TriggerAnchor>
           {/each}
+          <!-- eslint-enable svelte/no-navigation-without-resolve -->
         </Navigation.Menu>
       {/if}
 

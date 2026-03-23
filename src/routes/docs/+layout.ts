@@ -1,11 +1,11 @@
 import { error } from "@sveltejs/kit";
-import { isFeatureEnabled } from "$lib/config/feature-flags";
 import {
   docsLandingTocItems,
   getDocsNavSections,
   getDocsPage,
   getDocsTocItems,
 } from "$lib/content/docs";
+import { isSiteSectionEnabled } from "$lib/site-sections";
 
 function normalizePathname(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith("/")) {
@@ -16,7 +16,7 @@ function normalizePathname(pathname: string): string {
 }
 
 export function load({ url }) {
-  if (!isFeatureEnabled("docs")) {
+  if (!isSiteSectionEnabled("docs")) {
     error(404, "Page not found");
   }
 

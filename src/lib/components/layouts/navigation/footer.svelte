@@ -1,17 +1,14 @@
 <script lang="ts">
   import { asset, resolve } from "$app/paths";
   import { TwitterLogo, LinkedinLogo, InstagramLogo } from "phosphor-svelte";
-  import { isFeatureEnabled } from "$lib/config/feature-flags";
   import {
     COMPANY_NAME,
     COMPANY_WEBSITE_URL,
     SOCIAL_PROFILE_HREFS,
   } from "$lib/config/site";
+  import { getSiteLinksForSurface } from "$lib/site-sections";
 
-  const docsEnabled = isFeatureEnabled("docs");
-  const pricingEnabled = isFeatureEnabled("pricing");
-  const resourcesEnabled = isFeatureEnabled("resources");
-  const releaseHistoryEnabled = isFeatureEnabled("releaseHistory");
+  const footerLinks = getSiteLinksForSurface("footer");
 
   const socialLinks = [
     {
@@ -70,70 +67,18 @@
           More Info
         </h3>
         <ul class="space-y-3">
-          <li>
-            <a
-              href={resolve("/support")}
-              class="transition-colors duration-200 hover:text-primary-800"
-            >
-              Support
-            </a>
-          </li>
-          {#if pricingEnabled}
+          <!-- eslint-disable svelte/no-navigation-without-resolve -->
+          {#each footerLinks as item (item.href)}
             <li>
               <a
-                href={resolve("/pricing")}
+                href={resolve(item.href)}
                 class="transition-colors duration-200 hover:text-primary-800"
               >
-                Pricing
+                {item.label}
               </a>
             </li>
-          {/if}
-          {#if docsEnabled}
-            <li>
-              <a
-                href={resolve("/docs")}
-                class="transition-colors duration-200 hover:text-primary-800"
-              >
-                Documentation
-              </a>
-            </li>
-          {/if}
-          {#if resourcesEnabled}
-            <li>
-              <a
-                href={resolve("/resources")}
-                class="transition-colors duration-200 hover:text-primary-800"
-              >
-                Resources
-              </a>
-            </li>
-          {/if}
-          {#if releaseHistoryEnabled}
-            <li>
-              <a
-                href={resolve("/releases")}
-                class="transition-colors duration-200 hover:text-primary-800"
-              >
-                Release History
-              </a>
-            </li>
-          {/if}
-          <li>
-            <a
-              href={resolve("/privacy-policy")}
-              class="transition-colors duration-200 hover:text-primary-800"
-            >
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <a
-              href={resolve("/terms-and-conditions")}
-              class="transition-colors duration-200 hover:text-primary-800"
-            >
-              Terms & Conditions
-            </a>
-          </li>
+          {/each}
+          <!-- eslint-enable svelte/no-navigation-without-resolve -->
         </ul>
       </div>
 

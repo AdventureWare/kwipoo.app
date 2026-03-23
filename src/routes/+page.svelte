@@ -8,7 +8,6 @@
     CurrencyDollar,
     Prohibit,
   } from "phosphor-svelte";
-  import { isFeatureEnabled } from "$lib/config/feature-flags";
   import { getDocsHref, getDocsPageBadge } from "$lib/content/docs";
   import {
     APP_LOGIN_URL,
@@ -30,10 +29,11 @@
     WEBSITE_ID,
     toSeoJsonLd,
   } from "$lib/seo";
+  import { isSiteSectionEnabled } from "$lib/site-sections";
   const resolvePath = resolve as unknown as (path: string) => string;
 
   function resolveFeatureDocsHref(slug: string): string {
-    if (!isFeatureEnabled("docs")) {
+    if (!isSiteSectionEnabled("docs")) {
       return APP_LOGIN_URL;
     }
 
@@ -238,7 +238,7 @@
   ] as const;
 
   const homeTitle = "Personal Inventory App for Tracking What You Own | Kwipoo";
-  const docsUrl = isFeatureEnabled("docs")
+  const docsUrl = isSiteSectionEnabled("docs")
     ? `${MARKETING_SITE_URL}/docs`
     : undefined;
   const homeStructuredData = toSeoJsonLd({
