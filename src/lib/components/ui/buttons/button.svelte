@@ -1,7 +1,10 @@
 <!-- src/lib/components/ui/button.svelte -->
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import { trackAnalyticsEvent, type AnalyticsEventProperties } from "$lib/analytics";
+  import {
+    trackAnalyticsEvent,
+    type AnalyticsEventProperties,
+  } from "$lib/analytics";
   import type { AnalyticsEventName } from "$lib/analytics/schema";
   import { isExternalHref } from "$lib/config/site";
   import type { Snippet } from "svelte";
@@ -43,7 +46,13 @@
     "w-full",
     "font-medium",
     "shadow-sm",
-    "transition-colors",
+    "transition-all",
+    "duration-200",
+    "ease-out",
+    "hover:-translate-y-0.5",
+    "hover:shadow-md",
+    "active:translate-y-0",
+    "active:shadow-sm",
     "focus-visible:outline-2",
     "focus-visible:outline-offset-2",
     "focus-visible:outline-primary-300",

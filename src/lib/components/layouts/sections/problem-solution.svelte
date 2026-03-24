@@ -18,10 +18,17 @@
 </script>
 
 <section
-  class="card mb-30 border border-brand-border bg-brand-canvas px-5 py-8 sm:p-8 lg:px-10"
+  class="brand-outline-card card relative mb-30 overflow-hidden border border-brand-border bg-brand-canvas px-5 py-8 shadow-sm sm:p-8 lg:px-10"
 >
-  <div class="max-w-6xl mx-auto">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      class="absolute -right-10 top-0 h-48 w-48 rounded-full bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-primary-100)_78%,transparent)_0%,transparent_72%)] blur-2xl"
+    ></div>
+  </div>
+
+  <div class="relative mx-auto max-w-6xl">
     <div class="mb-8 text-left md:mb-10 md:text-center">
+      <p class="brand-section-label mb-4">Where The Friction Adds Up</p>
       <h2 class="mb-4 text-3xl font-bold text-primary-950 sm:text-4xl">
         {title}
       </h2>
@@ -32,9 +39,7 @@
       </p>
     </div>
 
-    <div
-      class="card grid grid-cols-1 gap-px overflow-hidden border border-brand-border bg-brand-border shadow-sm md:grid-cols-2"
-    >
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
       {#each items as item (item.title)}
         <IconContentCard
           icon={item.icon}
