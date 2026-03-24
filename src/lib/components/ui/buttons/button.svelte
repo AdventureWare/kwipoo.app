@@ -1,7 +1,8 @@
 <!-- src/lib/components/ui/button.svelte -->
 <script lang="ts">
-  import type { Pathname } from "$app/types";
   import { resolve } from "$app/paths";
+  import { trackAnalyticsEvent, type AnalyticsEventProperties } from "$lib/analytics";
+  import type { AnalyticsEventName } from "$lib/analytics/schema";
   import { isExternalHref } from "$lib/config/site";
   import type { Snippet } from "svelte";
   import type {
@@ -21,13 +22,19 @@
     href?: string;
     type?: "button" | "submit" | "reset";
     disabled?: boolean;
+    analyticsEvent?: AnalyticsEventName;
+    analyticsProperties?: AnalyticsEventProperties;
   }
 
   type LinkProps = SharedProps &
-    Omit<HTMLAnchorAttributes, "class" | "href" | "type">;
+    Omit<HTMLAnchorAttributes, "class" | "href" | "type" | "onclick"> & {
+      onclick?: (event: MouseEvent) => void;
+    };
 
   type NativeButtonProps = SharedProps &
-    Omit<HTMLButtonAttributes, "class" | "href" | "type">;
+    Omit<HTMLButtonAttributes, "class" | "href" | "type" | "onclick"> & {
+      onclick?: (event: MouseEvent) => void;
+    };
 
   type Props = LinkProps | NativeButtonProps;
 
@@ -59,6 +66,7 @@
     md: "btn-base min-h-11",
     lg: "btn-lg min-h-12",
   };
+  const resolvePath = resolve as unknown as (path: string) => string;
 
   let {
     children,
@@ -68,6 +76,9 @@
     href,
     type = "button",
     disabled = false,
+    analyticsEvent,
+    analyticsProperties,
+    onclick,
     ...restProps
   }: Props = $props();
 
@@ -79,12 +90,16 @@
     className,
   ]);
   let resolvedHref = $derived(
-    href
-      ? isExternalHref(href)
-        ? href
-        : resolve(href as Pathname)
-      : undefined,
+    href ? (isExternalHref(href) ? href : resolvePath(href)) : undefined,
   );
+
+  function handleClick(event: MouseEvent) {
+    if (analyticsEvent) {
+      void trackAnalyticsEvent(analyticsEvent, analyticsProperties);
+    }
+
+    onclick?.(event);
+  }
 </script>
 
 {#if href}
@@ -96,6 +111,7 @@
     aria-disabled={disabled}
     tabindex={disabled ? -1 : undefined}
     role="button"
+    onclick={handleClick}
   >
     {@render children()}
   </a>
@@ -106,6 +122,7 @@
     {type}
     {disabled}
     class={classes}
+    onclick={handleClick}
   >
     {@render children()}
   </button>

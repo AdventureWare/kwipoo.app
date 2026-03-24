@@ -1,10 +1,32 @@
 <script lang="ts">
   import { asset, resolve } from "$app/paths";
   import { TwitterLogo, LinkedinLogo, InstagramLogo } from "phosphor-svelte";
-  import { isFeatureEnabled } from "$lib/config/feature-flags";
-  import { COMPANY_NAME, COMPANY_WEBSITE_URL } from "$lib/config/site";
+  import {
+    COMPANY_NAME,
+    COMPANY_WEBSITE_URL,
+    SOCIAL_PROFILE_HREFS,
+  } from "$lib/config/site";
+  import { getSiteLinksForSurface } from "$lib/site-sections";
 
-  const docsEnabled = isFeatureEnabled("docs");
+  const footerLinks = getSiteLinksForSurface("footer");
+
+  const socialLinks = [
+    {
+      href: SOCIAL_PROFILE_HREFS.twitter,
+      label: "Twitter",
+      icon: TwitterLogo,
+    },
+    {
+      href: SOCIAL_PROFILE_HREFS.linkedin,
+      label: "LinkedIn",
+      icon: LinkedinLogo,
+    },
+    {
+      href: SOCIAL_PROFILE_HREFS.instagram,
+      label: "Instagram",
+      icon: InstagramLogo,
+    },
+  ] as const;
 </script>
 
 <footer class="border-t border-brand-border bg-brand-panel">
@@ -42,35 +64,21 @@
 
       <div class="col-span-1">
         <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider">
-          Resources
+          More Info
         </h3>
         <ul class="space-y-3">
-          {#if docsEnabled}
+          <!-- eslint-disable svelte/no-navigation-without-resolve -->
+          {#each footerLinks as item (item.href)}
             <li>
               <a
-                href={resolve("/docs")}
+                href={resolve(item.href)}
                 class="transition-colors duration-200 hover:text-primary-800"
               >
-                Documentation
+                {item.label}
               </a>
             </li>
-          {/if}
-          <li>
-            <a
-              href={resolve("/privacy-policy")}
-              class="transition-colors duration-200 hover:text-primary-800"
-            >
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <a
-              href={resolve("/terms-and-conditions")}
-              class="transition-colors duration-200 hover:text-primary-800"
-            >
-              Terms & Conditions
-            </a>
-          </li>
+          {/each}
+          <!-- eslint-enable svelte/no-navigation-without-resolve -->
         </ul>
       </div>
 
@@ -82,33 +90,17 @@
         <div
           class="flex flex-wrap justify-center gap-3 sm:gap-4 md:justify-start"
         >
-          <a
-            href="https://twitter.com/KwipooApp"
-            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
-            aria-label="Twitter"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <TwitterLogo size={20} />
-          </a>
-          <a
-            href="https://linkedin.com/company/kwipoo"
-            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
-            aria-label="LinkedIn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LinkedinLogo size={20} />
-          </a>
-          <a
-            href="https://instagram.com/kwipoo"
-            class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
-            aria-label="Instagram"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <InstagramLogo size={20} />
-          </a>
+          {#each socialLinks as socialLink (socialLink.label)}
+            <a
+              href={socialLink.href}
+              class="btn-icon h-10 w-10 rounded-full border border-primary-600 bg-primary-600 text-[var(--color-primary-contrast-600)] shadow-sm transition-colors hover:border-primary-700 hover:bg-primary-700"
+              aria-label={socialLink.label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <socialLink.icon size={20} />
+            </a>
+          {/each}
         </div>
         <!-- eslint-enable svelte/no-navigation-without-resolve -->
       </div>

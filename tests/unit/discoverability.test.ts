@@ -2,13 +2,16 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 async function loadDiscoverability({
   docsOverride,
+  resourcesOverride,
 }: {
   docsOverride?: string;
+  resourcesOverride?: string;
 }) {
   vi.resetModules();
   vi.doMock("$env/dynamic/public", () => ({
     env: {
       PUBLIC_FEATURE_DOCS: docsOverride,
+      PUBLIC_FEATURE_RESOURCES: resourcesOverride,
     },
   }));
 
@@ -42,15 +45,35 @@ describe("discoverability builders", () => {
     expect(buildSitemapXml()).toContain(
       "<loc>https://kwipoo.app/docs/things</loc>",
     );
+    expect(buildSitemapXml()).toContain(
+      "<loc>https://kwipoo.app/resources</loc>",
+    );
+    expect(buildSitemapXml()).toContain(
+      "<loc>https://kwipoo.app/resources/outdoor-adventurers</loc>",
+    );
     expect(buildSitemapXml()).not.toContain(
       "https://kwipoo.app/terms-and-conditions",
     );
     expect(buildLlmsTxt()).toContain("Documentation: https://kwipoo.app/docs");
+    expect(buildLlmsTxt()).toContain("Resources: https://kwipoo.app/resources");
     expect(buildLlmsTxt()).toContain("llms-full.txt");
     expect(buildLlmsTxt()).toContain("Track your Things");
     expect(buildLlmsFullTxt()).toContain("## Documentation Map");
     expect(buildLlmsFullTxt()).toContain("### Track and organize");
     expect(buildLlmsFullTxt()).toContain("https://kwipoo.app/privacy-policy");
     expect(buildLlmsFullTxt()).toContain("https://kwipoo.app/docs/things");
+  });
+
+  it("keeps resources routes out of the sitemap when resources are disabled", async () => {
+    const { buildSitemapXml } = await loadDiscoverability({
+      resourcesOverride: "false",
+    });
+
+    const sitemap = buildSitemapXml();
+
+    expect(sitemap).not.toContain("https://kwipoo.app/resources");
+    expect(sitemap).not.toContain(
+      "https://kwipoo.app/resources/outdoor-adventurers",
+    );
   });
 });

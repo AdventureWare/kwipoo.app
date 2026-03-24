@@ -3,20 +3,17 @@
   import { Navigation } from "@skeletonlabs/skeleton-svelte";
   import { page } from "$app/state";
   import { resolve } from "$app/paths";
-  import { isFeatureEnabled } from "$lib/config/feature-flags";
-  import { APP_LOGIN_URL } from "$lib/config/site";
+  import {
+    ANALYTICS_EVENT_NAMES,
+    createMarketingCtaClickedProperties,
+  } from "$lib/analytics/schema";
+  import { APP_SIGNUP_URL } from "$lib/config/site";
+  import { getSiteLinksForSurface } from "$lib/site-sections";
   import Button from "../../ui/buttons/button.svelte";
 
   const homeHref = resolve("/");
-  const docsHref = resolve("/docs");
-  const docsEnabled = isFeatureEnabled("docs");
-
-  const desktopLinks = [
-    { href: homeHref, label: "Home" },
-    ...(docsEnabled ? [{ href: docsHref, label: "Docs" }] : []),
-  ];
-
-  const mobileLinks = docsEnabled ? [{ href: docsHref, label: "Docs" }] : [];
+  const desktopLinks = getSiteLinksForSurface("headerDesktop");
+  const mobileLinks = getSiteLinksForSurface("headerMobile");
 
   const navLinkBaseClass =
     "rounded-full px-3 py-2 text-[1.04rem] font-semibold tracking-[0.01em] transition-colors md:px-4 md:py-2.5 md:text-[1.1rem]";
@@ -34,7 +31,7 @@
   class="sticky top-0 z-50 border-b border-brand-border bg-brand-canvas/95 backdrop-blur supports-[backdrop-filter]:bg-brand-canvas/88"
 >
   <div
-    class="mx-auto flex min-h-14 max-w-7xl items-center gap-2 px-4 py-1.5 sm:px-6 md:min-h-16 md:gap-3 md:py-2.5 lg:px-8"
+    class="mx-auto flex min-h-14 max-w-7xl flex-wrap items-center gap-2 px-4 py-1.5 sm:px-6 md:min-h-16 md:flex-nowrap md:gap-3 md:py-2.5 lg:px-8"
   >
     <Navigation.Header class="flex min-w-0 flex-1 items-center gap-4 md:gap-6">
       <a href={homeHref} class="shrink-0" aria-label="Kwipoo home">
@@ -42,9 +39,10 @@
       </a>
 
       <Navigation.Menu class="hidden items-center gap-2 md:flex">
+        <!-- eslint-disable svelte/no-navigation-without-resolve -->
         {#each desktopLinks as item (item.href)}
           <Navigation.TriggerAnchor
-            href={item.href}
+            href={resolve(item.href)}
             aria-current={isCurrent(item.href) ? "page" : undefined}
             class={[
               navLinkBaseClass,
@@ -56,21 +54,36 @@
             <Navigation.TriggerText>{item.label}</Navigation.TriggerText>
           </Navigation.TriggerAnchor>
         {/each}
+        <!-- eslint-enable svelte/no-navigation-without-resolve -->
       </Navigation.Menu>
     </Navigation.Header>
 
     <Navigation.Group class="hidden items-center md:flex">
-      <Button href={APP_LOGIN_URL} variant="secondary" class="w-auto px-5">
+      <Button
+        href={APP_SIGNUP_URL}
+        variant="secondary"
+        class="w-auto px-5"
+        analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+        analyticsProperties={createMarketingCtaClickedProperties({
+          location: "header_desktop",
+          label: "Get Started",
+          destination: APP_SIGNUP_URL,
+          kind: "signup",
+        })}
+      >
         Get Started
       </Button>
     </Navigation.Group>
 
-    <Navigation.Group class="ml-auto flex items-center gap-2 md:hidden">
+    <Navigation.Group
+      class="ml-auto flex w-full flex-wrap items-center justify-end gap-2 md:hidden"
+    >
       {#if mobileLinks.length > 0}
-        <Navigation.Menu class="flex items-center gap-2">
+        <Navigation.Menu class="flex flex-wrap items-center justify-end gap-2">
+          <!-- eslint-disable svelte/no-navigation-without-resolve -->
           {#each mobileLinks as item (item.href)}
             <Navigation.TriggerAnchor
-              href={item.href}
+              href={resolve(item.href)}
               aria-current={isCurrent(item.href) ? "page" : undefined}
               class={[
                 navLinkBaseClass,
@@ -82,10 +95,23 @@
               <Navigation.TriggerText>{item.label}</Navigation.TriggerText>
             </Navigation.TriggerAnchor>
           {/each}
+          <!-- eslint-enable svelte/no-navigation-without-resolve -->
         </Navigation.Menu>
       {/if}
 
-      <Button href={APP_LOGIN_URL} variant="secondary" size="sm" class="w-auto">
+      <Button
+        href={APP_SIGNUP_URL}
+        variant="secondary"
+        size="sm"
+        class="w-auto"
+        analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+        analyticsProperties={createMarketingCtaClickedProperties({
+          location: "header_mobile",
+          label: "Get Started",
+          destination: APP_SIGNUP_URL,
+          kind: "signup",
+        })}
+      >
         Get Started
       </Button>
     </Navigation.Group>

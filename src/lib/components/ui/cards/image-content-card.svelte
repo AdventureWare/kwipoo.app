@@ -1,9 +1,12 @@
 <script lang="ts">
   import { asset } from "$app/paths";
+  import type { FeatureBadge } from "$lib/types/feature-badges";
+  import FeatureStatusBadge from "../feature-status-badge.svelte";
   import Button from "../buttons/button.svelte";
   import Tag from "../tag.svelte";
   interface Props {
     tag: string;
+    featureBadge?: FeatureBadge;
     title: string;
     description: string;
     image: {
@@ -21,6 +24,7 @@
 
   let {
     tag,
+    featureBadge,
     title,
     description,
     image,
@@ -49,7 +53,12 @@
       />
     </div>
     <div class="order-last space-y-5 md:col-span-2 md:mr-12 md:space-y-6">
-      <Tag text={tag} />
+      <div class="flex flex-wrap items-start gap-2">
+        <Tag text={tag} />
+        {#if featureBadge}
+          <FeatureStatusBadge badge={featureBadge} className="mt-0.5" />
+        {/if}
+      </div>
       <h3 class="mb-3 text-xl font-bold text-primary-950 sm:text-2xl">
         {title}
       </h3>
@@ -73,7 +82,12 @@
     <div
       class="order-last space-y-5 md:order-first md:col-span-2 md:ml-12 md:space-y-6"
     >
-      <Tag text={tag} />
+      <div class="flex flex-wrap items-start gap-2">
+        <Tag text={tag} />
+        {#if featureBadge}
+          <FeatureStatusBadge badge={featureBadge} className="mt-0.5" />
+        {/if}
+      </div>
       <h3 class="mb-3 text-xl font-bold text-primary-950 sm:text-2xl">
         {title}
       </h3>

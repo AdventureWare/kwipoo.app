@@ -1,6 +1,5 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import type { Pathname } from "$app/types";
   import {
     MagnifyingGlass,
     EyeSlash,
@@ -9,16 +8,15 @@
     CurrencyDollar,
     Prohibit,
   } from "phosphor-svelte";
-  import {
-    isFeatureEnabled,
-  } from "$lib/config/feature-flags";
-  import { getDocsHref } from "$lib/content/docs";
+  import { getDocsHref, getDocsPageBadge } from "$lib/content/docs";
   import {
     APP_LOGIN_URL,
+    APP_SIGNUP_URL,
     MARKETING_SITE_URL,
     SITE_DESCRIPTION,
     SITE_KEYWORDS,
   } from "$lib/config/site";
+  import { trackCtaClick } from "$lib/analytics";
   import { HeroSection, QuoteCallout } from "$lib/components";
   import ProblemSolution from "$lib/components/layouts/sections/problem-solution.svelte";
   import Switchbacks from "$lib/components/layouts/sections/switchbacks.svelte";
@@ -31,13 +29,15 @@
     WEBSITE_ID,
     toSeoJsonLd,
   } from "$lib/seo";
+  import { isSiteSectionEnabled } from "$lib/site-sections";
+  const resolvePath = resolve as unknown as (path: string) => string;
 
   function resolveFeatureDocsHref(slug: string): string {
-    if (!isFeatureEnabled("docs")) {
+    if (!isSiteSectionEnabled("docs")) {
       return APP_LOGIN_URL;
     }
 
-    return resolve(getDocsHref(slug) as Pathname);
+    return resolvePath(getDocsHref(slug));
   }
 
   const problemSolutionData = [
@@ -82,6 +82,7 @@
   const switchbackItems = [
     {
       tag: "Things",
+      featureBadge: getDocsPageBadge("things"),
       title: "Keep track of what you own—all on one platform.",
       description:
         "Know exactly what you have, where it is, and what it’s worth—so you spend less time searching, avoid unnecessary repurchases, and make smarter decisions about what to keep, use, or replace. Whether it’s everyday essentials or hobby gear, Kwipoo helps you stay organized without the mental load.",
@@ -97,6 +98,7 @@
     },
     {
       tag: "Sets",
+      featureBadge: getDocsPageBadge("sets"),
       title:
         "Group the right things together—so they’re always ready when you need them.",
       description:
@@ -113,6 +115,7 @@
     },
     {
       tag: "Places",
+      featureBadge: getDocsPageBadge("places"),
       title:
         "Map out where your stuff lives—across home, storage, and anywhere else.",
       description:
@@ -129,6 +132,7 @@
     },
     {
       tag: "Spots",
+      featureBadge: getDocsPageBadge("spots"),
       title:
         "Pinpoint exactly where things are stored—down to the shelf, bin, or drawer.",
       description:
@@ -145,6 +149,7 @@
     },
     {
       tag: "Events",
+      featureBadge: getDocsPageBadge("events"),
       title: "Plan trips and events without last-minute scrambling.",
       description:
         "Assign gear to upcoming trips, events, or projects—whether you’re packing solo or coordinating with a group. Check off what’s ready, see what’s missing, and ensure no one forgets the essentials.",
@@ -160,6 +165,7 @@
     },
     {
       tag: "Social",
+      featureBadge: getDocsPageBadge("social"),
       title: "Borrow, lend, and collaborate—without the back-and-forth.",
       description:
         "See what your friends own, avoid unnecessary duplicate purchases, and coordinate gear-sharing seamlessly. Whether for hobbies, outdoor trips, or shared projects, Kwipoo makes it easy to stay connected and prepared.",
@@ -176,6 +182,7 @@
 
     {
       tag: "Profile",
+      featureBadge: getDocsPageBadge("profile"),
       title:
         "Customize your inventory, control privacy, and make Kwipoo work for you.",
       description:
@@ -192,6 +199,7 @@
     },
   ] satisfies Array<{
     tag: string;
+    featureBadge?: import("$lib/types/feature-badges").FeatureBadge;
     title: string;
     description: string;
     image: {
@@ -222,17 +230,17 @@
         "Kwipoo is useful for households, hobbyists, travelers, organizers, and anyone who wants a searchable home inventory instead of relying on memory, notes, or scattered spreadsheets.",
     },
     {
-      question: "How does Kwipoo help me avoid duplicate purchases or forgotten items?",
+      question:
+        "How does Kwipoo help me avoid duplicate purchases or forgotten items?",
       answer:
         "Because your inventory is searchable and tied to real storage locations, you can check what you already own, see where it lives, and reuse past packing or event setups before you buy or leave something behind.",
     },
   ] as const;
 
   const homeTitle = "Personal Inventory App for Tracking What You Own | Kwipoo";
-  const docsUrl = isFeatureEnabled("docs")
+  const docsUrl = isSiteSectionEnabled("docs")
     ? `${MARKETING_SITE_URL}/docs`
     : undefined;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const homeStructuredData = toSeoJsonLd({
     "@context": "https://schema.org",
     "@graph": [
@@ -271,6 +279,8 @@
       },
     ],
   });
+
+  void homeStructuredData;
 </script>
 
 <svelte:head>
@@ -282,15 +292,14 @@
     content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
   />
   <meta property="og:title" content={homeTitle} />
-  <meta
-    property="og:description"
-    content={SITE_DESCRIPTION}
-  />
+  <meta property="og:description" content={SITE_DESCRIPTION} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={MARKETING_SITE_URL} />
   <meta name="twitter:title" content={homeTitle} />
   <meta name="twitter:description" content={SITE_DESCRIPTION} />
-  <script type="application/ld+json">{homeStructuredData}</script>
+  <script type="application/ld+json">
+{homeStructuredData}
+  </script>
 </svelte:head>
 
 <HeroSection />
@@ -352,5 +361,12 @@
   buttonText="Create a Free Account Today"
   buttonVariant="primary"
   buttonSize="lg"
-  buttonHref={APP_LOGIN_URL}
+  buttonHref={APP_SIGNUP_URL}
+  onButtonClick={() =>
+    trackCtaClick({
+      location: "homepage_close",
+      label: "Create a Free Account Today",
+      destination: APP_SIGNUP_URL,
+      kind: "signup",
+    })}
 />

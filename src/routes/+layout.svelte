@@ -2,6 +2,7 @@
   import "../app.css";
   import { page } from "$app/state";
   import { Header, Footer } from "$lib/components";
+  import MarketingAnalytics from "$lib/components/analytics/marketing-analytics.svelte";
   import { SITE_NAME } from "$lib/config/site";
   import {
     DEFAULT_OG_IMAGE_ALT,
@@ -41,6 +42,7 @@
 </svelte:head>
 
 <div class="min-h-screen bg-surface flex flex-col">
+  <MarketingAnalytics />
   <Header />
   <main class="flex-grow m-8 xl:mx-auto xl:max-w-7xl">
     {@render children()}

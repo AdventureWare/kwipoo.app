@@ -43,6 +43,21 @@ export const FEATURE_FLAGS = {
     env.PUBLIC_FEATURE_DOCS,
     true,
   ),
+  resources: resolveBooleanFlag(
+    "PUBLIC_FEATURE_RESOURCES",
+    env.PUBLIC_FEATURE_RESOURCES,
+    true,
+  ),
+  pricing: resolveBooleanFlag(
+    "PUBLIC_FEATURE_PRICING",
+    env.PUBLIC_FEATURE_PRICING,
+    false,
+  ),
+  releaseHistory: resolveBooleanFlag(
+    "PUBLIC_FEATURE_RELEASE_HISTORY",
+    env.PUBLIC_FEATURE_RELEASE_HISTORY,
+    false,
+  ),
 } as const;
 
 export type FeatureFlagName = keyof typeof FEATURE_FLAGS;
