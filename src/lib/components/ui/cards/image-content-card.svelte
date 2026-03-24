@@ -39,18 +39,30 @@
 </script>
 
 <div
-  class="card grid grid-cols-1 items-center gap-8 border border-brand-border bg-brand-canvas px-5 py-6 shadow-sm sm:gap-10 sm:px-6 sm:py-7 md:grid-cols-3 md:gap-12 lg:px-8 lg:py-8"
+  class="brand-outline-card group relative grid grid-cols-1 items-center gap-8 rounded-[1.75rem] border border-brand-border bg-brand-canvas/92 px-5 py-6 shadow-sm sm:gap-10 sm:px-6 sm:py-7 md:grid-cols-3 md:gap-12 lg:px-8 lg:py-8"
 >
+  <div
+    class="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-primary-300/75 to-transparent"
+  ></div>
+
   {#if imageOnLeft}
     <div
-      class="card relative order-first mx-auto w-full max-w-md border border-brand-border bg-brand-panel p-3 shadow-sm sm:p-4 md:col-span-1 md:max-w-none"
+      class="relative order-first mx-auto w-full max-w-md md:col-span-1 md:max-w-none"
     >
-      <img
-        src={asset(image.src)}
-        alt={image.alt}
-        class="card aspect-[4/3] w-full object-cover shadow-md"
-        loading="lazy"
-      />
+      <div
+        class="absolute -inset-3 rounded-[2rem] bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-primary-100)_72%,transparent)_0%,transparent_72%)] blur-xl"
+      ></div>
+      <div
+        class="brand-outline-card card relative overflow-hidden border border-brand-border bg-brand-panel p-3 shadow-sm sm:p-4"
+      >
+        <div class="brand-soft-grid absolute inset-0 opacity-30"></div>
+        <img
+          src={asset(image.src)}
+          alt={image.alt}
+          class="card relative aspect-[4/3] w-full object-cover shadow-md"
+          loading="lazy"
+        />
+      </div>
     </div>
     <div class="order-last space-y-5 md:col-span-2 md:mr-12 md:space-y-6">
       <div class="flex flex-wrap items-start gap-2">
@@ -108,14 +120,22 @@
       {/if}
     </div>
     <div
-      class="card relative order-first mx-auto w-full max-w-md border border-brand-border bg-brand-panel p-3 shadow-sm sm:p-4 md:order-last md:col-span-1 md:max-w-none"
+      class="relative order-first mx-auto w-full max-w-md md:order-last md:col-span-1 md:max-w-none"
     >
-      <img
-        src={asset(image.src)}
-        alt={image.alt}
-        class="card aspect-[4/3] w-full object-cover shadow-md"
-        loading="lazy"
-      />
+      <div
+        class="absolute -inset-3 rounded-[2rem] bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-secondary-100)_70%,transparent)_0%,transparent_72%)] blur-xl"
+      ></div>
+      <div
+        class="brand-outline-card card relative overflow-hidden border border-brand-border bg-brand-panel p-3 shadow-sm sm:p-4"
+      >
+        <div class="brand-soft-grid absolute inset-0 opacity-30"></div>
+        <img
+          src={asset(image.src)}
+          alt={image.alt}
+          class="card relative aspect-[4/3] w-full object-cover shadow-md"
+          loading="lazy"
+        />
+      </div>
     </div>
   {/if}
 </div>

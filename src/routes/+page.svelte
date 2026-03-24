@@ -305,6 +305,7 @@
 <HeroSection />
 
 <QuoteCallout
+  eyebrow="The Everyday Problem"
   quoteText="Life’s already busy enough—why does keeping track of your own things have to feel like a second job? One day you’re tearing apart the house for that one thing you swore was in the closet. The next, you’re buying a duplicate because it was easier than looking. Then there’s the group trip or event where everyone thought someone else was bringing that one crucial item—until it was too late. These little everyday headaches add up—and steal time away from the things that actually matter."
 />
 
@@ -314,18 +315,25 @@
   items={problemSolutionData}
 />
 
-<Switchbacks items={switchbackItems} />
+<Switchbacks
+  eyebrow="How It Comes Together"
+  title="Everything has a place, a purpose, and a plan"
+  description="Kwipoo connects the things you own, where they live, the sets you reuse, and the events you prepare for so the whole system stays practical instead of becoming another chore."
+  items={switchbackItems}
+/>
 
 <section
-  class="card mb-30 border border-brand-border bg-brand-canvas px-5 py-8 sm:p-8 lg:px-10"
+  class="brand-outline-card card relative mb-30 overflow-hidden border border-brand-border bg-brand-canvas px-5 py-8 shadow-sm sm:p-8 lg:px-10"
 >
-  <div class="max-w-6xl mx-auto">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      class="absolute -left-10 top-0 h-48 w-48 rounded-full bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-secondary-100)_72%,transparent)_0%,transparent_72%)] blur-2xl"
+    ></div>
+  </div>
+
+  <div class="relative mx-auto max-w-6xl">
     <div class="mb-8 text-left md:mb-10 md:text-center">
-      <p
-        class="mb-3 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
-      >
-        Common Questions
-      </p>
+      <p class="brand-section-label mb-4">Common Questions</p>
       <h2 class="mb-4 text-3xl font-bold text-primary-950 sm:text-4xl">
         What people usually want to know before using Kwipoo
       </h2>
@@ -341,8 +349,11 @@
     <div class="grid gap-4 md:grid-cols-2">
       {#each faqItems as item (item.question)}
         <article
-          class="rounded-[1.5rem] border border-brand-border bg-brand-canvas p-6 shadow-sm"
+          class="brand-outline-card relative rounded-[1.5rem] border border-brand-border bg-brand-panel/80 p-6 shadow-sm"
         >
+          <div
+            class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary-300/70 to-transparent"
+          ></div>
           <h3 class="text-xl font-semibold text-color">
             {item.question}
           </h3>
@@ -356,7 +367,8 @@
 </section>
 
 <QuoteCallout
-  quoteText="We all have better things to do than hunt for missing stuff or panic over last-minute errands. Kwipoo gives you back that time and headspace—so you can actually enjoy your hobbies, family events, or just day-to-day life without  the frantic scramble."
+  eyebrow="The Calmer Alternative"
+  quoteText="We all have better things to do than hunt for missing stuff or panic over last-minute errands. Kwipoo gives you back that time and headspace so you can actually enjoy your hobbies, family events, or just day-to-day life without the frantic scramble."
   showButton={true}
   buttonText="Create a Free Account Today"
   buttonVariant="primary"

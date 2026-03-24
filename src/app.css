@@ -166,20 +166,113 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
     font-family: var(--font-jost);
     background-color: var(--body-background-color);
+    background-image:
+      radial-gradient(
+        circle at top,
+        color-mix(in srgb, var(--color-primary-100) 78%, transparent) 0%,
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 82% 18%,
+        color-mix(in srgb, var(--color-secondary-100) 72%, transparent) 0%,
+        transparent 22%
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-surface-50) 92%, white 8%) 0%,
+        var(--color-surface-50) 42%,
+        color-mix(
+            in srgb,
+            var(--color-surface-100) 94%,
+            var(--color-primary-50) 6%
+          )
+          100%
+      );
     color: var(--base-font-color);
     line-height: 1.5;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-primary-200) 82%, white 18%);
+    color: var(--color-surface-950);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
   }
 }
 
 @layer utilities {
   .text-color {
     color: var(--color-text);
+  }
+
+  .brand-section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-border) 92%, white 8%);
+    background: color-mix(in srgb, var(--color-brand-panel) 84%, white 16%);
+    color: var(--color-primary-800);
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    font-family: var(--font-jost-semibold);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .brand-outline-card {
+    box-shadow:
+      0 24px 70px -42px
+        color-mix(in srgb, var(--color-primary-900) 22%, transparent),
+      inset 0 1px 0 color-mix(in srgb, white 62%, transparent);
+  }
+
+  .brand-soft-grid {
+    background-image:
+      linear-gradient(
+        color-mix(in srgb, var(--color-brand-border) 42%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-brand-border) 42%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 32px 32px;
+    mask-image: linear-gradient(
+      180deg,
+      transparent,
+      black 18%,
+      black 82%,
+      transparent
+    );
+  }
+
+  .animate-float-soft {
+    animation: float-soft 8s ease-in-out infinite;
+  }
+
+  .animate-float-soft-delayed {
+    animation: float-soft 9s ease-in-out infinite;
+    animation-delay: -3s;
   }
 }
