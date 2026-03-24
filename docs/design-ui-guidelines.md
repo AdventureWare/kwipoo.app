@@ -63,6 +63,21 @@ This document is the default design brief for the Kwipoo marketing website. Read
 - Keep headings, screenshots, and CTA groups inside a predictable content width so they do not feel edge-to-edge or cramped.
 - Preserve at least one piece of product proof on mobile when the section depends on visual credibility.
 
+## System Reuse
+
+- Reuse existing section shells, cards, button treatments, and content-width patterns before introducing new structural classes.
+- Prefer semantic theme tokens and established utility combinations over one-off colors, shadows, or spacing values.
+- When a new layout need is close to an existing pattern, extend the existing pattern instead of creating a visually separate mini-system.
+- Keep spacing rhythmic within and between sections. Related content should tighten together before the whole page becomes denser.
+- Favor clean alignment lines between headings, body copy, screenshots, and CTA groups. Misalignment is usually a hierarchy problem before it is a styling problem.
+
+## Interaction Modes
+
+- Critical actions must remain available without hover.
+- Touch layouts should prioritize tap comfort, clear spacing, and obvious action placement over matching desktop density.
+- Do not rely on pointer precision for navigation, CTA groups, or dense card layouts.
+- Keyboard focus must stay visible when interactive styling is adjusted.
+
 ## Forms And Inputs
 
 - Default to a single-column form layout on narrow screens.
@@ -84,10 +99,16 @@ This document is the default design brief for the Kwipoo marketing website. Read
 Before finishing design-related work, check these:
 
 - Is the most important message visible without scanning the whole page?
+- Is the visual hierarchy obvious enough that a new visitor can tell what matters first?
 - Is there a single clear next action in each section?
+- Are spacing, grouping, and alignment consistent with nearby sections?
+- Does the primary action still look primary after the layout adapts across breakpoints?
+- Is anything feeling cramped, noisy, or overly dense at intermediate widths?
 - Does the page still feel airy and intentional on both desktop and mobile?
 - Is there any horizontal overflow at common mobile widths?
 - Are important screenshots, forms, and CTAs still usable at `320px` to `390px` widths?
+- Would the layout still make sense to both touch and pointer users?
 - Are screenshot treatments, shadows, radii, and spacing consistent?
+- Did you inspect a rendered result or screenshot, not just the source code?
 - Did the change improve clarity, polish, or usability rather than just add decoration?
 - Did you run `npm run test:e2e` for meaningful UI/layout changes?
