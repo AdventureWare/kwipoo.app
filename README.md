@@ -103,7 +103,8 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - The `Quality` workflow runs Prettier, ESLint, Svelte typechecking, and fast Vitest checks on every protected-branch push and pull request.
 - The `E2E` workflow runs a production build plus desktop Playwright smoke tests on pull requests, then expands to desktop, mobile, and narrow-mobile smoke coverage on pushes to `develop` and `main`.
 - Commit messages are checked against the repository's conventional-commit policy.
-- Deployment is expected to flow through Netlify using this repo and `netlify.toml` rather than a separate GitHub deploy workflow.
+- Deployment is expected to flow through Vercel using this repo's linked GitHub project rather than a separate GitHub deploy workflow.
+- Keep production environment variables and the `kwipoo.app` domain configured in Vercel. Local `.vercel/` metadata should stay uncommitted.
 
 ## Releases
 
