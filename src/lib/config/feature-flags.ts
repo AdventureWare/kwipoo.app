@@ -56,7 +56,7 @@ export const FEATURE_FLAGS = {
   releaseHistory: resolveBooleanFlag(
     "PUBLIC_FEATURE_RELEASE_HISTORY",
     env.PUBLIC_FEATURE_RELEASE_HISTORY,
-    false,
+    true,
   ),
 } as const;
 

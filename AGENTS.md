@@ -24,6 +24,7 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 ## Working Rules
 
 - Reuse `src/lib/config/site.ts` for app URLs, public-site URLs, and support contact data instead of hardcoding new copies.
+- Public release history content is synced from the app repo's generated feed; use `npm run releases:sync` when app release records change and keep `src/lib/content/releases.generated.ts` committed.
 - Use `resolve()` for internal route links and `asset()` for static asset URLs referenced from Svelte components.
 - Keep edits scoped. This repo is mostly copy, layout, and asset wiring.
 - Preserve the current visual language unless the user asks for a redesign.
@@ -50,6 +51,7 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 
 - Run `npm run check`
 - Run `npm run lint`
+- Run `npm run releases:sync` or `npm run releases:check` when touching the `/releases` content pipeline
 - For meaningful UI or layout changes, run `npm run test:e2e`
 - When the change is responsive-layout sensitive, make sure mobile coverage is part of the run, especially the narrow-mobile project
 - If the Svelte MCP server is available:
