@@ -110,19 +110,6 @@
         class="relative flex justify-center pb-10 sm:pb-12 lg:justify-end lg:py-12"
       >
         <div
-          class="animate-float-soft absolute left-0 top-16 hidden max-w-[13rem] rounded-[1.5rem] border border-brand-border bg-brand-canvas/92 p-4 shadow-sm lg:block"
-        >
-          <p
-            class="text-xs font-semibold uppercase tracking-[0.18em] text-primary-700"
-          >
-            Find It Fast
-          </p>
-          <p class="mt-2 text-sm leading-relaxed text-brand-body">
-            See the place, spot, or set before you start digging through bins.
-          </p>
-        </div>
-
-        <div
           class="animate-float-soft-delayed absolute -right-3 bottom-14 hidden max-w-[13rem] rounded-[1.5rem] border border-brand-border bg-brand-canvas/92 p-4 shadow-sm xl:block"
         >
           <p
