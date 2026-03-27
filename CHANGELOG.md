@@ -1,27 +1,5 @@
 # kwipoo.app
 
-## 0.0.13
-
-### Patch Changes
-
-- 1f04f34: Enable the docs section by default unless `PUBLIC_FEATURE_DOCS` explicitly disables it.
-- 81a2ed1: Expand the reusable feature badge system so docs and marketing surfaces can show labels like Coming Soon, New, and Updated in addition to Beta and Premium.
-- 81a2ed1: Update feature status badges so Sets, Events, Social, and Profile are marked as beta.
-- 1f04f34: Update the homepage feature sections so their Learn More buttons open the matching documentation pages.
-- 81a2ed1: Add a local mock Premium checkout flow that can be used to walk through the purchase experience.
-- 81a2ed1: Keep unfinished resources and release-history pages out of indexing and centralize footer social links in shared site config.
-- 81a2ed1: Add Premium signup wiring with configurable checkout and signup handoff URLs.
-- 81a2ed1: Add a draft pricing page scaffold with placeholder Free, Premium, and Custom plan content.
-- 81a2ed1: Remove the Support link from the shared site header navigation.
-- 81a2ed1: Add Coming Soon badges to the Articles, Videos, and Tutorials cards on the Resources page.
-- 81a2ed1: Clean up placeholder-style wording on the Resources landing page so the page reads more like finished marketing copy.
-- 81a2ed1: Add the first audience-specific guides to the Resources section for outdoor gear, households, and travel-heavy routines.
-- 81a2ed1: Include live resource pages in the public sitemap so search engines can discover the enabled Resources section.
-- 81a2ed1: Point the main marketing-site acquisition CTAs to the signup flow instead of the generic login screen.
-- 81a2ed1: Add a public support page and link it from the shared site navigation.
-- 81a2ed1: Add reusable feature status badges for docs and homepage feature sections.
-- 335c339: Update the docs to use the current visibility labels: Public, Friends Only, and Owner Only.
-
 ## 0.0.12
 
 ### Patch Changes

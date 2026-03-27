@@ -20,6 +20,7 @@ npm run dev
 Useful validation commands:
 
 ```sh
+npm run releases:sync
 npm run test:unit
 npm run theme:sync
 npm run check
@@ -37,7 +38,7 @@ Feature flags live in `src/lib/config/feature-flags.ts`.
 - `docs` defaults to `true` and can be overridden with `PUBLIC_FEATURE_DOCS`.
 - `resources` defaults to `true` and can be overridden with `PUBLIC_FEATURE_RESOURCES`.
 - `pricing` defaults to `false` and can be overridden with `PUBLIC_FEATURE_PRICING`.
-- `releaseHistory` defaults to `false` and can be overridden with `PUBLIC_FEATURE_RELEASE_HISTORY`.
+- `releaseHistory` defaults to `true` and can be overridden with `PUBLIC_FEATURE_RELEASE_HISTORY`.
 - Public flags are appropriate for UI and route gating. They are not appropriate for secrets or server-only access control.
 
 Create a local `.env` from `.env.example` when you want to override a flag locally.
@@ -69,6 +70,7 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - `src/routes/terms-and-conditions/+page.svelte`: terms and conditions page.
 - `static/assets/`: screenshots, product imagery, and brand assets.
 - `src/lib/config/site.ts`: source of truth for site/app URLs and support contact info.
+- `src/lib/content/releases.generated.ts`: generated release-history snapshot synced from the app repo.
 
 ## Content Conventions
 
@@ -84,8 +86,18 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - Shared brand ramps live in `src/lib/styles/kwipoo-brand-theme.generated.css`.
 - That file is generated from the app theme source, not edited by hand.
 - Run `npm run theme:sync` after changing the app theme.
+- Run `npm run releases:sync` after the app repo publishes or revises website-facing release records.
 - The website keeps its own semantic surface and presentation tokens in `src/app.css`.
 - See `docs/brand-theme-workflow.md` for the maintenance workflow.
+
+## Release History Sync
+
+- The public `/releases` page is driven by the app repo's canonical release records.
+- The app repo generates a website feed at `releases/derived/website/releases.json`.
+- This repo imports that feed into `src/lib/content/releases.generated.ts` with `npm run releases:sync`.
+- By default the sync script looks for the app feed at `/Users/colinfreed/Kwipoo/releases/derived/website/releases.json`.
+- Override the source path with `KWIPOO_APP_RELEASES_FILE=/path/to/releases.json` or point at an app checkout with `KWIPOO_APP_REPO_PATH=/path/to/Kwipoo`.
+- `npm run dev` and `npm run build` both attempt a best-effort sync first when the app feed is available, but they keep the committed snapshot if that source path is missing.
 
 ## AI Agent Workflow
 
@@ -103,7 +115,8 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - The `Quality` workflow runs Prettier, ESLint, Svelte typechecking, and fast Vitest checks on every protected-branch push and pull request.
 - The `E2E` workflow runs a production build plus desktop Playwright smoke tests on pull requests, then expands to desktop, mobile, and narrow-mobile smoke coverage on pushes to `develop` and `main`.
 - Commit messages are checked against the repository's conventional-commit policy.
-- Deployment is expected to flow through Netlify using this repo and `netlify.toml` rather than a separate GitHub deploy workflow.
+- Deployment is expected to flow through Vercel using this repo's linked GitHub project rather than a separate GitHub deploy workflow.
+- Keep production environment variables and the `kwipoo.app` domain configured in Vercel. Local `.vercel/` metadata should stay uncommitted.
 
 ## Releases
 

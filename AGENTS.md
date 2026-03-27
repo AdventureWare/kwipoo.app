@@ -24,6 +24,7 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 ## Working Rules
 
 - Reuse `src/lib/config/site.ts` for app URLs, public-site URLs, and support contact data instead of hardcoding new copies.
+- Public release history content is synced from the app repo's generated feed; use `npm run releases:sync` when app release records change and keep `src/lib/content/releases.generated.ts` committed.
 - Use `resolve()` for internal route links and `asset()` for static asset URLs referenced from Svelte components.
 - Keep edits scoped. This repo is mostly copy, layout, and asset wiring.
 - Preserve the current visual language unless the user asks for a redesign.
@@ -37,10 +38,20 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 - Keep release-promotion commit messages conventional-commit compliant and prefer `Rebase and merge` when landing that PR.
 - After a Changesets release PR merges to `main`, prefer the automated sync PR back into `develop` over manual cherry-picks of `chore: version packages`, unless that automation has clearly failed.
 
+## UI Workflow
+
+- For meaningful UI work, inspect the relevant route plus nearby shared components, `src/app.css`, and the closest existing pattern before adding new layout or styling.
+- Before coding, briefly state the intended visual hierarchy, primary action, and how the layout should reflow from mobile to tablet to desktop.
+- Build mobile-first. Reuse existing containers, cards, buttons, tokens, and spacing rhythm before introducing one-off widths, gaps, or breakpoint behavior.
+- Treat touch and pointer input as separate checks. Keep primary actions reachable without hover, and keep tap targets comfortable on small screens.
+- After implementation, review the rendered result for hierarchy, spacing, alignment, grouping, density, and CTA priority, not just for code correctness.
+- When feasible, prefer screenshot or rendered-preview review across `320px`, `390px`, `768px`, `1024px`, and `1440px` instead of relying only on source inspection.
+
 ## Validation
 
 - Run `npm run check`
 - Run `npm run lint`
+- Run `npm run releases:sync` or `npm run releases:check` when touching the `/releases` content pipeline
 - For meaningful UI or layout changes, run `npm run test:e2e`
 - When the change is responsive-layout sensitive, make sure mobile coverage is part of the run, especially the narrow-mobile project
 - If the Svelte MCP server is available:
@@ -52,4 +63,5 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 ## Local Skill
 
 - Use `.agents/skills/marketing-site-maintainer` for recurring work in this repo.
+- Use `.agents/skills/marketing-site-ui-builder` when implementing or refactoring marketing-site UI, layout, or responsive behavior.
 - Use `.agents/skills/marketing-site-design-review` for visual design, UX polish, and responsive-layout work.
