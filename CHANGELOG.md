@@ -1,5 +1,28 @@
 # kwipoo.app
 
+## 0.0.13
+
+### Patch Changes
+
+- 897330d: Enable the docs section by default unless `PUBLIC_FEATURE_DOCS` explicitly disables it.
+- 897330d: Expand the reusable feature badge system so docs and marketing surfaces can show labels like Coming Soon, New, and Updated in addition to Beta and Premium.
+- 897330d: Update feature status badges so Sets, Events, Social, and Profile are marked as beta.
+- 897330d: Update the homepage feature sections so their Learn More buttons open the matching documentation pages.
+- 897330d: Add a local mock Premium checkout flow that can be used to walk through the purchase experience.
+- 897330d: Keep unfinished resources and release-history pages out of indexing and centralize footer social links in shared site config.
+- 897330d: Add Premium signup wiring with configurable checkout and signup handoff URLs.
+- 897330d: Add a draft pricing page scaffold with placeholder Free, Premium, and Custom plan content.
+- 897330d: Remove the Support link from the shared site header navigation.
+- 897330d: Add Coming Soon badges to the Articles, Videos, and Tutorials cards on the Resources page.
+- 897330d: Clean up placeholder-style wording on the Resources landing page so the page reads more like finished marketing copy.
+- 897330d: Add the first audience-specific guides to the Resources section for outdoor gear, households, and travel-heavy routines.
+- 897330d: Include live resource pages in the public sitemap so search engines can discover the enabled Resources section.
+- 897330d: Point the main marketing-site acquisition CTAs to the signup flow instead of the generic login screen.
+- 897330d: Refresh the homepage, header, and footer with more polished layout framing, richer section hierarchy, and refined visual treatments across key marketing surfaces.
+- 897330d: Add a public support page and link it from the shared site navigation.
+- 897330d: Add reusable feature status badges for docs and homepage feature sections.
+- 897330d: Update the docs to use the current visibility labels: Public, Friends Only, and Owner Only.
+
 ## 0.0.12
 
 ### Patch Changes
