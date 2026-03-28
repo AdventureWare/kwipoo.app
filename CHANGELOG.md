@@ -1,5 +1,11 @@
 # kwipoo.app
 
+## 0.0.14
+
+### Patch Changes
+
+- 6534e49: Add a public delete-data request page and link it from the footer.
+
 ## 0.0.13
 
 ### Patch Changes
