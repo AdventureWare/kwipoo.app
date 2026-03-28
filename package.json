@@ -27,13 +27,13 @@
     "test:unit:watch": "vitest",
     "test:e2e": "npm run test:e2e:full",
     "test:e2e:ci": "npm run test:e2e:full:ci",
-    "test:e2e:smoke": "npm run build && playwright test --grep @smoke --project=preview-desktop",
+    "test:e2e:smoke": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-desktop",
     "test:e2e:smoke:ci": "playwright test --grep @smoke --project=preview-desktop",
-    "test:e2e:full": "npm run build && playwright test --grep @smoke",
+    "test:e2e:full": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke",
     "test:e2e:full:ci": "playwright test --grep @smoke",
-    "test:e2e:desktop": "npm run build && playwright test --grep @smoke --project=preview-desktop",
-    "test:e2e:mobile": "npm run build && playwright test --grep @smoke --project=preview-mobile",
-    "test:e2e:narrow": "npm run build && playwright test --grep @smoke --project=preview-narrow-mobile"
+    "test:e2e:desktop": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-desktop",
+    "test:e2e:mobile": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-mobile",
+    "test:e2e:narrow": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-narrow-mobile"
   },
   "devDependencies": {
     "@changesets/cli": "^2.30.0",
