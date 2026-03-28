@@ -1,15 +1,20 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const manageWebServerInternally =
+  process.env.KWIPOO_MANAGE_PLAYWRIGHT_PREVIEW !== "1";
+
 const config = defineConfig({
   forbidOnly: !!process.env.CI,
   reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
   retries: process.env.CI ? 1 : 0,
-  webServer: {
-    command: "npm run preview -- --host 127.0.0.1 --port 4173",
-    url: "http://127.0.0.1:4173",
-    timeout: 120_000,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: manageWebServerInternally
+    ? {
+        command: "npm run preview -- --host 127.0.0.1 --port 4173",
+        url: "http://127.0.0.1:4173",
+        timeout: 120_000,
+        reuseExistingServer: !process.env.CI,
+      }
+    : undefined,
   testDir: "tests/e2e",
   testMatch: /(.+\.)?(test|spec)\.[jt]s/,
   use: {

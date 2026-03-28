@@ -61,6 +61,11 @@ describe("site sections", () => {
             },
           ]
         : []),
+      {
+        id: "deleteDataForm",
+        href: "/delete-data-form",
+        label: "Delete Data Request",
+      },
       { id: "privacyPolicy", href: "/privacy-policy", label: "Privacy Policy" },
       {
         id: "termsAndConditions",
@@ -78,6 +83,7 @@ describe("site sections", () => {
       "/support",
     ]);
     expect(getSitePathsByDiscoverability("reference")).toEqual([
+      "/delete-data-form",
       "/privacy-policy",
       "/terms-and-conditions",
     ]);
