@@ -124,7 +124,7 @@ export const SITE_SECTIONS: SiteSection[] = [
     surfaceOrder: {
       footer: 5,
     },
-    discoverability: "indexable",
+    discoverability: "reference",
   },
   {
     id: "privacyPolicy",
