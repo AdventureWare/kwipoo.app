@@ -31,8 +31,7 @@
     "Kwipoo Documentation | Inventory, Storage, and Packing Guides";
   const docsDescription =
     "Browse the Kwipoo documentation for setup guidance, inventory structure, storage concepts, and feature walkthroughs.";
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const docsStructuredData = toSeoJsonLd({
+  const docsStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -52,7 +51,7 @@
         { name: "Docs", path: "/docs" },
       ]),
     ],
-  });
+  };
 </script>
 
 <svelte:head>
@@ -68,9 +67,9 @@
   <meta property="og:url" content={toAbsoluteMarketingUrl("/docs")} />
   <meta name="twitter:title" content={docsTitle} />
   <meta name="twitter:description" content={docsDescription} />
-  <script type="application/ld+json">
-{docsStructuredData}
-  </script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(docsStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <header class="space-y-4">

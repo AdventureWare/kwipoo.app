@@ -41,7 +41,7 @@
     }
   >;
 
-  const mockCheckoutStructuredData = toSeoJsonLd({
+  const mockCheckoutStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -62,7 +62,7 @@
         { name: "Mock Checkout", path: "/pricing/premium/mock-checkout" },
       ]),
     ],
-  });
+  };
 
   let step = $state<CheckoutStep>("details");
   let billingCycle = $state<BillingCycle>("monthly");
@@ -111,7 +111,6 @@
     step = "details";
   }
 
-  void mockCheckoutStructuredData;
 </script>
 
 <svelte:head>
@@ -127,10 +126,9 @@
   />
   <meta name="twitter:title" content={mockCheckoutTitle} />
   <meta name="twitter:description" content={mockCheckoutDescription} />
-  <!-- prettier-ignore -->
-  <script type="application/ld+json">
-{mockCheckoutStructuredData}
-  </script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(mockCheckoutStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <div class="grid gap-10 pb-10">

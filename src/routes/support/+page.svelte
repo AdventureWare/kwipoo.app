@@ -69,7 +69,7 @@
     "Screenshots or short reproduction steps when they help explain the problem",
   ] as const;
 
-  const supportStructuredData = toSeoJsonLd({
+  const supportStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -88,9 +88,7 @@
         { name: "Support", path: "/support" },
       ]),
     ],
-  });
-
-  void supportStructuredData;
+  };
 </script>
 
 <svelte:head>
@@ -103,7 +101,9 @@
   <meta property="og:url" content={toAbsoluteMarketingUrl("/support")} />
   <meta name="twitter:title" content={supportTitle} />
   <meta name="twitter:description" content={supportDescription} />
-  <script type="application/ld+json">{supportStructuredData}</script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(supportStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <div class="grid gap-10 pb-10">

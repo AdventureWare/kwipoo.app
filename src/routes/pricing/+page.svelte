@@ -132,7 +132,7 @@
     },
   ] satisfies ComparisonRow[];
 
-  const pricingStructuredData = toSeoJsonLd({
+  const pricingStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -151,9 +151,7 @@
         { name: "Pricing", path: "/pricing" },
       ]),
     ],
-  });
-
-  void pricingStructuredData;
+  };
 </script>
 
 <svelte:head>
@@ -166,10 +164,9 @@
   <meta property="og:url" content={toAbsoluteMarketingUrl("/pricing")} />
   <meta name="twitter:title" content={pricingTitle} />
   <meta name="twitter:description" content={pricingDescription} />
-  <!-- prettier-ignore -->
-  <script type="application/ld+json">
-{pricingStructuredData}
-  </script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(pricingStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <div class="grid gap-10 pb-10">

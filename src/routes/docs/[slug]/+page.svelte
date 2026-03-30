@@ -26,9 +26,8 @@
   }
 
   let docUrl = $derived(toAbsoluteMarketingUrl(getDocsHref(data.docPage.slug)));
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let docsStructuredData = $derived(
-    toSeoJsonLd({
+    {
       "@context": "https://schema.org",
       "@graph": [
         {
@@ -55,7 +54,7 @@
           { name: data.docPage.title, path: getDocsHref(data.docPage.slug) },
         ]),
       ],
-    }),
+    },
   );
 </script>
 
@@ -78,9 +77,9 @@
   <meta property="article:section" content={data.docPage.category} />
   <meta name="twitter:title" content={`${data.docPage.title} | Kwipoo Docs`} />
   <meta name="twitter:description" content={data.docPage.description} />
-  <script type="application/ld+json">
-{docsStructuredData}
-  </script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(docsStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <header class="space-y-4">

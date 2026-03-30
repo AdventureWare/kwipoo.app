@@ -1,4 +1,9 @@
-import { expect, test, type APIRequestContext } from "@playwright/test";
+import {
+  expect,
+  test,
+  type APIRequestContext,
+  type Page,
+} from "@playwright/test";
 
 async function docsAreAvailable(request: APIRequestContext): Promise<boolean> {
   const response = await request.get("/docs");
@@ -22,6 +27,19 @@ async function resourcesAreAvailable(
   return response.status() === 200;
 }
 
+async function expectJsonLdScriptsToParse(page: Page): Promise<void> {
+  const scripts = await page
+    .locator('script[type="application/ld+json"]')
+    .allTextContents();
+
+  expect(scripts.length).toBeGreaterThan(0);
+
+  for (const scriptContent of scripts) {
+    expect(scriptContent).not.toMatch(/\{[A-Za-z]+StructuredData\}/);
+    expect(() => JSON.parse(scriptContent)).not.toThrow();
+  }
+}
+
 test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await page.goto("/");
 
@@ -35,6 +53,7 @@ test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await expect(
     page.getByRole("button", { name: /create a free account today/i }),
   ).toBeVisible();
+  await expectJsonLdScriptsToParse(page);
 });
 
 test("@smoke homepage keeps the primary CTA and product proof available without horizontal overflow", async ({
@@ -82,6 +101,7 @@ test("@smoke docs and legal pages render the expected headings", async ({
         name: /^documentation$/i,
       }),
     ).toBeVisible();
+    await expectJsonLdScriptsToParse(page);
 
     await page.goto("/docs/getting-started");
     await expect(
@@ -90,6 +110,7 @@ test("@smoke docs and legal pages render the expected headings", async ({
         name: /getting started with kwipoo/i,
       }),
     ).toBeVisible();
+    await expectJsonLdScriptsToParse(page);
   } else {
     const docsResponse = await page.goto("/docs");
     expect(docsResponse?.status()).toBe(404);
@@ -102,11 +123,13 @@ test("@smoke docs and legal pages render the expected headings", async ({
   await expect(
     page.getByRole("heading", { level: 1, name: /privacy policy/i }),
   ).toBeVisible();
+  await expectJsonLdScriptsToParse(page);
 
   await page.goto("/terms-and-conditions");
   await expect(
     page.getByRole("heading", { level: 1, name: /terms and conditions/i }),
   ).toBeVisible();
+  await expectJsonLdScriptsToParse(page);
 });
 
 test("@smoke resources landing page and guide routes resolve consistently", async ({
@@ -121,6 +144,7 @@ test("@smoke resources landing page and guide routes resolve consistently", asyn
         name: /practical guides for organizing real life with kwipoo/i,
       }),
     ).toBeVisible();
+    await expectJsonLdScriptsToParse(page);
 
     await page.goto("/resources/outdoor-adventurers");
     await expect(
@@ -129,6 +153,7 @@ test("@smoke resources landing page and guide routes resolve consistently", asyn
         name: /never lose track of your gear again/i,
       }),
     ).toBeVisible();
+    await expectJsonLdScriptsToParse(page);
   } else {
     const resourcesResponse = await page.goto("/resources");
     expect(resourcesResponse?.status()).toBe(404);
@@ -155,6 +180,7 @@ test("@smoke support page renders the support entry points", async ({
   await expect(
     page.getByRole("link", { name: /kwipoo-support@adventureware\.com/i }),
   ).toBeVisible();
+  await expectJsonLdScriptsToParse(page);
 });
 
 test("@smoke account deletion page renders the account deletion request path", async ({
@@ -173,6 +199,7 @@ test("@smoke account deletion page renders the account deletion request path", a
       name: /submit account deletion request/i,
     }),
   ).toBeVisible();
+  await expectJsonLdScriptsToParse(page);
 });
 
 test("@smoke pricing page renders the draft plan structure", async ({
@@ -200,6 +227,7 @@ test("@smoke pricing page renders the draft plan structure", async ({
     await expect(
       page.getByRole("button", { name: /speak to sales/i }).first(),
     ).toBeVisible();
+    await expectJsonLdScriptsToParse(page);
   } else {
     const pricingResponse = await page.goto("/pricing");
     expect(pricingResponse?.status()).toBe(404);
@@ -224,6 +252,7 @@ test("@smoke premium signup flow route resolves to either a wired handoff or a g
         name: /continue to checkout|create account and upgrade|contact us about premium/i,
       }),
     ).toBeVisible();
+    await expectJsonLdScriptsToParse(page);
   } else {
     const premiumSignupResponse = await page.goto("/pricing/premium");
     expect(premiumSignupResponse?.status()).toBe(404);
@@ -246,6 +275,7 @@ test("@smoke mock premium checkout route renders an interactive purchase shell",
     await expect(
       page.getByRole("button", { name: /review mock purchase/i }),
     ).toBeVisible();
+    await expectJsonLdScriptsToParse(page);
   } else {
     const mockCheckoutResponse = await page.goto(
       "/pricing/premium/mock-checkout",

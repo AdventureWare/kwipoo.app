@@ -241,7 +241,7 @@
   const docsUrl = isSiteSectionEnabled("docs")
     ? `${MARKETING_SITE_URL}/docs`
     : undefined;
-  const homeStructuredData = toSeoJsonLd({
+  const homeStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       getOrganizationJsonLd(),
@@ -278,9 +278,7 @@
         })),
       },
     ],
-  });
-
-  void homeStructuredData;
+  };
 </script>
 
 <svelte:head>
@@ -297,9 +295,9 @@
   <meta property="og:url" content={MARKETING_SITE_URL} />
   <meta name="twitter:title" content={homeTitle} />
   <meta name="twitter:description" content={SITE_DESCRIPTION} />
-  <script type="application/ld+json">
-{homeStructuredData}
-  </script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(homeStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <HeroSection />

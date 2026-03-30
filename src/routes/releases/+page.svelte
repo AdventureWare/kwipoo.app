@@ -63,7 +63,7 @@
     return `release-${version.replace(/\./g, "-")}`;
   }
 
-  const releaseStructuredData = toSeoJsonLd({
+  const releaseStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -91,9 +91,7 @@
         { name: "Release History", path: "/releases" },
       ]),
     ],
-  });
-
-  void releaseStructuredData;
+  };
 </script>
 
 <svelte:head>
@@ -105,7 +103,9 @@
   <meta property="og:url" content={toAbsoluteMarketingUrl("/releases")} />
   <meta name="twitter:title" content={releaseTitle} />
   <meta name="twitter:description" content={releaseDescription} />
-  <script type="application/ld+json">{releaseStructuredData}</script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(releaseStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <div class="grid gap-10 pb-10">

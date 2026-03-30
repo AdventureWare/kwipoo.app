@@ -100,7 +100,7 @@
 
   const premiumFlowState = flowStateByMode[PREMIUM_SIGNUP_MODE];
 
-  const premiumSignupStructuredData = toSeoJsonLd({
+  const premiumSignupStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -120,9 +120,7 @@
         { name: "Premium Signup", path: "/pricing/premium" },
       ]),
     ],
-  });
-
-  void premiumSignupStructuredData;
+  };
 </script>
 
 <svelte:head>
@@ -138,10 +136,9 @@
   />
   <meta name="twitter:title" content={premiumSignupTitle} />
   <meta name="twitter:description" content={premiumSignupDescription} />
-  <!-- prettier-ignore -->
-  <script type="application/ld+json">
-{premiumSignupStructuredData}
-  </script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(premiumSignupStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <div class="grid gap-10 pb-10">

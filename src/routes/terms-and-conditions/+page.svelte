@@ -4,14 +4,13 @@
   const termsTitle = "Terms and Conditions | Kwipoo";
   const termsDescription =
     "Read the Kwipoo terms and conditions for account use, licenses, user responsibilities, dispute terms, and service policies.";
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const termsStructuredData = toSeoJsonLd({
+  const termsStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: termsTitle,
     description: termsDescription,
     url: toAbsoluteMarketingUrl("/terms-and-conditions"),
-  });
+  };
 </script>
 
 <svelte:head>
@@ -27,7 +26,9 @@
   />
   <meta name="twitter:title" content={termsTitle} />
   <meta name="twitter:description" content={termsDescription} />
-  <script type="application/ld+json">{termsStructuredData}</script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(termsStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <article class="">

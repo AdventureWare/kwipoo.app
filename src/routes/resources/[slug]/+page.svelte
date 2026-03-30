@@ -31,9 +31,8 @@
   let guideUrl = $derived(
     toAbsoluteMarketingUrl(getResourcesHref(data.resourceGuide.slug)),
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let resourceStructuredData = $derived(
-    toSeoJsonLd({
+    {
       "@context": "https://schema.org",
       "@graph": [
         {
@@ -66,7 +65,7 @@
           },
         ]),
       ],
-    }),
+    },
   );
 
   function resolveResourceHref(slug: string): string {
@@ -99,9 +98,9 @@
     content={`${data.resourceGuide.title} | Kwipoo Resources`}
   />
   <meta name="twitter:description" content={data.resourceGuide.description} />
-  <script type="application/ld+json">
-{resourceStructuredData}
-  </script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(resourceStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <header class="space-y-4">

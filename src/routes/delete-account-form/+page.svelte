@@ -26,7 +26,7 @@
     "If your request is broader than account deletion alone, the support and privacy pages remain available.",
   ] as const;
 
-  const pageStructuredData = toSeoJsonLd({
+  const pageStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -45,8 +45,7 @@
         { name: "Delete Account Request", path: "/delete-account-form" },
       ]),
     ],
-  });
-  void pageStructuredData;
+  };
 
   const fieldShellClasses =
     "rounded-[1.15rem] border border-surface-200 bg-white px-4 py-3 text-base text-surface-950 outline-none transition focus:border-primary-400 focus:ring-2 focus:ring-primary-100";
@@ -81,7 +80,9 @@
   />
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={pageDescription} />
-  <script type="application/ld+json">{pageStructuredData}</script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(pageStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <div class="grid gap-10 pb-12">
