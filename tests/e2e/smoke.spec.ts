@@ -157,6 +157,24 @@ test("@smoke support page renders the support entry points", async ({
   ).toBeVisible();
 });
 
+test("@smoke account deletion page renders the account deletion request path", async ({
+  page,
+}) => {
+  await page.goto("/delete-account-form");
+
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: /request deletion of your kwipoo account/i,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: /submit account deletion request/i,
+    }),
+  ).toBeVisible();
+});
+
 test("@smoke pricing page renders the draft plan structure", async ({
   page,
   request,
@@ -276,6 +294,9 @@ test("@smoke homepage footer links and social actions remain accessible on narro
   ).toBeVisible();
   await expect(
     page.getByRole("contentinfo").getByRole("link", { name: /^support$/i }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /delete account request/i }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: /terms & conditions/i }),
