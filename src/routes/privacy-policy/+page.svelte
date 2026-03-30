@@ -4,14 +4,13 @@
   const privacyTitle = "Privacy Policy | Kwipoo";
   const privacyDescription =
     "Read the Kwipoo privacy policy for details about account information, data handling, device permissions, and contact options.";
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const privacyStructuredData = toSeoJsonLd({
+  const privacyStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: privacyTitle,
     description: privacyDescription,
     url: toAbsoluteMarketingUrl("/privacy-policy"),
-  });
+  };
 </script>
 
 <svelte:head>
@@ -24,7 +23,9 @@
   <meta property="og:url" content={toAbsoluteMarketingUrl("/privacy-policy")} />
   <meta name="twitter:title" content={privacyTitle} />
   <meta name="twitter:description" content={privacyDescription} />
-  <script type="application/ld+json">{privacyStructuredData}</script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(privacyStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <article class="">

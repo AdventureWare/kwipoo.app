@@ -94,7 +94,7 @@
     summary: guide.summary,
   }));
 
-  const resourcesStructuredData = toSeoJsonLd({
+  const resourcesStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -113,9 +113,7 @@
         { name: "Resources", path: "/resources" },
       ]),
     ],
-  });
-
-  void resourcesStructuredData;
+  };
 
   function resolveResourceHref(slug: string): string {
     return resolvePath(getResourcesHref(slug));
@@ -135,9 +133,9 @@
   <meta property="og:url" content={toAbsoluteMarketingUrl("/resources")} />
   <meta name="twitter:title" content={resourcesTitle} />
   <meta name="twitter:description" content={resourcesDescription} />
-  <script type="application/ld+json">
-{resourcesStructuredData}
-  </script>
+  <svelte:element this={"script"} type="application/ld+json">
+    {toSeoJsonLd(resourcesStructuredData)}
+  </svelte:element>
 </svelte:head>
 
 <div class="grid gap-10 pb-10">
