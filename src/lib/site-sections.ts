@@ -10,6 +10,7 @@ export type SiteSectionId =
   | "resources"
   | "releaseHistory"
   | "support"
+  | "deleteAccountForm"
   | "deleteDataForm"
   | "privacyPolicy"
   | "termsAndConditions";
@@ -21,6 +22,7 @@ export type SiteSectionPath =
   | "/resources"
   | "/releases"
   | "/support"
+  | "/delete-account-form"
   | "/delete-data-form"
   | "/privacy-policy"
   | "/terms-and-conditions";
@@ -117,12 +119,22 @@ export const SITE_SECTIONS: SiteSection[] = [
     discoverability: "indexable",
   },
   {
+    id: "deleteAccountForm",
+    label: "Delete Account Request",
+    href: "/delete-account-form",
+    surfaces: ["footer"],
+    surfaceOrder: {
+      footer: 5,
+    },
+    discoverability: "reference",
+  },
+  {
     id: "deleteDataForm",
     label: "Delete Data Request",
     href: "/delete-data-form",
     surfaces: ["footer"],
     surfaceOrder: {
-      footer: 5,
+      footer: 6,
     },
     discoverability: "reference",
   },
@@ -132,7 +144,7 @@ export const SITE_SECTIONS: SiteSection[] = [
     href: "/privacy-policy",
     surfaces: ["footer"],
     surfaceOrder: {
-      footer: 6,
+      footer: 7,
     },
     discoverability: "reference",
   },
@@ -142,7 +154,7 @@ export const SITE_SECTIONS: SiteSection[] = [
     href: "/terms-and-conditions",
     surfaces: ["footer"],
     surfaceOrder: {
-      footer: 7,
+      footer: 8,
     },
     discoverability: "reference",
   },
