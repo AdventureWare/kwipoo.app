@@ -1,5 +1,11 @@
 # kwipoo.app
 
+## 0.0.15
+
+### Patch Changes
+
+- 3ccb27a: Add a public delete-account request page and link it from the footer.
+
 ## 0.0.14
 
 ### Patch Changes
