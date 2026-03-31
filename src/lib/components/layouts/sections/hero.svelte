@@ -5,7 +5,7 @@
     ANALYTICS_EVENT_NAMES,
     createMarketingCtaClickedProperties,
   } from "$lib/analytics/schema";
-  import { APP_SIGNUP_URL } from "$lib/config/site";
+  import { APP_LOGIN_URL, APP_SIGNUP_URL } from "$lib/config/site";
   import AppStoreButtons from "../../ui/buttons/app-store-buttons.svelte";
   import Button from "../../ui/buttons/button.svelte";
 </script>
@@ -68,21 +68,41 @@
 
         <div class="flex max-w-xl flex-col gap-3 sm:gap-4">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-            <div class="w-full sm:max-w-xs">
-              <Button
-                variant="primary"
-                size="lg"
-                href={APP_SIGNUP_URL}
-                analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
-                analyticsProperties={createMarketingCtaClickedProperties({
-                  location: "hero",
-                  label: "Create Free Account",
-                  destination: APP_SIGNUP_URL,
-                  kind: "signup",
-                })}
-              >
-                Create Free Account
-              </Button>
+            <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
+              <div class="w-full sm:max-w-xs">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  href={APP_SIGNUP_URL}
+                  analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+                  analyticsProperties={createMarketingCtaClickedProperties({
+                    location: "hero",
+                    label: "Create Free Account",
+                    destination: APP_SIGNUP_URL,
+                    kind: "signup",
+                  })}
+                >
+                  Create Free Account
+                </Button>
+              </div>
+
+              <div class="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  href={APP_LOGIN_URL}
+                  class="sm:min-w-[9.5rem]"
+                  analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+                  analyticsProperties={createMarketingCtaClickedProperties({
+                    location: "hero",
+                    label: "Open App",
+                    destination: APP_LOGIN_URL,
+                    kind: "login",
+                  })}
+                >
+                  Open App
+                </Button>
+              </div>
             </div>
 
             <p

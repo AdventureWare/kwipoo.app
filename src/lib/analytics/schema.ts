@@ -17,7 +17,7 @@ export type MarketingCtaLocation =
   | "hero_app_store"
   | "hero_google_play";
 
-export type MarketingCtaKind = "signup" | "app_store";
+export type MarketingCtaKind = "signup" | "login" | "app_store";
 
 export interface MarketingPageViewProperties extends AnalyticsEventProperties {
   source: MarketingAnalyticsSource;
