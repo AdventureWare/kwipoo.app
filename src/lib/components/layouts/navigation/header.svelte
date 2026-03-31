@@ -7,7 +7,7 @@
     ANALYTICS_EVENT_NAMES,
     createMarketingCtaClickedProperties,
   } from "$lib/analytics/schema";
-  import { APP_SIGNUP_URL } from "$lib/config/site";
+  import { APP_LOGIN_URL, APP_SIGNUP_URL } from "$lib/config/site";
   import { getSiteLinksForSurface } from "$lib/site-sections";
   import Button from "../../ui/buttons/button.svelte";
 
@@ -65,7 +65,7 @@
         </Navigation.Menu>
       </Navigation.Header>
 
-      <Navigation.Group class="hidden items-center md:flex">
+      <Navigation.Group class="hidden items-center gap-3 md:flex">
         <Button
           href={APP_SIGNUP_URL}
           variant="primary"
@@ -79,6 +79,20 @@
           })}
         >
           Get Started
+        </Button>
+        <Button
+          href={APP_LOGIN_URL}
+          variant="outline"
+          class="w-auto px-5"
+          analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+          analyticsProperties={createMarketingCtaClickedProperties({
+            location: "header_desktop",
+            label: "Log In",
+            destination: APP_LOGIN_URL,
+            kind: "login",
+          })}
+        >
+          Log In
         </Button>
       </Navigation.Group>
 
@@ -122,6 +136,21 @@
           })}
         >
           Get Started
+        </Button>
+        <Button
+          href={APP_LOGIN_URL}
+          variant="outline"
+          size="sm"
+          class="w-auto"
+          analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+          analyticsProperties={createMarketingCtaClickedProperties({
+            location: "header_mobile",
+            label: "Log In",
+            destination: APP_LOGIN_URL,
+            kind: "login",
+          })}
+        >
+          Log In
         </Button>
       </Navigation.Group>
     </div>
