@@ -36,7 +36,7 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 - For user-facing changes intended for release, add a Changesets entry with `npm run changeset` unless the change is clearly docs-only, CI-only, or internal repo maintenance.
 - CI/CD assumes `main` is the only protected release branch. Long-lived working branches are optional, but they are not part of the automated release flow.
 - Ship production changes by opening a PR into `main`; do not rely on an automated sync-back branch or a local merge commit onto `main`.
-- Keep PR titles and squash or rebase commit messages conventional-commit compliant so commitlint and release history stay clean.
+- Keep branch commits conventional-commit compliant. If you use `Squash and merge`, make the final squash commit title conventional-commit compliant too. Standard GitHub merge commits are allowed.
 
 ## UI Workflow
 
