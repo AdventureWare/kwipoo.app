@@ -4,6 +4,68 @@ import type { WebsiteReleaseNote } from "./releases";
 
 export const generatedReleaseNotes: WebsiteReleaseNote[] = [
   {
+    version: "1.7.1",
+    slug: "cleaner-cost-entry-and-more-reliable-image-uploads",
+    publishedAt: "2026-04-01",
+    title: "Cleaner cost entry and more reliable image uploads",
+    summary:
+      "Kwipoo now keeps decimal cost entry steady while you type and makes place and thing image uploads update production records immediately after success.",
+    highlights: [
+      "The Thing cost field now keeps decimal amounts in place while typing and normalizes pasted currency values more cleanly.",
+      "Place and Thing image uploads now update production records immediately after a successful upload instead of waiting on offline mutation sync.",
+    ],
+    details: [
+      "Cost entry is less frustrating when typing cents or pasting formatted values from other apps.",
+      "Successful image uploads now show up more reliably in live production data without depending on a later offline sync pass.",
+    ],
+    importance: "quiet",
+    platformTargets: ["web", "ios_wrapper", "android_wrapper"],
+  },
+  {
+    version: "1.7.0",
+    slug: "import-things-and-steadier-everyday-interactions",
+    publishedAt: "2026-03-31",
+    title: "Import Things and steadier everyday interactions",
+    summary:
+      "This release introduced Import Things for bulk entry, polished shared cards and detail drawers, and made actions, menus, and loading states more consistent throughout the app.",
+    highlights: [
+      "A new Import Things flow lets you paste or map a list of items, review them, and save them with shared defaults.",
+      "Shared place and set cards, detail drawers, and action rows are more consistent across interactive states, menus, and selection flows.",
+      "Auth, search, friend flows, and other loading or error states now give clearer feedback and avoid duplicate actions more reliably.",
+    ],
+    details: [
+      "The Import Things experience now includes clearer CSV guidance, stronger review summaries, and a full-screen modal with more room to work.",
+      "Thing, set, event, and move-to-spot drawers now share steadier controls for toggles, back actions, menus, and focus handling.",
+      "Public profile, event attendee, invitee, and friend discovery flows now behave more consistently across mobile and desktop.",
+    ],
+    importance: "notable",
+    platformTargets: ["web", "ios_wrapper", "android_wrapper"],
+    ctaLabel: "Open What's New",
+    ctaHref: "/updates",
+  },
+  {
+    version: "1.6.0",
+    slug: "faster-ways-to-add-reuse-and-duplicate-things",
+    publishedAt: "2026-03-26",
+    title: "Faster ways to add, reuse, and duplicate Things",
+    summary:
+      "Kwipoo added quicker ways to create Things, including Add Similar, Add Multiple, Add from Photo, and Duplicate Thing, while tightening dialog behavior and add-item reliability across the app.",
+    highlights: [
+      "New Add Similar, Add Multiple, Add from Photo, and Duplicate Thing flows make it much faster to create related items without starting from scratch.",
+      "Add-Thing flows are more reliable across Set, Event, and move-to-spot contexts, so new items land in the right place more consistently.",
+      "Dialogs, settings drawers, search labels, and public profile or chat layouts got accessibility and navigation improvements.",
+    ],
+    details: [
+      "The default Save & Add Another flow now stays blank between items, while Add Multiple intentionally carries forward repeated fields for batch entry.",
+      "Drawer history, scroll restoration, and back navigation are steadier, especially across settings and detail flows.",
+      "Several save, invite, and chat actions now surface sync or permission failures more reliably instead of failing quietly.",
+    ],
+    importance: "notable",
+    platformTargets: ["web", "ios_wrapper", "android_wrapper"],
+    ctaLabel: "Open What's New",
+    ctaHref: "/updates",
+  },
+  {
     version: "1.5.4",
     slug: "welcome-quick-start-and-faster-add-flows",
     publishedAt: "2026-03-25",
