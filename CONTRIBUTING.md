@@ -5,7 +5,7 @@ Hello and welcome to the Kwipoo project. This guide will help you contribute eff
 ## Commit Message Guidelines
 
 We follow the Conventional Commits specification to maintain consistent and readable commit history. This format also (will) enable automated versioning and changelog generation.
-Production changes should land through a pull request into `main`, so keep PR titles and final merge commit titles conventional-commit compliant as well.
+Production changes should land through a pull request into `main`. Keep branch commits conventional-commit compliant, and if you use `Squash and merge`, make the final squash commit title conventional-commit compliant too. Standard GitHub merge commits are allowed.
 
 ### Format
 

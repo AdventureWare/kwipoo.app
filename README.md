@@ -116,7 +116,7 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - Pull requests into `main` run the fast desktop smoke suite. Pushes to `main` rerun CI and expand browser coverage across desktop, mobile, and narrow-mobile viewports.
 - Deployment is expected to flow through Vercel using this repo's linked GitHub project rather than a separate GitHub deploy workflow.
 - Keep production environment variables and the `kwipoo.app` domain configured in Vercel. Local `.vercel/` metadata should stay uncommitted.
-- Recommended GitHub protection is to require `CI / validate` and `CI / e2e` on `main` and avoid separate required checks or protections on `develop`.
+- Recommended GitHub protection is to require `CI / validate` and `CI / e2e` on `main`, allow your preferred PR merge strategy, and avoid separate required checks or protections on `develop`.
 
 ## Releases
 
@@ -130,8 +130,8 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 ## Shipping To Production
 
 - Treat `main` as the only protected production branch.
-- Open a PR into `main` from your working branch, let `CI` pass, and merge with `Rebase and merge` or `Squash and merge`.
-- Keep the final merge commit title conventional-commit compliant because commitlint runs on PRs and `main` pushes.
+- Open a PR into `main` from your working branch, let `CI` pass, and merge with your preferred GitHub strategy.
+- Keep branch commits conventional-commit compliant. If you use `Squash and merge`, make the final squash commit title conventional-commit compliant. Standard GitHub merge commits are allowed and ignored by commitlint on `main` pushes.
 - After the PR lands, let Vercel deploy from `main`. If the merged changes included Changesets entries, merge the follow-up version PR when you want to cut the release metadata and changelog updates.
 - If you prefer keeping a long-lived `develop` branch locally or on origin, treat it as an optional integration branch rather than part of the required production path.
 
