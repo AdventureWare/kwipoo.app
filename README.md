@@ -95,7 +95,7 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - The public `/releases` page is driven by the app repo's canonical release records.
 - The app repo generates a website feed at `releases/derived/website/releases.json`.
 - This repo imports that feed into `src/lib/content/releases.generated.ts` with `npm run releases:sync`.
-- By default the sync script looks for the app feed at `/Users/colinfreed/Kwipoo/releases/derived/website/releases.json`.
+- By default the sync script looks for the app feed at `/Users/colinfreed/Projects/AdventureWare/Products/Kwipoo/app/releases/derived/website/releases.json`.
 - Override the source path with `KWIPOO_APP_RELEASES_FILE=/path/to/releases.json` or point at an app checkout with `KWIPOO_APP_REPO_PATH=/path/to/Kwipoo`.
 - `npm run dev` and `npm run build` both attempt a best-effort sync first when the app feed is available, but they keep the committed snapshot if that source path is missing.
 
@@ -111,12 +111,12 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 
 ## CI/CD
 
-- GitHub Actions validates pushes and pull requests to `develop` and `main`.
-- The `Quality` workflow runs Prettier, ESLint, Svelte typechecking, and fast Vitest checks on every protected-branch push and pull request.
-- The `E2E` workflow runs a production build plus desktop Playwright smoke tests on pull requests, then expands to desktop, mobile, and narrow-mobile smoke coverage on pushes to `develop` and `main`.
-- Commit messages are checked against the repository's conventional-commit policy.
+- GitHub Actions centers on `main` as the only release branch.
+- The `CI` workflow runs commitlint, Prettier, ESLint, Svelte typechecking, Vitest, and Playwright smoke coverage.
+- Pull requests into `main` run the fast desktop smoke suite. Pushes to `main` rerun CI and expand browser coverage across desktop, mobile, and narrow-mobile viewports.
 - Deployment is expected to flow through Vercel using this repo's linked GitHub project rather than a separate GitHub deploy workflow.
 - Keep production environment variables and the `kwipoo.app` domain configured in Vercel. Local `.vercel/` metadata should stay uncommitted.
+- Recommended GitHub protection is to require `CI / validate` and `CI / e2e` on `main` and avoid separate required checks or protections on `develop`.
 
 ## Releases
 
@@ -124,19 +124,16 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - For any user-facing change that should be included in the next release, run `npm run changeset` and commit the generated file in `.changeset/`.
 - `main` runs a release workflow that opens or updates a version PR using Changesets.
 - Merge that release PR to apply the version bump and changelog updates after the underlying changes are already on `main`.
-- After that release PR lands on `main`, GitHub Actions automatically opens a follow-up PR that syncs the generated `chore: version packages` commit back into `develop`.
+- There is no automated sync-back PR. Release metadata is generated and consumed on `main`.
 - CI-only, docs-only, and repo-maintenance changes do not always need a changeset.
 
-## Promoting `develop` to `main`
+## Shipping To Production
 
-- Treat `main` as a protected release branch, not a branch that accepts direct pushes or local merge commits.
-- `main` currently requires changes to land through a pull request and rejects merge commits on the branch.
-- When the goal is to move the current `develop` state to `main`, create a linear branch from `origin/main`, replay the `develop`-only commits onto it, and open a PR into `main`.
-- After that `main` PR merges, let the automated release PR land and then let the automated `develop` sync PR bring the version bump back downstream.
-- Before opening that PR, confirm the promotion branch matches `develop` at the tree level, for example with `git diff --stat develop..HEAD`.
-- Keep commit messages conventional-commit compliant because `commitlint` runs on protected-branch PRs and pushes.
-- When merging the PR, prefer `Rebase and merge`. If `Squash and merge` is used instead, edit the squash commit title so it still follows the conventional-commit format.
-- Do not leave a local-only merge commit on `main` after a rejected push. Reset local `main` back to `origin/main` and continue from the PR branch instead.
+- Treat `main` as the only protected production branch.
+- Open a PR into `main` from your working branch, let `CI` pass, and merge with `Rebase and merge` or `Squash and merge`.
+- Keep the final merge commit title conventional-commit compliant because commitlint runs on PRs and `main` pushes.
+- After the PR lands, let Vercel deploy from `main`. If the merged changes included Changesets entries, merge the follow-up version PR when you want to cut the release metadata and changelog updates.
+- If you prefer keeping a long-lived `develop` branch locally or on origin, treat it as an optional integration branch rather than part of the required production path.
 
 ## Current Notes
 
