@@ -34,9 +34,9 @@ This repository is the public marketing website for Kwipoo. It is separate from 
 - Treat legal copy as high-risk content. Make mechanical fixes freely, but do not invent policy or terms language unless the user explicitly asks for legal copy work.
 - When a task is really about the application, say so and keep the change in the website layer only.
 - For user-facing changes intended for release, add a Changesets entry with `npm run changeset` unless the change is clearly docs-only, CI-only, or internal repo maintenance.
-- If the task is to promote `develop` into `main`, do not push a merge commit directly to `main`. Create a linear branch from `origin/main`, replay the `develop`-only commits onto it, and open a PR to `main` instead.
-- Keep release-promotion commit messages conventional-commit compliant and prefer `Rebase and merge` when landing that PR.
-- After a Changesets release PR merges to `main`, prefer the automated sync PR back into `develop` over manual cherry-picks of `chore: version packages`, unless that automation has clearly failed.
+- CI/CD assumes `main` is the only protected release branch. Long-lived working branches are optional, but they are not part of the automated release flow.
+- Ship production changes by opening a PR into `main`; do not rely on an automated sync-back branch or a local merge commit onto `main`.
+- Keep PR titles and squash or rebase commit messages conventional-commit compliant so commitlint and release history stay clean.
 
 ## UI Workflow
 
