@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const DEFAULT_APP_THEME_PATH = "/Users/colinfreed/Kwipoo/kwipoo-teal-theme.css";
+const DEFAULT_APP_THEME_PATH =
+  "/Users/colinfreed/Projects/AdventureWare/Products/Kwipoo/app/kwipoo-teal-theme.css";
 
 const OUTPUT_PATH = path.resolve(
   "src/lib/styles/kwipoo-brand-theme.generated.css",

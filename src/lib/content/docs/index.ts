@@ -1,6 +1,11 @@
 import type { FeatureBadge } from "$lib/types/feature-badges";
 import { docsPages } from "./pages";
 import {
+  generatedDocsEntityReferences,
+  getDocsEntityFieldsTable,
+  getDocsEntityReference,
+} from "./entity-reference";
+import {
   docsCategoryDescriptions,
   docsCategoryOrder,
   type DocsCategory,
@@ -103,6 +108,11 @@ export function getRelatedDocsPages(docPage: DocsPage): DocsPage[] {
 }
 
 export { docsPages, docsCategoryDescriptions, docsCategoryOrder };
+export {
+  generatedDocsEntityReferences,
+  getDocsEntityFieldsTable,
+  getDocsEntityReference,
+};
 export type {
   DocsCallout,
   DocsCategory,
@@ -116,3 +126,8 @@ export type {
   DocsTable,
   DocsTocItem,
 } from "./schema";
+export type {
+  DocsEntityFieldReference,
+  DocsEntityReference,
+  DocsFieldStatus,
+} from "./entity-reference";
