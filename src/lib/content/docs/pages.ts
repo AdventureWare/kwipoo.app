@@ -1,4 +1,5 @@
 import { FEATURE_BADGE_PRESETS } from "$lib/types/feature-badges";
+import { getDocsEntityFieldsTable } from "./entity-reference";
 import type { DocsPage } from "./schema";
 
 export const docsPages = [
@@ -126,68 +127,9 @@ Spots
       {
         heading: "Fields for a Thing",
         paragraphs: [
-          "Only `Name` is required. Everything else is optional, but those fields can be very useful later for reference, repair, maintenance, insurance, packing, or trade and sale.",
+          "Only `Name` needs manual input to save a Thing. Several other fields start with sensible defaults, and the rest are optional details you can fill in over time for reference, repair, maintenance, insurance, packing, or trade and sale.",
         ],
-        table: {
-          columns: ["Field", "Description", "Required?", "Example"],
-          rows: [
-            [
-              "Name",
-              "A clear, descriptive name for the item.",
-              "Yes",
-              "Mountain Bike",
-            ],
-            [
-              "Description",
-              "Additional notes, details, or context about the item.",
-              "No",
-              "Bought in 2020, 21-speed, aluminum frame",
-            ],
-            ["Brand", "The brand or manufacturer of the item.", "No", "Trek"],
-            [
-              "Category",
-              "A text field for the item's category. Kwipoo suggests categories, but you can enter your own.",
-              "No",
-              "Camping",
-            ],
-            [
-              "Visibility",
-              "Who can see this Thing: Public, Friends Only, or Owner Only.",
-              "No",
-              "Public",
-            ],
-            ["Weight", "The numeric value of the item's weight.", "No", "15.2"],
-            ["Weight Unit", "The unit used for weight.", "No", "lb"],
-            [
-              "Source",
-              "Where you purchased or acquired the item.",
-              "No",
-              "REI",
-            ],
-            ["Quantity", "How many identical units you have.", "No", "2"],
-            ["Cost", "How much you paid or what it is worth.", "No", "$500"],
-            [
-              "Acquisition Date",
-              "The date you bought or acquired the item.",
-              "No",
-              "2021-08-15",
-            ],
-            [
-              "Condition",
-              "The overall condition of the Thing.",
-              "No",
-              "5 - Very Good",
-            ],
-            ["Model", "Model name or number.", "No", "Marlin 7"],
-            [
-              "Product ID",
-              "Additional product ID or code, separate from the serial number.",
-              "No",
-              "UPC-654789",
-            ],
-            ["Serial number", "The item's serial number.", "No", "SN12345ABC"],
-          ],
-        },
+        table: getDocsEntityFieldsTable("things"),
       },
       {
         heading: "Privacy & Visibility",
@@ -344,48 +286,15 @@ Spots
           "Go to `Places` from the navigation bar.",
           "Open the menu in the top right.",
           "Choose the option to add a new Place.",
-          "Enter the required fields: `Name`, `Type`, and `Visibility`.",
+          "Enter the required field: `Place Name`.",
+          "Review the default `Type` and `Visibility` values and change them if needed.",
           "Add optional description and address details if they help.",
           "Save the Place so it appears in your list.",
         ],
       },
       {
         heading: "Fields for a Place",
-        table: {
-          columns: ["Field", "Description", "Required?", "Example"],
-          rows: [
-            ["Name", "A clear, descriptive name for the Place.", "Yes", "Home"],
-            ["Type", "The Place type from preset options.", "Yes", "House"],
-            [
-              "Visibility",
-              "Who can see this Place: Public, Friends Only, or Owner Only.",
-              "Yes",
-              "Friends Only",
-            ],
-            [
-              "Description",
-              "Additional notes or details about the Place.",
-              "No",
-              "Main house with basement",
-            ],
-            [
-              "Address Line 1",
-              "The first line of the address.",
-              "No",
-              "123 Main St",
-            ],
-            ["Address Line 2", "Additional address info.", "No", "Apt 5B"],
-            ["City", "City where the Place is located.", "No", "Denver"],
-            ["State", "State, province, or region.", "No", "CO"],
-            ["Postal Code", "ZIP or postal code.", "No", "80203"],
-            [
-              "Country",
-              "Country where the Place is located.",
-              "No",
-              "United States",
-            ],
-          ],
-        },
+        table: getDocsEntityFieldsTable("places"),
       },
       {
         heading: "Managing Places & Spots",
@@ -462,29 +371,7 @@ Spots
       },
       {
         heading: "Fields for a Spot",
-        table: {
-          columns: ["Field", "Description", "Required?", "Example"],
-          rows: [
-            [
-              "Name",
-              "A clear, descriptive name for the Spot.",
-              "Yes",
-              "Bedroom",
-            ],
-            [
-              "Description",
-              "Additional notes or details about the Spot.",
-              "No",
-              "Closet near the door",
-            ],
-            [
-              "Visibility",
-              "Who can see this Spot: Public, Friends Only, or Owner Only.",
-              "Yes",
-              "Friends Only",
-            ],
-          ],
-        },
+        table: getDocsEntityFieldsTable("spots"),
       },
       {
         heading: "Moving Things to a Spot",
@@ -579,30 +466,7 @@ Spots
       },
       {
         heading: "Fields for a Set",
-        table: {
-          columns: ["Field", "Description", "Required?", "Example"],
-          rows: [
-            [
-              "Name",
-              "A clear, descriptive name for the Set.",
-              "Yes",
-              "Winter Camping Kit",
-            ],
-            [
-              "Description",
-              "Additional notes, details, or context about the Set.",
-              "No",
-              "Gear for 3-4 day trips",
-            ],
-            ["Type", "A text field for the Set's purpose.", "No", "Travel"],
-            [
-              "Visibility",
-              "Who can see this Set: Public, Friends Only, or Owner Only.",
-              "Yes",
-              "Friends Only",
-            ],
-          ],
-        },
+        table: getDocsEntityFieldsTable("sets"),
       },
       {
         heading: "Assigning Things to a Set",
@@ -713,50 +577,16 @@ Spots
         bullets: [
           "Go to `Events` from the navigation bar.",
           "Add a new Event.",
-          "Enter the required fields: whether the Event is solo, the name, start date, end date, and visibility.",
+          "Set whether the Event is solo or collaborative.",
+          "Enter the required field: `Name`.",
+          "Review the default start date, end date, and visibility values and change them if needed.",
           "Add optional `Description` and `Location` if they help.",
           "Save the Event so it appears in your list.",
         ],
       },
       {
         heading: "Fields for an Event",
-        table: {
-          columns: ["Field", "Description", "Required?", "Example"],
-          rows: [
-            [
-              "Is Solo",
-              "Defines whether this is a Solo or Group Event.",
-              "Yes",
-              "True",
-            ],
-            [
-              "Name",
-              "A clear, descriptive name for the Event.",
-              "Yes",
-              "Backpacking Trip",
-            ],
-            [
-              "Description",
-              "Additional details about the Event.",
-              "No",
-              "Weekend in the mountains",
-            ],
-            [
-              "Location",
-              "Where the Event is taking place.",
-              "No",
-              "Rocky Mountain National Park",
-            ],
-            ["Start Date", "When the Event begins.", "Yes", "2025-06-15"],
-            ["End Date", "When the Event ends.", "Yes", "2025-06-18"],
-            [
-              "Visibility",
-              "Who can see this Event: Public, Friends Only, or Owner Only.",
-              "Yes",
-              "Friends Only",
-            ],
-          ],
-        },
+        table: getDocsEntityFieldsTable("events"),
       },
       {
         heading: "Lists & Assigning Things to an Event",

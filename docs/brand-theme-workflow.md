@@ -26,7 +26,7 @@ Kwipoo now treats the app theme as the source of truth for the shared brand pale
 
 By default the sync script reads:
 
-`/Users/colinfreed/Kwipoo/kwipoo-teal-theme.css`
+`/Users/colinfreed/Projects/AdventureWare/Products/Kwipoo/app/kwipoo-teal-theme.css`
 
 If that path changes, pass the path explicitly:
 

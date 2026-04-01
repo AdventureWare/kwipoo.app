@@ -3,6 +3,8 @@ import {
   docsCategoryOrder,
   docsPages,
   getDocsCategoryGroups,
+  getDocsEntityFieldsTable,
+  getDocsEntityReference,
   getDocsNavSections,
   getDocsPage,
   getDocsPageLabel,
@@ -53,5 +55,27 @@ describe("docs content helpers", () => {
       "Getting started with Kwipoo",
     );
     expect(getDocsPageLabel("missing-page")).toBe("Documentation");
+  });
+
+  it("builds entity field tables from the generated app docs reference", () => {
+    const fieldSectionHeadings = new Map([
+      ["things", "Fields for a Thing"],
+      ["places", "Fields for a Place"],
+      ["spots", "Fields for a Spot"],
+      ["sets", "Fields for a Set"],
+      ["events", "Fields for an Event"],
+    ]);
+
+    for (const [slug, heading] of fieldSectionHeadings) {
+      const page = getDocsPage(slug);
+      const entityReference = getDocsEntityReference(slug);
+      const section = page?.sections.find((entry) => entry.heading === heading);
+
+      expect(entityReference).toBeDefined();
+      expect(section?.table).toEqual(getDocsEntityFieldsTable(slug));
+      expect(section?.table?.rows).toHaveLength(
+        entityReference?.fields.length ?? 0,
+      );
+    }
   });
 });

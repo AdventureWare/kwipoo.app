@@ -3,7 +3,7 @@ import path from "node:path";
 import prettier from "prettier";
 
 const DEFAULT_APP_RELEASES_PATH =
-  "/Users/colinfreed/Kwipoo/releases/derived/website/releases.json";
+  "/Users/colinfreed/Projects/AdventureWare/Products/Kwipoo/app/releases/derived/website/releases.json";
 
 const OUTPUT_PATH = path.resolve("src/lib/content/releases.generated.ts");
 
