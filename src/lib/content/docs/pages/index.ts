@@ -1,3 +1,4 @@
+import { createAccountDocsPage } from "./create-account";
 import type { DocsPage } from "../schema";
 import { eventsDocsPage } from "./events";
 import { gettingStartedDocsPage } from "./getting-started";
@@ -10,11 +11,12 @@ import { thingsDocsPage } from "./things";
 
 export const docsPages: DocsPage[] = [
   gettingStartedDocsPage,
-  thingsDocsPage,
+  createAccountDocsPage,
+  profileDocsPage,
   placesDocsPage,
   spotsDocsPage,
+  thingsDocsPage,
   setsDocsPage,
   eventsDocsPage,
   socialDocsPage,
-  profileDocsPage,
 ];

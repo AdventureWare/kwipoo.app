@@ -8,9 +8,9 @@ export const eventsDocsPage = defineDocsPage({
   badge: FEATURE_BADGE_PRESETS.beta,
   title: "Prepare for Events",
   summary:
-    "Use Events to plan trips, projects, moves, and shared activities with clear lists, assigned gear, packing views, and weight tracking.",
+    "Use Events to plan trips, projects, moves, and shared activities with dedicated lists, assignment flows, packing views, invites, and weight tracking.",
   description:
-    "Events connect your inventory to a real upcoming plan. They help you prepare for solo or group activities without losing track of what is covered, what is missing, and who is bringing what.",
+    "Events connect your inventory to a real upcoming plan. In the current app, each Event can include a personal list, a shared group list, category sections inside those lists, packing status, and collaboration tools for attendees.",
   image: {
     src: "/assets/eventsFeatureAsset@2x.png",
     alt: "Kwipoo Events feature showing trip and event planning tools",
@@ -19,129 +19,160 @@ export const eventsDocsPage = defineDocsPage({
     {
       heading: "Why Use Events?",
       paragraphs: [
-        "An Event in Kwipoo is more than a date on a calendar. It is a way to plan, track, and coordinate Things for activities. Whether you are going on a solo trip, organizing a group adventure, getting ready to move, or prepping for a weekend getaway, Events help you manage what you need and avoid forgotten items.",
+        "An Event in Kwipoo is more than a date on a calendar. It is a planning workspace tied to real Things in your inventory. Whether you are packing for a solo trip, coordinating a group outing, preparing for a move, or organizing a project, Events help you decide what belongs, who is bringing it, and what is already packed.",
       ],
       bullets: [
-        "Pack Smarter, Not Harder: Assign Things to an Event and check them off as you pack.",
-        "Solo or Group: Plan for yourself or invite others to collaborate.",
-        "Know Who's Bringing What: Reduce duplicate contributions and missing essentials.",
-        "Weight Tracking Made Easy: See the total weight of your gear to optimize packing.",
-      ],
-    },
-    {
-      heading: "Types of Events",
-      bullets: [
-        "Solo Event: A personal packing and planning list just for you.",
-        "Group Event: A shared Event with invites, a group list, and optional personal lists for attendees.",
+        "Task-focused planning: Build an Event around what you need for one specific plan.",
+        "Solo or collaborative: Start with a solo Event or use a group Event with invites and shared coordination.",
+        "Structured lists: Organize the Event with categories, direct assignments, or both.",
+        "Practical packing: Review assigned Things by Spot and mark them packed as you go.",
       ],
     },
     {
-      heading: "Adding an Event",
+      heading: "Add an Event",
       bullets: [
-        "Go to `Events` from the navigation bar.",
-        "Add a new Event.",
-        "Set whether the Event is solo or collaborative.",
+        "Open `Events` from the main navigation.",
+        "Use `Add Event`.",
+        "When creating a new Event, choose whether `Is this a Solo event?` should be on or off.",
         "Enter the required field: `Name`.",
-        "Review the default start date, end date, and visibility values and change them if needed.",
         "Add optional `Description` and `Location` if they help.",
-        "Save the Event so it appears in your list.",
+        "Review `Start Date`, `End Date`, and `Visibility` before saving.",
+        "Save the Event so it appears in your Events list.",
+      ],
+    },
+    {
+      heading: "Browse and open Events",
+      paragraphs: [
+        "The main `Events` screen shows your Event cards grouped by month. From there you can open individual Event detail views, jump into invites, or reveal older Events when needed.",
+      ],
+      bullets: [
+        "Use `Invites` from the Events page to review event invitations.",
+        "Use `Show Past Events` when you want to include older Events in the list.",
+        "Tap an Event card to open its detail drawer.",
       ],
     },
     createEntityFieldsSection({
       slug: "events",
       heading: "Fields for an Event",
+      paragraphs: [
+        "Only `Name` is required. `Description`, `Location`, `Start Date`, `End Date`, and `Visibility` are optional or adjustable, and the solo-versus-group choice is made when you first create the Event.",
+      ],
     }),
     {
-      heading: "Lists & Assigning Things to an Event",
-      paragraphs: [
-        "Every Event has a list where you can assign Things and Sets so nothing gets left behind.",
-      ],
+      heading: "Choose solo or group planning",
       subsections: [
         {
           heading: "Solo Events",
           bullets: [
-            "A personal list is automatically created for you.",
-            "Assign Things or Sets directly to that list.",
+            "A solo Event uses your personal list as the main planning list.",
+            "This is the simplest setup when you are planning only for yourself.",
           ],
         },
         {
           heading: "Group Events",
           bullets: [
-            "A group list is shared among attendees.",
-            "Each participant can add a personal list that is private to them.",
-            "Everyone can see the group list and what is already being brought.",
+            "A group Event can include a shared `Group List` plus optional personal lists for attendees.",
+            "Use `Send Invites` from the Event menu to bring other people into the Event.",
+            "If you are an invited attendee instead of the creator, the Event menu can show `View Invite` for that Event.",
           ],
         },
         {
-          heading: "How to Add a Personal List (Group Events Only)",
+          heading: "Personal lists inside group Events",
           bullets: [
-            "Open the Event details.",
-            "Open the Event menu.",
-            "Add a personal list from the menu.",
-            "Remove it later from the same menu if needed.",
-          ],
-        },
-        {
-          heading: "Assigning Things & Sets to an Event",
-          bullets: [
-            "Open the Event details and use the assign action from the Event menu.",
-            "If both group and personal lists exist, the active tab determines where the Things will be assigned.",
-            "Assign Things directly or add categories first and then assign Things into those categories.",
-            "Select the Things or Sets you want to add and confirm the assignment.",
+            "Open the Event menu and use `Add Personal List` if you want a separate personal planning tab.",
+            "Use `Remove Personal List` from the same menu if you no longer need it.",
+            "When both lists exist, switch between `Personal List` and `Group List` tabs in the Event detail view.",
           ],
         },
       ],
     },
     {
-      heading: "Viewing & Checking the Packing List",
-      bullets: [
-        "Open the packing list from the Event menu.",
-        "Use tile view to see item cards grouped by Spot.",
-        "Use list view for a simpler text-based layout, also grouped by Spot.",
-        "Check items off as you pack.",
-      ],
-    },
-    {
-      heading: "Total Weight Tracking",
+      heading: "Build the Event lists",
       paragraphs: [
-        "For group Events, Kwipoo can show both your personal weight and the combined group weight so you can balance loads and avoid unnecessary bulk.",
+        "The current Event detail workflow is category-driven, similar to Sets. Categories act as sections inside the active list so you can group related Things instead of managing one long flat list.",
       ],
       bullets: [
-        "Personal Weight: The total weight of everything you personally added.",
-        "Group Weight: The combined weight of all Things in the shared group list.",
+        "Use `Add Category` inside the active list tab to create a new section.",
+        "Categories can represent whatever makes the Event easier to scan, such as Shelter, Food, Clothing, Tools, or Paperwork.",
+        "If a list has no categories yet, you can still assign Things directly from the Event menu.",
       ],
     },
     {
-      heading: "Inviting & Managing Attendees (Group Events Only)",
+      heading: "Assign Things to an Event",
+      subsections: [
+        {
+          heading: "Assign to the active list",
+          bullets: [
+            "Open the Event detail view.",
+            "Switch to the list you want to work in if both `Personal List` and `Group List` are available.",
+            "Open the Event menu and use `Assign Thing(s)`.",
+            "Select the Things you want to assign to that list and confirm.",
+          ],
+        },
+        {
+          heading: "Assign to a specific category",
+          bullets: [
+            "Open the target category row inside the Event list.",
+            "Use `Assign Thing(s)` for that category.",
+            "Select the Things that belong in that section and confirm the assignment.",
+            "New Things created from that flow inherit the category context automatically.",
+          ],
+        },
+      ],
+      callout: {
+        tone: "tip",
+        title: "The active tab controls the top-level assignment target",
+        body: "If you use `Assign Thing(s)` from the Event menu, Kwipoo assigns into whichever list tab is currently active.",
+      },
+    },
+    {
+      heading: "Use the Packing List",
       bullets: [
-        "Send invites from the Event menu and choose who to invite.",
-        "View, accept, or decline invitations before the Event starts.",
-        "The Event creator is the initial admin and can remove Things or Sets from the group list, assign other admins, and remove attendees when needed.",
+        "Open the Event menu and use `Packing List`.",
+        "Switch between `Grid View` and `List View` depending on how you want to review the items.",
+        "Kwipoo groups the packing list by each Thing's current Spot so you can collect items from their real locations.",
+        "Use the checkboxes to mark assigned Things as packed.",
       ],
     },
     {
-      heading: "Viewing & Editing Events",
+      heading: "Review weights, attendees, and conversation",
+      paragraphs: [
+        "Each Event detail view includes supporting information beyond the list itself so you can track the plan at a glance.",
+      ],
       bullets: [
-        "Browse upcoming and past Events from the Events list page.",
-        "Edit the name, description, dates, or attendees as needed, depending on your permissions.",
-        "Delete the Event if you are the admin. Deleting the Event does not delete the Things in it.",
+        "Weights: The `Weights` section shows `Personal Weight`, and for group Events it also shows `Group Weight`.",
+        "Event Details: The info section can show the Event location, organizers, and attendee previews.",
+        "Attendees: Group Events include a `View All` action for the attendee list.",
+        "Conversation: Group Events include a conversation shortcut from the detail view.",
       ],
     },
     {
-      heading: "Privacy & Visibility",
+      heading: "Edit and manage Events",
+      paragraphs: [
+        "The Event detail screen includes an `Edit Mode` toggle inside the Event menu. That mode exposes the current cleanup and maintenance controls for the Event and its lists.",
+      ],
+      bullets: [
+        "Turn on `Edit Mode` when you want to edit or delete categories, remove assigned Things, or expose event-level edit controls.",
+        "Admins can edit the Event itself with the pencil action and delete it with the trash action.",
+        "Group-list cleanup permissions depend on your role or on who created the category or assignment.",
+        "Deleting an Event removes the Event record and its planning structure, but it does not delete the Things in your inventory.",
+      ],
+    },
+    {
+      heading: "Privacy and visibility",
       bullets: [
         "Public: Anyone can see the Event if your profile is public.",
-        "Friends Only: Only invited attendees can view it.",
+        "Friends Only: Only your Kwipoo friends can see the Event.",
         "Owner Only: The Event is visible only to you.",
       ],
     },
     {
-      heading: "Pro Tips",
+      heading: "Pro tips",
       bullets: [
-        "Plan Ahead: Build the list before it is time to pack so last-minute scrambling stays low.",
-        "Use the Group List Strategically: Early contributions help you spot duplicates and gaps.",
-        "Track Weight for Smarter Packing when you are flying, backpacking, or traveling light.",
-        "Pick Solo or Group based on the kind of coordination you actually need.",
+        "Use solo Events when you just need a clean packing plan without collaboration overhead.",
+        "Use group Events early so shared assignments and invite coordination happen before the last-minute rush.",
+        "Keep category names practical and short so the list remains easy to scan on mobile.",
+        "Check the packing list by Spot before you leave so retrieval matches where the Things actually live.",
       ],
     },
   ],

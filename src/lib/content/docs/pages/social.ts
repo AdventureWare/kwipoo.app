@@ -8,9 +8,9 @@ export const socialDocsPage = defineDocsPage({
   badge: FEATURE_BADGE_PRESETS.beta,
   title: "Coordinate through Social",
   summary:
-    "Use Social to connect with friends, browse shared gear, coordinate plans, borrow instead of rebuying, and keep conversations tied to real inventory.",
+    "Use Kwipoo's social features to find people, manage friends, review shared collections, respond to notifications, and coordinate through profile-based collaboration tools.",
   description:
-    "Kwipoo's social features help you see what other people have, manage friendships, message directly, and coordinate around trips, gifts, and shared gear needs.",
+    "In the current app, social features are spread across Profile, public profile pages, Notifications, Events, and Chat Center. Together they help you discover people, control what is shared, and coordinate around real inventory.",
   image: {
     src: "/assets/socialFeatureAsset@2x.png",
     alt: "Kwipoo Social feature showing shared inventory and collaboration",
@@ -19,126 +19,141 @@ export const socialDocsPage = defineDocsPage({
     {
       heading: "Why Use Social?",
       paragraphs: [
-        "Kwipoo is more than just a way to track your Things. It is also a tool for connecting with people who share your interests, helping you borrow, lend, discover, and chat about gear. Whether you are coordinating a trip, looking for a gift, or just keeping up with friends, Social makes inventory more useful together.",
+        "Kwipoo is not only a place to track your own Things. It also lets you connect inventory to real people. That makes the app more useful for coordination, inspiration, gift ideas, event planning, and deciding what already exists in your wider circle before you buy or duplicate something.",
       ],
       bullets: [
-        "Check Before You Buy: See whether a friend already owns the item and might lend or sell it instead.",
-        "Surprise Gifts Done Right: Avoid gifting something a friend already has, or get ideas from what they use.",
-        "See What Friends Are Using: Browse friends' Things and Sets for inspiration and recommendations.",
-        "Lend & Borrow: Check a friend's inventory before buying something for yourself.",
-        "Easier Event Planning: Look at a friend's profile when deciding what they should bring or what they still need.",
+        "Shared discovery: Browse another person's visible Things, Sets, and Places when their privacy settings allow it.",
+        "Faster coordination: Use friends, notifications, and Event collaboration together instead of tracking plans in isolation.",
+        "Practical decision-making: Check what already exists in your network before buying, gifting, or packing.",
+        "Context-aware communication: Keep event conversation and message review tied to the people and plans involved.",
       ],
     },
     {
-      heading: "Finding & Adding Friends",
+      heading: "Where social features live",
+      paragraphs: [
+        "There is not a standalone Social tab in the current app. Most social actions start from your `Profile`, from another person's public profile page, or from collaboration surfaces like `Notifications`, `Events`, and `Chat Center`.",
+      ],
+      bullets: [
+        "Profile: Open `Friends`, `Find Friends`, `Notifications`, `Chats`, and `Settings`.",
+        "Public profiles: View another person's shared collections and friend-request state.",
+        "Notifications: Review friend requests, event invites, and message alerts.",
+        "Events and Chat Center: Continue group coordination after the connection already exists.",
+      ],
+    },
+    {
+      heading: "Find and add friends",
       subsections: [
         {
-          heading: "Searching for Users",
+          heading: "Search for people",
           bullets: [
-            "Go to your Profile.",
+            "Open your `Profile`.",
             "Open `Find Friends`.",
-            "Search by username or name.",
+            "Search by username or by first and last name.",
+            "Enter at least a few characters so results can load.",
+            "Use `View More Results` if the first result set is full and you need a broader list.",
             "Select a user to view their profile.",
           ],
         },
         {
-          heading: "Sending a Friend Request",
+          heading: "Send a friend request",
           bullets: [
-            "If the user is not already your friend, use the `Send Friend Request` action on their profile.",
-            "If their profile is set to Friends Only, you will not see their Things, Sets, or Places until they accept.",
+            "Open the person's public profile page.",
+            "Use `Send Friend Request` if you are not already connected.",
+            "If a request is already pending, the page shows `Friend Request Pending` instead of another send action.",
+            "If the account is private or Friends Only, you may need an accepted friendship before you can view their shared collections.",
           ],
         },
         {
-          heading: "Viewing Your Friends",
+          heading: "Respond to incoming friend requests",
           bullets: [
-            "Open your Profile.",
-            "Use the friends entry point to see your friends list.",
-            "Search for a specific friend from that list.",
-            "Open a friend's name to view their profile.",
-          ],
-        },
-        {
-          heading: "Removing a Friend",
-          bullets: [
-            "Open your friends list.",
-            "Find the friend you want to remove.",
-            "Use the delete action next to their name.",
+            "Open `Notifications` from your Profile header to review new requests.",
+            "Friend-request notifications open a request card with the current details.",
+            "If you open the sender's profile directly, a pending incoming request can show `Accept` and `Decline` actions there.",
           ],
         },
       ],
     },
     {
-      heading: "Viewing & Interacting with Other Users",
+      heading: "Manage your friends list",
+      paragraphs: [
+        "Your own Profile summary includes a `Friends` button with the current count. That drawer is the main place to review and clean up your active connections.",
+      ],
+      bullets: [
+        "Open `Friends` from your Profile.",
+        "Search inside the list if you need to find one person quickly.",
+        "Open a friend's username to jump to their public profile page.",
+        "Use `Delete` next to a friend when you want to remove the connection.",
+      ],
+    },
+    {
+      heading: "View shared profiles and collections",
       subsections: [
         {
-          heading: "Viewing a Friend's Profile",
+          heading: "When access is allowed",
           bullets: [
-            "Open a friend's name from your friends list to view their profile.",
-            "If they shared Things, Sets, or Places with Friends Only visibility, you will be able to see them.",
+            "A visible profile can show the person's counts plus tabs for their shared `Things`, `Sets`, and `Places`.",
+            "Friends can see content that is shared with `Friends Only` visibility.",
+            "Public profiles can be discovered and viewed more broadly when the owner's privacy settings allow it.",
           ],
         },
         {
-          heading: "Viewing a Non-Friend's Profile",
+          heading: "When access is restricted",
           bullets: [
-            "If you find a user through `Find Friends`, you can view their profile.",
-            "If their account is public, you can see their visible Things, Sets, and Places.",
-            "If their account is set to Friends Only, you will only see the friend request action until they accept.",
+            "If the account is private, Kwipoo shows a locked-profile message instead of the collection tabs.",
+            "If the user is not yet your friend, you may only see the friend-request controls and limited public information.",
+            "Signed-out visitors can still land on public profiles, but the page prompts them to `Create Account / Log In` for deeper access.",
           ],
         },
       ],
     },
     {
-      heading: "Messaging & Chat",
+      heading: "Use notifications for social activity",
       paragraphs: [
-        "Kwipoo's chat features make it easier to stay in touch and coordinate with friends. You can use direct conversations with individual users or event chats tied to shared plans.",
+        "The bell icon on your Profile opens `Notifications`. In the current app, that feed is the main review surface for new social activity.",
       ],
-      subsections: [
-        {
-          heading: "Accessing the Chat Center",
-          bullets: [
-            "Go to your Profile.",
-            "Open the chat center to see all chats.",
-            "Use direct chats for one-to-one conversations.",
-            "Use event chats for group conversations created from Events.",
-          ],
-        },
-        {
-          heading: "Starting a Direct Chat",
-          bullets: [
-            "Go to a friend's profile.",
-            "Use the chat icon in the top right.",
-            "If a conversation already exists, you will jump into it.",
-            "If not, Kwipoo creates a new thread.",
-          ],
-        },
-        {
-          heading: "Using Event Chats",
-          bullets: [
-            "When you create or join an Event, an event chat is created automatically.",
-            "Access event chats from the chat center or through Event details.",
-          ],
-        },
+      bullets: [
+        "Unread counts appear on the Profile header bell.",
+        "The feed can include friend requests, accepted friend requests, event invites, direct-message alerts, and event-message alerts.",
+        "Use the check action in the header to mark all unread notifications as read.",
+        "Individual notifications can open the relevant request or invite details before you respond.",
       ],
     },
     {
-      heading: "Privacy & Control",
+      heading: "Use Chat Center and event conversation",
       paragraphs: [
-        "Kwipoo gives you full control over who can see your profile and the Things, Sets, and Places connected to it. Your profile privacy applies globally, and you can also fine-tune visibility on individual items.",
+        "If chats are enabled for your account, your Profile header includes a chats shortcut that opens `Chat Center`.",
+      ],
+      bullets: [
+        "Use `Chat Center` to review your existing conversations in one list.",
+        "Search chats by name when the list gets longer.",
+        "The chat list can include both direct conversations and event-based conversations.",
+        "Group-event conversation is also reachable from the `Conversation` action inside Event details.",
+      ],
+      callout: {
+        tone: "tip",
+        title: "Chat follows existing relationships and plans",
+        body: "The current app clearly exposes Chat Center and event conversation, but the visible shortcut for starting a brand-new direct chat from another person's profile is not currently surfaced in the public profile UI.",
+      },
+    },
+    {
+      heading: "Privacy and control",
+      paragraphs: [
+        "Profile privacy is the foundation for what other people can discover about you. Your profile setting works together with item-level visibility on Things, Sets, Places, Spots, and Events.",
       ],
       bullets: [
         "Public: Anyone can view your profile and visible items.",
-        "Friends Only: Only friends can see your profile and items.",
-        "Owner Only: No one else can see your profile or items.",
+        "Friends Only: Only your Kwipoo friends can see your profile and friend-shared content.",
+        "Owner Only: Your profile is hidden from other people.",
+        "Even with a public profile, individual inventory items can still be more restrictive.",
       ],
     },
     {
-      heading: "Pro Tips",
+      heading: "Pro tips",
       bullets: [
-        "Use Friends Only visibility if you want friend-only sharing without broadcasting your inventory more broadly.",
-        "Check friends' gear before buying something yourself.",
-        "Use inventory visibility to make gift-giving easier and more informed.",
-        "Use chat for quick coordination when you want to borrow, ask questions, or plan together.",
-        "Add friends, family, roommates, and social groups to make the network more useful over time.",
+        "Treat `Find Friends` as the starting point, but use public profiles and notifications to finish the connection flow.",
+        "Keep your profile privacy aligned with how broadly you want your inventory to be discoverable.",
+        "Review shared `Things`, `Sets`, and `Places` before trips, gifts, or purchases so you can make decisions with real context.",
+        "Use Events when the collaboration is plan-specific and Chat Center when you need to continue the conversation later.",
       ],
     },
   ],
