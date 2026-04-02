@@ -43,14 +43,14 @@
     >
       <div class="space-y-4">
         <div
-          class="card preset-filled-surface-50-950 rounded-[1.5rem] border border-surface-200-800 p-5 shadow-sm"
+          class="card preset-filled-surface-100-900 rounded-[1.5rem] border border-surface-200-800 p-5 shadow-sm"
         >
           <p
-            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
+            class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
           >
             Docs Workspace
           </p>
-          <p class="mt-3 text-[0.98rem] leading-6 text-surface-100">
+          <p class="mt-3 text-[0.98rem] leading-6 text-brand-body">
             Read the guide here, then open Kwipoo alongside it while the docs
             expand into deeper walkthroughs and screenshots.
           </p>
@@ -64,7 +64,7 @@
             </a>
             <a
               href={resolve("/support")}
-              class="btn btn-sm preset-outlined-surface-200-800 w-full justify-center border-surface-700 text-surface-50 hover:border-surface-600 hover:preset-tonal-surface hover:text-surface-50"
+              class="btn btn-sm preset-outlined-surface-200-800 w-full justify-center border-surface-700 text-color hover:border-surface-600 hover:preset-tonal-surface hover:text-color"
             >
               Contact support
             </a>

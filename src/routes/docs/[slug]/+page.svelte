@@ -145,11 +145,11 @@
         {#each data.relatedDocs as docPage (docPage.slug)}
           <a
             href={resolveDocsHref(docPage.slug)}
-            class="card card-hover preset-filled-surface-50-950 rounded-[1.2rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
+            class="card card-hover preset-filled-surface-100-900 rounded-[1.2rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
           >
             <div class="flex flex-wrap items-center gap-2">
               <p
-                class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
+                class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
               >
                 {docPage.eyebrow}
               </p>
@@ -158,11 +158,11 @@
               {/if}
             </div>
             <h3
-              class="mt-2 text-[1.15rem] font-semibold leading-tight text-surface-50"
+              class="mt-2 text-[1.15rem] font-semibold leading-tight text-color"
             >
               {docPage.title}
             </h3>
-            <p class="mt-2 text-[0.95rem] leading-6 text-surface-100">
+            <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
               {docPage.summary}
             </p>
           </a>
