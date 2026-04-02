@@ -7,6 +7,7 @@
     items: Array<{
       id: string;
       label: string;
+      level?: 2 | 3;
     }>;
   } = $props();
 </script>
@@ -14,19 +15,23 @@
 {#if items.length > 0}
   <nav
     aria-label={title}
-    class="card preset-filled-surface-50-950 rounded-[1.5rem] border border-surface-200-800 p-5 shadow-sm"
+    class="brand-outline-card card rounded-[1.5rem] border border-brand-border bg-brand-canvas/92 p-5 shadow-sm"
   >
     <p
-      class="text-xs font-semibold uppercase tracking-[0.18em] text-surface-300"
+      class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-muted"
     >
       {title}
     </p>
 
-    <div class="mt-4 space-y-2">
+    <div class="mt-4 space-y-1.5">
       {#each items as item (item.id)}
         <a
           href={`#${item.id}`}
-          class="btn btn-sm block w-full justify-start rounded-xl border border-surface-700 bg-surface-900 px-3 py-2 text-sm leading-6 text-surface-50 shadow-none hover:border-surface-600 hover:bg-surface-800 hover:text-surface-50"
+          class={`block rounded-xl px-3 py-2 leading-6 transition-colors hover:bg-brand-panel ${
+            item.level === 3
+              ? "ml-4 text-[0.95rem] text-brand-body hover:text-color"
+              : "text-sm font-semibold text-color hover:text-color"
+          }`}
         >
           {item.label}
         </a>

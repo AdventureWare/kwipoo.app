@@ -87,11 +87,28 @@ export function getDocsSectionId(heading: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+export function getDocsSubsectionId(
+  sectionHeading: string,
+  subsectionHeading: string,
+): string {
+  return `${getDocsSectionId(sectionHeading)}--${getDocsSectionId(subsectionHeading)}`;
+}
+
 export function getDocsTocItems(docPage: DocsPage): DocsTocItem[] {
-  return docPage.sections.map((section) => ({
-    id: getDocsSectionId(section.heading),
-    label: section.heading,
-  }));
+  return docPage.sections.flatMap((section) => {
+    const sectionItem: DocsTocItem = {
+      id: getDocsSectionId(section.heading),
+      label: section.heading,
+      level: 2,
+    };
+    const subsectionItems = (section.subsections ?? []).map((subsection) => ({
+      id: getDocsSubsectionId(section.heading, subsection.heading),
+      label: subsection.heading,
+      level: 3 as const,
+    }));
+
+    return [sectionItem, ...subsectionItems];
+  });
 }
 
 export function getDocsPageLabel(slug: string): string {

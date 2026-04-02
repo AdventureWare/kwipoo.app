@@ -1,6 +1,7 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import DocsSectionContent from "$lib/components/ui/docs-section-content.svelte";
+  import DocsTableOfContents from "$lib/components/ui/docs-table-of-contents.svelte";
   import FeatureStatusBadge from "$lib/components/ui/feature-status-badge.svelte";
   import { getDocsHref, getDocsSectionId } from "$lib/content/docs";
   import {
@@ -121,6 +122,12 @@
     {data.docPage.summary}
   </p>
 
+  {#if data.tocItems?.length}
+    <div class="xl:hidden">
+      <DocsTableOfContents items={data.tocItems} />
+    </div>
+  {/if}
+
   {#each sectionEntries as entry (entry.id)}
     <DocsSectionContent id={entry.id} section={entry.section} />
   {/each}
@@ -145,7 +152,7 @@
         {#each data.relatedDocs as docPage (docPage.slug)}
           <a
             href={resolveDocsHref(docPage.slug)}
-            class="card card-hover preset-filled-surface-100-900 rounded-[1.2rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
+            class="brand-outline-card card card-hover rounded-[1.2rem] border border-brand-border bg-brand-canvas/92 p-5 shadow-sm hover:border-primary-300"
           >
             <div class="flex flex-wrap items-center gap-2">
               <p
