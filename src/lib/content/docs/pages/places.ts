@@ -8,59 +8,73 @@ export const placesDocsPage = defineDocsPage({
   summary:
     "Use Places for the major real-world locations where you keep your Things, from home and office to storage units and shared spaces.",
   description:
-    "Places are the top-level locations in your inventory. They help you answer where something belongs before you narrow it down further with Spots, whether those Spots live inside a Place or inside a container Thing.",
+    "Places are the top-level locations in your inventory. They answer the broad question of where something belongs before you narrow it down further with Spots inside that place.",
   image: {
     src: "/assets/placesFeatureAsset@2x.png",
     alt: "Kwipoo Places feature showing organized storage locations",
   },
   sections: [
     {
-      heading: "Why Use Places?",
+      heading: "Why use Places?",
       paragraphs: [
-        'A Place represents a real-world location where you store Things, such as your home, office, or storage unit. Places give you the high-level location layer, while Spots handle the more specific areas inside a Place or inside a container Thing like a tote or backpack. If you want a simpler setup, you can always use one general Spot like "Main" instead of breaking the Place into many areas.',
+        "A Place represents a real-world location where you keep Things, such as your home, office, garage, or storage unit. Places give you the broad location layer, while Spots handle the more precise shelf, drawer, bin, room, or compartment inside that place.",
       ],
       bullets: [
-        "Track Where Your Things Are Stored: Use Places for the big location layer, then use Spots for the exact shelf, bin, room, or compartment when you need more precision.",
-        "Flexible Organization: Use multiple detailed Spots inside a Place, or add Spots to a container Thing like a tote or backpack when that matches reality better.",
-        "Save Key Location Details: Store addresses and related information for reference.",
-        "Privacy & Sharing Options: Control who can see each Place with visibility settings.",
+        "Location structure: Use Places for the top layer of your storage map.",
+        "Flexible detail: Stay broad with a simple place list, or add Spots only where precision matters.",
+        "Useful context: Save a photo, type, description, and address details when they help you recognize or revisit the place later.",
+        "Sharing control: Set each Place to Public, Friends Only, or Owner Only based on how visible it should be.",
       ],
+      callout: {
+        tone: "tip",
+        title: "Start broad, then add detail only where it pays off",
+        body: "Most people do not need every room or shelf documented on day one. A clear Place plus one or two important Spots is often enough to start.",
+      },
     },
     {
-      heading: "Adding a Place",
+      heading: "Add a Place",
       bullets: [
-        "Go to `Places` from the navigation bar.",
-        "Open the menu in the top right.",
-        "Choose the option to add a new Place.",
+        "Open `Places` from the main navigation.",
+        "Use the primary `Add Place` action.",
         "Enter the required field: `Place Name`.",
         "Review the default `Type` and `Visibility` values and change them if needed.",
-        "Add optional description and address details if they help.",
-        "Save the Place so it appears in your list.",
+        "Add a photo if visual recognition will help.",
+        "Add optional description and address details only if they add real value.",
+        "Save the Place so it appears in your Places collection.",
       ],
     },
     createEntityFieldsSection({
       slug: "places",
       heading: "Fields for a Place",
+      paragraphs: [
+        "Only `Place Name` is required. Type and visibility start with defaults, and address fields are optional. The form also supports an optional place photo for quicker visual recognition.",
+      ],
     }),
     {
-      heading: "Managing Places & Spots",
+      heading: "Use Places to hold Spots",
+      paragraphs: [
+        "Open a Place to review its summary and manage the Spots inside it. This is where Places become more than a flat list and start acting as the container for your actual storage structure.",
+      ],
       bullets: [
-        "Use Places for the major locations in your life, such as home, office, garage, or storage.",
-        "Use Spots when you want more detail inside a Place, or inside a container Thing like a tote, backpack, or storage bin.",
-        'If you prefer a simpler setup, create a single Spot like "Main" instead of breaking the Place into multiple areas.',
+        "Use `Add Spot` from the Place detail view when you want more precision inside that place.",
+        "If the Place is simple, you can stop at one or two spots instead of mapping everything.",
+        "Each Spot can then hold the Things assigned to that exact location.",
       ],
     },
     {
-      heading: "Viewing & Editing Places",
+      heading: "View, edit, and delete Places",
+      paragraphs: [
+        "Select a Place card to open its detail view. That screen shows the place photo, type, address, description, and current Spots.",
+      ],
       bullets: [
-        "Browse all of your Places from the Places list.",
-        "Turn on edit mode from the top right menu when you want to update a Place.",
-        "Use the pencil action to edit a Place and save changes.",
-        "Delete a Place from edit mode when it is no longer needed. Deleting a Place does not delete the Things inside it, but it can affect Spot assignments.",
+        "Use the pencil action in the Place detail view to edit the Place.",
+        "Use the trash action to delete a Place you no longer need.",
+        "Deleting a Place also removes its Spots, so use that action carefully.",
+        "Shared editable Places can still be opened and updated, but photo changes are currently limited for shared-place edits.",
       ],
     },
     {
-      heading: "Privacy & Visibility",
+      heading: "Privacy and visibility",
       bullets: [
         "Public: Anyone can see this Place if your profile is public.",
         "Friends Only: Only your Kwipoo friends can view this Place.",
@@ -68,12 +82,13 @@ export const placesDocsPage = defineDocsPage({
       ],
     },
     {
-      heading: "Pro Tips",
+      heading: "Pro tips",
       bullets: [
-        'Keep It Simple or Detailed: Use a single "Main" Spot or create multiple detailed Spots based on rooms or areas.',
-        "Use Spots on Container Things when you want to map the inside of a tote, backpack, toolbox, or other portable storage item.",
-        "Save Addresses for Reference when you are managing multiple properties or storage locations.",
-        "Set visibility based on how comfortable you are sharing a location with others.",
+        "Use Place names that match how you already think, such as Home, Garage, Office, or Storage Unit.",
+        "Add a photo when the place is easier to recognize visually than by text alone.",
+        "Only fill in address fields for places you may need to revisit, compare, or share later.",
+        "Add Spots where the broad place is still too vague to answer where something lives.",
+        "Review Place names and Spot structure occasionally so the storage map stays natural.",
       ],
     },
   ],

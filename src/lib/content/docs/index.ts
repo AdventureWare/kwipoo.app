@@ -15,6 +15,12 @@ import {
   type DocsTocItem,
 } from "./schema";
 
+const docsStartHereNavItems = [
+  { slug: "getting-started", label: "Welcome" },
+  { slug: "create-account", label: "Create your account" },
+  { slug: "profile", label: "Profile" },
+] as const;
+
 const docsFeatureNavItems = [
   { slug: "places", label: "Places" },
   { slug: "spots", label: "Spots" },
@@ -22,7 +28,6 @@ const docsFeatureNavItems = [
   { slug: "sets", label: "Sets" },
   { slug: "events", label: "Events" },
   { slug: "social", label: "Social" },
-  { slug: "profile", label: "Profile" },
 ] as const;
 
 export const docsLandingTocItems: DocsTocItem[] = [
@@ -56,12 +61,12 @@ export function getDocsNavSections(): DocsNavSection[] {
   return [
     {
       title: "Getting Started",
-      items: [
-        {
-          label: "Welcome",
-          href: "/docs",
-        },
-      ],
+      items: docsStartHereNavItems.map((item) => ({
+        label: item.label,
+        href: getDocsHref(item.slug),
+        slug: item.slug,
+        badge: getDocsPage(item.slug)?.badge,
+      })),
     },
     {
       title: "Features",

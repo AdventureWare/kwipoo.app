@@ -51,6 +51,7 @@ describe("docs content helpers", () => {
 
   it("returns stable labels for known and unknown docs slugs", () => {
     expect(getDocsPageLabel("places")).toBe("Places");
+    expect(getDocsPageLabel("create-account")).toBe("Create your account");
     expect(getDocsPageLabel("getting-started")).toBe(
       "Getting started with Kwipoo",
     );

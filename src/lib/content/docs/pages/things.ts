@@ -6,162 +6,144 @@ export const thingsDocsPage = defineDocsPage({
   eyebrow: "Core inventory",
   title: "Track your Things",
   summary:
-    "Build a searchable inventory of the physical items you own so you can find them faster, avoid duplicate purchases, and keep the details you will need later.",
+    "Build a searchable inventory of the physical items you own so you can find them faster, avoid duplicate purchases, and reuse them in Sets or Events.",
   description:
-    "Things are the foundation of Kwipoo. Each Thing represents a real item you own, with details about where it is, how to identify it, and how it fits into the rest of your setup.",
+    "Things are the foundation of Kwipoo. Each Thing represents a real item you own, with details about what it is, where it currently lives, and how it connects to the rest of your setup.",
   image: {
     src: "/assets/thingsFeatureAsset@2x.png",
     alt: "Kwipoo Things feature showing an organized list of items",
   },
   sections: [
     {
-      heading: "Why Use Things?",
+      heading: "Why use Things?",
       paragraphs: [
-        "A Thing represents any physical object you want to track in Kwipoo, whether that is camping gear, an appliance, or your favorite guitar. By adding Things, you give yourself a fuller picture of what you own in one place so you can make better decisions, save time, and avoid unnecessary purchases.",
+        "A Thing represents a physical object you want to keep track of in Kwipoo, whether that is camping gear, home equipment, seasonal storage, or everyday essentials. Things become especially useful once they are tied to real Places and Spots.",
       ],
       bullets: [
-        "Centralized Inventory: Keep a complete record of what you own in one place so you can check before buying, understand what you already have, and make smarter decisions about replacing, upgrading, or downsizing.",
-        "Location Tracking: Assign each Thing to a specific Spot so you always know where it is.",
-        "Detailed Item Data: Keep notes on source, cost, condition, weight, and more for planning, insurance, maintenance, repair, or sale.",
-        "Privacy & Sharing: Set each Thing to Public, Friends Only, or Owner Only depending on what you are comfortable sharing.",
+        "Searchable inventory: Keep a record of what you own in one place.",
+        "Location memory: Assign Things to Spots so you can answer where an item lives without guessing.",
+        "Planning reuse: Reuse the same Things in Sets and Events instead of rebuilding packing lists from scratch.",
+        "Flexible detail: Start with only a name, then add categories, photos, cost, weight, and identifiers over time.",
       ],
     },
     {
-      heading: "Adding a Thing",
+      heading: "Choose the right add flow",
+      summary:
+        "The Things screen now supports several creation paths depending on how fast or how structured you want the entry process to be.",
+      subsections: [
+        {
+          heading: "Add Thing",
+          bullets: [
+            "Use `Add Thing` for the standard entry flow.",
+            "Start with the name, then add the optional details that matter for this item.",
+          ],
+        },
+        {
+          heading: "Add from Photo",
+          bullets: [
+            "Use `Add from Photo` when a quick visual capture is the fastest way to get the item into Kwipoo.",
+            "This flow is designed for light entry first, with more details added later.",
+          ],
+        },
+        {
+          heading: "Add Multiple",
+          bullets: [
+            "Use `Add Multiple` when you are entering a batch of related items.",
+            "Lock repeated fields so the next item starts with shared values already filled in.",
+            "Keep moving through the queue with the `Add Next` flow until the batch is done.",
+          ],
+        },
+        {
+          heading: "Import Things",
+          bullets: [
+            "Use `Import Things` when you already have a list of items outside the app.",
+            "You can paste a line-by-line list or upload a CSV.",
+            "Imports support shared defaults like category, source, visibility, and spot assignment so backfilling goes faster.",
+          ],
+        },
+      ],
+      callout: {
+        tone: "tip",
+        title: "Use the simplest flow that gets the item captured",
+        body: "You do not need the full detail set on day one. The app is designed so a saved item can grow richer over time.",
+      },
+    },
+    {
+      heading: "Add a single Thing",
       bullets: [
-        "Go to `Things` on the navigation bar.",
-        "Use the add action in the top right.",
-        "Add an image if you want a visual reference.",
+        "Open `Things` from the main navigation.",
+        "Use `Add Thing` for the standard form, or open the add-options menu for the other entry modes.",
         "Enter the required field: `Name`.",
-        "Fill out any optional fields that will help later.",
-        "Save your new Thing so it appears in the Things list.",
+        "Add optional fields that will help you identify, locate, compare, insure, repair, or repurchase the item later.",
+        "Save the Thing so it appears in your Things collection.",
       ],
     },
     createEntityFieldsSection({
       slug: "things",
       heading: "Fields for a Thing",
       paragraphs: [
-        "Only `Name` needs manual input to save a Thing. Several other fields start with sensible defaults, and the rest are optional details you can fill in over time for reference, repair, maintenance, insurance, packing, or trade and sale.",
+        "Only `Name` is required to save a Thing. Several other fields start with defaults, and the rest can be filled in later as your inventory becomes more useful.",
       ],
     }),
     {
-      heading: "Privacy & Visibility",
-      bullets: [
-        "Public: Anyone can see this Thing if your profile is also public.",
-        "Friends Only: Only your Kwipoo friends can view it.",
-        "Owner Only: Visible to you alone, even if the rest of your profile is public.",
-      ],
-    },
-    {
-      heading: "Categories Explained",
-      subsections: [
-        {
-          heading: "What are Categories?",
-          paragraphs: [
-            "Categories help you classify your Things so they are easier to search, filter, and analyze. Each Thing can have a category based on type, purpose, or whatever organization style makes sense to you.",
-          ],
-        },
-        {
-          heading: "Why use Categories?",
-          bullets: [
-            "Find What You Need Faster: Filter and search your Things by category instead of scrolling through a long list.",
-            "Avoid Unnecessary Purchases: Check how many shirts, tools, or camping items you already own before buying more.",
-            "Track Spending by Category: See where your money goes across gear, clothing, electronics, and more.",
-            "Plan & Pack Smarter: Filtering by category makes it easier to prep for a trip or move.",
-          ],
-        },
-        {
-          heading: "How do Categories Work?",
-          bullets: [
-            "Suggested Categories: Kwipoo provides a list of common categories to choose from.",
-            "Custom Categories: If none fit, you can enter your own.",
-            "Flexible & Simple: There is no strict structure. Categorize Things in the way that makes sense to you.",
-          ],
-        },
-        {
-          heading: "Examples of How Categories Help",
-          bullets: [
-            "Packing for a Trip: Filter by camping gear to make sure you have what you need.",
-            "Decluttering: Check clothing to see how many jackets you actually wear.",
-            "Shopping Smarter: Look at electronics before buying another charger or pair of headphones.",
-          ],
-        },
-        {
-          heading: "Best Practices",
-          bullets: [
-            "Use broad categories when you do not need much detail.",
-            "Be specific when more detail will actually help.",
-            "Review your categories over time to spot trends in ownership and spending.",
-          ],
-        },
-      ],
-    },
-    {
-      heading: "Viewing & Editing Things",
-      bullets: [
-        "Browse all the items you have added in the Things section.",
-        "Search or filter by category, brand, or other criteria to find what you need quickly.",
-        "Open a Thing card to view the details, edit the information, change its Spot, or delete it.",
-        "If you entered cost or weight, those values can appear in aggregate views like Sets or Events.",
-      ],
-    },
-    {
-      heading: "Assigning a Single Thing to a Spot",
-      bullets: [
-        "Open the Thing's details and use the move action.",
-        "Choose the correct Place and Spot from the list.",
-        "Use `Move Here` for the location where the item currently belongs.",
-        "If the item moves in real life, update its Spot in Kwipoo too.",
-      ],
-    },
-    {
-      heading: "Thing Filters",
+      heading: "Search, group, and summarize your inventory",
       paragraphs: [
-        "The Thing Filters panel helps you find, organize, and analyze your Things with search, grouping, and summary options.",
+        "The Things page includes a search bar plus a filters panel so you can move between quick lookup and broader inventory analysis.",
       ],
       subsections: [
         {
-          heading: "Search-By",
+          heading: "Search fields",
           bullets: [
-            "Name: Search by the Thing's name.",
-            "Category: Search by the assigned category.",
-            "Description: Search for keywords in the Thing's description.",
-            "Brand: Find Things by brand.",
-            "Acquired From: Search based on where you got the Thing.",
+            "Search by `Name` by default.",
+            "Turn on additional search fields for `Category`, `Description`, `Brand`, or `Source` when you need a broader match.",
           ],
         },
         {
-          heading: "Grouped By",
+          heading: "Grouping options",
           bullets: [
-            "Category: View Things grouped by category.",
-            "Brand: See all the Things you have from a specific brand.",
-            "Acquisition Source: Organize by where or from whom you acquired Things.",
+            "Group Things by `Category`.",
+            "Group Things by `Brand`.",
+            "Group Things by acquisition `Source`.",
           ],
         },
         {
-          heading: "Summary Type",
+          heading: "Summary options",
           bullets: [
-            "Count of Things: Shows how many Things fall under each group.",
-            "Sum of Cost: Displays the total cost of Things in each group when costs have been entered.",
-          ],
-        },
-        {
-          heading: "Applying Filters",
-          paragraphs: [
-            "After selecting your search, grouping, and summary preferences, apply the filters to see results. Filters are useful for finding specific items, checking spending patterns, and getting better insight into your inventory.",
+            "Use `Count` when you want to know how many Things are in each group.",
+            "Use `Sum of Cost` when you want grouped totals from the cost values you have entered.",
           ],
         },
       ],
     },
     {
-      heading: "Pro Tips",
+      heading: "View, edit, duplicate, and move Things",
+      paragraphs: [
+        "Open any Thing card to view its detail screen. From there you can review item information, update details, check which Sets include it, and manage where it currently lives.",
+      ],
       bullets: [
-        "Start with your key items first, then add more as you have time and energy.",
-        "Add details over time instead of trying to perfect every entry immediately.",
-        "Add new Things right after you get them, while the information is easy to find.",
-        "Check retailer purchase histories to speed up backfilling older items.",
-        "Move a Thing in Kwipoo when you move it in real life.",
-        "Use categories even if they stay simple. They pay off later in search and analysis.",
+        "Edit the Thing when details change.",
+        "Use `Add Similar` when a new item is related but should start with fresh identifying details.",
+        "Use `Duplicate Thing` when you want a copy of an existing entry as the starting point.",
+        "Move the Thing into the correct Spot whenever its real-world location changes.",
+        "Delete the Thing only when you no longer want it tracked in the inventory.",
+      ],
+    },
+    {
+      heading: "Privacy and visibility",
+      bullets: [
+        "Public: Anyone can see the Thing if your profile is also public.",
+        "Friends Only: Only your Kwipoo friends can view it.",
+        "Owner Only: Visible only to you.",
+      ],
+    },
+    {
+      heading: "Pro tips",
+      bullets: [
+        "Start with the items you misplace, rebuy, pack often, or lend to other people.",
+        "Use photos for quick capture, but rely on clear names so search stays dependable.",
+        "Add a spot assignment as soon as the item's location matters to you.",
+        "Use Add Multiple or Import when backfilling a large area instead of entering every item one at a time.",
+        "Review categories and costs over time so grouped views stay useful.",
       ],
     },
   ],
