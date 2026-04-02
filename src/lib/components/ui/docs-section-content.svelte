@@ -12,9 +12,9 @@
   } = $props();
 
   const calloutToneClasses = {
-    note: "preset-tonal-tertiary border-tertiary-200-800 text-color",
-    tip: "preset-tonal-success border-success-200-800 text-color",
-    warning: "preset-tonal-warning border-warning-200-800 text-color",
+    note: "docs-callout docs-callout-note",
+    tip: "docs-callout docs-callout-tip",
+    warning: "docs-callout docs-callout-warning",
   } as const;
   const resolvePath = resolve as unknown as (path: string) => string;
 
@@ -130,13 +130,13 @@
           calloutToneClasses[section.callout.tone ?? "note"]
         }`}
       >
-        <p
-          class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-muted"
-        >
+        <p class="docs-callout-label text-sm font-semibold uppercase tracking-[0.18em]">
           {section.callout.tone ?? "note"}
         </p>
         <h3 class="mt-2 text-lg font-semibold">{section.callout.title}</h3>
-        <p class="mt-2 text-sm leading-6 text-color">{section.callout.body}</p>
+        <p class="docs-callout-copy mt-2 text-sm leading-6">
+          {section.callout.body}
+        </p>
       </div>
     {/if}
 

@@ -246,6 +246,62 @@
       inset 0 1px 0 color-mix(in srgb, white 62%, transparent);
   }
 
+  .docs-callout {
+    --docs-callout-bg: var(--color-brand-panel);
+    --docs-callout-border: var(--color-brand-border);
+    --docs-callout-fg: var(--color-brand-ink);
+    --docs-callout-copy: var(--docs-callout-fg);
+    --docs-callout-label: color-mix(
+      in srgb,
+      var(--docs-callout-fg) 72%,
+      var(--docs-callout-bg) 28%
+    );
+    background-color: var(--docs-callout-bg);
+    border-color: var(--docs-callout-border);
+    color: var(--docs-callout-fg);
+  }
+
+  .docs-callout-note {
+    --docs-callout-bg: var(--color-tertiary-50-950);
+    --docs-callout-border: var(--color-tertiary-200-800);
+    --docs-callout-fg: var(--color-tertiary-950-50);
+    --docs-callout-copy: color-mix(
+      in srgb,
+      var(--color-tertiary-950-50) 86%,
+      var(--color-tertiary-50-950) 14%
+    );
+  }
+
+  .docs-callout-tip {
+    --docs-callout-bg: var(--color-success-50-950);
+    --docs-callout-border: var(--color-success-200-800);
+    --docs-callout-fg: var(--color-success-950-50);
+    --docs-callout-copy: color-mix(
+      in srgb,
+      var(--color-success-950-50) 88%,
+      var(--color-success-50-950) 12%
+    );
+  }
+
+  .docs-callout-warning {
+    --docs-callout-bg: var(--color-warning-50-950);
+    --docs-callout-border: var(--color-warning-200-800);
+    --docs-callout-fg: var(--color-warning-950-50);
+    --docs-callout-copy: color-mix(
+      in srgb,
+      var(--color-warning-950-50) 88%,
+      var(--color-warning-50-950) 12%
+    );
+  }
+
+  .docs-callout-label {
+    color: var(--docs-callout-label);
+  }
+
+  .docs-callout-copy {
+    color: var(--docs-callout-copy);
+  }
+
   .brand-soft-grid {
     background-image:
       linear-gradient(
