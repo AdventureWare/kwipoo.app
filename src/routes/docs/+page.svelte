@@ -1,5 +1,6 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
+  import DocsTableOfContents from "$lib/components/ui/docs-table-of-contents.svelte";
   import {
     docsLandingTocItems,
     docsPages,
@@ -107,15 +108,19 @@
       product you actually use day to day.
     </p>
 
+    <div class="xl:hidden">
+      <DocsTableOfContents items={docsLandingTocItems} />
+    </div>
+
     <div
-      class="card preset-filled-surface-100-900 rounded-[1.5rem] border border-primary-200-800 p-6 shadow-sm"
+      class="brand-outline-card card rounded-[1.5rem] border border-brand-border bg-brand-panel/80 p-6 shadow-sm"
     >
       <p
-        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-surface-300"
+        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
         Recommended flow
       </p>
-      <p class="mt-3 text-[1.15rem] leading-7 text-surface-50">
+      <p class="mt-3 text-[1.15rem] leading-7 text-color">
         Start with setup, then move through Places, Spots, Things, Sets, and
         Events in the same order they become useful in real life.
       </p>
@@ -129,7 +134,7 @@
         </a>
         <a
           href={`#${docsLandingTocItems[2].id}`}
-          class="btn btn-sm preset-outlined-surface-200-800 w-auto border-surface-600 text-color hover:border-surface-500 hover:bg-surface-100 hover:text-color"
+          class="btn btn-sm w-auto border border-brand-border bg-brand-canvas text-surface-950 hover:bg-brand-panel"
         >
           Browse topics
         </a>
@@ -161,7 +166,7 @@
       {#each startHerePages as docPage (docPage.slug)}
         <a
           href={resolveDocsHref(docPage.slug)}
-          class="card card-hover preset-filled-surface-100-900 flex h-full flex-col gap-3 rounded-[1.35rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
+          class="brand-outline-card card card-hover flex h-full flex-col gap-3 rounded-[1.35rem] border border-brand-border bg-brand-canvas/92 p-5 shadow-sm hover:border-primary-300"
         >
           <div class="flex flex-wrap items-center gap-2">
             <p
@@ -226,9 +231,9 @@
     <div class="grid gap-5">
       {#each categoryGroups as group (group.category)}
         <section
-          class="card preset-filled-surface-100-900 rounded-[1.5rem] border border-surface-200-800 p-6 shadow-sm"
+          class="brand-outline-card card rounded-[1.5rem] border border-brand-border bg-brand-panel/80 p-6 shadow-sm"
         >
-          <div class="space-y-3 border-b border-surface-200-800 pb-5">
+          <div class="space-y-3 border-b border-brand-border pb-5">
             <p
               class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
             >
@@ -246,7 +251,7 @@
             {#each group.pages as docPage (docPage.slug)}
               <a
                 href={resolveDocsHref(docPage.slug)}
-                class="card card-hover preset-filled-surface-100-900 rounded-[1.2rem] border border-surface-200-800 p-4 hover:border-primary-200-800"
+                class="brand-outline-card card card-hover rounded-[1.2rem] border border-brand-border bg-brand-canvas/92 p-4 hover:border-primary-300"
               >
                 <div class="flex flex-wrap items-center gap-2">
                   <p
@@ -299,7 +304,7 @@
       {#each featuredPages as docPage (docPage.slug)}
         <a
           href={resolveDocsHref(docPage.slug)}
-          class="card card-hover preset-filled-surface-100-900 rounded-[1.2rem] border border-surface-200-800 p-5 shadow-sm hover:border-primary-200-800"
+          class="brand-outline-card card card-hover rounded-[1.2rem] border border-brand-border bg-brand-canvas/92 p-5 shadow-sm hover:border-primary-300"
         >
           <div class="flex flex-wrap items-center gap-2">
             <p

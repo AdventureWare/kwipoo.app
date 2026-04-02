@@ -86,6 +86,7 @@ export interface DocsNavSection {
 export interface DocsTocItem {
   id: string;
   label: string;
+  level?: 2 | 3;
 }
 
 export const docsCategoryDescriptions: Record<DocsCategory, string> = {

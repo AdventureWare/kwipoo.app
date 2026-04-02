@@ -1,6 +1,6 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import type { DocsSection } from "$lib/content/docs";
+  import { getDocsSubsectionId, type DocsSection } from "$lib/content/docs";
   import { isExternalHref } from "$lib/config/site";
 
   let {
@@ -25,9 +25,18 @@
 
 <section {id} class="scroll-mt-28 space-y-5">
   <div class="max-w-4xl">
-    <h2 class="text-3xl font-semibold tracking-tight text-color sm:text-5xl">
-      {section.heading}
-    </h2>
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <h2 class="text-3xl font-semibold tracking-tight text-color sm:text-5xl">
+        {section.heading}
+      </h2>
+      <a
+        href={`#${id}`}
+        aria-label={`Link to section ${section.heading}`}
+        class="inline-flex shrink-0 items-center rounded-full border border-surface-300 px-2.5 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-brand-muted transition-colors hover:border-primary-300 hover:text-color"
+      >
+        Link
+      </a>
+    </div>
 
     {#if section.summary}
       <p class="mt-3 text-lg leading-8 text-brand-body">
@@ -56,12 +65,24 @@
     {#if section.subsections}
       <div class="mt-8 space-y-8">
         {#each section.subsections as subsection (subsection.heading)}
-          <section class="space-y-4">
-            <h3
-              class="text-[1.2rem] font-semibold leading-tight text-color sm:text-[1.35rem]"
-            >
-              {subsection.heading}
-            </h3>
+          <section
+            id={getDocsSubsectionId(section.heading, subsection.heading)}
+            class="scroll-mt-28 space-y-4"
+          >
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <h3
+                class="text-[1.2rem] font-semibold leading-tight text-color sm:text-[1.35rem]"
+              >
+                {subsection.heading}
+              </h3>
+              <a
+                href={`#${getDocsSubsectionId(section.heading, subsection.heading)}`}
+                aria-label={`Link to subsection ${subsection.heading}`}
+                class="inline-flex shrink-0 items-center rounded-full border border-surface-300 px-2.5 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-brand-muted transition-colors hover:border-primary-300 hover:text-color"
+              >
+                Link
+              </a>
+            </div>
 
             {#if subsection.paragraphs?.length}
               <div class="space-y-4 text-lg leading-8 text-color">

@@ -43,7 +43,7 @@
     >
       <div class="space-y-4">
         <div
-          class="card preset-filled-surface-100-900 rounded-[1.5rem] border border-surface-200-800 p-5 shadow-sm"
+          class="brand-outline-card card rounded-[1.5rem] border border-brand-border bg-brand-canvas/92 p-5 shadow-sm"
         >
           <p
             class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
@@ -64,7 +64,7 @@
             </a>
             <a
               href={resolve("/support")}
-              class="btn btn-sm preset-outlined-surface-200-800 w-full justify-center border-surface-700 text-color hover:border-surface-600 hover:preset-tonal-surface hover:text-color"
+              class="btn btn-sm w-full justify-center border border-brand-border bg-brand-canvas text-surface-950 hover:bg-brand-panel"
             >
               Contact support
             </a>
