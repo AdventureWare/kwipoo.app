@@ -1,51 +1,35 @@
 # Brand Theme Workflow
 
-Kwipoo now treats the app theme as the source of truth for the shared brand palette.
+Kwipoo now treats the product-level brand contract as the source of truth for the shared brand palette.
 
 ## Files
 
+- `../coordination/contracts/kwipoo-brand-theme.tokens.json`
+  - product-level source of truth for shared brand ramps and semantic brand tokens
+- `../scripts/sync-shared-brand-theme.mjs`
+  - generates the shared theme artifacts for both repos
 - `src/lib/styles/kwipoo-brand-theme.generated.css`
   - generated file
-  - contains the shared Skeleton-compatible brand ramps copied from the app theme
+  - contains the shared Skeleton-compatible brand ramps generated from the product contract
 - `src/app.css`
   - imports the generated brand theme
-  - keeps website-only surface, panel, border, and semantic tokens
+  - keeps website-only semantic mappings and presentation rules
 - `scripts/sync-app-theme.mjs`
-  - reads the app theme CSS file
-  - extracts the shared brand variables
-  - rewrites the generated website theme file
+  - delegates to the product-level sync script so `npm run theme:sync` still works from this repo
 
 ## Normal workflow
 
-1. Update the source theme in the app repo.
-2. In this repo, run `npm run theme:sync`.
-3. Review the site visually.
-4. Run `npm run check`, `npm run lint`, and `npm run test:e2e:narrow` for layout-sensitive changes.
-
-## Theme path
-
-By default the sync script reads:
-
-`/Users/colinfreed/Projects/AdventureWare/Products/Kwipoo/app/kwipoo-teal-theme.css`
-
-If that path changes, pass the path explicitly:
-
-```sh
-KWIPOO_APP_THEME_FILE="/path/to/kwipoo-teal-theme.css" npm run theme:sync
-```
+1. Update `coordination/contracts/kwipoo-brand-theme.tokens.json`.
+2. From `Kwipoo/`, run `node scripts/sync-shared-brand-theme.mjs`.
+3. Or from `website/`, run `npm run theme:sync`.
+4. Review the site visually.
+5. Run `npm run check`, `npm run lint`, and `npm run test:e2e:narrow` for layout-sensitive changes.
 
 ## Why this split exists
 
-The brand ramps should stay consistent across the app and website.
-
-The website still needs its own semantic layer for:
-
-- warm/light marketing surfaces
-- readable body text on those surfaces
-- screenshot framing and decorative accents
-- CTA contrast tuned for the marketing site
+The brand ramps should stay consistent across the app and website, while each repo still controls its own layout and product-context decisions.
 
 That means:
 
-- shared brand tokens come from the app
+- shared brand tokens come from the product-level contract
 - website presentation tokens stay local to the website

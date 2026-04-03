@@ -146,7 +146,7 @@ export const SITE_SECTIONS: SiteSection[] = [
     surfaceOrder: {
       footer: 7,
     },
-    discoverability: "reference",
+    discoverability: "indexable",
   },
   {
     id: "termsAndConditions",
@@ -156,7 +156,7 @@ export const SITE_SECTIONS: SiteSection[] = [
     surfaceOrder: {
       footer: 8,
     },
-    discoverability: "reference",
+    discoverability: "indexable",
   },
 ];
 

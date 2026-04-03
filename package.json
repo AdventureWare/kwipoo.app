@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.17",
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "npm run content:sync:if-available && vite dev",
     "build": "npm run content:sync:if-available && vite build",

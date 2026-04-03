@@ -86,12 +86,12 @@ describe("site sections", () => {
       "/docs",
       "/resources",
       "/support",
+      "/privacy-policy",
+      "/terms-and-conditions",
     ]);
     expect(getSitePathsByDiscoverability("reference")).toEqual([
       "/delete-account-form",
       "/delete-data-form",
-      "/privacy-policy",
-      "/terms-and-conditions",
     ]);
   });
 

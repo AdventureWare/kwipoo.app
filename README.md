@@ -84,10 +84,10 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 ## Brand Theme
 
 - Shared brand ramps live in `src/lib/styles/kwipoo-brand-theme.generated.css`.
-- That file is generated from the app theme source, not edited by hand.
-- Run `npm run theme:sync` after changing the app theme.
+- That file is generated from `../coordination/contracts/kwipoo-brand-theme.tokens.json`, not edited by hand.
+- Run `node ../scripts/sync-shared-brand-theme.mjs` from `Kwipoo/` or `npm run theme:sync` from this repo after changing the shared brand contract.
 - Run `npm run releases:sync` after the app repo publishes or revises website-facing release records.
-- The website keeps its own semantic surface and presentation tokens in `src/app.css`.
+- The website keeps its own semantic mappings and presentation rules in `src/app.css`.
 - See `docs/brand-theme-workflow.md` for the maintenance workflow.
 
 ## Release History Sync

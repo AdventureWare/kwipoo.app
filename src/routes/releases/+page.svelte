@@ -7,6 +7,7 @@
     type WebsiteReleaseNote,
   } from "$lib/content/releases";
   import {
+    INDEXABLE_ROBOTS_CONTENT,
     getBreadcrumbJsonLd,
     toAbsoluteMarketingUrl,
     toSeoJsonLd,
@@ -97,6 +98,7 @@
 <svelte:head>
   <title>{releaseTitle}</title>
   <meta name="description" content={releaseDescription} />
+  <meta name="robots" content={INDEXABLE_ROBOTS_CONTENT} />
   <meta property="og:title" content={releaseTitle} />
   <meta property="og:description" content={releaseDescription} />
   <meta property="og:type" content="website" />

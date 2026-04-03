@@ -7,6 +7,7 @@
     SUPPORT_EMAIL_MAILTO,
   } from "$lib/config/site";
   import {
+    INDEXABLE_ROBOTS_CONTENT,
     getBreadcrumbJsonLd,
     toAbsoluteMarketingUrl,
     toSeoJsonLd,
@@ -94,7 +95,7 @@
 <svelte:head>
   <title>{supportTitle}</title>
   <meta name="description" content={supportDescription} />
-  <meta name="robots" content="index,follow" />
+  <meta name="robots" content={INDEXABLE_ROBOTS_CONTENT} />
   <meta property="og:title" content={supportTitle} />
   <meta property="og:description" content={supportDescription} />
   <meta property="og:type" content="website" />

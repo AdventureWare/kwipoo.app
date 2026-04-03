@@ -33,7 +33,8 @@ describe("discoverability builders", () => {
 
     expect(sitemap).toContain("<loc>https://kwipoo.app/</loc>");
     expect(sitemap).not.toContain("https://kwipoo.app/docs");
-    expect(sitemap).not.toContain("https://kwipoo.app/privacy-policy");
+    expect(sitemap).toContain("https://kwipoo.app/privacy-policy");
+    expect(sitemap).toContain("https://kwipoo.app/terms-and-conditions");
     expect(buildRobotsTxt()).toContain("https://kwipoo.app/sitemap.xml");
   });
 
@@ -51,8 +52,11 @@ describe("discoverability builders", () => {
     expect(buildSitemapXml()).toContain(
       "<loc>https://kwipoo.app/resources/outdoor-adventurers</loc>",
     );
-    expect(buildSitemapXml()).not.toContain(
-      "https://kwipoo.app/terms-and-conditions",
+    expect(buildSitemapXml()).toContain(
+      "<loc>https://kwipoo.app/releases</loc>",
+    );
+    expect(buildSitemapXml()).toContain(
+      "<loc>https://kwipoo.app/terms-and-conditions</loc>",
     );
     expect(buildLlmsTxt()).toContain("Documentation: https://kwipoo.app/docs");
     expect(buildLlmsTxt()).toContain("Resources: https://kwipoo.app/resources");

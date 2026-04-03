@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { toAbsoluteMarketingUrl, toSeoJsonLd } from "$lib/seo";
+  import {
+    INDEXABLE_ROBOTS_CONTENT,
+    toAbsoluteMarketingUrl,
+    toSeoJsonLd,
+  } from "$lib/seo";
 
   const privacyTitle = "Privacy Policy | Kwipoo";
   const privacyDescription =
@@ -16,7 +20,7 @@
 <svelte:head>
   <title>{privacyTitle}</title>
   <meta name="description" content={privacyDescription} />
-  <meta name="robots" content="noindex,follow" />
+  <meta name="robots" content={INDEXABLE_ROBOTS_CONTENT} />
   <meta property="og:title" content={privacyTitle} />
   <meta property="og:description" content={privacyDescription} />
   <meta property="og:type" content="website" />
