@@ -42,6 +42,10 @@ export const ROBOTS_TXT_URL = toAbsoluteMarketingUrl("/robots.txt");
 export const SITEMAP_XML_URL = toAbsoluteMarketingUrl("/sitemap.xml");
 export const LLMS_TXT_URL = toAbsoluteMarketingUrl("/llms.txt");
 export const LLMS_FULL_TXT_URL = toAbsoluteMarketingUrl("/llms-full.txt");
+export const INDEXABLE_ROBOTS_CONTENT =
+  "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
+export const NOINDEX_FOLLOW_ROBOTS_CONTENT = "noindex,follow";
+export const NOINDEX_NOFOLLOW_ROBOTS_CONTENT = "noindex,nofollow";
 
 export function toSeoJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");

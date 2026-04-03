@@ -4,8 +4,6 @@
 @import "@skeletonlabs/skeleton-svelte";
 @import "./lib/styles/kwipoo-brand-theme.generated.css";
 
-@source "../node_modules/@skeletonlabs/skeleton-svelte/dist";
-
 @font-face {
   font-family: "Monoton";
   src: url("/fonts/Monoton-Regular.ttf") format("truetype");
@@ -43,31 +41,6 @@
   --color-neutral-900: #545454;
   --color-neutral-950: #363636;
 
-  --color-surface-50: #fffdf9;
-  --color-surface-100: #faf7f1;
-  --color-surface-200: #f0ebe1;
-  --color-surface-300: #e1d8ca;
-  --color-surface-400: #c7bcab;
-  --color-surface-500: #a89a88;
-  --color-surface-600: #877866;
-  --color-surface-700: #695c4e;
-  --color-surface-800: #4d4338;
-  --color-surface-900: #342c24;
-  --color-surface-950: #1d1813;
-  --color-surface-contrast-dark: var(--color-surface-950);
-  --color-surface-contrast-light: var(--color-surface-50);
-  --color-surface-contrast-50: var(--color-surface-contrast-dark);
-  --color-surface-contrast-100: var(--color-surface-contrast-dark);
-  --color-surface-contrast-200: var(--color-surface-contrast-dark);
-  --color-surface-contrast-300: var(--color-surface-contrast-dark);
-  --color-surface-contrast-400: var(--color-surface-contrast-light);
-  --color-surface-contrast-500: var(--color-surface-contrast-light);
-  --color-surface-contrast-600: var(--color-surface-contrast-light);
-  --color-surface-contrast-700: var(--color-surface-contrast-light);
-  --color-surface-contrast-800: var(--color-surface-contrast-light);
-  --color-surface-contrast-900: var(--color-surface-contrast-light);
-  --color-surface-contrast-950: var(--color-surface-contrast-light);
-
   /* Semantic colors */
   --color-surface: var(--color-surface-50);
   --color-background: var(--color-surface-100);
@@ -77,48 +50,6 @@
     in srgb,
     var(--color-tertiary-300) 62%,
     var(--color-surface-700) 38%
-  );
-  --color-brand-canvas: var(--color-surface-50);
-  --color-brand-panel: color-mix(
-    in srgb,
-    var(--color-surface-100) 86%,
-    var(--color-primary-50) 14%
-  );
-  --color-brand-panel-strong: color-mix(
-    in srgb,
-    var(--color-surface-200) 74%,
-    var(--color-secondary-100) 26%
-  );
-  --color-brand-border: color-mix(
-    in srgb,
-    var(--color-primary-200) 22%,
-    var(--color-surface-600) 78%
-  );
-  --color-brand-ink: var(--color-tertiary-950);
-  --color-brand-body: color-mix(
-    in srgb,
-    var(--color-tertiary-900) 76%,
-    var(--color-surface-900) 24%
-  );
-  --color-brand-muted: color-mix(
-    in srgb,
-    var(--color-tertiary-400) 45%,
-    var(--color-surface-700) 55%
-  );
-  --color-brand-glow: color-mix(
-    in srgb,
-    var(--color-primary-200) 72%,
-    transparent
-  );
-  --color-brand-shell: color-mix(
-    in srgb,
-    var(--color-tertiary-950) 86%,
-    var(--color-primary-900) 14%
-  );
-  --color-brand-screen: color-mix(
-    in srgb,
-    var(--color-tertiary-950) 90%,
-    black 10%
   );
   --font-monoton: "Monoton", cursive;
   --font-jost: "Jost", sans-serif;

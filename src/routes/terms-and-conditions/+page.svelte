@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { toAbsoluteMarketingUrl, toSeoJsonLd } from "$lib/seo";
+  import {
+    INDEXABLE_ROBOTS_CONTENT,
+    toAbsoluteMarketingUrl,
+    toSeoJsonLd,
+  } from "$lib/seo";
 
   const termsTitle = "Terms and Conditions | Kwipoo";
   const termsDescription =
@@ -16,7 +20,7 @@
 <svelte:head>
   <title>{termsTitle}</title>
   <meta name="description" content={termsDescription} />
-  <meta name="robots" content="noindex,follow" />
+  <meta name="robots" content={INDEXABLE_ROBOTS_CONTENT} />
   <meta property="og:title" content={termsTitle} />
   <meta property="og:description" content={termsDescription} />
   <meta property="og:type" content="website" />
