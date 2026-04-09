@@ -4,6 +4,7 @@
   import DocsTableOfContents from "$lib/components/ui/docs-table-of-contents.svelte";
   import FeatureStatusBadge from "$lib/components/ui/feature-status-badge.svelte";
   import { getDocsHref, getDocsSectionId } from "$lib/content/docs";
+  import { getResourcesHref } from "$lib/content/resources";
   import {
     ORGANIZATION_ID,
     getBreadcrumbJsonLd,
@@ -24,6 +25,10 @@
 
   function resolveDocsHref(slug: string): string {
     return resolvePath(getDocsHref(slug));
+  }
+
+  function resolveResourceHref(slug: string): string {
+    return resolvePath(getResourcesHref(slug));
   }
 
   let docUrl = $derived(toAbsoluteMarketingUrl(getDocsHref(data.docPage.slug)));
@@ -131,6 +136,52 @@
   {#each sectionEntries as entry (entry.id)}
     <DocsSectionContent id={entry.id} section={entry.section} />
   {/each}
+
+  {#if data.relatedResources.length > 0}
+    <section class="grid gap-5">
+      <div class="space-y-3">
+        <p
+          class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+        >
+          Use It In Real Life
+        </p>
+        <h2
+          class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
+        >
+          Practical guides that use this feature
+        </h2>
+        <p class="max-w-4xl text-base leading-7 text-brand-body">
+          If you want an example-driven path instead of feature reference alone,
+          start with one of these walkthroughs.
+        </p>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <!-- eslint-disable svelte/no-navigation-without-resolve -->
+        {#each data.relatedResources as guide (guide.slug)}
+          <a
+            href={resolveResourceHref(guide.slug)}
+            class="brand-outline-card card card-hover rounded-[1.2rem] border border-brand-border bg-brand-canvas/92 p-5 shadow-sm hover:border-primary-300"
+          >
+            <p
+              class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+            >
+              {guide.audience}
+            </p>
+            <h3
+              class="mt-2 text-[1.15rem] font-semibold leading-tight text-color"
+            >
+              {guide.title}
+            </h3>
+            <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
+              {guide.summary}
+            </p>
+          </a>
+        {/each}
+        <!-- eslint-enable svelte/no-navigation-without-resolve -->
+      </div>
+    </section>
+  {/if}
 
   {#if data.relatedDocs.length > 0}
     <section class="grid gap-5">

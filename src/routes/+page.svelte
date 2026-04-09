@@ -10,10 +10,13 @@
   } from "phosphor-svelte";
   import { getDocsHref, getDocsPageBadge } from "$lib/content/docs";
   import {
+    getResourceGuide,
+    getResourcesHref,
+  } from "$lib/content/resources";
+  import {
     APP_LOGIN_URL,
     APP_SIGNUP_URL,
     MARKETING_SITE_URL,
-    SITE_DESCRIPTION,
     SITE_KEYWORDS,
   } from "$lib/config/site";
   import { trackCtaClick } from "$lib/analytics";
@@ -21,6 +24,7 @@
   import EverydayProblemHighlights from "$lib/components/layouts/sections/everyday-problem-highlights.svelte";
   import ProblemSolution from "$lib/components/layouts/sections/problem-solution.svelte";
   import Switchbacks from "$lib/components/layouts/sections/switchbacks.svelte";
+  import Button from "$lib/components/ui/buttons/button.svelte";
   import {
     getOrganizationJsonLd,
     getSoftwareApplicationJsonLd,
@@ -39,6 +43,14 @@
     }
 
     return resolvePath(getDocsHref(slug));
+  }
+
+  function resolveResourceGuideHref(slug: string): string {
+    if (!isSiteSectionEnabled("resources")) {
+      return resolvePath(getResourcesHref());
+    }
+
+    return resolvePath(getResourcesHref(slug));
   }
 
   const problemSolutionData = [
@@ -127,6 +139,10 @@
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("things"),
+      supportingLinkText: "See the home inventory guide",
+      supportingLinkHref: resolveResourceGuideHref(
+        "home-inventory-that-stays-updated",
+      ),
     },
     {
       tag: "Sets",
@@ -144,6 +160,10 @@
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("sets"),
+      supportingLinkText: "See the repeatable packing guide",
+      supportingLinkHref: resolveResourceGuideHref(
+        "repeatable-packing-system-trips-camping-events",
+      ),
     },
     {
       tag: "Places",
@@ -161,6 +181,10 @@
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("places"),
+      supportingLinkText: "See the storage bins guide",
+      supportingLinkHref: resolveResourceGuideHref(
+        "organize-storage-bins-find-things-later",
+      ),
     },
     {
       tag: "Spots",
@@ -178,6 +202,10 @@
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("spots"),
+      supportingLinkText: "See the multi-location guide",
+      supportingLinkHref: resolveResourceGuideHref(
+        "track-what-you-own-across-home-storage-and-travel",
+      ),
     },
     {
       tag: "Events",
@@ -194,6 +222,10 @@
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("events"),
+      supportingLinkText: "See the moving checklist guide",
+      supportingLinkHref: resolveResourceGuideHref(
+        "moving-inventory-checklist-boxes-storage-and-essentials",
+      ),
     },
     {
       tag: "Social",
@@ -210,6 +242,10 @@
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("social"),
+      supportingLinkText: "See the household inventory guide",
+      supportingLinkHref: resolveResourceGuideHref(
+        "households-families-roommates",
+      ),
     },
 
     {
@@ -243,7 +279,44 @@
     buttonVariant?: "primary" | "secondary" | "outline" | "ghost";
     buttonSize?: "sm" | "md" | "lg";
     buttonHref?: string;
+    supportingLinkText?: string;
+    supportingLinkHref?: string;
   }>;
+
+  interface HomeGuideEntry {
+    slug: string;
+    audience: string;
+    title: string;
+    summary: string;
+    href: string;
+  }
+
+  const resourcesHubHref = resolvePath(getResourcesHref());
+  const homepageGuideEntrySlugs = [
+    "home-inventory-that-stays-updated",
+    "organize-storage-bins-find-things-later",
+    "stop-buying-duplicates-you-already-have-at-home",
+    "camping-gear-inventory-checklist-and-setup-guide",
+    "moving-inventory-checklist-boxes-storage-and-essentials",
+    "repeatable-packing-system-trips-camping-events",
+  ] as const;
+  const homepageGuideEntries: HomeGuideEntry[] = homepageGuideEntrySlugs
+    .map((slug) => {
+      const guide = getResourceGuide(slug);
+
+      if (!guide) {
+        return null;
+      }
+
+      return {
+        slug: guide.slug,
+        audience: guide.audience,
+        title: guide.title,
+        summary: guide.summary,
+        href: resolvePath(getResourcesHref(guide.slug)),
+      };
+    })
+    .filter((entry): entry is HomeGuideEntry => Boolean(entry));
 
   const faqItems = [
     {
@@ -269,7 +342,10 @@
     },
   ] as const;
 
-  const homeTitle = "Personal Inventory App for Tracking What You Own | Kwipoo";
+  const homeTitle =
+    "Home Inventory App for Storage, Packing, and Moving | Kwipoo";
+  const homeDescription =
+    "Kwipoo is a home inventory app for tracking what you own, where it is stored, and what you need for packing, storage, trips, and moves.";
   const docsUrl = isSiteSectionEnabled("docs")
     ? `${MARKETING_SITE_URL}/docs`
     : undefined;
@@ -283,7 +359,7 @@
         "@type": "WebPage",
         name: homeTitle,
         url: MARKETING_SITE_URL,
-        description: SITE_DESCRIPTION,
+        description: homeDescription,
         isPartOf: {
           "@id": WEBSITE_ID,
         },
@@ -315,18 +391,18 @@
 
 <svelte:head>
   <title>{homeTitle}</title>
-  <meta name="description" content={SITE_DESCRIPTION} />
+  <meta name="description" content={homeDescription} />
   <meta name="keywords" content={SITE_KEYWORDS} />
   <meta
     name="robots"
     content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
   />
   <meta property="og:title" content={homeTitle} />
-  <meta property="og:description" content={SITE_DESCRIPTION} />
+  <meta property="og:description" content={homeDescription} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={MARKETING_SITE_URL} />
   <meta name="twitter:title" content={homeTitle} />
-  <meta name="twitter:description" content={SITE_DESCRIPTION} />
+  <meta name="twitter:description" content={homeDescription} />
   <svelte:element this={"script"} type="application/ld+json">
     {toSeoJsonLd(homeStructuredData)}
   </svelte:element>
@@ -346,6 +422,73 @@
   ]}
   items={everydayProblemHighlights}
 />
+
+{#if isSiteSectionEnabled("resources")}
+  <section
+    class="brand-outline-card card relative mb-30 overflow-hidden border border-brand-border bg-brand-canvas px-5 py-8 shadow-sm sm:px-8 sm:py-10 lg:px-10"
+  >
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      <div
+        class="absolute -right-12 top-6 h-44 w-44 rounded-full bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-primary-100)_72%,transparent)_0%,transparent_72%)] blur-3xl"
+      ></div>
+      <div
+        class="absolute -left-8 bottom-0 h-40 w-40 rounded-full bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-secondary-100)_70%,transparent)_0%,transparent_72%)] blur-3xl"
+      ></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl">
+      <div
+        class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"
+      >
+        <div class="max-w-3xl">
+          <p class="brand-section-label mb-4">Start With Your Problem</p>
+          <h2 class="text-3xl font-bold leading-tight text-primary-950 sm:text-4xl">
+            Choose the guide that matches the friction you want to remove first.
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-brand-body sm:text-lg">
+            If you found Kwipoo because of home inventory, storage bins,
+            duplicate buying, camping prep, moving, or repeatable packing,
+            start there. These guides explain the workflow in plain language
+            and give new visitors a faster path into the parts of Kwipoo that
+            fit their situation.
+          </p>
+        </div>
+
+        <div class="w-full max-w-xs lg:w-60">
+          <Button href={resourcesHubHref} variant="outline" size="md">
+            Browse All Guides
+          </Button>
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {#each homepageGuideEntries as guide (guide.slug)}
+          <!-- eslint-disable svelte/no-navigation-without-resolve -->
+          <a
+            href={guide.href}
+            class="brand-outline-card card-hover flex h-full flex-col rounded-[1.5rem] border border-brand-border bg-brand-panel/88 p-5 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 sm:p-6"
+          >
+            <p
+              class="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-brand-muted"
+            >
+              {guide.audience}
+            </p>
+            <h3 class="mt-3 text-[1.18rem] font-semibold leading-tight text-primary-950">
+              {guide.title}
+            </h3>
+            <p class="mt-3 text-[0.96rem] leading-7 text-brand-body">
+              {guide.summary}
+            </p>
+            <p class="mt-5 text-sm font-semibold text-primary-700">
+              Read guide
+            </p>
+          </a>
+          <!-- eslint-enable svelte/no-navigation-without-resolve -->
+        {/each}
+      </div>
+    </div>
+  </section>
+{/if}
 
 <ProblemSolution
   title="Get more of your time back with Kwipoo"
