@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Component } from "svelte";
   import IconContentCard from "$lib/components/ui/cards/icon-content-card.svelte";
+  import MotionReveal from "$lib/components/ui/motion-reveal.svelte";
 
   interface GridItem {
     icon: Component;
@@ -27,7 +28,7 @@
   </div>
 
   <div class="relative mx-auto max-w-6xl">
-    <div class="mb-8 text-left md:mb-10 md:text-center">
+    <MotionReveal delay={40} class="mb-8 text-left md:mb-10 md:text-center">
       <p class="brand-section-label mb-4">Where The Friction Adds Up</p>
       <h2 class="mb-4 text-3xl font-bold text-primary-950 sm:text-4xl">
         {title}
@@ -37,15 +38,17 @@
       >
         {description}
       </p>
-    </div>
+    </MotionReveal>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {#each items as item (item.title)}
-        <IconContentCard
-          icon={item.icon}
-          title={item.title}
-          description={item.description}
-        />
+      {#each items as item, index (item.title)}
+        <MotionReveal delay={90 + index * 70} distance={22}>
+          <IconContentCard
+            icon={item.icon}
+            title={item.title}
+            description={item.description}
+          />
+        </MotionReveal>
       {/each}
     </div>
   </div>

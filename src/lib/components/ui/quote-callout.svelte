@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from "./buttons/button.svelte";
+  import MotionReveal from "./motion-reveal.svelte";
 
   interface Props {
     quoteText?: string;
@@ -33,7 +34,7 @@
     ></div>
   </div>
 
-  <div class="relative mx-auto max-w-4xl text-center">
+  <MotionReveal delay={60} class="relative mx-auto max-w-4xl text-center">
     <p class="brand-section-label mb-5">{eyebrow}</p>
 
     <p
@@ -44,7 +45,11 @@
     </p>
 
     {#if showButton}
-      <div class="mt-6 w-full sm:mx-auto sm:max-w-xs lg:max-w-sm">
+      <MotionReveal
+        delay={180}
+        distance={18}
+        class="mt-6 w-full sm:mx-auto sm:max-w-xs lg:max-w-sm"
+      >
         <Button
           variant={buttonVariant}
           size={buttonSize}
@@ -53,7 +58,7 @@
         >
           {buttonText}
         </Button>
-      </div>
+      </MotionReveal>
     {/if}
-  </div>
+  </MotionReveal>
 </div>
