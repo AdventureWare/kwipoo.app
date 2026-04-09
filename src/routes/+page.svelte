@@ -18,6 +18,7 @@
   } from "$lib/config/site";
   import { trackCtaClick } from "$lib/analytics";
   import { HeroSection, QuoteCallout } from "$lib/components";
+  import EverydayProblemHighlights from "$lib/components/layouts/sections/everyday-problem-highlights.svelte";
   import ProblemSolution from "$lib/components/layouts/sections/problem-solution.svelte";
   import Switchbacks from "$lib/components/layouts/sections/switchbacks.svelte";
   import {
@@ -78,6 +79,37 @@
         "Kwipoo makes sure you always pack what you need and leave nothing behind. Instead of scrambling at the last minute, you can track what’s in your bags, storage, or car and check items off as you pack. And when planning for future trips, you can review what you brought last time to fine-tune your packing list.",
     },
   ];
+
+  const everydayProblemHighlights = [
+    {
+      icon: MagnifyingGlass,
+      title: "You know it is somewhere",
+      description:
+        "But not whether it is in the closet, the car, the garage bin, or the bag you packed last month.",
+    },
+    {
+      icon: CurrencyDollar,
+      title: "You buy it again just to move on",
+      description:
+        "Because checking every shelf, drawer, and tote takes more effort than grabbing another one.",
+    },
+    {
+      icon: Calendar,
+      title: "Packing starts too late",
+      description:
+        "Trips and events become a last-minute scramble when you have to rebuild the same list from memory.",
+    },
+    {
+      icon: Prohibit,
+      title: "The one important thing gets missed",
+      description:
+        "Especially when everyone assumes someone else already packed it, brought it, or knows where it lives.",
+    },
+  ] satisfies Array<{
+    icon: import("svelte").Component;
+    title: string;
+    description: string;
+  }>;
 
   const switchbackItems = [
     {
@@ -302,9 +334,17 @@
 
 <HeroSection />
 
-<QuoteCallout
+<EverydayProblemHighlights
   eyebrow="The Everyday Problem"
-  quoteText="Life’s already busy enough—why does keeping track of your own things have to feel like a second job? One day you’re tearing apart the house for that one thing you swore was in the closet. The next, you’re buying a duplicate because it was easier than looking. Then there’s the group trip or event where everyone thought someone else was bringing that one crucial item—until it was too late. These little everyday headaches add up—and steal time away from the things that actually matter."
+  title="The friction usually looks small until it keeps happening"
+  description="It is rarely one dramatic disaster. It is the repeated little interruptions: searching, second-guessing, duplicate buying, and last-minute scrambling when you already have enough going on."
+  signals={[
+    "Searching the same bins again",
+    "Buying doubles because it is faster",
+    "Rebuilding the same packing list",
+    "Realizing the one key item never made it",
+  ]}
+  items={everydayProblemHighlights}
 />
 
 <ProblemSolution
