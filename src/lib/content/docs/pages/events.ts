@@ -8,9 +8,9 @@ export const eventsDocsPage = defineDocsPage({
   badge: FEATURE_BADGE_PRESETS.beta,
   title: "Prepare for Events",
   summary:
-    "Use Events to plan trips, projects, moves, and shared activities with dedicated lists, assignment flows, packing views, invites, and weight tracking.",
+    "Use Events to plan trips, projects, moves, and shared activities with item lists, packing views, invites, and weight tracking.",
   description:
-    "Events connect your inventory to a real upcoming plan. In the current app, each Event can include a personal list, a shared group list, category sections inside those lists, packing status, and collaboration tools for attendees.",
+    "Events connect your inventory to a specific plan. They give you a place to build lists, assign items, review packing status, and coordinate with other people when needed.",
   image: {
     src: "/assets/eventsFeatureAsset@2x.png",
     alt: "Kwipoo Events feature showing trip and event planning tools",

@@ -43,31 +43,18 @@
 
   const baseClasses = [
     "btn",
+    "kw-button",
     "w-full",
     "font-medium",
-    "shadow-sm",
-    "transition-all",
-    "duration-200",
-    "ease-out",
-    "hover:-translate-y-0.5",
-    "hover:shadow-md",
-    "active:translate-y-0",
-    "active:shadow-sm",
-    "focus-visible:outline-2",
-    "focus-visible:outline-offset-2",
-    "focus-visible:outline-primary-300",
     "disabled:opacity-50",
     "disabled:cursor-not-allowed",
   ];
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary:
-      "border border-primary-600 bg-primary-600 text-primary-contrast-600 hover:border-primary-700 hover:bg-primary-700 hover:text-primary-contrast-700",
-    secondary:
-      "border border-secondary-500 bg-secondary-500 text-surface-950 hover:border-secondary-600 hover:bg-secondary-600",
-    outline:
-      "border border-primary-300 bg-brand-canvas text-surface-950 hover:bg-primary-50",
-    ghost: "bg-primary-50 text-surface-950 hover:bg-primary-100",
+    primary: "kw-button--primary border",
+    secondary: "kw-button--secondary border",
+    outline: "kw-button--outline border",
+    ghost: "kw-button--ghost border",
   };
 
   const sizeClasses: Record<ButtonSize, string> = {

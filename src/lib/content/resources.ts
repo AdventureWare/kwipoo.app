@@ -25,22 +25,22 @@ export const resourceGuides = [
     audience: "Outdoor adventurers",
     format: "Guide",
     readTime: "7 min read",
-    title: "Never lose track of your gear again",
+    title: "Keep outdoor gear organized and trip-ready",
     summary:
-      "Use Kwipoo to catalog your gear, build reusable trip kits, coordinate group packing, and keep spending on outdoor equipment under control.",
+      "Use Kwipoo to track gear, build reusable trip kits, coordinate group packing, and keep outdoor spending easier to manage.",
     description:
-      "Outdoor gear tends to spread across closets, bins, garages, trunks, and borrowed bags. This guide shows how to use Kwipoo to keep that gear visible, easier to pack, and less likely to be duplicated or forgotten.",
+      "Outdoor gear tends to spread across closets, bins, garages, trunks, and borrowed bags. This guide shows how to use Kwipoo to keep it easier to find, pack, and avoid buying twice.",
     image: {
       src: "/assets/backpack@2x.png",
       alt: "Kwipoo Sets view with grouped outdoor gear for trip planning",
     },
     sections: [
       {
-        heading: "Get your gear inventory into one place",
+        heading: "Start with the gear that matters most",
         summary:
-          "Start with the gear that is expensive, easy to misplace, or frustrating to rebuy by mistake.",
+          "Begin with the items that cost the most, go missing most often, or are the most annoying to replace.",
         paragraphs: [
-          "If you have ever bought another headlamp, stove canister, or dry bag because you could not remember what you already owned, the first win is visibility. Kwipoo gives you one place to check before you shop, pack, or tear through storage.",
+          "If you have ever bought another headlamp, stove canister, or dry bag because you were not sure what you already had, the first win is visibility. Kwipoo gives you one place to check before you shop, pack, or dig through storage.",
         ],
         bullets: [
           "Add your most-used or most expensive gear as Things first.",
@@ -54,11 +54,11 @@ export const resourceGuides = [
         },
       },
       {
-        heading: "Build ready-to-go trip kits",
+        heading: "Build reusable trip kits",
         summary:
-          "Reusable Sets keep you from rebuilding the same packing list every time a trip comes up.",
+          "Sets save you from rebuilding the same packing list every time a trip comes up.",
         paragraphs: [
-          "Instead of mentally reassembling a backpacking list before every trip, create Sets for the activities you repeat. That could mean one base backpacking kit, one cold-weather variation, and one car-camping setup with the heavier gear.",
+          "Instead of rebuilding a backpacking list from memory before every trip, create Sets for the outings you repeat. That could mean one base backpacking kit, one cold-weather variation, and one car-camping setup with the heavier gear.",
         ],
         bullets: [
           "Create Sets for recurring adventures like backpacking weekends, climbing days, or overlanding trips.",
@@ -67,9 +67,9 @@ export const resourceGuides = [
         ],
       },
       {
-        heading: "Coordinate group trips with less guesswork",
+        heading: "Make group trips easier to coordinate",
         summary:
-          "Trips go smoother when everyone can see what is covered before they leave home.",
+          "Trips go smoother when everyone can see what is already covered before they leave home.",
         paragraphs: [
           "Group plans break down when someone assumes another person packed the fuel, water filter, or first-aid kit. Kwipoo helps you review what is already accounted for and where the gaps still are before the trip starts.",
         ],
@@ -80,11 +80,11 @@ export const resourceGuides = [
         ],
       },
       {
-        heading: "Spend less and replace gear more intentionally",
+        heading: "Make replacement decisions with better context",
         summary:
-          "A visible inventory makes it easier to avoid duplicate purchases and understand where your money has gone.",
+          "A visible inventory helps you avoid duplicate purchases and see where your money is going.",
         paragraphs: [
-          "Outdoor gear adds up quickly. When your inventory shows what you own, what condition it is in, and what it cost, you can make calmer decisions about upgrades, lending, and what is actually missing from your setup.",
+          "Outdoor gear adds up quickly. When your inventory shows what you own, what shape it is in, and what it cost, you can make calmer decisions about upgrades, lending, and what is actually missing from your setup.",
         ],
         bullets: [
           "Track gear costs so you can estimate the value of a kit or category.",
@@ -104,20 +104,20 @@ export const resourceGuides = [
     audience: "Families, couples, and roommates",
     format: "Guide",
     readTime: "7 min read",
-    title: "Stop losing track of your household items",
+    title: "Build a household inventory people can actually use",
     summary:
-      "Use Kwipoo to organize home essentials, track shared items, reduce duplicate purchases, and make storage easier to maintain across the whole household.",
+      "Use Kwipoo to organize home essentials, track shared items, cut down on duplicate purchases, and keep storage easier to maintain.",
     description:
-      "Household organization gets messy when items move between rooms, seasonal bins, drawers, and the people who use them. This guide walks through how Kwipoo can keep the home inventory visible and easier to manage day to day.",
+      "Household organization gets messy when items move between rooms, seasonal bins, drawers, and the people who use them. This guide shows how Kwipoo can make everyday home storage easier to see and manage.",
     image: {
       src: "/assets/placesFeatureAsset@2x.png",
       alt: "Kwipoo Places view showing organized home storage locations",
     },
     sections: [
       {
-        heading: "Get a handle on what you own",
+        heading: "Start with the items people ask about most",
         summary:
-          "A clear inventory helps you stop rebuying basics and cuts down on the daily search for common household items.",
+          "A clear inventory cuts down on repeated searches and unnecessary rebuys.",
         paragraphs: [
           "If batteries vanish into drawers, tools migrate between rooms, or no one can remember where the extra lightbulbs went, the problem is usually not the number of items. It is that the household has no shared source of truth for what exists and where it lives.",
         ],
@@ -133,9 +133,9 @@ export const resourceGuides = [
         },
       },
       {
-        heading: "Organize seasonal and rarely used items",
+        heading: "Organize seasonal and low-use storage",
         summary:
-          "Seasonal gear should be easy to store away without becoming impossible to find later.",
+          "Seasonal gear is easier to store away when everyone can still find it later.",
         paragraphs: [
           "Holiday decor, winter clothes, spare bedding, and camping supplies often end up in out-of-the-way storage for good reason. Kwipoo helps you move them out of daily space without losing track of the exact bin, room, or shelf where they ended up.",
         ],
@@ -146,9 +146,9 @@ export const resourceGuides = [
         ],
       },
       {
-        heading: "Keep shared items from becoming household friction",
+        heading: "Keep shared items from turning into friction",
         summary:
-          "Shared tools, chargers, appliances, and supplies are easier to manage when ownership and movement are visible.",
+          "Shared tools, chargers, appliances, and supplies are easier to manage when their location stays visible.",
         paragraphs: [
           "A surprising amount of household frustration comes from items that everyone uses but no one tracks. Kwipoo helps households keep better tabs on what is shared, who has it, and what needs to be replaced or returned.",
         ],
@@ -159,9 +159,9 @@ export const resourceGuides = [
         ],
       },
       {
-        heading: "Reduce clutter without losing control",
+        heading: "Declutter with a clearer picture",
         summary:
-          "Knowing what is underused or duplicated makes it easier to declutter and reclaim space.",
+          "Once you can see what is underused or duplicated, it is easier to decide what should stay, move, or go.",
         paragraphs: [
           "Clutter usually grows when storage fills with forgotten duplicates, single-purpose tools, or categories that no one reviews. Once your household inventory is searchable, it becomes easier to decide what to keep accessible, what to store away, and what no longer needs space at all.",
         ],
@@ -180,7 +180,7 @@ export const resourceGuides = [
     audience: "Frequent travelers and movers",
     format: "Guide",
     readTime: "8 min read",
-    title: "Never forget or lose your travel essentials again",
+    title: "Keep travel essentials organized across trips and moves",
     summary:
       "Use Kwipoo to track what you own across locations, build reusable packing systems, avoid overpacking, and protect high-value travel gear.",
     description:
@@ -193,7 +193,7 @@ export const resourceGuides = [
       {
         heading: "Start with a portable inventory",
         summary:
-          "A reliable inventory makes every trip, move, and reset easier because you can check one source instead of relying on memory.",
+          "A reliable inventory makes trips, moves, and resets easier because you have one place to check instead of relying on memory.",
         paragraphs: [
           "When your life spans flights, short stays, storage, and frequent repacking, the first problem is usually fragmentation. Some items are at home, some are in transit, and some are tucked into a bag you last touched two moves ago. Kwipoo helps you rebuild clarity from that spread-out reality.",
         ],
@@ -206,7 +206,7 @@ export const resourceGuides = [
       {
         heading: "Create a packing system you can reuse",
         summary:
-          "Packing gets faster when recurring trip types already have a starting structure.",
+          "Packing gets faster when repeat trip types already have a starting point.",
         paragraphs: [
           "Business travel, weekend trips, long stays, and full moves all call for different versions of the same core items. Kwipoo helps you reuse what works instead of rebuilding every list from scratch while hoping you remembered the obvious things.",
         ],
@@ -222,9 +222,9 @@ export const resourceGuides = [
         },
       },
       {
-        heading: "Keep track of items across multiple locations",
+        heading: "Keep location records current",
         summary:
-          "Temporary locations only work if you name them clearly and update them when things move.",
+          "Temporary locations only help if you name them clearly and update them when things move.",
         paragraphs: [
           "When belongings rotate between home, storage, hotels, Airbnbs, and friends' places, vague mental notes stop being reliable. Kwipoo helps you keep a current record of where items actually are so retrieval is less of a scavenger hunt.",
         ],
@@ -235,9 +235,9 @@ export const resourceGuides = [
         ],
       },
       {
-        heading: "Travel lighter without forgetting the important stuff",
+        heading: "Pack lighter without guessing",
         summary:
-          "The goal is not packing less for its own sake. It is packing the right things with more confidence.",
+          "The goal is not packing less for its own sake. It is bringing the right things with more confidence.",
         paragraphs: [
           "Overpacking creates drag. Underpacking creates stress. Once your inventory is searchable and your Sets reflect real trip patterns, you can make more deliberate decisions about what is worth carrying and what can stay behind.",
         ],

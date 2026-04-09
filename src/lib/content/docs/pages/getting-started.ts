@@ -6,9 +6,9 @@ export const gettingStartedDocsPage = defineDocsPage({
   eyebrow: "New to Kwipoo",
   title: "Getting started with Kwipoo",
   summary:
-    "Learn the core model, set up your first real storage path, and reach a useful first session without trying to document everything at once.",
+    "Learn the basic Kwipoo model, create a first useful location path, and get value quickly without trying to catalog everything at once.",
   description:
-    "Kwipoo works best when you build from real life instead of starting with a giant catalog. Begin with one place, one spot, and one thing so the structure stays easy to understand and easy to maintain.",
+    "Kwipoo is easiest to learn when you start with a real place, a more specific spot if needed, and one item you actually want to track. This guide walks through that first setup so the structure stays practical from day one.",
   image: {
     src: "/assets/product_Feature.png",
     alt: "Kwipoo app overview showing core inventory screens",

@@ -1,4 +1,4 @@
-import { env } from "$env/dynamic/public";
+const publicEnv = import.meta.env as Record<string, string | undefined>;
 
 function normalizePublicValue(value: string | undefined): string | undefined {
   if (value === undefined) {
@@ -31,13 +31,14 @@ function resolveAnalyticsProvider(
 }
 
 export const ANALYTICS_PROVIDER = resolveAnalyticsProvider(
-  env.PUBLIC_ANALYTICS_PROVIDER,
+  publicEnv.PUBLIC_ANALYTICS_PROVIDER,
 );
-export const POSTHOG_KEY = normalizePublicValue(env.PUBLIC_POSTHOG_KEY);
+export const POSTHOG_KEY = normalizePublicValue(publicEnv.PUBLIC_POSTHOG_KEY);
 export const POSTHOG_HOST =
-  normalizePublicValue(env.PUBLIC_POSTHOG_HOST) ?? "https://us.i.posthog.com";
+  normalizePublicValue(publicEnv.PUBLIC_POSTHOG_HOST) ??
+  "https://us.i.posthog.com";
 export const ANALYTICS_SCRIPT_URL = normalizePublicValue(
-  env.PUBLIC_ANALYTICS_SCRIPT_URL,
+  publicEnv.PUBLIC_ANALYTICS_SCRIPT_URL,
 );
 
 export const ANALYTICS_ENABLED = Boolean(

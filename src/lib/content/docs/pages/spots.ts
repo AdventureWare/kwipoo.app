@@ -6,9 +6,9 @@ export const spotsDocsPage = defineDocsPage({
   eyebrow: "Precise locations",
   title: "Pinpoint items with Spots",
   summary:
-    "Use Spots to record the exact area inside a Place or container Thing where something lives, from rooms and closets to bins, shelves, pouches, and drawers.",
+    "Use Spots for the exact location inside a Place or container Thing, such as a shelf, drawer, bin, or pocket.",
   description:
-    "Spots turn a broad Place or container Thing into a practical storage map. They help you find Things faster, keep location assignments accurate, and support more precise moves when your setup changes.",
+    "Spots add precision to your inventory. They turn a broad location into something you can actually use when it is time to find, move, or pack an item.",
   image: {
     src: "/assets/spotsFeatureAsset@2x.png",
     alt: "Kwipoo Spots feature showing detailed storage locations",

@@ -8,9 +8,9 @@ export const socialDocsPage = defineDocsPage({
   badge: FEATURE_BADGE_PRESETS.beta,
   title: "Coordinate through Social",
   summary:
-    "Use Kwipoo's social features to find people, manage friends, review shared collections, respond to notifications, and coordinate through profile-based collaboration tools.",
+    "Use Kwipoo's social features to find people, manage friends, view shared collections, review notifications, and coordinate around plans or gear.",
   description:
-    "In the current app, social features are spread across Profile, public profile pages, Notifications, Events, and Chat Center. Together they help you discover people, control what is shared, and coordinate around real inventory.",
+    "Kwipoo's social features span profiles, notifications, events, and chat. Together they help you control what is shared and coordinate with other people around real inventory.",
   image: {
     src: "/assets/socialFeatureAsset@2x.png",
     alt: "Kwipoo Social feature showing shared inventory and collaboration",

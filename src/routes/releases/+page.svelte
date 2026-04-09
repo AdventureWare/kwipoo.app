@@ -13,9 +13,9 @@
     toSeoJsonLd,
   } from "$lib/seo";
 
-  const releaseTitle = "Kwipoo Release History | Product Updates";
+  const releaseTitle = "Kwipoo Release History | What's New";
   const releaseDescription =
-    "Browse shipped Kwipoo releases, product improvements, and recent fixes in one public changelog archive.";
+    "See what shipped in Kwipoo, from major features to smaller fixes that make everyday organizing easier.";
   const latestRelease = getLatestWebsiteRelease();
 
   const importanceLabels: Record<WebsiteReleaseNote["importance"], string> = {
@@ -25,13 +25,15 @@
     urgent: "Important fix",
   };
 
-  const importanceBadgeClasses: Record<WebsiteReleaseNote["importance"], string> =
-    {
-      quiet: "border-surface-200 bg-surface-100 text-surface-700",
-      notable: "border-primary-200 bg-primary-50 text-primary-700",
-      launch: "border-secondary-200 bg-secondary-50 text-secondary-700",
-      urgent: "border-warning-200 bg-warning-50 text-warning-700",
-    };
+  const importanceBadgeClasses: Record<
+    WebsiteReleaseNote["importance"],
+    string
+  > = {
+    quiet: "border-surface-200 bg-surface-100 text-surface-700",
+    notable: "border-primary-200 bg-primary-50 text-primary-700",
+    launch: "border-secondary-200 bg-secondary-50 text-secondary-700",
+    urgent: "border-warning-200 bg-warning-50 text-warning-700",
+  };
 
   function formatPublishedDate(dateString: string): string {
     const publishedDate = new Date(`${dateString}T00:00:00Z`);
@@ -126,16 +128,17 @@
         <p
           class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
         >
-          Product Updates
+          What's New
         </p>
         <h1
           class="max-w-4xl text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.15rem]"
         >
-          A public archive of shipped Kwipoo releases.
+          See what shipped in Kwipoo.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
-          Every published version now lands here with the main improvements,
-          fixes, and follow-up details in one readable place.
+          Every release note below focuses on the changes you can actually
+          notice, from new ways to organize Things to smaller fixes that make
+          daily use smoother.
         </p>
       </div>
 
@@ -150,7 +153,9 @@
               Latest Release
             </p>
             <div class="flex flex-wrap items-center gap-2">
-              <h2 class="text-[1.45rem] font-semibold leading-tight text-surface-950">
+              <h2
+                class="text-[1.45rem] font-semibold leading-tight text-surface-950"
+              >
                 Version {latestRelease.version}
               </h2>
               <span
@@ -164,8 +169,12 @@
             </p>
           </div>
 
-          <div class="rounded-[1.15rem] border border-primary-200 bg-white/85 p-4">
-            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-700">
+          <div
+            class="rounded-[1.15rem] border border-primary-200 bg-white/85 p-4"
+          >
+            <p
+              class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-700"
+            >
               Shipped
             </p>
             <p class="mt-2 text-base font-semibold text-surface-950">
@@ -212,7 +221,6 @@
               {formatPlatformTargets(latestRelease)}
             </p>
           </div>
-
         </div>
 
         <div class="grid gap-3 md:grid-cols-3">
@@ -220,7 +228,9 @@
             <div
               class="rounded-[1.15rem] border border-primary-200 bg-white p-4"
             >
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-700">
+              <p
+                class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-700"
+              >
                 Highlight
               </p>
               <p class="mt-3 text-[0.98rem] leading-7 text-brand-body">
@@ -237,7 +247,9 @@
             >
               More In This Release
             </p>
-            <ul class="mt-4 grid gap-3 pl-5 text-[0.98rem] leading-7 text-brand-body">
+            <ul
+              class="mt-4 grid gap-3 pl-5 text-[0.98rem] leading-7 text-brand-body"
+            >
               {#each latestRelease.details as detail (detail)}
                 <li class="list-disc">{detail}</li>
               {/each}
@@ -255,12 +267,14 @@
       >
         Release Archive
       </p>
-      <h2 class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color">
-        Version-by-version notes, newest first.
+      <h2
+        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
+      >
+        All release notes, newest first.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        This page is synced from the app release records, so the website archive
-        stays aligned with the actual shipped product history.
+        Start with the latest update, then scroll back through earlier versions
+        whenever you want the full picture.
       </p>
     </div>
 
@@ -279,7 +293,9 @@
               >
                 {formatPublishedDate(release.publishedAt)}
               </p>
-              <h3 class="text-[1.5rem] font-semibold leading-tight text-surface-950">
+              <h3
+                class="text-[1.5rem] font-semibold leading-tight text-surface-950"
+              >
                 Version {release.version}
               </h3>
               <p class="text-sm leading-6 text-brand-body">
@@ -294,10 +310,14 @@
             </span>
           </div>
 
-          <div class="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <div
+            class="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
+          >
             <div class="space-y-4">
               <div class="space-y-3">
-                <h4 class="text-[1.2rem] font-semibold leading-tight text-surface-950">
+                <h4
+                  class="text-[1.2rem] font-semibold leading-tight text-surface-950"
+                >
                   {release.title}
                 </h4>
                 <p class="text-[1rem] leading-7 text-brand-body">
@@ -305,7 +325,9 @@
                 </p>
               </div>
 
-              <ul class="grid gap-3 pl-5 text-[0.98rem] leading-7 text-brand-body">
+              <ul
+                class="grid gap-3 pl-5 text-[0.98rem] leading-7 text-brand-body"
+              >
                 {#each release.highlights as highlight (highlight)}
                   <li class="list-disc">{highlight}</li>
                 {/each}
@@ -313,13 +335,17 @@
             </div>
 
             {#if release.details.length > 0}
-              <div class="rounded-[1.15rem] border border-surface-200 bg-white p-5">
+              <div
+                class="rounded-[1.15rem] border border-surface-200 bg-white p-5"
+              >
                 <p
                   class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
                 >
                   Additional Notes
                 </p>
-                <ul class="mt-4 grid gap-3 pl-5 text-[0.95rem] leading-7 text-brand-body">
+                <ul
+                  class="mt-4 grid gap-3 pl-5 text-[0.95rem] leading-7 text-brand-body"
+                >
                   {#each release.details as detail (detail)}
                     <li class="list-disc">{detail}</li>
                   {/each}

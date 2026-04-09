@@ -4,6 +4,7 @@ import {
   docsPages,
   getDocsCategoryGroups,
   getDocsEntityFieldsTable,
+  getDocsHref,
   getDocsEntityReference,
   getDocsNavSections,
   getDocsPage,
@@ -36,17 +37,32 @@ describe("docs content helpers", () => {
 
   it("builds docs navigation only from valid page slugs", () => {
     const navSections = getDocsNavSections();
+    const startHereItems = navSections.find(
+      (section) => section.title === "Getting Started",
+    );
     const featureItems = navSections.find(
       (section) => section.title === "Features",
     );
 
+    expect(startHereItems).toBeDefined();
     expect(featureItems).toBeDefined();
+
+    for (const item of startHereItems?.items ?? []) {
+      expect(item.slug).toBeTruthy();
+      expect(getDocsPage(item.slug ?? "")).toBeDefined();
+      expect(item.href).toBe(getDocsHref(item.slug ?? ""));
+    }
 
     for (const item of featureItems?.items ?? []) {
       expect(item.slug).toBeTruthy();
       expect(getDocsPage(item.slug ?? "")).toBeDefined();
-      expect(item.href).toBe(`/docs/${item.slug}`);
+      expect(item.href).toBe(getDocsHref(item.slug ?? ""));
     }
+  });
+
+  it("keeps the docs index separate from the getting started guide", () => {
+    expect(getDocsHref("getting-started")).toBe("/docs/getting-started");
+    expect(getDocsHref("things")).toBe("/docs/things");
   });
 
   it("returns stable labels for known and unknown docs slugs", () => {

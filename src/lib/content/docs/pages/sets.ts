@@ -8,9 +8,9 @@ export const setsDocsPage = defineDocsPage({
   badge: FEATURE_BADGE_PRESETS.beta,
   title: "Pack faster with Sets",
   summary:
-    "Group Things into reusable Sets so recurring activities, travel kits, outfits, and gear setups are easier to assemble, review, and reuse.",
+    "Group Things into reusable Sets so recurring trips, routines, outfits, and gear kits are easier to rebuild.",
   description:
-    "Sets are reusable collections of Things for a specific purpose. In the current app, Sets are organized around categories inside the Set so larger groupings stay easier to scan, assign, and maintain over time.",
+    "Sets let you save groups of Things you use together. In the current app, you can organize each Set with categories to keep larger kits easy to scan and maintain.",
   image: {
     src: "/assets/backpack@2x.png",
     alt: "Kwipoo Sets feature showing grouped travel or hobby gear",

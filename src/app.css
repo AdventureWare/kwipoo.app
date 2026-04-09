@@ -7,7 +7,7 @@
 @font-face {
   font-family: "Monoton";
   src: url("/fonts/Monoton-Regular.ttf") format("truetype");
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -15,15 +15,23 @@
 @font-face {
   font-family: "Jost";
   src: url("/fonts/Jost-Regular.ttf") format("truetype");
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Jost-SemiBold";
+  font-family: "Jost";
   src: url("/fonts/Jost-SemiBold.ttf") format("truetype");
-  font-weight: normal;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kwipoo Display";
+  src: url("/fonts/Monoton-Regular.ttf") format("truetype");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -44,8 +52,8 @@
   /* Semantic colors */
   --color-surface: var(--color-surface-50);
   --color-background: var(--color-surface-100);
-  --color-text: var(--color-surface-950);
-  --color-link: var(--color-primary-700);
+  --color-text: var(--base-font-color);
+  --color-link: var(--anchor-font-color);
   --color-muted: color-mix(
     in srgb,
     var(--color-tertiary-300) 62%,
@@ -53,45 +61,10 @@
   );
   --font-monoton: "Monoton", cursive;
   --font-jost: "Jost", sans-serif;
-  --font-jost-semibold: "Jost-SemiBold", sans-serif;
-}
-
-[data-theme="kwipoo"] {
-  --spacing: 0.25rem;
-  --text-scaling: 1;
-  --base-font-color: var(--color-surface-950);
-  --base-font-color-dark: var(--color-surface-50);
-  --base-font-family: var(--font-jost);
-  --base-font-size: inherit;
-  --base-line-height: 1.5;
-  --base-font-weight: 400;
-  --base-font-style: normal;
-  --base-letter-spacing: 0;
-  --heading-font-color: var(--color-primary-950);
-  --heading-font-color-dark: var(--color-surface-50);
-  --heading-font-family: var(--font-jost-semibold);
-  --heading-font-weight: 600;
-  --heading-font-style: normal;
-  --heading-letter-spacing: -0.02em;
-  --anchor-font-color: var(--color-primary-700);
-  --anchor-font-color-dark: var(--color-primary-300);
-  --anchor-font-family: var(--font-jost);
-  --anchor-font-size: inherit;
-  --anchor-line-height: inherit;
-  --anchor-font-weight: 600;
-  --anchor-font-style: normal;
-  --anchor-letter-spacing: inherit;
-  --anchor-text-decoration: none;
-  --anchor-text-decoration-hover: none;
-  --anchor-text-decoration-active: none;
-  --anchor-text-decoration-focus: none;
-  --body-background-color: var(--color-surface-50);
-  --body-background-color-dark: var(--color-surface-950);
-  --radius-base: 1rem;
-  --radius-container: 1.5rem;
-  --default-border-width: 1px;
-  --default-divide-width: 1px;
-  --default-ring-width: 1px;
+  --kw-shadow-soft: 0 10px 30px -18px
+    color-mix(in oklab, var(--color-tertiary-950), transparent 70%);
+  --kw-shadow-panel: 0 12px 32px -20px
+    color-mix(in oklab, var(--color-tertiary-950), transparent 60%);
 }
 
 @layer base {
@@ -101,7 +74,7 @@
   }
 
   body {
-    font-family: var(--font-jost);
+    font-family: var(--base-font-family);
     background-color: var(--body-background-color);
     background-image:
       radial-gradient(
@@ -164,16 +137,16 @@
     color: var(--color-primary-800);
     padding: 0.45rem 0.85rem;
     border-radius: 999px;
-    font-family: var(--font-jost-semibold);
+    font-family: var(--heading-font-family);
     font-size: 0.75rem;
+    font-weight: var(--heading-font-weight);
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
 
   .brand-outline-card {
     box-shadow:
-      0 24px 70px -42px
-        color-mix(in srgb, var(--color-primary-900) 22%, transparent),
+      var(--kw-shadow-panel),
       inset 0 1px 0 color-mix(in srgb, white 62%, transparent);
   }
 
@@ -254,6 +227,90 @@
     );
   }
 
+  .kw-button {
+    box-shadow: var(--kw-shadow-soft);
+    transition-property:
+      background-color, border-color, box-shadow, color, transform;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .kw-button:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: var(--kw-shadow-panel);
+  }
+
+  .kw-button:active {
+    transform: translateY(0);
+    box-shadow: var(--kw-shadow-soft);
+  }
+
+  .kw-button:focus-visible {
+    outline: 2px solid var(--color-primary-300);
+    outline-offset: 2px;
+  }
+
+  .kw-button--primary {
+    border-color: var(--color-primary-600);
+    background-color: var(--color-primary-600);
+    color: var(--color-primary-contrast-600);
+  }
+
+  .kw-button--primary:hover {
+    border-color: var(--color-primary-700);
+    background-color: var(--color-primary-700);
+    color: var(--color-primary-contrast-700);
+  }
+
+  .kw-button--secondary {
+    border-color: var(--color-secondary-500);
+    background-color: var(--color-secondary-500);
+    color: var(--color-secondary-contrast-500);
+  }
+
+  .kw-button--secondary:hover {
+    border-color: var(--color-secondary-600);
+    background-color: var(--color-secondary-600);
+    color: var(--color-secondary-contrast-600);
+  }
+
+  .kw-button--outline {
+    border-color: color-mix(
+      in srgb,
+      var(--color-primary-300) 78%,
+      var(--color-brand-border) 22%
+    );
+    background-color: var(--color-brand-canvas);
+    color: var(--color-brand-ink);
+  }
+
+  .kw-button--outline:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--color-brand-canvas) 82%,
+      var(--color-primary-50) 18%
+    );
+    color: var(--color-brand-ink);
+  }
+
+  .kw-button--ghost {
+    border-color: transparent;
+    background-color: color-mix(
+      in srgb,
+      var(--color-primary-50) 72%,
+      transparent
+    );
+    color: var(--color-brand-ink);
+  }
+
+  .kw-button--ghost:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--color-primary-100) 78%,
+      transparent
+    );
+  }
+
   .animate-float-soft {
     animation: float-soft 8s ease-in-out infinite;
   }
@@ -261,5 +318,12 @@
   .animate-float-soft-delayed {
     animation: float-soft 9s ease-in-out infinite;
     animation-delay: -3s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-soft,
+  .animate-float-soft-delayed {
+    animation: none;
   }
 }
