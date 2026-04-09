@@ -155,14 +155,14 @@ test("@smoke resources landing page and guide routes resolve consistently", asyn
       headingLocator(
         page,
         1,
-        /practical guides for organizing real life with kwipoo/i,
+        /practical guides for using kwipoo in real situations/i,
       ),
     ).toBeVisible();
     await expectJsonLdScriptsToParse(page);
 
     await page.goto("/resources/outdoor-adventurers");
     await expect(
-      headingLocator(page, 1, /never lose track of your gear again/i),
+      headingLocator(page, 1, /keep outdoor gear organized and trip-ready/i),
     ).toBeVisible();
     await expectJsonLdScriptsToParse(page);
   } else {
