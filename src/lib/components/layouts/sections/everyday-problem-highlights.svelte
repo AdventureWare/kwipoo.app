@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Component } from "svelte";
   import MotionReveal from "$lib/components/ui/motion-reveal.svelte";
+  import QuipuThreads from "$lib/components/ui/quipu-threads.svelte";
 
   interface ProblemHighlight {
     icon: Component;
@@ -36,6 +37,16 @@
       class="absolute right-0 top-0 h-52 w-52 rounded-full bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-secondary-100)_72%,transparent)_0%,transparent_72%)] blur-3xl"
     ></div>
     <div class="brand-soft-grid absolute inset-x-6 bottom-0 h-28 opacity-35"></div>
+    <div class="absolute right-10 top-0 hidden lg:block">
+      <QuipuThreads
+        class="animate-quipu-sway opacity-65"
+        strands={[
+          { length: 88, knots: [24, 56], accent: "gold" },
+          { length: 122, knots: [26, 62, 96], accent: "teal" },
+          { length: 104, knots: [30, 72], accent: "gold" },
+        ]}
+      />
+    </div>
   </div>
 
   <div class="relative mx-auto max-w-6xl">
@@ -51,6 +62,15 @@
           ></div>
 
           <p class="brand-section-label mb-4">{eyebrow}</p>
+          <div class="absolute right-6 top-0 hidden sm:block lg:hidden">
+            <QuipuThreads
+              class="opacity-55"
+              strands={[
+                { length: 60, knots: [18, 40], accent: "teal" },
+                { length: 82, knots: [24, 58], accent: "gold" },
+              ]}
+            />
+          </div>
           <h2
             class="max-w-lg text-3xl font-bold leading-tight text-primary-950 sm:text-4xl"
           >

@@ -9,6 +9,7 @@
   import AppStoreButtons from "../../ui/buttons/app-store-buttons.svelte";
   import Button from "../../ui/buttons/button.svelte";
   import MotionReveal from "../../ui/motion-reveal.svelte";
+  import QuipuThreads from "../../ui/quipu-threads.svelte";
 </script>
 
 <section
@@ -24,6 +25,16 @@
     <div
       class="brand-soft-grid absolute inset-x-8 bottom-0 h-32 opacity-40"
     ></div>
+    <div class="absolute left-10 top-0 hidden md:block">
+      <QuipuThreads
+        class="animate-quipu-sway opacity-70"
+        strands={[
+          { length: 104, knots: [28, 62, 90], accent: "teal" },
+          { length: 138, knots: [34, 80, 116], accent: "gold" },
+          { length: 118, knots: [22, 54, 94], accent: "teal" },
+        ]}
+      />
+    </div>
   </div>
 
   <div class="relative px-4 sm:px-8 lg:px-10">
@@ -80,7 +91,7 @@
           distance={30}
           class="flex max-w-xl flex-col gap-2.5 sm:gap-4"
         >
-          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+          <div class="flex flex-col gap-3">
             <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
               <div class="w-full sm:max-w-xs">
                 <Button
@@ -117,13 +128,6 @@
                 </Button>
               </div>
             </div>
-
-            <p
-              class="hidden max-w-xs text-sm leading-relaxed text-brand-muted sm:block sm:text-[0.95rem]"
-            >
-              Free account. Useful for storage, hobbies, travel prep, and the
-              little things you are tired of re-finding.
-            </p>
           </div>
 
           <div
@@ -148,8 +152,16 @@
           class="absolute -right-3 bottom-14 hidden xl:block"
         >
           <div
-            class="animate-float-soft-delayed max-w-[13rem] rounded-[1.5rem] border border-brand-border bg-brand-canvas/92 p-4 shadow-sm"
+            class="animate-float-soft-delayed relative max-w-[13rem] overflow-hidden rounded-[1.5rem] border border-brand-border bg-brand-canvas/92 p-4 shadow-sm"
           >
+            <div class="absolute right-4 top-0 opacity-60">
+              <QuipuThreads
+                strands={[
+                  { length: 54, knots: [20, 40], accent: "gold" },
+                  { length: 72, knots: [24, 52], accent: "teal" },
+                ]}
+              />
+            </div>
             <p
               class="text-xs font-semibold uppercase tracking-[0.18em] text-primary-700"
             >
