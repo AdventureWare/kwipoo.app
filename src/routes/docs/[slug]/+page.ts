@@ -1,5 +1,6 @@
 import { error } from "@sveltejs/kit";
 import { getDocsPage, getRelatedDocsPages } from "$lib/content/docs";
+import { getDocsRelatedResourceGuides } from "$lib/content/resources";
 
 export function load({ params }) {
   const docPage = getDocsPage(params.slug);
@@ -11,5 +12,6 @@ export function load({ params }) {
   return {
     docPage,
     relatedDocs: getRelatedDocsPages(docPage),
+    relatedResources: getDocsRelatedResourceGuides(docPage.slug),
   };
 }

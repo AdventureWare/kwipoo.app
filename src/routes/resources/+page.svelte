@@ -36,9 +36,10 @@
     summary: string;
   };
 
-  const resourcesTitle = "Kwipoo Resources | Articles, Videos, and Tutorials";
+  const resourcesTitle =
+    "Home Inventory, Storage, Packing, and Moving Guides | Kwipoo";
   const resourcesDescription =
-    "Browse practical Kwipoo guides for building a home inventory, organizing storage bins, avoiding duplicate purchases, creating repeatable packing systems, and tracking belongings across home, storage, and travel.";
+    "Browse Kwipoo guides, comparisons, and decision pages for home inventory, storage bins, storage units, duplicate-buy prevention, camping gear organization, moving checklists, packing systems, and multi-location organization.";
 
   const resourceFormats: ResourceFormat[] = [
     {
@@ -86,7 +87,7 @@
       title: "Outdoor adventures",
       audience: "Camping, hiking, and gear-heavy hobbies",
       summary:
-        "Track gear, build repeatable kits, and check what is missing before the trip starts.",
+        "Track camping gear, build reusable kits, and check what is missing before the trip starts.",
     },
     {
       title: "Home organization",
@@ -110,6 +111,7 @@
     readTime: guide.readTime,
     summary: guide.summary,
   }));
+  const resourceGuideCount = featuredResources.length;
 
   const resourcesStructuredData = {
     "@context": "https://schema.org",
@@ -182,9 +184,13 @@
           Start with the guide that matches your setup. Each one focuses on a
           concrete problem, like building a home inventory that stays current,
           organizing storage bins you can actually trust later, avoiding
-          duplicate purchases before you buy again, managing outdoor gear,
-          keeping shared household items organized, or building a repeatable
-          packing system for frequent trips and events.
+          duplicate purchases before you buy again, building a camping gear
+          checklist you can trust, planning a move with clearer box and
+          essentials tracking, comparing an inventory app with a spreadsheet,
+          deciding what to inventory first, choosing between bin-level and
+          item-level tracking, organizing a storage unit, keeping shared
+          household items organized, or building a repeatable packing system
+          for frequent trips and events.
         </p>
       </div>
 
@@ -200,13 +206,15 @@
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            Start with eight grounded guides.
+            Start with {resourceGuideCount} grounded guides.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            They cover home inventory setup, storage bins, duplicate-purchase
-            prevention, repeatable packing, outdoor gear, shared households,
-            and multi-location travel or moving workflows, with examples tied
-            to real storage and packing habits.
+            They cover home inventory setup, what to inventory first, bin-level
+            versus item-level tracking, storage bins, storage units,
+            duplicate-purchase prevention, camping and moving checklists,
+            packing-system comparisons, outdoor gear, shared households, and
+            multi-location workflows, with examples tied to real storage and
+            packing habits.
           </p>
         </div>
 
@@ -219,9 +227,11 @@
             Live now
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            Home inventory, storage bins, duplicate-buy prevention, repeatable
-            packing, outdoor gear, households, home/storage/travel tracking,
-            and moving.
+            Home inventory, inventory app comparisons, storage bins, storage
+            unit organization, first-inventory decisions, bin-versus-item
+            tracking, duplicate-buy prevention, camping and moving checklists,
+            repeatable packing, outdoor gear, households, and home/storage/
+            travel tracking.
           </p>
         </div>
       </aside>

@@ -19,6 +19,8 @@
     buttonSize?: "sm" | "md" | "lg";
     buttonHref?: string;
     onButtonClick?: () => void;
+    supportingLinkText?: string;
+    supportingLinkHref?: string;
     imageOnLeft?: boolean;
   }
 
@@ -34,6 +36,8 @@
     buttonSize = "md",
     buttonHref,
     onButtonClick,
+    supportingLinkText,
+    supportingLinkHref,
     imageOnLeft = false,
   }: Props = $props();
 </script>
@@ -89,6 +93,16 @@
           </Button>
         </div>
       {/if}
+      {#if supportingLinkText && supportingLinkHref}
+        <!-- eslint-disable svelte/no-navigation-without-resolve -->
+        <a
+          href={supportingLinkHref}
+          class="inline-flex text-sm font-semibold text-primary-700 transition-colors hover:text-primary-800 hover:underline"
+        >
+          {supportingLinkText}
+        </a>
+        <!-- eslint-enable svelte/no-navigation-without-resolve -->
+      {/if}
     </div>
   {:else}
     <div
@@ -117,6 +131,16 @@
             {buttonText}
           </Button>
         </div>
+      {/if}
+      {#if supportingLinkText && supportingLinkHref}
+        <!-- eslint-disable svelte/no-navigation-without-resolve -->
+        <a
+          href={supportingLinkHref}
+          class="inline-flex text-sm font-semibold text-primary-700 transition-colors hover:text-primary-800 hover:underline"
+        >
+          {supportingLinkText}
+        </a>
+        <!-- eslint-enable svelte/no-navigation-without-resolve -->
       {/if}
     </div>
     <div

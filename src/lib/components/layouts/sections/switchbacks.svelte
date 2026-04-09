@@ -18,6 +18,8 @@
     buttonSize?: "sm" | "md" | "lg";
     buttonHref?: string;
     onButtonClick?: () => void;
+    supportingLinkText?: string;
+    supportingLinkHref?: string;
   }
 
   interface Props {
@@ -77,6 +79,8 @@
           buttonSize={item.buttonSize}
           buttonHref={item.buttonHref}
           onButtonClick={item.onButtonClick}
+          supportingLinkText={item.supportingLinkText}
+          supportingLinkHref={item.supportingLinkHref}
           imageOnLeft={index % 2 !== 0}
         />
       </MotionReveal>

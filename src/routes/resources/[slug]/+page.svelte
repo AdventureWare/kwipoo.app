@@ -28,6 +28,13 @@
     })),
   );
   let tocItems = $derived(getResourceGuideTocItems(data.resourceGuide));
+  let inlineRelatedResources = $derived(data.relatedResources.slice(0, 2));
+  let seoTitle = $derived(
+    data.resourceGuide.seoTitle ?? `${data.resourceGuide.title} | Kwipoo Resources`,
+  );
+  let seoDescription = $derived(
+    data.resourceGuide.seoDescription ?? data.resourceGuide.description,
+  );
   let guideUrl = $derived(
     toAbsoluteMarketingUrl(getResourcesHref(data.resourceGuide.slug)),
   );
@@ -38,7 +45,7 @@
         {
           "@type": "Article",
           headline: data.resourceGuide.title,
-          description: data.resourceGuide.description,
+          description: seoDescription,
           url: guideUrl,
           mainEntityOfPage: guideUrl,
           image: toAbsoluteMarketingUrl(data.resourceGuide.image.src),
@@ -56,6 +63,21 @@
             url: toAbsoluteMarketingUrl("/resources"),
           },
         },
+        ...(data.resourceGuide.faqItems?.length
+          ? [
+              {
+                "@type": "FAQPage",
+                mainEntity: data.resourceGuide.faqItems.map((item) => ({
+                  "@type": "Question",
+                  name: item.question,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: item.answer,
+                  },
+                })),
+              },
+            ]
+          : []),
         getBreadcrumbJsonLd([
           { name: "Home", path: "/" },
           { name: "Resources", path: "/resources" },
@@ -74,17 +96,17 @@
 </script>
 
 <svelte:head>
-  <title>{data.resourceGuide.title} | Kwipoo Resources</title>
-  <meta name="description" content={data.resourceGuide.description} />
+  <title>{seoTitle}</title>
+  <meta name="description" content={seoDescription} />
   <meta
     name="robots"
     content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
   />
   <meta
     property="og:title"
-    content={`${data.resourceGuide.title} | Kwipoo Resources`}
+    content={seoTitle}
   />
-  <meta property="og:description" content={data.resourceGuide.description} />
+  <meta property="og:description" content={seoDescription} />
   <meta property="og:type" content="article" />
   <meta property="og:url" content={guideUrl} />
   <meta
@@ -95,9 +117,9 @@
   <meta property="article:section" content="Resources" />
   <meta
     name="twitter:title"
-    content={`${data.resourceGuide.title} | Kwipoo Resources`}
+    content={seoTitle}
   />
-  <meta name="twitter:description" content={data.resourceGuide.description} />
+  <meta name="twitter:description" content={seoDescription} />
   <svelte:element this={"script"} type="application/ld+json">
     {toSeoJsonLd(resourceStructuredData)}
   </svelte:element>
@@ -168,9 +190,85 @@
     </div>
   </section>
 
-  {#each sectionEntries as entry (entry.id)}
+  {#each sectionEntries as entry, index (entry.id)}
     <DocsSectionContent id={entry.id} section={entry.section} />
+
+    {#if index === 1 && inlineRelatedResources.length > 0}
+      <section
+        class="card rounded-[1.5rem] border border-primary-200 bg-primary-50 p-6 shadow-sm"
+      >
+        <p
+          class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
+        >
+          Keep Going
+        </p>
+        <h2
+          class="mt-3 text-[1.55rem] font-semibold leading-tight text-surface-950"
+        >
+          Related guides in the same workflow
+        </h2>
+        <p class="mt-3 max-w-3xl text-[0.98rem] leading-7 text-brand-body">
+          If this guide matches the problem you are solving, these are usually
+          the next practical guides people need.
+        </p>
+
+        <div class="mt-5 grid gap-4 md:grid-cols-2">
+          {#each inlineRelatedResources as guide (guide.slug)}
+            <!-- eslint-disable svelte/no-navigation-without-resolve -->
+            <a
+              href={resolveResourceHref(guide.slug)}
+              class="card card-hover rounded-[1.15rem] border border-primary-200 bg-white p-4 shadow-sm hover:border-primary-300"
+            >
+              <p
+                class="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-brand-muted"
+              >
+                {guide.audience}
+              </p>
+              <h3 class="mt-2 text-[1.1rem] font-semibold text-surface-950">
+                {guide.title}
+              </h3>
+              <p class="mt-2 text-[0.95rem] leading-6 text-brand-body">
+                {guide.summary}
+              </p>
+            </a>
+            <!-- eslint-enable svelte/no-navigation-without-resolve -->
+          {/each}
+        </div>
+      </section>
+    {/if}
   {/each}
+
+  {#if data.resourceGuide.faqItems?.length}
+    <section class="grid gap-5">
+      <div class="space-y-3">
+        <p
+          class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+        >
+          Common Questions
+        </p>
+        <h2
+          class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
+        >
+          Quick answers before you set this up
+        </h2>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        {#each data.resourceGuide.faqItems as item (item.question)}
+          <article
+            class="card rounded-[1.3rem] border border-surface-200 bg-surface-50 p-5 shadow-sm"
+          >
+            <h3 class="text-[1.08rem] font-semibold leading-tight text-surface-950">
+              {item.question}
+            </h3>
+            <p class="mt-3 text-[0.96rem] leading-7 text-brand-body">
+              {item.answer}
+            </p>
+          </article>
+        {/each}
+      </div>
+    </section>
+  {/if}
 
   <section
     class="grid gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)]"
