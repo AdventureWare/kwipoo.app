@@ -91,9 +91,9 @@ export interface DocsTocItem {
 
 export const docsCategoryDescriptions: Record<DocsCategory, string> = {
   "Start here":
-    "Foundational guides for getting your account set up and building a system you will actually use.",
+    "Setup guides and core concepts for getting your account ready and building a structure that makes sense.",
   "Track and organize":
-    "Core concepts for understanding what you own, where it lives, and how to keep it easy to find.",
+    "Guides for recording what you own, where it lives, and how to keep those locations easy to search.",
   "Plan and collaborate":
-    "Features that help you prepare for trips, routines, and shared gear without starting from scratch each time.",
+    "Guides for reusable kits, event planning, and the sharing tools that help other people stay in sync.",
 };

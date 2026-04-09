@@ -8,19 +8,22 @@ async function loadBillingConfig({
   signupUrl?: string;
 }) {
   vi.resetModules();
-  vi.doMock("$env/dynamic/public", () => ({
-    env: {
-      PUBLIC_PREMIUM_CHECKOUT_URL: checkoutUrl,
-      PUBLIC_PREMIUM_SIGNUP_URL: signupUrl,
-    },
-  }));
+  vi.unstubAllEnvs();
+
+  if (checkoutUrl !== undefined) {
+    vi.stubEnv("PUBLIC_PREMIUM_CHECKOUT_URL", checkoutUrl);
+  }
+
+  if (signupUrl !== undefined) {
+    vi.stubEnv("PUBLIC_PREMIUM_SIGNUP_URL", signupUrl);
+  }
 
   return import("../../src/lib/config/billing");
 }
 
 afterEach(() => {
   vi.resetModules();
-  vi.doUnmock("$env/dynamic/public");
+  vi.unstubAllEnvs();
 });
 
 describe("billing config", () => {

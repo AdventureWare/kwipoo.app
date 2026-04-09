@@ -34,11 +34,11 @@ export const docsLandingTocItems: DocsTocItem[] = [
   { id: "overview", label: "Overview" },
   { id: "start-here", label: "Start Here" },
   { id: "browse-topics", label: "Browse Topics" },
-  { id: "content-roadmap", label: "Content Roadmap" },
+  { id: "content-roadmap", label: "Continue Reading" },
 ] as const;
 
 export function getDocsHref(slug: string): string {
-  return slug === "getting-started" ? "/docs" : `/docs/${slug}`;
+  return `/docs/${slug}`;
 }
 
 export function getDocsPage(slug: string): DocsPage | undefined {

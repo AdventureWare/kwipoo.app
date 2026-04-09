@@ -6,9 +6,9 @@ export const thingsDocsPage = defineDocsPage({
   eyebrow: "Core inventory",
   title: "Track your Things",
   summary:
-    "Build a searchable inventory of the physical items you own so you can find them faster, avoid duplicate purchases, and reuse them in Sets or Events.",
+    "Keep a searchable record of the items you own so you can find them, avoid duplicate purchases, and reuse them in Sets or Events.",
   description:
-    "Things are the foundation of Kwipoo. Each Thing represents a real item you own, with details about what it is, where it currently lives, and how it connects to the rest of your setup.",
+    "Things are the core inventory records in Kwipoo. Each one represents a real item, along with the details and location information that make it easier to manage.",
   image: {
     src: "/assets/thingsFeatureAsset@2x.png",
     alt: "Kwipoo Things feature showing an organized list of items",

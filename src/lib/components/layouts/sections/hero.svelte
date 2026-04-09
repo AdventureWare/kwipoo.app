@@ -29,20 +29,20 @@
     <div
       class="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16"
     >
-      <div class="py-6 text-left sm:py-16 lg:py-20">
+      <div class="py-5 text-left sm:py-16 lg:py-20">
         <div class="mb-3 hidden sm:block">
           <p class="brand-section-label">Personal Inventory For Real Life</p>
         </div>
 
         <h1
-          class="max-w-2xl text-3xl font-bold leading-tight text-primary-950 sm:text-5xl lg:text-6xl"
+          class="max-w-2xl text-3xl font-bold leading-[1.05] text-primary-950 sm:text-5xl sm:leading-tight lg:text-6xl"
         >
           Life is busy. <br class="hidden sm:block" />
           Your stuff shouldn't make it busier
         </h1>
 
         <p
-          class="mx-0 mb-5 mt-3 max-w-xl text-base leading-relaxed text-brand-body sm:mb-6 sm:mt-5 sm:text-xl"
+          class="mx-0 mb-4 mt-2.5 max-w-xl text-base leading-relaxed text-brand-body sm:mb-6 sm:mt-5 sm:text-xl"
         >
           Keep track of what you own, where it lives, and what you need next in
           one personal inventory app.

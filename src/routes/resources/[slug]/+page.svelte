@@ -186,7 +186,8 @@
       <h2
         class="mt-3 text-[1.6rem] font-semibold leading-tight text-surface-950"
       >
-        Open Kwipoo and start with the highest-friction items first.
+        Open Kwipoo and start with the items you search for, pack, or replace
+        most often.
       </h2>
       <p class="mt-3 max-w-2xl text-[0.98rem] leading-7 text-brand-body">
         You do not need a perfect system on day one. Add the items, locations,

@@ -6,9 +6,9 @@ export const placesDocsPage = defineDocsPage({
   eyebrow: "Storage structure",
   title: "Organize with Places",
   summary:
-    "Use Places for the major real-world locations where you keep your Things, from home and office to storage units and shared spaces.",
+    "Use Places for the broad locations where you keep things, such as home, office, garage, or storage.",
   description:
-    "Places are the top-level locations in your inventory. They answer the broad question of where something belongs before you narrow it down further with Spots inside that place.",
+    "Places are the top level of Kwipoo's location model. They tell you the general home for an item before you narrow it down with Spots.",
   image: {
     src: "/assets/placesFeatureAsset@2x.png",
     alt: "Kwipoo Places feature showing organized storage locations",

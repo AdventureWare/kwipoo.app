@@ -8,19 +8,22 @@ async function loadFeatureFlags({
   pricingOverride?: string;
 }) {
   vi.resetModules();
-  vi.doMock("$env/dynamic/public", () => ({
-    env: {
-      PUBLIC_FEATURE_DOCS: docsOverride,
-      PUBLIC_FEATURE_PRICING: pricingOverride,
-    },
-  }));
+  vi.unstubAllEnvs();
+
+  if (docsOverride !== undefined) {
+    vi.stubEnv("PUBLIC_FEATURE_DOCS", docsOverride);
+  }
+
+  if (pricingOverride !== undefined) {
+    vi.stubEnv("PUBLIC_FEATURE_PRICING", pricingOverride);
+  }
 
   return import("../../src/lib/config/feature-flags");
 }
 
 afterEach(() => {
   vi.resetModules();
-  vi.doUnmock("$env/dynamic/public");
+  vi.unstubAllEnvs();
 });
 
 describe("feature flags", () => {

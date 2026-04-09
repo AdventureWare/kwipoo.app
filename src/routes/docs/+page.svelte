@@ -31,7 +31,7 @@
   const docsTitle =
     "Kwipoo Documentation | Inventory, Storage, and Packing Guides";
   const docsDescription =
-    "Browse the Kwipoo documentation for setup guidance, inventory structure, storage concepts, and feature walkthroughs.";
+    "Browse setup guides, feature overviews, and reference pages for organizing your inventory in Kwipoo.";
   const docsStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -94,18 +94,17 @@
     Documentation
   </h1>
   <p class="max-w-4xl text-lg leading-8 text-brand-body">
-    Use this documentation to understand how Kwipoo is structured, how the core
-    inventory model fits together, and where each feature belongs in a real
-    workflow.
+    Start here if you are setting up Kwipoo for the first time or need a quick
+    refresher on how the inventory model fits together. These guides cover the
+    core structure first, then the features that build on it.
   </p>
 </header>
 
 <article class="mt-8 grid gap-10">
   <section id={docsLandingTocItems[0].id} class="grid gap-5">
     <p class="text-lg leading-8 text-color">
-      Start with the foundational guides if you are new to Kwipoo. Once the
-      model feels clear, move into the feature pages for the parts of the
-      product you actually use day to day.
+      If you are new, begin with the setup guides. Once the basics are clear,
+      jump to the feature pages that match how you actually use Kwipoo.
     </p>
 
     <div class="xl:hidden">
@@ -121,8 +120,9 @@
         Recommended flow
       </p>
       <p class="mt-3 text-[1.15rem] leading-7 text-color">
-        Start with setup, then move through Places, Spots, Things, Sets, and
-        Events in the same order they become useful in real life.
+        Most people get the clearest start by creating an account, then setting
+        up Places, Spots, and Things before moving on to Sets, Events, and
+        sharing features.
       </p>
       <div class="mt-5 flex flex-wrap gap-3">
         <!-- eslint-disable svelte/no-navigation-without-resolve -->
@@ -153,11 +153,11 @@
       <h2
         class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
-        Foundational guides first.
+        Start with the basics.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        These pages establish the vocabulary and habits that the rest of the
-        documentation builds on.
+        These guides explain the setup and terminology the rest of the docs
+        assume.
       </p>
     </div>
 
@@ -195,16 +195,16 @@
       >
         <p
           class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
-        >
-          Product Access
-        </p>
-        <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-950">
-          Open Kwipoo while you read.
-        </h3>
-        <p class="text-[0.98rem] leading-6 text-brand-body">
-          The docs are designed to sit next to the actual product while you
-          build out or review your setup.
-        </p>
+      >
+        Product Access
+      </p>
+      <h3 class="text-[1.25rem] font-semibold leading-tight text-surface-950">
+        Keep Kwipoo open while you read.
+      </h3>
+      <p class="text-[0.98rem] leading-6 text-brand-body">
+        It is easier to follow the guides with the app open in another tab so
+        you can check your setup as you go.
+      </p>
       </a>
       <!-- eslint-enable svelte/no-navigation-without-resolve -->
     </div>
@@ -220,11 +220,11 @@
       <h2
         class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
-        Move through the docs by category.
+        Browse by topic.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        The topic groups below match the directory in the left sidebar, so the
-        landing page and the rest of the docs stay in the same mental model.
+        These groups match the docs sidebar, so the landing page and the rest
+        of the library stay organized the same way.
       </p>
     </div>
 
@@ -285,17 +285,17 @@
       <p
         class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-800-200"
       >
-        Content Roadmap
+        Continue Reading
       </p>
       <h2
         class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
-        The core structure is now in place.
+        Go deeper where you need it.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        With the main guides now aligned to the current app, the next layer
-        should add more screenshots, narrower task guides, and tighter
-        troubleshooting notes for the highest-friction flows.
+        If you are past the initial setup, these are good next reads for item
+        tracking, reusable kits, event planning, and coordination with other
+        people.
       </p>
     </div>
 

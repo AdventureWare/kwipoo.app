@@ -1,4 +1,4 @@
-import { env } from "$env/dynamic/public";
+const publicEnv = import.meta.env as Record<string, string | undefined>;
 
 const TRUE_FLAG_VALUES = new Set(["1", "true", "yes", "on"]);
 const FALSE_FLAG_VALUES = new Set(["0", "false", "no", "off"]);
@@ -40,22 +40,22 @@ function resolveBooleanFlag(
 export const FEATURE_FLAGS = {
   docs: resolveBooleanFlag(
     "PUBLIC_FEATURE_DOCS",
-    env.PUBLIC_FEATURE_DOCS,
+    publicEnv.PUBLIC_FEATURE_DOCS,
     true,
   ),
   resources: resolveBooleanFlag(
     "PUBLIC_FEATURE_RESOURCES",
-    env.PUBLIC_FEATURE_RESOURCES,
+    publicEnv.PUBLIC_FEATURE_RESOURCES,
     true,
   ),
   pricing: resolveBooleanFlag(
     "PUBLIC_FEATURE_PRICING",
-    env.PUBLIC_FEATURE_PRICING,
+    publicEnv.PUBLIC_FEATURE_PRICING,
     false,
   ),
   releaseHistory: resolveBooleanFlag(
     "PUBLIC_FEATURE_RELEASE_HISTORY",
-    env.PUBLIC_FEATURE_RELEASE_HISTORY,
+    publicEnv.PUBLIC_FEATURE_RELEASE_HISTORY,
     true,
   ),
 } as const;

@@ -38,28 +38,27 @@
 
   const resourcesTitle = "Kwipoo Resources | Articles, Videos, and Tutorials";
   const resourcesDescription =
-    "Browse Kwipoo resource guides for households, outdoor setups, travel prep, and other real-world inventory workflows.";
+    "Browse practical Kwipoo guides for organizing outdoor gear, household storage, travel prep, and moving.";
 
   const resourceFormats: ResourceFormat[] = [
     {
       title: "Articles",
       description:
-        "Written pieces for workflows, feature introductions, and practical organization ideas.",
-      cadence: "Evergreen references and updates",
-      badge: FEATURE_BADGE_PRESETS.comingSoon,
+        "Written guides for common workflows, feature context, and setup decisions.",
+      cadence: "Live now",
     },
     {
       title: "Videos",
       description:
-        "Short visual walkthroughs that show the product in motion and explain real setup patterns.",
-      cadence: "Product demos and guided explainers",
+        "Short walkthroughs that show how a workflow looks inside the product.",
+      cadence: "Planned",
       badge: FEATURE_BADGE_PRESETS.comingSoon,
     },
     {
       title: "Tutorials",
       description:
-        "Step-by-step learning paths for getting started, building inventory structure, and improving routines.",
-      cadence: "Hands-on, follow-along teaching",
+        "Follow-along lessons for getting started and building a system step by step.",
+      cadence: "Planned",
       badge: FEATURE_BADGE_PRESETS.comingSoon,
     },
   ];
@@ -69,19 +68,19 @@
       title: "Outdoor adventures",
       audience: "Camping, hiking, and gear-heavy hobbies",
       summary:
-        "Organize gear, build reusable kits, and make sure trips do not fall apart because something critical stayed behind.",
+        "Track gear, build repeatable kits, and check what is missing before the trip starts.",
     },
     {
       title: "Home organization",
       audience: "Families, couples, and roommates",
       summary:
-        "Bring order to shared household items, seasonal storage, and the everyday essentials that tend to disappear into drawers and bins.",
+        "Keep shared household items easier to find, easier to store, and less likely to be bought twice.",
     },
     {
       title: "Travel and moving",
       audience: "Frequent travelers and multi-location lives",
       summary:
-        "Keep belongings visible across suitcases, storage, temporary stays, and repeat packing workflows.",
+        "Track what moves between bags, storage, and temporary stays so packing is easier to trust.",
     },
   ];
 
@@ -154,18 +153,17 @@
         <p
           class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
         >
-          Content Hub
+          Resources
         </p>
         <h1
           class="max-w-4xl text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.15rem]"
         >
-          Practical guides for organizing real life with Kwipoo.
+          Practical guides for using Kwipoo in real situations.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
-          Start with audience-specific guides for outdoor gear, shared
-          households, and travel-heavy routines. Each guide focuses on a
-          specific setup problem so people can see how Kwipoo fits into daily
-          life, not just how the feature list reads on paper.
+          Start with the guide that matches your setup. Each one focuses on a
+          concrete problem, like managing outdoor gear, keeping shared
+          household items organized, or packing across frequent travel.
         </p>
       </div>
 
@@ -181,11 +179,11 @@
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            Start with three practical guides.
+            Start with three grounded guides.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            These guides are organized around real households, trips, and gear
-            setups so the advice stays concrete from the first read.
+            They cover outdoor gear, shared households, and travel or moving
+            workflows, with examples tied to real storage and packing habits.
           </p>
         </div>
 
@@ -198,7 +196,7 @@
             Live now
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            Outdoor adventurers, households, and frequent travelers or movers.
+            Outdoor gear, households, travel, and moving.
           </p>
         </div>
       </aside>
@@ -215,11 +213,11 @@
       <h2
         class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
-        The library is designed to support more than one way of learning.
+        More ways to learn are on the way.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        Written guides are available now, with videos and tutorials planned for
-        the same practical, real-world workflows.
+        Written guides are live now. Video walkthroughs and follow-along
+        tutorials are planned for the same everyday workflows.
       </p>
     </div>
 

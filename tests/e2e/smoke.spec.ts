@@ -40,19 +40,44 @@ async function expectJsonLdScriptsToParse(page: Page): Promise<void> {
   }
 }
 
+async function expectCanonicalUrl(
+  page: Page,
+  expectedUrl: string,
+): Promise<void> {
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    expectedUrl,
+  );
+}
+
+function headingLocator(page: Page, level: 1 | 2 | 3, text: RegExp) {
+  return page.locator(`h${level}`).filter({ hasText: text }).first();
+}
+
+function actionLocator(page: Page, text: RegExp) {
+  return page.locator("a, button").filter({ hasText: text }).first();
+}
+
+function imageLocator(page: Page, altText: string) {
+  return page.locator(`img[alt="${altText}"]`).first();
+}
+
+function footerLocator(page: Page) {
+  return page.locator("footer, [role='contentinfo']").first();
+}
+
 test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await page.goto("/");
 
   await expect(page).toHaveTitle(/Kwipoo/i);
   await expect(
-    page.getByRole("heading", {
-      level: 1,
-      name: /life is busy\.?\s*your stuff shouldn't make it busier/i,
-    }),
+    headingLocator(
+      page,
+      1,
+      /life is busy\.?\s*your stuff shouldn't make it busier/i,
+    ),
   ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: /create a free account today/i }),
-  ).toBeVisible();
+  await expect(actionLocator(page, /create free account/i)).toBeVisible();
   await expectJsonLdScriptsToParse(page);
 });
 
@@ -61,10 +86,8 @@ test("@smoke homepage keeps the primary CTA and product proof available without 
 }, testInfo) => {
   await page.goto("/");
 
-  const primaryCta = page.getByRole("button", {
-    name: /create free account/i,
-  });
-  const heroImage = page.getByRole("img", { name: /kwipoo app interface/i });
+  const primaryCta = actionLocator(page, /create free account/i);
+  const heroImage = imageLocator(page, "Kwipoo app interface");
 
   await expect(primaryCta).toBeVisible();
   await expect(heroImage).toBeVisible();
@@ -95,21 +118,15 @@ test("@smoke docs and legal pages render the expected headings", async ({
 }) => {
   if (await docsAreAvailable(request)) {
     await page.goto("/docs");
-    await expect(
-      page.getByRole("heading", {
-        level: 1,
-        name: /^documentation$/i,
-      }),
-    ).toBeVisible();
+    await expect(headingLocator(page, 1, /^documentation$/i)).toBeVisible();
+    await expectCanonicalUrl(page, "https://kwipoo.app/docs");
     await expectJsonLdScriptsToParse(page);
 
     await page.goto("/docs/getting-started");
     await expect(
-      page.getByRole("heading", {
-        level: 1,
-        name: /getting started with kwipoo/i,
-      }),
+      headingLocator(page, 1, /getting started with kwipoo/i),
     ).toBeVisible();
+    await expectCanonicalUrl(page, "https://kwipoo.app/docs/getting-started");
     await expectJsonLdScriptsToParse(page);
   } else {
     const docsResponse = await page.goto("/docs");
@@ -120,15 +137,11 @@ test("@smoke docs and legal pages render the expected headings", async ({
   }
 
   await page.goto("/privacy-policy");
-  await expect(
-    page.getByRole("heading", { level: 1, name: /privacy policy/i }),
-  ).toBeVisible();
+  await expect(headingLocator(page, 1, /privacy policy/i)).toBeVisible();
   await expectJsonLdScriptsToParse(page);
 
   await page.goto("/terms-and-conditions");
-  await expect(
-    page.getByRole("heading", { level: 1, name: /terms and conditions/i }),
-  ).toBeVisible();
+  await expect(headingLocator(page, 1, /terms and conditions/i)).toBeVisible();
   await expectJsonLdScriptsToParse(page);
 });
 
@@ -139,19 +152,17 @@ test("@smoke resources landing page and guide routes resolve consistently", asyn
   if (await resourcesAreAvailable(request)) {
     await page.goto("/resources");
     await expect(
-      page.getByRole("heading", {
-        level: 1,
-        name: /practical guides for organizing real life with kwipoo/i,
-      }),
+      headingLocator(
+        page,
+        1,
+        /practical guides for organizing real life with kwipoo/i,
+      ),
     ).toBeVisible();
     await expectJsonLdScriptsToParse(page);
 
     await page.goto("/resources/outdoor-adventurers");
     await expect(
-      page.getByRole("heading", {
-        level: 1,
-        name: /never lose track of your gear again/i,
-      }),
+      headingLocator(page, 1, /never lose track of your gear again/i),
     ).toBeVisible();
     await expectJsonLdScriptsToParse(page);
   } else {
@@ -169,14 +180,9 @@ test("@smoke support page renders the support entry points", async ({
   await page.goto("/support");
 
   await expect(
-    page.getByRole("heading", {
-      level: 1,
-      name: /contact kwipoo support when you need help/i,
-    }),
+    headingLocator(page, 1, /contact kwipoo support when you need help/i),
   ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: /email support/i }),
-  ).toBeVisible();
+  await expect(actionLocator(page, /^email support$/i)).toBeVisible();
   await expect(
     page.getByRole("link", { name: /kwipoo-support@adventureware\.com/i }),
   ).toBeVisible();
@@ -189,15 +195,10 @@ test("@smoke account deletion page renders the account deletion request path", a
   await page.goto("/delete-account-form");
 
   await expect(
-    page.getByRole("heading", {
-      level: 1,
-      name: /request deletion of your kwipoo account/i,
-    }),
+    headingLocator(page, 1, /request deletion of your kwipoo account/i),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", {
-      name: /submit account deletion request/i,
-    }),
+    actionLocator(page, /submit account deletion request/i),
   ).toBeVisible();
   await expectJsonLdScriptsToParse(page);
 });
@@ -210,23 +211,16 @@ test("@smoke pricing page renders the draft plan structure", async ({
     await page.goto("/pricing");
 
     await expect(
-      page.getByRole("heading", {
-        level: 1,
-        name: /placeholder pricing scaffolding for free, premium, and custom plans/i,
-      }),
+      headingLocator(
+        page,
+        1,
+        /placeholder pricing scaffolding for free, premium, and custom plans/i,
+      ),
     ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { level: 3, name: /^free$/i }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { level: 3, name: /^premium$/i }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { level: 3, name: /^custom$/i }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: /speak to sales/i }).first(),
-    ).toBeVisible();
+    await expect(headingLocator(page, 3, /^free$/i)).toBeVisible();
+    await expect(headingLocator(page, 3, /^premium$/i)).toBeVisible();
+    await expect(headingLocator(page, 3, /^custom$/i)).toBeVisible();
+    await expect(actionLocator(page, /speak to sales/i)).toBeVisible();
     await expectJsonLdScriptsToParse(page);
   } else {
     const pricingResponse = await page.goto("/pricing");
@@ -289,9 +283,11 @@ test("@smoke homepage footer links and social actions remain accessible on narro
   request,
 }) => {
   await page.goto("/");
-  await page.getByRole("contentinfo").scrollIntoViewIfNeeded();
+  const footer = footerLocator(page);
 
-  const docsLink = page.getByRole("link", { name: /documentation/i });
+  await footer.scrollIntoViewIfNeeded();
+
+  const docsLink = footer.getByRole("link", { name: /documentation/i });
 
   if (await docsAreAvailable(request)) {
     await expect(docsLink).toBeVisible();
@@ -299,9 +295,7 @@ test("@smoke homepage footer links and social actions remain accessible on narro
     await expect(docsLink).toHaveCount(0);
   }
 
-  const footerPricingLink = page
-    .getByRole("contentinfo")
-    .getByRole("link", { name: /^pricing$/i });
+  const footerPricingLink = footer.getByRole("link", { name: /^pricing$/i });
 
   if (await pricingIsAvailable(request)) {
     await expect(footerPricingLink).toBeVisible();
@@ -309,9 +303,7 @@ test("@smoke homepage footer links and social actions remain accessible on narro
     await expect(footerPricingLink).toHaveCount(0);
   }
 
-  const resourcesLink = page
-    .getByRole("contentinfo")
-    .getByRole("link", { name: /^resources$/i });
+  const resourcesLink = footer.getByRole("link", { name: /^resources$/i });
 
   if (await resourcesAreAvailable(request)) {
     await expect(resourcesLink).toBeVisible();
@@ -322,14 +314,12 @@ test("@smoke homepage footer links and social actions remain accessible on narro
   await expect(
     page.getByRole("link", { name: /privacy policy/i }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("contentinfo").getByRole("link", { name: /^support$/i }),
-  ).toBeVisible();
+  await expect(footer.getByRole("link", { name: /^support$/i })).toBeVisible();
   await expect(
     page.getByRole("link", { name: /delete account request/i }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: /terms & conditions/i }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: /twitter/i })).toBeVisible();
+  await expect(footer.getByLabel(/twitter/i)).toBeVisible();
 });

@@ -6,9 +6,9 @@ export const createAccountDocsPage = defineDocsPage({
   eyebrow: "Account access",
   title: "Create your account",
   summary:
-    "Set up a Kwipoo account with email, Google, or Apple, confirm your access, and understand what happens during your first session.",
+    "Create a Kwipoo account with email, Google, or Apple, confirm access if needed, and understand what the first session looks like.",
   description:
-    "Kwipoo supports email-and-password signup plus Google and Apple sign-in. New email signups require confirmation before the first session starts, and every account can continue into the guided welcome flow once access is ready.",
+    "This guide covers the available sign-in methods, the confirmation step for email accounts, and what happens when you enter Kwipoo for the first time.",
   image: {
     src: "/assets/householdProfile@2x.png",
     alt: "Kwipoo account and profile setup view",

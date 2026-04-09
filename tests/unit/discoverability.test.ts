@@ -8,19 +8,22 @@ async function loadDiscoverability({
   resourcesOverride?: string;
 }) {
   vi.resetModules();
-  vi.doMock("$env/dynamic/public", () => ({
-    env: {
-      PUBLIC_FEATURE_DOCS: docsOverride,
-      PUBLIC_FEATURE_RESOURCES: resourcesOverride,
-    },
-  }));
+  vi.unstubAllEnvs();
+
+  if (docsOverride !== undefined) {
+    vi.stubEnv("PUBLIC_FEATURE_DOCS", docsOverride);
+  }
+
+  if (resourcesOverride !== undefined) {
+    vi.stubEnv("PUBLIC_FEATURE_RESOURCES", resourcesOverride);
+  }
 
   return import("../../src/lib/discoverability");
 }
 
 afterEach(() => {
   vi.resetModules();
-  vi.doUnmock("$env/dynamic/public");
+  vi.unstubAllEnvs();
 });
 
 describe("discoverability builders", () => {
@@ -44,6 +47,9 @@ describe("discoverability builders", () => {
 
     expect(buildSitemapXml()).toContain("<loc>https://kwipoo.app/docs</loc>");
     expect(buildSitemapXml()).toContain(
+      "<loc>https://kwipoo.app/docs/getting-started</loc>",
+    );
+    expect(buildSitemapXml()).toContain(
       "<loc>https://kwipoo.app/docs/things</loc>",
     );
     expect(buildSitemapXml()).toContain(
@@ -65,6 +71,9 @@ describe("discoverability builders", () => {
     expect(buildLlmsFullTxt()).toContain("## Documentation Map");
     expect(buildLlmsFullTxt()).toContain("### Track and organize");
     expect(buildLlmsFullTxt()).toContain("https://kwipoo.app/privacy-policy");
+    expect(buildLlmsFullTxt()).toContain(
+      "https://kwipoo.app/docs/getting-started",
+    );
     expect(buildLlmsFullTxt()).toContain("https://kwipoo.app/docs/things");
   });
 

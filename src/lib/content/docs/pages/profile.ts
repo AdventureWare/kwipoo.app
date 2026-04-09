@@ -8,9 +8,9 @@ export const profileDocsPage = defineDocsPage({
   badge: FEATURE_BADGE_PRESETS.beta,
   title: "Manage your Profile",
   summary:
-    "Use your Profile to update how you appear on Kwipoo, review your collections, manage social activity, and control account settings, privacy, defaults, and support options.",
+    "Use your Profile to update account details, review your collections, manage privacy, and reach social activity, notifications, chats, and settings.",
   description:
-    "Your Profile is the main personal control center in Kwipoo. In the current app, it combines your public-facing identity, collection overview, social shortcuts, notifications, chats, and settings navigation.",
+    "Profile is the main account hub in Kwipoo. It brings together your public profile, collection shortcuts, social activity, and the settings used to manage your account.",
   image: {
     src: "/assets/householdProfile@2x.png",
     alt: "Kwipoo profile view showing personal setup options",
