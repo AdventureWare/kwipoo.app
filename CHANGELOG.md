@@ -1,5 +1,22 @@
 # kwipoo.app
 
+## 0.0.18
+
+### Patch Changes
+
+- 618f9c3: Add FAQ content and FAQPage structured data to high-intent resource guides.
+- 618f9c3: Add mid-article crosslinks between related resource guides to improve internal routing.
+- 618f9c3: Add homepage guide-entry cards that route visitors to problem-specific resource articles.
+- d6b1375: Add modern reveal and ambient motion polish to the homepage while respecting reduced-motion preferences.
+- 618f9c3: Tighten homepage and resource page SEO titles and descriptions around inventory, storage, packing, and moving intent.
+- 618f9c3: Add a moving inventory checklist guide and expand the resources hub copy for moving workflows.
+- deee5f6: Add quipu-inspired thread and knot accents to the homepage visuals and section treatments.
+- 618f9c3: Add decision-focused resource guides for what to inventory first, whether to track bins or individual items, and how to organize camping gear at home.
+- 618f9c3: Add comparison and how-to resource guides for spreadsheet vs app, storage-unit inventory, and packing checklist vs packing system queries.
+- b69e881: Fix low-contrast documentation callout text so card content stays readable across supported color modes.
+- 618f9c3: Add contextual resource-guide links from feature sections and documentation pages.
+- 618f9c3: Add a camping gear inventory guide and expand the resources hub copy for outdoor planning workflows.
+
 ## 0.0.17
 
 ### Patch Changes
