@@ -38,7 +38,7 @@
 
   const resourcesTitle = "Kwipoo Resources | Articles, Videos, and Tutorials";
   const resourcesDescription =
-    "Browse practical Kwipoo guides for organizing outdoor gear, household storage, travel prep, and moving.";
+    "Browse practical Kwipoo guides for building a home inventory, organizing storage bins, avoiding duplicate purchases, creating repeatable packing systems, and tracking belongings across home, storage, and travel.";
 
   const resourceFormats: ResourceFormat[] = [
     {
@@ -65,6 +65,24 @@
 
   const resourceTracks: ResourceTrack[] = [
     {
+      title: "Home inventory",
+      audience: "Anyone building a system they can keep updated",
+      summary:
+        "Start with a practical inventory structure that mirrors real rooms, bins, and storage habits instead of a perfect spreadsheet.",
+    },
+    {
+      title: "Storage and bins",
+      audience: "Closets, totes, shelves, and long-term storage",
+      summary:
+        "Name bins more clearly, connect them to real storage locations, and stop turning packed-away items into mystery boxes.",
+    },
+    {
+      title: "Packing systems",
+      audience: "Trips, camping, and recurring events",
+      summary:
+        "Turn repeat trips and event prep into reusable packing workflows instead of rebuilding the same list every time.",
+    },
+    {
       title: "Outdoor adventures",
       audience: "Camping, hiking, and gear-heavy hobbies",
       summary:
@@ -77,10 +95,10 @@
         "Keep shared household items easier to find, easier to store, and less likely to be bought twice.",
     },
     {
-      title: "Travel and moving",
-      audience: "Frequent travelers and multi-location lives",
+      title: "Travel, moving, and multi-location life",
+      audience: "Belongings split between home, storage, and temporary places",
       summary:
-        "Track what moves between bags, storage, and temporary stays so packing is easier to trust.",
+        "Keep a clearer picture of what is at home, in storage, in transit, or temporarily elsewhere without rebuilding the map each time.",
     },
   ];
 
@@ -162,8 +180,11 @@
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
           Start with the guide that matches your setup. Each one focuses on a
-          concrete problem, like managing outdoor gear, keeping shared
-          household items organized, or packing across frequent travel.
+          concrete problem, like building a home inventory that stays current,
+          organizing storage bins you can actually trust later, avoiding
+          duplicate purchases before you buy again, managing outdoor gear,
+          keeping shared household items organized, or building a repeatable
+          packing system for frequent trips and events.
         </p>
       </div>
 
@@ -179,11 +200,13 @@
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            Start with three grounded guides.
+            Start with eight grounded guides.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            They cover outdoor gear, shared households, and travel or moving
-            workflows, with examples tied to real storage and packing habits.
+            They cover home inventory setup, storage bins, duplicate-purchase
+            prevention, repeatable packing, outdoor gear, shared households,
+            and multi-location travel or moving workflows, with examples tied
+            to real storage and packing habits.
           </p>
         </div>
 
@@ -196,7 +219,9 @@
             Live now
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            Outdoor gear, households, travel, and moving.
+            Home inventory, storage bins, duplicate-buy prevention, repeatable
+            packing, outdoor gear, households, home/storage/travel tracking,
+            and moving.
           </p>
         </div>
       </aside>
