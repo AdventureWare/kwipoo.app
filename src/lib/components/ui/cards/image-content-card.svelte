@@ -59,7 +59,7 @@
         <img
           src={asset(image.src)}
           alt={image.alt}
-          class="card relative aspect-[4/3] w-full object-cover shadow-md"
+          class="card relative aspect-[4/3] w-full object-cover shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           loading="lazy"
         />
       </div>
@@ -132,7 +132,7 @@
         <img
           src={asset(image.src)}
           alt={image.alt}
-          class="card relative aspect-[4/3] w-full object-cover shadow-md"
+          class="card relative aspect-[4/3] w-full object-cover shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           loading="lazy"
         />
       </div>

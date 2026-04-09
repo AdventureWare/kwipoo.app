@@ -1,5 +1,6 @@
 <script lang="ts">
   import ImageContentCard from "$lib/components/ui/cards/image-content-card.svelte";
+  import MotionReveal from "$lib/components/ui/motion-reveal.svelte";
   import type { FeatureBadge } from "$lib/types/feature-badges";
 
   interface SwitchbackItemData {
@@ -39,7 +40,7 @@
 
   <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     {#if eyebrow || title || description}
-      <div class="mb-10 text-left md:mb-12 md:text-center">
+      <MotionReveal delay={40} class="mb-10 text-left md:mb-12 md:text-center">
         {#if eyebrow}
           <p class="brand-section-label mb-4">{eyebrow}</p>
         {/if}
@@ -55,11 +56,15 @@
             {description}
           </p>
         {/if}
-      </div>
+      </MotionReveal>
     {/if}
 
     {#each items as item, index (item.title)}
-      <div class="mb-16 last:mb-0 sm:mb-20 lg:mb-24">
+      <MotionReveal
+        delay={80 + index * 60}
+        distance={26}
+        class="mb-16 last:mb-0 sm:mb-20 lg:mb-24"
+      >
         <ImageContentCard
           tag={item.tag}
           featureBadge={item.featureBadge}
@@ -74,7 +79,7 @@
           onButtonClick={item.onButtonClick}
           imageOnLeft={index % 2 !== 0}
         />
-      </div>
+      </MotionReveal>
     {/each}
   </div>
 </section>
