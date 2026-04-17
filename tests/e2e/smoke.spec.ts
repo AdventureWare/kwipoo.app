@@ -6,6 +6,8 @@ import {
 } from "@playwright/test";
 import { APP_URL } from "../../src/lib/config/site";
 
+const PREVIEW_URL = `http://127.0.0.1:${process.env.KWIPOO_PLAYWRIGHT_PREVIEW_PORT ?? "4173"}`;
+
 type AnalyticsCapturePayload = {
   event: string;
   properties?: Record<string, string | number | boolean | null>;
@@ -185,7 +187,7 @@ test("@smoke homepage emits pageview and CTA analytics with the marketing handof
     search:
       "?utm_source=newsletter&utm_medium=email&utm_campaign=spring-launch",
     navigation_type: "initial_load",
-    url: "http://127.0.0.1:4173/?utm_source=newsletter&utm_medium=email&utm_campaign=spring-launch",
+    url: `${PREVIEW_URL}/?utm_source=newsletter&utm_medium=email&utm_campaign=spring-launch`,
   });
   expect(ctaEvent?.properties).toMatchObject({
     source: "marketing_site",

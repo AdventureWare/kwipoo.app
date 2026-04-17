@@ -1,7 +1,9 @@
 import { spawn } from "node:child_process";
 import process from "node:process";
 
-const PREVIEW_URL = "http://127.0.0.1:4173";
+const PREVIEW_HOST = "127.0.0.1";
+const PREVIEW_PORT = process.env.KWIPOO_PLAYWRIGHT_PREVIEW_PORT ?? "4173";
+const PREVIEW_URL = `http://${PREVIEW_HOST}:${PREVIEW_PORT}`;
 const PREVIEW_START_TIMEOUT_MS = 120_000;
 const PREVIEW_POLL_INTERVAL_MS = 500;
 
@@ -66,9 +68,9 @@ async function main() {
     "preview",
     "--",
     "--host",
-    "127.0.0.1",
+    PREVIEW_HOST,
     "--port",
-    "4173",
+    PREVIEW_PORT,
   ]);
 
   let previewExitedEarly = false;
