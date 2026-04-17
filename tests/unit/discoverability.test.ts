@@ -1,5 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+const DEFAULT_PUBLIC_ENV = {
+  PUBLIC_FEATURE_DOCS: undefined,
+  PUBLIC_FEATURE_PRICING: undefined,
+  PUBLIC_FEATURE_RELEASE_HISTORY: undefined,
+  PUBLIC_FEATURE_RESOURCES: undefined,
+};
+
 async function loadDiscoverability({
   docsOverride,
   resourcesOverride,
@@ -8,22 +15,18 @@ async function loadDiscoverability({
   resourcesOverride?: string;
 }) {
   vi.resetModules();
-  vi.unstubAllEnvs();
-
-  if (docsOverride !== undefined) {
-    vi.stubEnv("PUBLIC_FEATURE_DOCS", docsOverride);
-  }
-
-  if (resourcesOverride !== undefined) {
-    vi.stubEnv("PUBLIC_FEATURE_RESOURCES", resourcesOverride);
-  }
+  vi.doMock("$env/static/public", () => ({
+    ...DEFAULT_PUBLIC_ENV,
+    PUBLIC_FEATURE_DOCS: docsOverride,
+    PUBLIC_FEATURE_RESOURCES: resourcesOverride,
+  }));
 
   return import("../../src/lib/discoverability");
 }
 
 afterEach(() => {
   vi.resetModules();
-  vi.unstubAllEnvs();
+  vi.doUnmock("$env/static/public");
 });
 
 describe("discoverability builders", () => {

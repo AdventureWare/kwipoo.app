@@ -1,6 +1,8 @@
+import {
+  PUBLIC_PREMIUM_CHECKOUT_URL,
+  PUBLIC_PREMIUM_SIGNUP_URL,
+} from "$env/static/public";
 import { SUPPORT_EMAIL_MAILTO } from "$lib/config/site";
-
-const publicEnv = import.meta.env as Record<string, string | undefined>;
 
 function normalizePublicUrl(value: string | undefined): string | undefined {
   if (value === undefined) {
@@ -14,11 +16,9 @@ function normalizePublicUrl(value: string | undefined): string | undefined {
 
 export const PREMIUM_SIGNUP_PATH = "/pricing/premium";
 export const PREMIUM_CHECKOUT_URL = normalizePublicUrl(
-  publicEnv.PUBLIC_PREMIUM_CHECKOUT_URL,
+  PUBLIC_PREMIUM_CHECKOUT_URL,
 );
-export const PREMIUM_SIGNUP_URL = normalizePublicUrl(
-  publicEnv.PUBLIC_PREMIUM_SIGNUP_URL,
-);
+export const PREMIUM_SIGNUP_URL = normalizePublicUrl(PUBLIC_PREMIUM_SIGNUP_URL);
 export const PREMIUM_CONTACT_HREF = `${SUPPORT_EMAIL_MAILTO}?subject=${encodeURIComponent(
   "Kwipoo Premium signup",
 )}`;

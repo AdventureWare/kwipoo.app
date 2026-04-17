@@ -42,6 +42,25 @@ function spawnCommand(command, args, extraEnv = {}) {
 
 async function main() {
   const playwrightArgs = process.argv.slice(2);
+  const buildProcess = spawnCommand("npm", ["run", "build:e2e"]);
+
+  const buildExitCode = await new Promise((resolve, reject) => {
+    buildProcess.once("error", reject);
+    buildProcess.once("exit", (code, signal) => {
+      if (signal) {
+        resolve(1);
+        return;
+      }
+
+      resolve(code ?? 1);
+    });
+  });
+
+  if (buildExitCode !== 0) {
+    process.exitCode = buildExitCode;
+    return;
+  }
+
   const previewProcess = spawnCommand("npm", [
     "run",
     "preview",

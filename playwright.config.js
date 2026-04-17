@@ -9,7 +9,8 @@ const config = defineConfig({
   retries: process.env.CI ? 1 : 0,
   webServer: manageWebServerInternally
     ? {
-        command: "npm run preview -- --host 127.0.0.1 --port 4173",
+        command:
+          "npm run build:e2e && npm run preview -- --host 127.0.0.1 --port 4173",
         url: "http://127.0.0.1:4173",
         timeout: 120_000,
         reuseExistingServer: !process.env.CI,

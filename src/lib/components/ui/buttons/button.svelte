@@ -1,10 +1,13 @@
 <!-- src/lib/components/ui/button.svelte -->
 <script lang="ts">
+  import { goto } from "$app/navigation";
+  import { page } from "$app/state";
   import { resolve } from "$app/paths";
   import {
     trackAnalyticsEvent,
     type AnalyticsEventProperties,
   } from "$lib/analytics";
+  import { buildMarketingAppHandoffHref } from "$lib/analytics/handoff";
   import type { AnalyticsEventName } from "$lib/analytics/schema";
   import { isExternalHref } from "$lib/config/site";
   import type { Snippet } from "svelte";
@@ -85,16 +88,89 @@
     disabled && "pointer-events-none",
     className,
   ]);
-  let resolvedHref = $derived(
-    href ? (isExternalHref(href) ? href : resolvePath(href)) : undefined,
-  );
-
-  function handleClick(event: MouseEvent) {
-    if (analyticsEvent) {
-      void trackAnalyticsEvent(analyticsEvent, analyticsProperties);
+  let resolvedHref = $derived.by(() => {
+    if (!href) {
+      return undefined;
     }
 
+    const normalizedHref = isExternalHref(href) ? href : resolvePath(href);
+    const ctaLocation =
+      typeof analyticsProperties?.location === "string"
+        ? analyticsProperties.location
+        : undefined;
+    const ctaKind =
+      typeof analyticsProperties?.kind === "string"
+        ? analyticsProperties.kind
+        : undefined;
+
+    return buildMarketingAppHandoffHref({
+      href: normalizedHref,
+      currentPath: page.url.pathname,
+      currentSearch: page.url.search,
+      ctaLocation,
+      ctaKind,
+    });
+  });
+  let resolvedAnalyticsProperties = $derived.by(() => {
+    if (!analyticsProperties || !resolvedHref) {
+      return analyticsProperties;
+    }
+
+    if (typeof analyticsProperties.destination !== "string") {
+      return analyticsProperties;
+    }
+
+    return {
+      ...analyticsProperties,
+      destination: resolvedHref,
+    };
+  });
+
+  function shouldDelayTrackedNavigation(event: MouseEvent): boolean {
+    const currentTarget = event.currentTarget;
+
+    if (!(currentTarget instanceof HTMLAnchorElement) || !resolvedHref || !href) {
+      return false;
+    }
+
+    return (
+      event.button === 0 &&
+      !event.metaKey &&
+      !event.ctrlKey &&
+      !event.shiftKey &&
+      !event.altKey &&
+      !currentTarget.target
+    );
+  }
+
+  async function handleClick(event: MouseEvent) {
     onclick?.(event);
+
+    if (event.defaultPrevented || disabled || !analyticsEvent) {
+      return;
+    }
+
+    if (shouldDelayTrackedNavigation(event)) {
+      const destinationHref = resolvedHref;
+
+      if (!destinationHref) {
+        return;
+      }
+
+      event.preventDefault();
+      await trackAnalyticsEvent(analyticsEvent, resolvedAnalyticsProperties);
+
+      if (isExternalHref(destinationHref)) {
+        window.location.assign(destinationHref);
+      } else {
+        // eslint-disable-next-line svelte/no-navigation-without-resolve
+        await goto(resolvePath(destinationHref));
+      }
+
+      return;
+    }
+
+    void trackAnalyticsEvent(analyticsEvent, resolvedAnalyticsProperties);
   }
 </script>
 

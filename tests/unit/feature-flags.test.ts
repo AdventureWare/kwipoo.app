@@ -1,5 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+const DEFAULT_PUBLIC_ENV = {
+  PUBLIC_FEATURE_DOCS: undefined,
+  PUBLIC_FEATURE_PRICING: undefined,
+  PUBLIC_FEATURE_RELEASE_HISTORY: undefined,
+  PUBLIC_FEATURE_RESOURCES: undefined,
+};
+
 async function loadFeatureFlags({
   docsOverride,
   pricingOverride,
@@ -8,22 +15,18 @@ async function loadFeatureFlags({
   pricingOverride?: string;
 }) {
   vi.resetModules();
-  vi.unstubAllEnvs();
-
-  if (docsOverride !== undefined) {
-    vi.stubEnv("PUBLIC_FEATURE_DOCS", docsOverride);
-  }
-
-  if (pricingOverride !== undefined) {
-    vi.stubEnv("PUBLIC_FEATURE_PRICING", pricingOverride);
-  }
+  vi.doMock("$env/static/public", () => ({
+    ...DEFAULT_PUBLIC_ENV,
+    PUBLIC_FEATURE_DOCS: docsOverride,
+    PUBLIC_FEATURE_PRICING: pricingOverride,
+  }));
 
   return import("../../src/lib/config/feature-flags");
 }
 
 afterEach(() => {
   vi.resetModules();
-  vi.unstubAllEnvs();
+  vi.doUnmock("$env/static/public");
 });
 
 describe("feature flags", () => {
