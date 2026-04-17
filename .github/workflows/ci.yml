@@ -75,8 +75,8 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      - name: Build
-        run: npm run build
+      - name: Build e2e preview
+        run: npm run build:e2e
 
       - name: Run desktop smoke suite on pull requests
         if: github.event_name == 'pull_request'

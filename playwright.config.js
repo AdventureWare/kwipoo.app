@@ -2,6 +2,9 @@ import { defineConfig, devices } from "@playwright/test";
 
 const manageWebServerInternally =
   process.env.KWIPOO_MANAGE_PLAYWRIGHT_PREVIEW !== "1";
+const previewHost = "127.0.0.1";
+const previewPort = process.env.KWIPOO_PLAYWRIGHT_PREVIEW_PORT ?? "4173";
+const previewUrl = `http://${previewHost}:${previewPort}`;
 
 const config = defineConfig({
   forbidOnly: !!process.env.CI,
@@ -9,9 +12,8 @@ const config = defineConfig({
   retries: process.env.CI ? 1 : 0,
   webServer: manageWebServerInternally
     ? {
-        command:
-          "npm run build:e2e && npm run preview -- --host 127.0.0.1 --port 4173",
-        url: "http://127.0.0.1:4173",
+        command: `npm run build:e2e && npm run preview -- --host ${previewHost} --port ${previewPort}`,
+        url: previewUrl,
         timeout: 120_000,
         reuseExistingServer: !process.env.CI,
       }
@@ -19,7 +21,7 @@ const config = defineConfig({
   testDir: "tests/e2e",
   testMatch: /(.+\.)?(test|spec)\.[jt]s/,
   use: {
-    baseURL: "http://127.0.0.1:4173",
+    baseURL: previewUrl,
     screenshot: "only-on-failure",
     trace: "on-first-retry",
   },
@@ -28,7 +30,7 @@ const config = defineConfig({
       name: "preview-desktop",
       use: {
         ...devices["Desktop Chrome"],
-        baseURL: "http://127.0.0.1:4173",
+        baseURL: previewUrl,
         viewport: { width: 1440, height: 960 },
       },
     },
@@ -36,14 +38,14 @@ const config = defineConfig({
       name: "preview-mobile",
       use: {
         ...devices["iPhone 13"],
-        baseURL: "http://127.0.0.1:4173",
+        baseURL: previewUrl,
       },
     },
     {
       name: "preview-narrow-mobile",
       use: {
         ...devices["iPhone SE"],
-        baseURL: "http://127.0.0.1:4173",
+        baseURL: previewUrl,
       },
     },
   ],
