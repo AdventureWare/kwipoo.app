@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "npm run content:sync:if-available && vite dev",
     "build": "npm run content:sync:if-available && vite build",
+    "build:e2e": "npm run content:sync:if-available && vite build --mode e2e",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo '' && husky",
     "commitlint": "commitlint --from=HEAD~1 --to=HEAD --verbose",
@@ -33,13 +34,13 @@
     "test:unit:watch": "vitest",
     "test:e2e": "npm run test:e2e:full",
     "test:e2e:ci": "npm run test:e2e:full:ci",
-    "test:e2e:smoke": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-desktop",
+    "test:e2e:smoke": "node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-desktop",
     "test:e2e:smoke:ci": "playwright test --grep @smoke --project=preview-desktop",
-    "test:e2e:full": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke",
+    "test:e2e:full": "node scripts/run-playwright-preview.mjs --grep @smoke",
     "test:e2e:full:ci": "playwright test --grep @smoke",
-    "test:e2e:desktop": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-desktop",
-    "test:e2e:mobile": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-mobile",
-    "test:e2e:narrow": "npm run build && node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-narrow-mobile"
+    "test:e2e:desktop": "node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-desktop",
+    "test:e2e:mobile": "node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-mobile",
+    "test:e2e:narrow": "node scripts/run-playwright-preview.mjs --grep @smoke --project=preview-narrow-mobile"
   },
   "devDependencies": {
     "@changesets/cli": "^2.30.0",

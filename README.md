@@ -59,6 +59,8 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - `PUBLIC_POSTHOG_HOST` overrides the PostHog API host and defaults to `https://us.i.posthog.com`.
 - `PUBLIC_ANALYTICS_SCRIPT_URL` can load the provider script if it is not already present on `window`.
 - The shared client layer tracks pageviews centrally from `src/routes/+layout.svelte` and supports CTA event hooks through the shared button component.
+- Marketing-site handoff links into the app now preserve a lean acquisition payload: `utm_source`, `utm_medium`, `utm_campaign`, `landing_path`, `cta_location`, and `cta_kind`.
+- Cross-repo metric definitions and validation rules live in `../coordination/contracts/analytics-operating-model.md`.
 
 ## Project Structure
 

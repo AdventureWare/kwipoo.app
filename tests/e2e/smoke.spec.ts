@@ -4,6 +4,12 @@ import {
   type APIRequestContext,
   type Page,
 } from "@playwright/test";
+import { APP_URL } from "../../src/lib/config/site";
+
+type AnalyticsCapturePayload = {
+  event: string;
+  properties?: Record<string, string | number | boolean | null>;
+};
 
 async function docsAreAvailable(request: APIRequestContext): Promise<boolean> {
   const response = await request.get("/docs");
@@ -66,6 +72,53 @@ function footerLocator(page: Page) {
   return page.locator("footer, [role='contentinfo']").first();
 }
 
+async function installAnalyticsStub(page: Page): Promise<void> {
+  await page.addInitScript(() => {
+    const trackedWindow = window as typeof window & {
+      __kwipooPosthogEvents?: AnalyticsCapturePayload[];
+      __kwipooPosthogInit?: {
+        apiKey: string;
+        options?: Record<string, unknown>;
+      } | null;
+      posthog?: {
+        __kwipooInitialized?: boolean;
+        init: (apiKey: string, options?: Record<string, unknown>) => void;
+        capture: (event: string, properties?: Record<string, unknown>) => void;
+      };
+    };
+
+    trackedWindow.__kwipooPosthogEvents = [];
+    trackedWindow.__kwipooPosthogInit = null;
+    trackedWindow.posthog = {
+      __kwipooInitialized: false,
+      init(apiKey, options) {
+        trackedWindow.__kwipooPosthogInit = { apiKey, options };
+        this.__kwipooInitialized = true;
+      },
+      capture(event, properties) {
+        trackedWindow.__kwipooPosthogEvents?.push({
+          event,
+          properties: properties as
+            | Record<string, string | number | boolean | null>
+            | undefined,
+        });
+      },
+    };
+  });
+}
+
+async function getAnalyticsEvents(
+  page: Page,
+): Promise<AnalyticsCapturePayload[]> {
+  return page.evaluate(() => {
+    const trackedWindow = window as typeof window & {
+      __kwipooPosthogEvents?: AnalyticsCapturePayload[];
+    };
+
+    return trackedWindow.__kwipooPosthogEvents ?? [];
+  });
+}
+
 test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await page.goto("/");
 
@@ -79,6 +132,80 @@ test("@smoke homepage renders primary marketing content", async ({ page }) => {
   ).toBeVisible();
   await expect(actionLocator(page, /create free account/i)).toBeVisible();
   await expectJsonLdScriptsToParse(page);
+});
+
+test("@smoke homepage emits pageview and CTA analytics with the marketing handoff payload", async ({
+  page,
+}) => {
+  await installAnalyticsStub(page);
+  await page.goto(
+    "/?utm_source=newsletter&utm_medium=email&utm_campaign=spring-launch",
+  );
+
+  await page.waitForFunction(() => {
+    const trackedWindow = window as typeof window & {
+      __kwipooPosthogEvents?: Array<{ event: string }>;
+    };
+
+    return trackedWindow.__kwipooPosthogEvents?.some(
+      (payload) => payload.event === "$pageview",
+    );
+  });
+
+  const primaryCta = actionLocator(page, /create free account/i).first();
+  await expect(primaryCta).toBeVisible();
+  const popupPromise = page
+    .waitForEvent("popup", { timeout: 5_000 })
+    .catch(() => null);
+  await primaryCta.click({ modifiers: ["Meta"] });
+  const popup = await popupPromise;
+  await popup?.close();
+
+  await page.waitForFunction(() => {
+    const trackedWindow = window as typeof window & {
+      __kwipooPosthogEvents?: Array<{ event: string }>;
+    };
+
+    return trackedWindow.__kwipooPosthogEvents?.some(
+      (payload) => payload.event === "marketing_cta_clicked",
+    );
+  });
+
+  const analyticsEvents = await getAnalyticsEvents(page);
+  const pageviewEvent = analyticsEvents.find(
+    (payload) => payload.event === "$pageview",
+  );
+  const ctaEvent = analyticsEvents.find(
+    (payload) => payload.event === "marketing_cta_clicked",
+  );
+
+  expect(pageviewEvent?.properties).toMatchObject({
+    source: "marketing_site",
+    path: "/",
+    search:
+      "?utm_source=newsletter&utm_medium=email&utm_campaign=spring-launch",
+    navigation_type: "initial_load",
+    url: "http://127.0.0.1:4173/?utm_source=newsletter&utm_medium=email&utm_campaign=spring-launch",
+  });
+  expect(ctaEvent?.properties).toMatchObject({
+    source: "marketing_site",
+    location: "hero",
+    label: "Create Free Account",
+    kind: "signup",
+  });
+
+  const ctaDestination = new URL(
+    String(ctaEvent?.properties?.destination ?? ""),
+  );
+  expect(ctaDestination.origin).toBe(APP_URL);
+  expect(ctaDestination.pathname).toBe("/login");
+  expect(ctaDestination.searchParams.get("mode")).toBe("sign_up");
+  expect(ctaDestination.searchParams.get("utm_source")).toBe("newsletter");
+  expect(ctaDestination.searchParams.get("utm_medium")).toBe("email");
+  expect(ctaDestination.searchParams.get("utm_campaign")).toBe("spring-launch");
+  expect(ctaDestination.searchParams.get("landing_path")).toBe("/");
+  expect(ctaDestination.searchParams.get("cta_location")).toBe("hero");
+  expect(ctaDestination.searchParams.get("cta_kind")).toBe("signup");
 });
 
 test("@smoke homepage keeps the primary CTA and product proof available without horizontal overflow", async ({

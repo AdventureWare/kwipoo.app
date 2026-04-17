@@ -1,5 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+const DEFAULT_PUBLIC_ENV = {
+  PUBLIC_PREMIUM_CHECKOUT_URL: undefined,
+  PUBLIC_PREMIUM_SIGNUP_URL: undefined,
+};
+
 async function loadBillingConfig({
   checkoutUrl,
   signupUrl,
@@ -8,22 +13,18 @@ async function loadBillingConfig({
   signupUrl?: string;
 }) {
   vi.resetModules();
-  vi.unstubAllEnvs();
-
-  if (checkoutUrl !== undefined) {
-    vi.stubEnv("PUBLIC_PREMIUM_CHECKOUT_URL", checkoutUrl);
-  }
-
-  if (signupUrl !== undefined) {
-    vi.stubEnv("PUBLIC_PREMIUM_SIGNUP_URL", signupUrl);
-  }
+  vi.doMock("$env/static/public", () => ({
+    ...DEFAULT_PUBLIC_ENV,
+    PUBLIC_PREMIUM_CHECKOUT_URL: checkoutUrl,
+    PUBLIC_PREMIUM_SIGNUP_URL: signupUrl,
+  }));
 
   return import("../../src/lib/config/billing");
 }
 
 afterEach(() => {
   vi.resetModules();
-  vi.unstubAllEnvs();
+  vi.doUnmock("$env/static/public");
 });
 
 describe("billing config", () => {
