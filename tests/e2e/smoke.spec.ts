@@ -156,10 +156,15 @@ test("@smoke homepage emits pageview and CTA analytics with the marketing handof
 
   const primaryCta = actionLocator(page, /create free account/i).first();
   await expect(primaryCta).toBeVisible();
+  await primaryCta.evaluate((element) => {
+    if (element instanceof HTMLAnchorElement) {
+      element.target = "_blank";
+    }
+  });
   const popupPromise = page
     .waitForEvent("popup", { timeout: 5_000 })
     .catch(() => null);
-  await primaryCta.click({ modifiers: ["Meta"] });
+  await primaryCta.click();
   const popup = await popupPromise;
   await popup?.close();
 
