@@ -4,6 +4,62 @@ import type { WebsiteReleaseNote } from "./releases";
 
 export const generatedReleaseNotes: WebsiteReleaseNote[] = [
   {
+    version: "1.8.0",
+    slug: "release-1-8-0",
+    publishedAt: "2026-04-16",
+    title:
+      "Guide every new signup into the welcome flow more consistently, make post-signup on…",
+    summary:
+      "Guide every new signup into the welcome flow more consistently, make post-signup onboarding state more reliable, tighten the first-run steps around adding a place, a spot, and a thing with a real location, add a clearer recovery path on Places and Things when setup is still inco…",
+    highlights: [
+      "Guide every new signup into the welcome flow more consistently, make post-signup onboarding state more reliable, tighten the first-run steps around adding a place, a spot, and a thing with a real location, add a clearer recovery path on Places and Things when setup is still incomplete, and suggest the next useful action after first value is reached.",
+      "Add a first owner-only thing transfer flow so you can hand a thing to another Kwipoo user without deleting and recreating it.",
+      "Fix toast notifications so their title and message render correctly, and move mobile toast placement away from the bottom navigation to keep core actions visible.",
+    ],
+    details: [
+      "Guide every new signup into the welcome flow more consistently, make post-signup onboarding state more reliable, tighten the first-run steps around adding a place, a spot, and a thing with a real location, add a clearer recovery path on Places and Things when setup is still incomplete, and suggest the next useful action after first value is reached.",
+      "Add a first owner-only thing transfer flow so you can hand a thing to another Kwipoo user without deleting and recreating it.",
+      "Fix toast notifications so their title and message render correctly, and move mobile toast placement away from the bottom navigation to keep core actions visible.",
+      "Allow spots to nest inside other spots, carry that hierarchy through thing and place spot flows, and show clearer nested paths when browsing or choosing a spot.",
+      "Add a clear failed sync action on Places for stuck local place or nested-spot drafts, harden nested-spot cycle validation, and clarify that nested spots must be cleared before deleting a parent spot.",
+      "Improve the thing transfer flow so the detail drawer closes cleanly after a transfer instead of showing an error screen.",
+      "Improve sharing and permissions screens so default access, person-by-person grants, and current editors/viewers are easier to scan and manage.",
+    ],
+    importance: "notable",
+    platformTargets: ["web", "ios_wrapper", "android_wrapper"],
+    ctaLabel: "Open What's New",
+    ctaHref: "/updates",
+  },
+  {
+    version: "1.7.2",
+    slug: "release-1-7-2",
+    publishedAt: "2026-04-09",
+    title: "Avatar sizing and returning /things refreshes cheaper",
+    summary:
+      "Fix avatar sizing so profile pages use a clear hero image and list, card, and notification avatars stay consistently readable. Make returning /things refreshes cheaper by switching delta sync away from broad live-ID scans and full local snapshot rebuilds. Improved performance on…",
+    highlights: [
+      "Fix avatar sizing so profile pages use a clear hero image and list, card, and notification avatars stay consistently readable.",
+      "Make returning `/things` refreshes cheaper by switching delta sync away from broad live-ID scans and full local snapshot rebuilds.",
+      "Improved performance on large Things, Sets, Places, and Notifications screens by reducing repeated list recompute during browsing, filtering, and detail interactions.",
+    ],
+    details: [
+      "Fix avatar sizing so profile pages use a clear hero image and list, card, and notification avatars stay consistently readable.",
+      "Make returning `/things` refreshes cheaper by switching delta sync away from broad live-ID scans and full local snapshot rebuilds.",
+      "Improved performance on large Things, Sets, Places, and Notifications screens by reducing repeated list recompute during browsing, filtering, and detail interactions.",
+      "Fix the Settings drawer so opening What's New closes the drawer before showing the updates page.",
+      "Stop Places from loading the full things collections payload on startup, and only load the smaller thing-and-spot visibility data when place details need it.",
+      "Improve toggle visibility so off and on states are easier to distinguish across forms and menus.",
+      "Reduce authenticated startup payload by lazy-loading shell drawers and modals and deferring analytics and Firebase messaging setup until after the first route paint.",
+      "Improve account creation reliability by keeping sign-up form failures on the correct form state, preserving profile details when first-run auth profile fallback is needed, and adding a dedicated auth regression test command.",
+      "Improve Thing card readability by softening the image title bar and showing clearer name and description placeholders when a thing does not have its own image.",
+      "Fix form modals so they use the available screen width on mobile while keeping their existing centered max-width layout on larger screens.",
+      "Reduce authenticated idle shell work by removing the 1-second connectivity poll and cleaning up push listeners so browser and wrapper sessions stay quieter in the background.",
+      "Reduced the profile page's first-load payload so profile summary data can render without shipping full collections in the SSR document, and limited profile tabs to hydrate only the active collection pane first.",
+    ],
+    importance: "quiet",
+    platformTargets: ["web", "ios_wrapper", "android_wrapper"],
+  },
+  {
     version: "1.7.1",
     slug: "cleaner-cost-entry-and-more-reliable-image-uploads",
     publishedAt: "2026-04-01",
