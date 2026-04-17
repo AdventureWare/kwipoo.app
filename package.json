@@ -76,6 +76,7 @@
     "{src,tests}/**/*.{js,ts,svelte}": "eslint"
   },
   "dependencies": {
-    "phosphor-svelte": "^3.0.1"
+    "phosphor-svelte": "^3.0.1",
+    "posthog-js": "^1.369.2"
   }
 }

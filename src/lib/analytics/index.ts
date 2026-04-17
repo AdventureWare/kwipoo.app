@@ -31,9 +31,33 @@ type PostHogLike = {
 };
 
 let initializationPromise: Promise<boolean> | undefined;
+let importedPostHog: PostHogLike | undefined;
+let importPostHogPromise: Promise<PostHogLike | undefined> | undefined;
 
 function getPostHog(): PostHogLike | undefined {
-  return window.posthog;
+  return window.posthog ?? importedPostHog;
+}
+
+async function loadPostHogClient(): Promise<PostHogLike | undefined> {
+  if (window.posthog) {
+    return window.posthog;
+  }
+
+  if (importedPostHog) {
+    return importedPostHog;
+  }
+
+  importPostHogPromise ??= import("posthog-js")
+    .then((module) => {
+      importedPostHog = module.default as PostHogLike;
+      return importedPostHog;
+    })
+    .catch((error) => {
+      console.warn("Failed to load posthog-js.", error);
+      return undefined;
+    });
+
+  return importPostHogPromise;
 }
 
 function getNormalizedProperties(
@@ -73,8 +97,12 @@ const postHogAdapter: AnalyticsAdapter = {
       return false;
     }
 
-    if (!getPostHog() && ANALYTICS_SCRIPT_URL) {
-      await loadAnalyticsScript(ANALYTICS_SCRIPT_URL);
+    if (!getPostHog()) {
+      if (ANALYTICS_SCRIPT_URL) {
+        await loadAnalyticsScript(ANALYTICS_SCRIPT_URL);
+      } else {
+        await loadPostHogClient();
+      }
     }
 
     const posthog = getPostHog();
