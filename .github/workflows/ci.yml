@@ -58,6 +58,12 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      PUBLIC_ANALYTICS_PROVIDER: posthog
+      PUBLIC_POSTHOG_KEY: phc_e2e_test_key
+      PUBLIC_POSTHOG_HOST: ""
+      PUBLIC_ANALYTICS_SCRIPT_URL: /analytics-test-stub.js
+      PUBLIC_PREMIUM_SIGNUP_URL: ""
 
     steps:
       - name: Check out repository
