@@ -56,6 +56,8 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - Marketing analytics are optional and configured through public env vars.
 - `PUBLIC_ANALYTICS_PROVIDER=posthog` enables the shared analytics layer.
 - `PUBLIC_POSTHOG_KEY` is the PostHog project key used by the adapter.
+- In production, this key should point at the shared `Kwipoo` app PostHog project so website acquisition and app activation live in one project.
+- In preview and development environments, this key should point at `Kwipoo Staging`, not the production project.
 - `PUBLIC_POSTHOG_HOST` overrides the PostHog API host and defaults to `https://us.i.posthog.com`.
 - `PUBLIC_ANALYTICS_SCRIPT_URL` can load the provider script if it is not already present on `window`.
 - The shared client layer tracks pageviews centrally from `src/routes/+layout.svelte` and supports CTA event hooks through the shared button component.
