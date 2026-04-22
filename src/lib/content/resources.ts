@@ -16,6 +16,9 @@ export interface ResourceGuide {
     src: string;
     alt: string;
   };
+  proofTitle?: string;
+  proofIntro?: string;
+  proofPoints?: string[];
   sections: DocsSection[];
   faqItems?: Array<{
     question: string;
@@ -523,6 +526,14 @@ export const resourceGuides = [
       src: "/assets/placesFeatureAsset@2x.png",
       alt: "Kwipoo storage location tracking for a storage unit inventory",
     },
+    proofTitle: "Why Kwipoo works for storage-unit inventory",
+    proofIntro:
+      "A storage unit becomes expensive guesswork when the map only lives in memory. Kwipoo helps because it keeps the layout, box labels, and the most useful contents visible before you make another trip.",
+    proofPoints: [
+      "You can map the unit as a real Place and break it into practical Spots so the inventory reflects how you actually search the space.",
+      "Boxes can stay broad where that is enough, while higher-friction contents get more detail only where it saves future visits or duplicate purchases.",
+      "The same record helps before visiting, before rebuying, and during moves or cleanouts, so the unit stops resetting to memory every time.",
+    ],
     sections: [
       {
         heading: "Start with the layout before the contents",
@@ -742,6 +753,14 @@ export const resourceGuides = [
       src: "/assets/placesFeatureAsset@2x.png",
       alt: "Kwipoo location views supporting a moving inventory checklist",
     },
+    proofTitle: "Why Kwipoo works during a move",
+    proofIntro:
+      "Moves are hard because boxes, essentials, transit storage, and new-home setup all overlap at once. Kwipoo helps by keeping those stages visible in one system instead of scattering them across labels, notes, and memory.",
+    proofPoints: [
+      "You can separate first-week essentials from sealed storage, so the move stays workable before full unpacking starts.",
+      "Places and Spots let boxes move from old home to transit to storage to the new house without losing the retrieval trail.",
+      "The inventory also helps with downsizing and box decisions, not just packing, because you can see what is duplicated, underused, or expensive to move.",
+    ],
     sections: [
       {
         heading: "Start with the items that matter in the first week",
@@ -968,6 +987,14 @@ export const resourceGuides = [
       src: "/assets/thingsFeatureAsset@2x.png",
       alt: "Kwipoo Things view showing household items tracked to avoid duplicate purchases",
     },
+    proofTitle: "Why Kwipoo works for duplicate prevention",
+    proofIntro:
+      "The system helps most when duplicate buying is caused by uncertainty, not by a lack of effort. Kwipoo makes the answer easier to trust before you buy again.",
+    proofPoints: [
+      "You can check the item, its real storage location, and any useful notes in one place instead of relying on memory.",
+      "Repeat-buy categories like chargers, batteries, cleaning supplies, toiletries, and pantry items stay visible when the buying decision happens.",
+      "Shared household context is easier to trust because the same names and storage logic work across the people using it.",
+    ],
     sections: [
       {
         heading: "Start with the categories that get bought twice",
@@ -1178,6 +1205,14 @@ export const resourceGuides = [
       src: "/assets/eventsFeatureAsset@2x.png",
       alt: "Kwipoo Events view showing a reusable packing workflow in progress",
     },
+    proofTitle: "Why Kwipoo works for repeatable packing",
+    proofIntro:
+      "Packing gets easier when the reusable setup is tied to real inventory instead of a checklist you have to reconstruct from memory every time.",
+    proofPoints: [
+      "Sets let you keep the repeatable core of a trip, event, or camping setup together instead of rebuilding the same baseline over and over.",
+      "The workflow starts from items you already own and where they actually live, so retrieval is part of packing instead of a separate guessing step.",
+      "Events give you a live adjustment layer for this specific trip, weather change, missing item, or group plan without rewriting the whole system.",
+    ],
     sections: [
       {
         heading: "Start with the trips and events you repeat most often",
@@ -1292,6 +1327,14 @@ export const resourceGuides = [
       src: "/assets/placesFeatureAsset@2x.png",
       alt: "Kwipoo Places view showing organized storage locations and bins",
     },
+    proofTitle: "Why Kwipoo works for storage bins",
+    proofIntro:
+      "Bin systems fall apart when the label is vague, the location is fuzzy, or the packed-away contents disappear from memory. Kwipoo fixes that by keeping the storage map searchable.",
+    proofPoints: [
+      "You can track both the larger storage area and the exact retrieval spot, so the system answers what the bin is and where it actually lives.",
+      "Grouped bins can stay broad while higher-friction contents get more detail only where that extra precision is worth it.",
+      "Seasonal and long-term storage stay visible enough to check before you rebuy, repack, or tear through every tote looking for one thing.",
+    ],
     sections: [
       {
         heading: "Name bins for retrieval, not just for packing speed",
@@ -1409,6 +1452,14 @@ export const resourceGuides = [
       src: "/assets/thingsFeatureAsset@2x.png",
       alt: "Kwipoo Things view showing a practical home inventory in progress",
     },
+    proofTitle: "Why Kwipoo holds up as a home inventory",
+    proofIntro:
+      "A home inventory stays useful when it matches how your house actually works and when it is light enough to keep current. That is the problem Kwipoo is built around.",
+    proofPoints: [
+      "Places and Spots let the inventory mirror real rooms, shelves, bins, and drawers instead of an abstract category tree.",
+      "You can start with high-friction categories first, then expand only after the system saves time or prevents duplicate buying.",
+      "Sets and Events give the inventory a second life in packing, projects, moves, and seasonal resets instead of leaving it as a static list.",
+    ],
     sections: [
       {
         heading: "Start with the items that cause the most friction",
@@ -1607,6 +1658,14 @@ export const resourceGuides = [
       src: "/assets/placesFeatureAsset@2x.png",
       alt: "Kwipoo Places view showing organized home storage locations",
     },
+    proofTitle: "Why Kwipoo works for shared households",
+    proofIntro:
+      "A household system only works if more than one person can trust it. Kwipoo helps by making shared items, practical storage locations, and repeated household questions easier to answer without one person carrying the whole system in their head.",
+    proofPoints: [
+      "Shared-use items can stay visible in a common household source of truth instead of disappearing into whoever last handled them.",
+      "Places and Spots mirror how the home is actually organized, so everyone can search with the same language for bins, shelves, closets, and drawers.",
+      "The system helps reduce duplicate buying, borrowing confusion, and clutter decisions because item visibility survives beyond one person’s memory.",
+    ],
     sections: [
       {
         heading: "Start with the shared items people ask about most",

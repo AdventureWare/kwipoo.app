@@ -1,7 +1,10 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { Button } from "$lib/components";
-  import { PREMIUM_SIGNUP_PATH } from "$lib/config/billing";
+  import {
+    PREMIUM_MANAGE_URL,
+    PREMIUM_SIGNUP_PATH,
+  } from "$lib/config/billing";
   import {
     APP_SIGNUP_URL,
     SUPPORT_EMAIL,
@@ -38,7 +41,7 @@
 
   const pricingTitle = "Kwipoo Pricing | Free, Premium, and Custom Plans";
   const pricingDescription =
-    "Explore the draft Kwipoo pricing page scaffold with placeholder Free, Premium, and Custom plan positioning.";
+    "Choose Kwipoo Free for up to 100 Things or upgrade to Premium for $4.99 per month and higher inventory and storage limits.";
   const customPricingHref = `${SUPPORT_EMAIL_MAILTO}?subject=${encodeURIComponent(
     "Kwipoo custom pricing inquiry",
   )}`;
@@ -48,40 +51,40 @@
       name: "Free",
       eyebrow: "For getting started",
       priceLabel: "$0",
-      cadence: "to start",
+      cadence: "forever",
       description:
-        "A draft entry point for trying Kwipoo without committing to a paid plan.",
+        "A strong starting point for organizing what you own before you need larger storage or inventory limits.",
       features: [
-        "Up to 100 cloud-stored Places and Things",
-        "Core inventory structure for organizing what you own and where it lives",
-        "Basic planning workflows for early Sets, storage cleanup, and trip prep",
-        "Self-serve setup for individuals or households testing the product",
+        "Up to 100 Things with the full core inventory structure",
+        "250 MB of storage for starter photos and attachments",
+        "Places, Sets, Events, and everyday planning workflows included",
+        "Self-serve setup for a person or household getting organized",
       ],
       ctaLabel: "Start Free",
       ctaHref: APP_SIGNUP_URL,
       ctaVariant: "secondary",
       footnote:
-        "Placeholder draft. Free-plan limits and included features are not final.",
+        "Free stays useful on its own, and you can upgrade later when you need more room.",
     },
     {
       name: "Premium",
       eyebrow: "For heavier personal use",
       highlight: "Suggested flagship plan",
-      priceLabel: "Premium pricing TBD",
-      cadence: "monthly or annual",
+      priceLabel: "$4.99",
+      cadence: "per month",
       description:
-        "A draft paid tier for people who want more room, more flexibility, and a clearer everyday workflow.",
+        "More room for active households, hobby gear, storage projects, and repeat trip planning without running into the free cap.",
       features: [
-        "Higher limits than Free for stored inventory and planning data",
-        "Placeholder room for richer organization, planning, or collaboration tools",
-        "Placeholder room for upgraded support, onboarding, or priority help",
-        "Shaped for active households, hobby gear, storage management, and repeat trip planning",
+        "Up to 5,000 Things before you hit the inventory limit",
+        "10 GB of storage for richer photos and attachments",
+        "Hosted checkout and customer portal for self-serve billing",
+        "Built for ongoing personal and household inventory use",
       ],
-      ctaLabel: "Start Premium",
+      ctaLabel: "Buy Premium",
       ctaHref: PREMIUM_SIGNUP_PATH,
       ctaVariant: "primary",
       footnote:
-        "Starts the Premium signup handoff flow. The final billing destination is environment-configurable.",
+        "Existing accounts keep their grandfathered access at no cost; new upgrades use the app-owned billing flow.",
       featured: true,
     },
     {
@@ -90,45 +93,45 @@
       priceLabel: "Contact for pricing",
       cadence: "tailored to scope",
       description:
-        "A draft lane for bigger households, clubs, teams, programs, or organizations that need a more specific arrangement.",
+        "For clubs, programs, larger groups, or specialized setups that need something beyond the self-serve plans.",
       features: [
-        "Custom volume, account shape, or rollout conversations",
-        "Placeholder room for onboarding, migration, or hands-on setup support",
-        "Placeholder room for specialized collaboration, permissions, or workflow needs",
-        "A direct discussion before packaging and commercial terms are finalized",
+        "Custom volume, rollout, or migration conversations",
+        "Direct coordination for unusual data or workflow needs",
+        "A human path for organization-wide or operational use cases",
+        "Commercial terms shaped to fit the scope instead of forcing the standard plan",
       ],
       ctaLabel: "Speak to Sales",
       ctaHref: customPricingHref,
       ctaVariant: "outline",
       footnote:
-        "Use this as the placeholder path for custom packaging until the real offer is defined.",
+        "Start here when Free or Premium is not the right fit.",
     },
   ] satisfies PricingTier[];
 
   const comparisonRows = [
     {
-      label: "Cloud-stored Places and Things",
+      label: "Things",
       free: "Up to 100",
-      premium: "Higher draft limit",
+      premium: "Up to 5,000",
       custom: "Tailored to fit scope",
     },
     {
+      label: "Storage",
+      free: "250 MB",
+      premium: "10 GB",
+      custom: "Shaped to fit the plan",
+    },
+    {
       label: "Best fit",
-      free: "Trying Kwipoo",
+      free: "Trying Kwipoo or staying light",
       premium: "Daily personal or household use",
       custom: "Teams, groups, or complex rollouts",
     },
     {
-      label: "Support model",
-      free: "Self-serve",
-      premium: "Draft upgraded support",
-      custom: "Direct conversation",
-    },
-    {
-      label: "Commercial model",
-      free: "No-cost entry point",
-      premium: "Paid subscription draft",
-      custom: "Quoted engagement",
+      label: "Billing",
+      free: "No payment required",
+      premium: "Managed in the app with checkout and portal access",
+      custom: "Quoted conversation",
     },
   ] satisfies ComparisonRow[];
 
@@ -157,7 +160,6 @@
 <svelte:head>
   <title>{pricingTitle}</title>
   <meta name="description" content={pricingDescription} />
-  <meta name="robots" content="noindex,nofollow" />
   <meta property="og:title" content={pricingTitle} />
   <meta property="og:description" content={pricingDescription} />
   <meta property="og:type" content="website" />
@@ -187,17 +189,18 @@
         <p
           class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
         >
-          Draft Pricing
+          Pricing
         </p>
         <h1
           class="max-w-4xl text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.15rem]"
         >
-          Placeholder pricing scaffolding for Free, Premium, and Custom plans.
+          Free for up to 100 Things. Premium when you need real room to grow.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
-          This page is intentionally shaped as a draft. The goal right now is to
-          establish the structure, tone, and plan comparison flow before final
-          pricing, packaging, and feature limits are locked.
+          Start with Kwipoo Free at no cost, then move to Premium for $4.99 per
+          month when you need higher Thing limits, more storage, and a managed
+          subscription path. If your setup is bigger than that, talk to us about
+          a custom arrangement.
         </p>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -210,9 +213,18 @@
             Start Free
           </Button>
           <Button href={PREMIUM_SIGNUP_PATH} variant="outline" size="lg" class="sm:w-auto">
-            Start Premium
+            Buy Premium
           </Button>
         </div>
+        <p class="text-sm leading-6 text-brand-muted">
+          Already paying?
+          <!-- eslint-disable svelte/no-navigation-without-resolve -->
+          <a class="font-semibold text-primary-700 transition-colors hover:text-primary-800" href={PREMIUM_MANAGE_URL}>
+            Manage your subscription
+          </a>
+          <!-- eslint-enable svelte/no-navigation-without-resolve -->
+          in the app-owned billing flow.
+        </p>
       </div>
 
       <aside
@@ -227,12 +239,12 @@
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            This is a reviewable shell, not a final price sheet.
+            Premium is live without forcing long-time users into a paid plan.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            Copy, limits, and packaging are placeholders. The layout is ready to
-            review now, and the offer details can be refined later without
-            changing the page structure.
+            Existing accounts created before the freemium rollout keep their
+            grandfathered higher limits at no cost. New paid upgrades go through
+            the app-owned checkout and billing portal.
           </p>
         </div>
 
@@ -242,10 +254,10 @@
           <p
             class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-700"
           >
-            Flag
+            Premium
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            PUBLIC_FEATURE_PRICING
+            $4.99 per month, self-serve
           </p>
         </div>
       </aside>
@@ -262,12 +274,12 @@
       <h2
         class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
-        Three pricing lanes with room to sharpen the details later.
+        Pick the lane that matches how much inventory and storage you actually need.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        The scaffolding below is built to hold draft copy now and real plan
-        details later. Each card has a clear audience, value framing, and next
-        action.
+        Free stays simple. Premium gives active users more room without asking
+        them to change how they organize. Custom is there when the self-serve
+        plans stop fitting.
       </p>
     </div>
 
@@ -364,11 +376,20 @@
       <h2
         class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
-        Quick comparison rows for the first review pass.
+        The most important limit and billing differences in one scan.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        This is the lightweight comparison area. It gives the page a pricing
-        page rhythm now without forcing final commitments too early.
+        You should be able to tell in a few seconds whether Free is enough or
+        whether Premium is the better fit.
+      </p>
+      <p class="text-sm leading-6 text-brand-muted">
+        Existing customers do not need to rebuy here.
+        <!-- eslint-disable svelte/no-navigation-without-resolve -->
+        <a class="font-semibold text-primary-700 transition-colors hover:text-primary-800" href={PREMIUM_MANAGE_URL}>
+          Open subscription management
+        </a>
+        <!-- eslint-enable svelte/no-navigation-without-resolve -->
+        if you are already on Premium.
       </p>
     </div>
 
@@ -426,34 +447,34 @@
       <p
         class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
-        What To Finalize Later
+        Why Premium exists
       </p>
       <div class="mt-4 grid gap-4">
         <div class="rounded-[1.1rem] border border-surface-200 bg-white p-4">
           <h3 class="text-[1.08rem] font-semibold text-surface-950">
-            Exact plan limits
+            Free should stay genuinely usable
           </h3>
           <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
-            Replace draft quantity language with the real thresholds once
-            pricing and storage policy are settled.
+            You can organize real inventory on the free plan before deciding
+            whether you need more capacity.
           </p>
         </div>
         <div class="rounded-[1.1rem] border border-surface-200 bg-white p-4">
           <h3 class="text-[1.08rem] font-semibold text-surface-950">
-            Premium differentiators
+            Premium buys room, not complexity
           </h3>
           <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
-            Decide which benefits actually belong in Premium so the plan feels
-            concrete rather than aspirational.
+            The upgrade is straightforward: more Things, more storage, and an
+            account-managed billing path.
           </p>
         </div>
         <div class="rounded-[1.1rem] border border-surface-200 bg-white p-4">
           <h3 class="text-[1.08rem] font-semibold text-surface-950">
-            Custom qualification
+            Existing users keep their footing
           </h3>
           <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
-            Clarify who should contact sales and what kinds of usage patterns
-            justify a custom conversation.
+            Grandfathered accounts are not forced into paid conversion just
+            because Premium now exists.
           </p>
         </div>
       </div>
@@ -466,14 +487,15 @@
         <p
           class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-secondary-800"
         >
-          Contact Placeholder
+          Need something outside the standard plans?
         </p>
         <h2 class="text-[1.55rem] font-semibold leading-tight text-surface-950">
-          Use the Custom lane when a standard plan probably will not fit.
+          Start a custom-plan conversation when Free or Premium is not enough.
         </h2>
         <p class="text-[0.98rem] leading-7 text-brand-body">
-          For now, the draft sales path can simply route to email while the
-          actual qualification flow is being figured out.
+          If you are planning for a club, program, or other larger rollout, we
+          can talk through fit before you try to force it through the self-serve
+          path.
         </p>
       </div>
 

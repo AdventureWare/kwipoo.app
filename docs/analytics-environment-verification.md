@@ -45,6 +45,8 @@ Expected split:
 4. In the production `Kwipoo` PostHog project, confirm the tagged flow appears:
    - `$pageview`
    - `marketing_cta_clicked`
+   - `resource_guide_selected` when you enter through the resources hub
+   - `resource_guide_selected` when you click a related guide inside a guide
 5. Refresh `Acquisition to Activation Overview` and confirm the website tiles reflect the tagged flow.
 
 ## Verify Non-Production Analytics
@@ -72,6 +74,8 @@ Then:
 4. In the `Kwipoo Staging` project, confirm the tagged flow appears:
    - `$pageview`
    - `marketing_cta_clicked`
+   - `resource_guide_selected` when you enter through the resources hub
+   - `resource_guide_selected` when you click a related guide inside a guide
 
 ## Expected Outcomes
 
@@ -84,6 +88,29 @@ Then:
   - `landing_path`
   - `cta_location`
   - `cta_kind`
+- Resource guide CTA clicks also preserve:
+  - `content_slug`
+  - `content_title`
+  - `content_audience`
+- Resource hub guide clicks preserve:
+  - `location`
+  - `content_slug`
+  - `content_title`
+  - `content_audience`
+  - `content_format`
+  - `content_read_time`
+  - `destination`
+- In-guide related-guide clicks also preserve:
+  - `location`
+  - `content_slug`
+  - `content_title`
+  - `content_audience`
+  - `content_format`
+  - `content_read_time`
+  - `destination`
+  - `parent_content_slug`
+  - `parent_content_title`
+  - `parent_content_audience`
 
 ## Failure Signs
 

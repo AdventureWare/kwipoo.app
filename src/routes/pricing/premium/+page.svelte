@@ -4,9 +4,7 @@
   import {
     PREMIUM_CHECKOUT_URL,
     PREMIUM_CONTACT_HREF,
-    PREMIUM_PRIMARY_CTA,
-    PREMIUM_SIGNUP_MODE,
-    PREMIUM_SIGNUP_URL,
+    PREMIUM_MANAGE_URL,
   } from "$lib/config/billing";
   import { SUPPORT_EMAIL } from "$lib/config/site";
   import {
@@ -21,84 +19,32 @@
     description: string;
   };
 
-  type FlowState = {
-    eyebrow: string;
-    title: string;
-    description: string;
-    statusLabel: string;
-    statusValue: string;
-    checklist: string[];
-  };
-
-  const premiumSignupTitle = "Kwipoo Premium Signup | Checkout Flow Draft";
+  const premiumSignupTitle = "Kwipoo Premium | Buy or Manage Your Subscription";
   const premiumSignupDescription =
-    "Start the draft Kwipoo Premium signup flow and hand off to checkout, account creation, or direct contact depending on configuration.";
-
-  const flowStateByMode = {
-    checkout: {
-      eyebrow: "Hosted checkout configured",
-      title: "This route can hand off directly into a payment step.",
-      description:
-        "Use this when you have a hosted checkout page ready, such as a Stripe payment link, Paddle checkout, Lemon Squeezy checkout, or an app-owned billing entry page.",
-      statusLabel: "Current source",
-      statusValue: PREMIUM_CHECKOUT_URL ?? "PUBLIC_PREMIUM_CHECKOUT_URL",
-      checklist: [
-        "Keep the pricing page focused on plan messaging and route the paid action through this entry point.",
-        "Send the primary CTA into a hosted checkout or app billing flow instead of trying to process payment on the marketing site itself.",
-        "Let the destination system own subscription state, payment method collection, and post-purchase account access.",
-      ],
-    },
-    signup: {
-      eyebrow: "Signup handoff configured",
-      title: "This route can send people into account creation before upgrade.",
-      description:
-        "Use this when Premium purchase should happen after account creation inside the product application rather than on the marketing site.",
-      statusLabel: "Current source",
-      statusValue: PREMIUM_SIGNUP_URL ?? "PUBLIC_PREMIUM_SIGNUP_URL",
-      checklist: [
-        "Capture intent on the marketing site, then hand off to the app for authentication and plan selection.",
-        "Keep upgrade eligibility, billing state, and entitlement changes in the product or billing backend.",
-        "Use this pattern if Premium requires an account before the user can complete purchase.",
-      ],
-    },
-    contact: {
-      eyebrow: "Fallback contact flow",
-      title: "The marketing site is ready, but payment is not connected yet.",
-      description:
-        "Until a real checkout or in-app upgrade destination is configured, this route keeps the Premium CTA usable by falling back to direct contact.",
-      statusLabel: "Next wiring step",
-      statusValue:
-        "Set PUBLIC_PREMIUM_CHECKOUT_URL or PUBLIC_PREMIUM_SIGNUP_URL",
-      checklist: [
-        "Add a hosted checkout URL if you want the site to send users straight into payment.",
-        "Add an app signup or upgrade URL if you want purchase to happen after account creation.",
-        "Keep direct contact as the fallback path while pricing, packaging, and billing operations are still being finalized.",
-      ],
-    },
-  } satisfies Record<
-    import("$lib/config/billing").PremiumSignupMode,
-    FlowState
-  >;
+    "Buy Kwipoo Premium for $4.99 per month or manage your existing subscription through the app-owned billing flow.";
 
   const setupCards = [
     {
-      title: "Checkout destination",
+      title: "Account-aware checkout",
       description:
-        "A hosted payment link or billing screen is the cleanest handoff when you are ready to collect money.",
+        "The website sends you into the app, where sign-in, subscription state, and Stripe checkout stay tied to the right account.",
     },
     {
-      title: "Account-aware upgrade path",
+      title: "Customer portal access",
       description:
-        "If Premium should be tied to an authenticated user, point this flow to the app and let the app own upgrade state.",
+        "Existing subscribers can open the billing portal from this same handoff instead of hunting around inside the product first.",
     },
     {
-      title: "Fallback contact path",
+      title: "Grandfathering stays intact",
       description:
-        "Even before billing is live, you still need a real CTA destination so visitors are not trapped on a dead-end pricing card.",
+        "Accounts created before the freemium rollout keep their grandfathered access rather than being forced into a paid plan.",
     },
   ] satisfies SetupCard[];
-
-  const premiumFlowState = flowStateByMode[PREMIUM_SIGNUP_MODE];
+  const premiumChecklist = [
+    "If you are new, the flow sends you through account creation first and then returns you to checkout.",
+    "If you already have an account, sign in and continue directly into the hosted subscription flow.",
+    "If you are already paying, use the manage path to update payment details or cancel in the customer portal.",
+  ];
 
   const premiumSignupStructuredData = {
     "@context": "https://schema.org",
@@ -126,7 +72,6 @@
 <svelte:head>
   <title>{premiumSignupTitle}</title>
   <meta name="description" content={premiumSignupDescription} />
-  <meta name="robots" content="noindex,nofollow" />
   <meta property="og:title" content={premiumSignupTitle} />
   <meta property="og:description" content={premiumSignupDescription} />
   <meta property="og:type" content="website" />
@@ -153,7 +98,7 @@
         Pricing
       </a>
       <span aria-hidden="true">/</span>
-      <span class="text-brand-body">Premium Signup</span>
+      <span class="text-brand-body">Premium</span>
     </nav>
 
     <div
@@ -163,32 +108,41 @@
         <p
           class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
         >
-          Premium Flow
+          Premium
         </p>
         <h1
           class="max-w-4xl text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.15rem]"
         >
-          Start the Premium signup flow.
+          Buy Premium or manage the subscription you already have.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
-          This is the marketing-site handoff point for Premium. It gives the
-          pricing page a stable destination now, while the actual billing or
-          upgrade destination can be swapped in later through configuration.
+          Premium is handled inside the app so checkout, account state, and
+          billing management stay attached to the right user. Use this page to
+          start a new subscription or jump straight to the management path.
         </p>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Button
-            href={PREMIUM_PRIMARY_CTA.href}
+            href={PREMIUM_CHECKOUT_URL}
             variant="primary"
             size="lg"
             class="sm:w-auto"
           >
-            {PREMIUM_PRIMARY_CTA.label}
+            Buy Premium
           </Button>
-          <Button href="/pricing" variant="outline" size="lg" class="sm:w-auto">
+          <Button href="/pricing" variant="ghost" size="lg" class="sm:w-auto">
             Back to Pricing
           </Button>
         </div>
+        <p class="text-sm leading-6 text-brand-muted">
+          Already subscribed?
+          <!-- eslint-disable svelte/no-navigation-without-resolve -->
+          <a class="font-semibold text-primary-700 transition-colors hover:text-primary-800" href={PREMIUM_MANAGE_URL}>
+            Manage your subscription
+          </a>
+          <!-- eslint-enable svelte/no-navigation-without-resolve -->
+          in the app billing flow instead.
+        </p>
       </div>
 
       <aside
@@ -198,15 +152,17 @@
           <p
             class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
           >
-            {premiumFlowState.eyebrow}
+            Account-linked billing
           </p>
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            {premiumFlowState.title}
+            The marketing site owns the handoff. The app owns the subscription.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            {premiumFlowState.description}
+            That separation keeps billing reliable. The website can explain the
+            plan and capture intent, while the authenticated app handles
+            checkout, cancellation, and state changes without duplicate logic.
           </p>
         </div>
 
@@ -216,10 +172,10 @@
           <p
             class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-700"
           >
-            {premiumFlowState.statusLabel}
+            Premium plan
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            {premiumFlowState.statusValue}
+            $4.99 per month
           </p>
         </div>
       </aside>
@@ -234,12 +190,12 @@
         What This Route Owns
       </p>
       <h2 class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color">
-        The marketing layer should own the handoff, not the subscription ledger.
+        This page should answer two questions fast: how do I buy, and how do I manage?
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        This keeps the site honest about its role. The page explains the next
-        step, sends people to the right destination, and leaves billing truth to
-        the system that will actually create or upgrade an account.
+        The buy path sends people into the app-owned checkout flow. The manage
+        path sends paying customers into the billing portal or back to their
+        account billing screen if the subscription is handled another way.
       </p>
     </div>
 
@@ -269,7 +225,7 @@
         Next Steps
       </p>
       <ul class="mt-4 grid gap-3 text-[0.98rem] leading-7 text-brand-body">
-        {#each premiumFlowState.checklist as item (item)}
+        {#each premiumChecklist as item (item)}
           <li class="flex gap-3">
             <span
               aria-hidden="true"
@@ -291,11 +247,12 @@
       </p>
       <div class="mt-4 space-y-3">
         <h2 class="text-[1.45rem] font-semibold leading-tight text-surface-950">
-          Keep a human path available while billing is still settling.
+          Support still matters for edge cases and manually managed access.
         </h2>
         <p class="text-[0.98rem] leading-7 text-brand-body">
-          Even with a checkout route in place, a support or sales contact path is
-          still useful for edge cases, migrations, and early Premium questions.
+          Grandfathered accounts, comped access, and special cases are handled
+          directly by Kwipoo support. If a standard checkout or portal flow does
+          not fit your situation, contact us instead of trying to force it.
         </p>
       </div>
 

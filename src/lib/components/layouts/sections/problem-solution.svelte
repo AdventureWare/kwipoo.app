@@ -29,7 +29,7 @@
 
   <div class="relative mx-auto max-w-6xl">
     <MotionReveal delay={40} class="mb-8 text-left md:mb-10 md:text-center">
-      <p class="brand-section-label mb-4">Where The Friction Adds Up</p>
+      <p class="brand-section-label mb-4">Where Kwipoo Helps Most</p>
       <h2 class="mb-4 text-3xl font-bold text-primary-950 sm:text-4xl">
         {title}
       </h2>

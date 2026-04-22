@@ -2,21 +2,13 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 const DEFAULT_PUBLIC_ENV = {
   PUBLIC_PREMIUM_CHECKOUT_URL: undefined,
-  PUBLIC_PREMIUM_SIGNUP_URL: undefined,
 };
 
-async function loadBillingConfig({
-  checkoutUrl,
-  signupUrl,
-}: {
-  checkoutUrl?: string;
-  signupUrl?: string;
-}) {
+async function loadBillingConfig({ checkoutUrl }: { checkoutUrl?: string }) {
   vi.resetModules();
   vi.doMock("$env/static/public", () => ({
     ...DEFAULT_PUBLIC_ENV,
     PUBLIC_PREMIUM_CHECKOUT_URL: checkoutUrl,
-    PUBLIC_PREMIUM_SIGNUP_URL: signupUrl,
   }));
 
   return import("../../src/lib/config/billing");
@@ -28,48 +20,36 @@ afterEach(() => {
 });
 
 describe("billing config", () => {
-  it("falls back to contact when no premium destination is configured", async () => {
-    const { PREMIUM_PRIMARY_CTA, PREMIUM_SIGNUP_MODE } =
-      await loadBillingConfig({});
+  it("defaults to the app-owned checkout and management routes", async () => {
+    const {
+      APP_BILLING_CHECKOUT_URL,
+      APP_BILLING_MANAGE_URL,
+      PREMIUM_CHECKOUT_URL,
+      PREMIUM_MANAGE_URL,
+    } = await loadBillingConfig({});
 
-    expect(PREMIUM_SIGNUP_MODE).toBe("contact");
-    expect(PREMIUM_PRIMARY_CTA.label).toBe("Contact us about Premium");
-    expect(PREMIUM_PRIMARY_CTA.href).toContain("mailto:");
+    expect(PREMIUM_CHECKOUT_URL).toBe(APP_BILLING_CHECKOUT_URL);
+    expect(PREMIUM_MANAGE_URL).toBe(APP_BILLING_MANAGE_URL);
+    expect(PREMIUM_CHECKOUT_URL).toContain("/billing/checkout");
+    expect(PREMIUM_MANAGE_URL).toContain("/billing/manage");
   });
 
-  it("uses the signup URL when checkout is not configured", async () => {
-    const { PREMIUM_PRIMARY_CTA, PREMIUM_SIGNUP_MODE } =
-      await loadBillingConfig({
-        signupUrl: "https://kwipoo.vercel.app/signup?plan=premium",
-      });
+  it("allows checkout overrides for a different destination", async () => {
+    const { PREMIUM_CHECKOUT_URL } = await loadBillingConfig({
+      checkoutUrl: "https://payments.example.com/kwipoo-premium",
+    });
 
-    expect(PREMIUM_SIGNUP_MODE).toBe("signup");
-    expect(PREMIUM_PRIMARY_CTA.label).toBe("Create account and upgrade");
-    expect(PREMIUM_PRIMARY_CTA.href).toBe(
-      "https://kwipoo.vercel.app/signup?plan=premium",
-    );
-  });
-
-  it("prefers checkout when both checkout and signup URLs are configured", async () => {
-    const { PREMIUM_PRIMARY_CTA, PREMIUM_SIGNUP_MODE } =
-      await loadBillingConfig({
-        checkoutUrl: "https://payments.example.com/kwipoo-premium",
-        signupUrl: "https://kwipoo.vercel.app/signup?plan=premium",
-      });
-
-    expect(PREMIUM_SIGNUP_MODE).toBe("checkout");
-    expect(PREMIUM_PRIMARY_CTA.label).toBe("Continue to checkout");
-    expect(PREMIUM_PRIMARY_CTA.href).toBe(
+    expect(PREMIUM_CHECKOUT_URL).toBe(
       "https://payments.example.com/kwipoo-premium",
     );
   });
 
-  it("treats blank values as missing", async () => {
-    const { PREMIUM_SIGNUP_MODE } = await loadBillingConfig({
-      checkoutUrl: "   ",
-      signupUrl: "",
-    });
+  it("treats blank checkout overrides as missing", async () => {
+    const { PREMIUM_CHECKOUT_URL, APP_BILLING_CHECKOUT_URL } =
+      await loadBillingConfig({
+        checkoutUrl: "   ",
+      });
 
-    expect(PREMIUM_SIGNUP_MODE).toBe("contact");
+    expect(PREMIUM_CHECKOUT_URL).toBe(APP_BILLING_CHECKOUT_URL);
   });
 });
