@@ -1,5 +1,12 @@
 # kwipoo.app
 
+## 0.0.19
+
+### Patch Changes
+
+- e5d3ddd: Tighten homepage and resource-page messaging so the primary promise is clearer and search visitors get a stronger start-free path from guides.
+- e5d3ddd: Update the pricing and premium pages with live freemium messaging plus buy and manage-subscription actions that hand off into the app billing flow.
+
 ## 0.0.18
 
 ### Patch Changes
