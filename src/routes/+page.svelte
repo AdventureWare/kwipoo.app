@@ -7,6 +7,10 @@
     Calendar,
     CurrencyDollar,
     Prohibit,
+    MapPinArea,
+    Camera,
+    ShieldCheck,
+    Stack,
   } from "phosphor-svelte";
   import { getDocsHref, getDocsPageBadge } from "$lib/content/docs";
   import {
@@ -24,7 +28,6 @@
   import EverydayProblemHighlights from "$lib/components/layouts/sections/everyday-problem-highlights.svelte";
   import ProblemSolution from "$lib/components/layouts/sections/problem-solution.svelte";
   import Switchbacks from "$lib/components/layouts/sections/switchbacks.svelte";
-  import Button from "$lib/components/ui/buttons/button.svelte";
   import {
     getOrganizationJsonLd,
     getSoftwareApplicationJsonLd,
@@ -58,37 +61,37 @@
       icon: Table,
       title: "Not Knowing What You Have",
       description:
-        "Kwipoo gives you a searchable inventory so you always know exactly what you own. Instead of guessing or digging through bins, you can pull up your items instantly, check their details, and avoid wasting money on duplicates. Everything is stored on one platform, so you never have to wonder what you have again.",
+        "Build a searchable inventory so you can check what you already own before you dig through bins or buy another one.",
     },
     {
       icon: MagnifyingGlass,
       title: "Struggling to Find Things",
       description:
-        "With Kwipoo, you always know where your stuff is. Assign your items to storage locations—whether it’s in a closet, a storage unit, or a packed-away bin—so you never have to waste time searching. Spots let you track things how you want, whether it’s at the room level or down to the exact shelf, box, or drawer, so you can grab what you need without the scavenger hunt.",
+        "Tie items to real places, spots, shelves, bins, and drawers so you know where to look first instead of starting from scratch.",
     },
     {
       icon: EyeSlash,
       title: "Missing Details That Matter",
       description:
-        "Log important item details like model names, serial numbers, and purchase info in Kwipoo so you never have to dig through manuals or search online when you need a replacement part. If you're selling, upgrading, or comparing items, you have all the specs and purchase history at your fingertips to make quick, informed decisions. No more guesswork—just instant access to the info that matters.",
+        "Keep model numbers, serials, purchase notes, and photos with the item so replacements, resale, and comparisons take minutes instead of guesswork.",
     },
     {
       icon: Calendar,
       title: "Event & Trip Planning Frustrations",
       description:
-        "Kwipoo makes packing and planning effortless with reusable sets that help you stay prepared. Whether you’re heading out solo or coordinating a group, you can build packing lists, check off items as you go, and make sure nothing gets forgotten. You can even look back at past events to see exactly what you brought last time, so you don’t have to figure it all out again.",
+        "Reuse sets and past event setups so packing starts with a real list instead of memory.",
     },
     {
       icon: CurrencyDollar,
       title: "Wasting Money on Unnecessary Purchases",
       description:
-        "Before buying something new, check Kwipoo to see if you already own it or have enough already. You can search your inventory in seconds, so you don’t accidentally purchase duplicates of things you forgot you had. And if you don’t own it, you can see if a friend or family member does—so you can borrow instead of buy.",
+        "Search before you buy to catch duplicates, see whether you already have enough, and borrow from people you trust when that is easier.",
     },
     {
       icon: Prohibit,
       title: "Forgetting & Leaving Things Behind",
       description:
-        "Kwipoo makes sure you always pack what you need and leave nothing behind. Instead of scrambling at the last minute, you can track what’s in your bags, storage, or car and check items off as you pack. And when planning for future trips, you can review what you brought last time to fine-tune your packing list.",
+        "Check items in and out of bags, cars, and storage so the one important thing does not get missed at the last minute.",
     },
   ];
 
@@ -123,23 +126,54 @@
     description: string;
   }>;
 
+  const trustSignals = [
+    {
+      icon: MapPinArea,
+      title: "Track where things actually live",
+      description:
+        "Kwipoo is built around places and spots, so your inventory can get as specific as a storage unit, shelf, drawer, or bin instead of stopping at a vague list.",
+    },
+    {
+      icon: Camera,
+      title: "Keep the details you need later",
+      description:
+        "Photos, serial numbers, model details, and notes stay with the item so replacements, comparisons, and handoffs do not depend on memory.",
+    },
+    {
+      icon: Stack,
+      title: "Reuse setups instead of rebuilding them",
+      description:
+        "Sets and events help you carry the same gear, packing, and planning workflows forward instead of recreating them every time.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Start small without breaking the system",
+      description:
+        "You can begin with one recurring pain point, then grow from there when it proves useful. The app does not require a perfect inventory to be worth starting.",
+    },
+  ] satisfies Array<{
+    icon: import("svelte").Component;
+    title: string;
+    description: string;
+  }>;
+
   const switchbackItems = [
     {
       tag: "Things",
       featureBadge: getDocsPageBadge("things"),
-      title: "Keep track of what you own—all on one platform.",
+      title: "Know what you own before you search or buy again.",
       description:
-        "Know exactly what you have, where it is, and what it’s worth—so you spend less time searching, avoid unnecessary repurchases, and make smarter decisions about what to keep, use, or replace. Whether it’s everyday essentials or hobby gear, Kwipoo helps you stay organized without the mental load.",
+        "Things are the individual items in your inventory. Add the basics once, then search, filter, and revisit them when you need to find, compare, replace, or repack something.",
       image: {
         src: "/assets/thingsFeatureAsset@2x.png",
         alt: "Kwipoo inventory management interface showing organized items",
       },
       showButton: true,
-      buttonText: "Learn More",
+      buttonText: "How Things Work",
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("things"),
-      supportingLinkText: "See the home inventory guide",
+      supportingLinkText: "Start with the home inventory guide",
       supportingLinkHref: resolveResourceGuideHref(
         "home-inventory-that-stays-updated",
       ),
@@ -148,19 +182,19 @@
       tag: "Sets",
       featureBadge: getDocsPageBadge("sets"),
       title:
-        "Group the right things together—so they’re always ready when you need them.",
+        "Reuse the same packing and gear setups instead of starting from scratch.",
       description:
-        "Create reusable Sets for trips, hobbies, or recurring routines. Whether it’s a backpacking kit, a photography setup, or a go-bag, Kwipoo helps you pack faster, plan smarter, and avoid forgetting essentials.",
+        "Sets group the items you use together for trips, hobbies, and routines, so the next checklist starts mostly done.",
       image: {
         src: "/assets/backpack@2x.png",
         alt: "Event planning and packing list features in Kwipoo",
       },
       showButton: true,
-      buttonText: "Learn More",
+      buttonText: "How Sets Work",
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("sets"),
-      supportingLinkText: "See the repeatable packing guide",
+      supportingLinkText: "Start with the repeatable packing guide",
       supportingLinkHref: resolveResourceGuideHref(
         "repeatable-packing-system-trips-camping-events",
       ),
@@ -169,19 +203,19 @@
       tag: "Places",
       featureBadge: getDocsPageBadge("places"),
       title:
-        "Map out where your stuff lives—across home, storage, and anywhere else.",
+        "See which home, storage unit, or location your stuff belongs to.",
       description:
-        "A Place represents a real-world location (home, storage unit, office), giving you a clear, structured way to track what’s stored where—so you never have to dig through the wrong spot again.",
+        "Places give your inventory a real-world map, so you stop guessing whether something is at home, in storage, or somewhere else.",
       image: {
         src: "/assets/placesFeatureAsset@2x.png",
         alt: "Privacy controls and sharing features in Kwipoo",
       },
       showButton: true,
-      buttonText: "Learn More",
+      buttonText: "How Places Work",
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("places"),
-      supportingLinkText: "See the storage bins guide",
+      supportingLinkText: "Start with the storage bins guide",
       supportingLinkHref: resolveResourceGuideHref(
         "organize-storage-bins-find-things-later",
       ),
@@ -190,19 +224,19 @@
       tag: "Spots",
       featureBadge: getDocsPageBadge("spots"),
       title:
-        "Pinpoint exactly where things are stored—down to the shelf, bin, or drawer.",
+        "Get specific enough to find the shelf, bin, or drawer that matters.",
       description:
-        "Spots let you track specific locations within Places (like “Bedroom” or “Basement”), so you can find what you need instantly instead of tearing through storage.",
+        "Spots break a place into the exact storage locations you actually search through, so finding one item does not mean tearing apart the whole area.",
       image: {
         src: "/assets/spotsFeatureAsset@2x.png",
         alt: "Kwipoo inventory management interface showing organized items",
       },
       showButton: true,
-      buttonText: "Learn More",
+      buttonText: "How Spots Work",
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("spots"),
-      supportingLinkText: "See the multi-location guide",
+      supportingLinkText: "Start with the multi-location guide",
       supportingLinkHref: resolveResourceGuideHref(
         "track-what-you-own-across-home-storage-and-travel",
       ),
@@ -210,19 +244,19 @@
     {
       tag: "Events",
       featureBadge: getDocsPageBadge("events"),
-      title: "Plan trips and events without last-minute scrambling.",
+      title: "Prepare for trips, projects, and one-off plans without the scramble.",
       description:
-        "Assign gear to upcoming trips, events, or projects—whether you’re packing solo or coordinating with a group. Check off what’s ready, see what’s missing, and ensure no one forgets the essentials.",
+        "Events pull the right items into a working plan so you can see what is ready, what is missing, and what still needs attention.",
       image: {
         src: "/assets/eventsFeatureAsset@2x.png",
         alt: "Event planning and packing list features in Kwipoo",
       },
       showButton: true,
-      buttonText: "Learn More",
+      buttonText: "How Events Work",
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("events"),
-      supportingLinkText: "See the moving checklist guide",
+      supportingLinkText: "Start with the moving checklist guide",
       supportingLinkHref: resolveResourceGuideHref(
         "moving-inventory-checklist-boxes-storage-and-essentials",
       ),
@@ -230,19 +264,19 @@
     {
       tag: "Social",
       featureBadge: getDocsPageBadge("social"),
-      title: "Borrow, lend, and collaborate—without the back-and-forth.",
+      title: "Coordinate shared gear without the usual back-and-forth.",
       description:
-        "See what your friends own, avoid unnecessary duplicate purchases, and coordinate gear-sharing seamlessly. Whether for hobbies, outdoor trips, or shared projects, Kwipoo makes it easy to stay connected and prepared.",
+        "Social helps you see what trusted people already have when borrowing, lending, or planning together makes more sense than buying again.",
       image: {
         src: "/assets/socialFeatureAsset@2x.png",
         alt: "Privacy controls and sharing features in Kwipoo",
       },
       showButton: true,
-      buttonText: "Learn More",
+      buttonText: "How Social Works",
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("social"),
-      supportingLinkText: "See the household inventory guide",
+      supportingLinkText: "Start with the household inventory guide",
       supportingLinkHref: resolveResourceGuideHref(
         "households-families-roommates",
       ),
@@ -252,15 +286,15 @@
       tag: "Profile",
       featureBadge: getDocsPageBadge("profile"),
       title:
-        "Customize your inventory, control privacy, and make Kwipoo work for you.",
+        "Control privacy and make the system fit how you organize.",
       description:
-        "Set visibility preferences, manage your personal inventory, and tailor how you track and organize things to fit your lifestyle. Your stuff, your rules.",
+        "Profile settings let you decide what stays private, what gets shared, and how your inventory works for your life instead of someone else's default.",
       image: {
         src: "/assets/logos/logo.svg",
         alt: "Privacy controls and sharing features in Kwipoo",
       },
       showButton: true,
-      buttonText: "Learn More",
+      buttonText: "How Profile Works",
       buttonVariant: "primary",
       buttonSize: "md",
       buttonHref: resolveFeatureDocsHref("profile"),
@@ -322,12 +356,7 @@
     {
       question: "What is Kwipoo?",
       answer:
-        "Kwipoo is a personal inventory and planning app for tracking what you own, where it is stored, and what you need for trips, hobbies, events, and day-to-day life.",
-    },
-    {
-      question: "What can I track in Kwipoo?",
-      answer:
-        "You can track individual Things, organize them inside Places and Spots, group them into reusable Sets, and prepare for Events without rebuilding the same list every time.",
+        "Kwipoo is a personal inventory app for tracking what you own, where it is stored, and what you need for packing, storage, trips, hobbies, and everyday life.",
     },
     {
       question: "Who is Kwipoo for?",
@@ -335,10 +364,19 @@
         "Kwipoo is useful for households, hobbyists, travelers, organizers, and anyone who wants a searchable home inventory instead of relying on memory, notes, or scattered spreadsheets.",
     },
     {
-      question:
-        "How does Kwipoo help me avoid duplicate purchases or forgotten items?",
+      question: "Do I need to inventory everything to get value?",
       answer:
-        "Because your inventory is searchable and tied to real storage locations, you can check what you already own, see where it lives, and reuse past packing or event setups before you buy or leave something behind.",
+        "No. Most people should start with the items they search for, buy twice, pack often, or keep forgetting. The goal is to reduce friction quickly, not build a perfect catalog on day one.",
+    },
+    {
+      question: "What can I track in Kwipoo?",
+      answer:
+        "You can track individual Things, organize them inside Places and Spots, group them into reusable Sets, and prepare for Events without rebuilding the same list every time.",
+    },
+    {
+      question: "Is Kwipoo free to start?",
+      answer:
+        "Yes. Kwipoo Free lets you get started without payment, and you can upgrade later if you need more room.",
     },
   ] as const;
 
@@ -403,12 +441,93 @@
   <meta property="og:url" content={MARKETING_SITE_URL} />
   <meta name="twitter:title" content={homeTitle} />
   <meta name="twitter:description" content={homeDescription} />
-  <svelte:element this={"script"} type="application/ld+json">
+<svelte:element this={"script"} type="application/ld+json">
     {toSeoJsonLd(homeStructuredData)}
   </svelte:element>
 </svelte:head>
 
 <HeroSection />
+
+<section
+  class="brand-outline-card card relative mb-30 overflow-hidden border border-brand-border bg-brand-canvas px-5 py-8 shadow-sm sm:px-8 sm:py-10 lg:px-10"
+>
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      class="absolute -left-10 top-0 h-44 w-44 rounded-full bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-secondary-100)_72%,transparent)_0%,transparent_72%)] blur-3xl"
+    ></div>
+    <div
+      class="absolute right-0 bottom-0 h-48 w-48 rounded-full bg-[radial-gradient(circle,_color-mix(in_srgb,var(--color-primary-100)_72%,transparent)_0%,transparent_72%)] blur-3xl"
+    ></div>
+  </div>
+
+  <div class="relative mx-auto max-w-6xl">
+    <div
+      class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
+    >
+      <div
+        class="brand-outline-card relative overflow-hidden rounded-[1.75rem] border border-brand-border bg-brand-panel/88 p-6 shadow-sm sm:p-7"
+      >
+        <div
+          class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary-300/80 to-transparent"
+        ></div>
+        <p class="brand-section-label mb-4">Why It Holds Up In Real Life</p>
+        <h2 class="max-w-lg text-3xl font-bold leading-tight text-primary-950 sm:text-4xl">
+          Kwipoo is built to stay useful after the first list.
+        </h2>
+        <p class="mt-4 max-w-xl text-base leading-relaxed text-brand-body sm:text-lg">
+          The point is not to make a prettier spreadsheet. It is to build a
+          system you can keep using when you need to find something, check what
+          you already have, pack faster, or remember the details that matter.
+        </p>
+        <div class="mt-6 grid gap-3 sm:grid-cols-2">
+          <div
+            class="rounded-2xl border border-brand-border bg-brand-canvas/86 px-4 py-3 text-sm font-medium text-brand-ink shadow-sm"
+          >
+            Works for storage, travel, projects, and everyday life
+          </div>
+          <div
+            class="rounded-2xl border border-brand-border bg-brand-canvas/86 px-4 py-3 text-sm font-medium text-brand-ink shadow-sm"
+          >
+            Built around real locations, not generic folders
+          </div>
+          <div
+            class="rounded-2xl border border-brand-border bg-brand-canvas/86 px-4 py-3 text-sm font-medium text-brand-ink shadow-sm"
+          >
+            Useful even if you start with one repeated problem
+          </div>
+          <div
+            class="rounded-2xl border border-brand-border bg-brand-canvas/86 px-4 py-3 text-sm font-medium text-brand-ink shadow-sm"
+          >
+            Keeps item details close when you need them later
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {#each trustSignals as signal (signal.title)}
+          <article
+            class="brand-outline-card relative flex h-full flex-col rounded-[1.5rem] border border-brand-border bg-brand-canvas/94 p-5 shadow-sm sm:p-6"
+          >
+            <div
+              class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary-300/70 to-transparent"
+            ></div>
+            <div
+              class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-border bg-brand-panel text-primary-700 shadow-sm"
+            >
+              <signal.icon class="h-5 w-5 sm:h-6 sm:w-6"></signal.icon>
+            </div>
+            <h3 class="text-lg font-semibold text-primary-950 sm:text-xl">
+              {signal.title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-brand-body sm:text-base">
+              {signal.description}
+            </p>
+          </article>
+        {/each}
+      </div>
+    </div>
+  </div>
+</section>
 
 <EverydayProblemHighlights
   eyebrow="The Everyday Problem"
@@ -437,28 +556,25 @@
     </div>
 
     <div class="relative mx-auto max-w-6xl">
-      <div
-        class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"
-      >
-        <div class="max-w-3xl">
-          <p class="brand-section-label mb-4">Start With Your Problem</p>
-          <h2 class="text-3xl font-bold leading-tight text-primary-950 sm:text-4xl">
-            Choose the guide that matches the friction you want to remove first.
-          </h2>
-          <p class="mt-4 text-base leading-relaxed text-brand-body sm:text-lg">
-            If you found Kwipoo because of home inventory, storage bins,
-            duplicate buying, camping prep, moving, or repeatable packing,
-            start there. These guides explain the workflow in plain language
-            and give new visitors a faster path into the parts of Kwipoo that
-            fit their situation.
-          </p>
-        </div>
-
-        <div class="w-full max-w-xs lg:w-60">
-          <Button href={resourcesHubHref} variant="outline" size="md">
-            Browse All Guides
-          </Button>
-        </div>
+      <div class="max-w-3xl">
+        <p class="brand-section-label mb-4">Start With Your Problem</p>
+        <h2 class="text-3xl font-bold leading-tight text-primary-950 sm:text-4xl">
+          Start with the problem you want to stop repeating.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-brand-body sm:text-lg">
+          Pick the guide that matches what is slowing you down: not knowing
+          what you own, not finding it, buying duplicates, or rebuilding the
+          same packing list. Then start free in Kwipoo while the workflow is
+          still fresh.
+        </p>
+        <!-- eslint-disable svelte/no-navigation-without-resolve -->
+        <a
+          href={resourcesHubHref}
+          class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary-700 transition-colors duration-150 hover:text-primary-800"
+        >
+          See all guides
+        </a>
+        <!-- eslint-enable svelte/no-navigation-without-resolve -->
       </div>
 
       <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -491,15 +607,15 @@
 {/if}
 
 <ProblemSolution
-  title="Get more of your time back with Kwipoo"
-  description="We all want to live our best lives, but too often, we spend more time and energy managing and keeping up with everything we own, need, and use than actually living. Kwipoo is here to help—a platform that keeps track of your stuff so you can stay prepared, make smarter decisions, and remove the guesswork. Focus on what you love instead of getting caught up in the hassle."
+  title="Kwipoo turns repeated friction into a system you can actually trust"
+  description="The goal is not to catalog your whole life on day one. It is to make the next search, purchase, packing list, or replacement decision easier because your items, locations, and details are already there."
   items={problemSolutionData}
 />
 
 <Switchbacks
-  eyebrow="How It Comes Together"
-  title="Everything has a place, a purpose, and a plan"
-  description="Kwipoo connects the things you own, where they live, the sets you reuse, and the events you prepare for so the whole system stays practical instead of becoming another chore."
+  eyebrow="How The System Works"
+  title="Each part of Kwipoo answers a different question you run into in real life"
+  description="Things tell you what you own. Places and Spots tell you where it is. Sets and Events help you reuse the system when you pack, move, or plan again."
   items={switchbackItems}
 />
 
@@ -516,14 +632,13 @@
     <div class="mb-8 text-left md:mb-10 md:text-center">
       <p class="brand-section-label mb-4">Common Questions</p>
       <h2 class="mb-4 text-3xl font-bold text-primary-950 sm:text-4xl">
-        What people usually want to know before using Kwipoo
+        Questions that usually come up right before someone starts
       </h2>
       <p
         class="text-base leading-relaxed text-brand-body md:mx-auto md:max-w-4/5 md:text-lg"
       >
-        This is the short version: Kwipoo helps you build a searchable personal
-        inventory, organize where things live, and reuse plans for trips,
-        events, and recurring routines.
+        These are the questions that usually decide whether someone tries
+        Kwipoo now or keeps putting it off.
       </p>
     </div>
 
@@ -548,17 +663,17 @@
 </section>
 
 <QuoteCallout
-  eyebrow="The Calmer Alternative"
-  quoteText="We all have better things to do than hunt for missing stuff or panic over last-minute errands. Kwipoo gives you back that time and headspace so you can actually enjoy your hobbies, family events, or just day-to-day life without the frantic scramble."
+  eyebrow="Start Small"
+  quoteText="You do not need a perfect inventory to get value. Start with the things you search for, buy twice, pack often, or keep forgetting. That is usually enough to make Kwipoo useful right away."
   showButton={true}
-  buttonText="Create a Free Account Today"
+  buttonText="Start Free"
   buttonVariant="primary"
   buttonSize="lg"
   buttonHref={APP_SIGNUP_URL}
   onButtonClick={() =>
     trackCtaClick({
       location: "homepage_close",
-      label: "Create a Free Account Today",
+      label: "Start Free",
       destination: APP_SIGNUP_URL,
       kind: "signup",
     })}

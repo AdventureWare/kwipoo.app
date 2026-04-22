@@ -1,11 +1,19 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
+  import { Button } from "$lib/components";
   import DocsSectionContent from "$lib/components/ui/docs-section-content.svelte";
+  import {
+    ANALYTICS_EVENT_NAMES,
+    createMarketingCtaClickedProperties,
+    createResourceGuideSelectedProperties,
+    type ResourceGuideSelectionLocation,
+  } from "$lib/analytics/schema";
+  import { trackAnalyticsEvent } from "$lib/analytics";
   import {
     getResourceGuideTocItems,
     getResourcesHref,
   } from "$lib/content/resources";
-  import { APP_LOGIN_URL } from "$lib/config/site";
+  import { APP_LOGIN_URL, APP_SIGNUP_URL } from "$lib/config/site";
   import {
     ORGANIZATION_ID,
     getBreadcrumbJsonLd,
@@ -29,6 +37,13 @@
   );
   let tocItems = $derived(getResourceGuideTocItems(data.resourceGuide));
   let inlineRelatedResources = $derived(data.relatedResources.slice(0, 2));
+  let resourceGuideAnalyticsContext = $derived(
+    {
+      content_slug: data.resourceGuide.slug,
+      content_title: data.resourceGuide.title,
+      content_audience: data.resourceGuide.audience,
+    },
+  );
   let seoTitle = $derived(
     data.resourceGuide.seoTitle ?? `${data.resourceGuide.title} | Kwipoo Resources`,
   );
@@ -92,6 +107,30 @@
 
   function resolveResourceHref(slug: string): string {
     return resolvePath(getResourcesHref(slug));
+  }
+
+  function trackRelatedGuideClick(
+    location: Extract<
+      ResourceGuideSelectionLocation,
+      "resource_guide_inline_related" | "resource_guide_bottom_related"
+    >,
+    guide: PageData["relatedResources"][number],
+  ): void {
+    trackAnalyticsEvent(
+      ANALYTICS_EVENT_NAMES.resourceGuideSelected,
+      createResourceGuideSelectedProperties({
+        location,
+        content_slug: guide.slug,
+        content_title: guide.title,
+        content_audience: guide.audience,
+        content_format: guide.format,
+        content_read_time: guide.readTime,
+        destination: resolveResourceHref(guide.slug),
+        parent_content_slug: data.resourceGuide.slug,
+        parent_content_title: data.resourceGuide.title,
+        parent_content_audience: data.resourceGuide.audience,
+      }),
+    );
   }
 </script>
 
@@ -161,16 +200,67 @@
   <p class="max-w-4xl text-lg leading-8 text-brand-body">
     {data.resourceGuide.description}
   </p>
+  <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+    <Button
+      href={APP_SIGNUP_URL}
+      variant="primary"
+      class="w-full sm:w-auto"
+      analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+      analyticsProperties={createMarketingCtaClickedProperties({
+        location: "resource_guide_header",
+        label: "Start Free",
+        destination: APP_SIGNUP_URL,
+        kind: "signup",
+        ...resourceGuideAnalyticsContext,
+      })}
+    >
+      Start Free
+    </Button>
+  </div>
+  <p class="max-w-3xl text-sm leading-6 text-brand-muted">
+    Read the guide, then set up the first items and places that will save you
+    time right away.
+  </p>
 </header>
 
 <article class="mt-8 grid gap-10">
+  {#if data.resourceGuide.proofTitle && data.resourceGuide.proofPoints?.length}
+    <section
+      class="card rounded-[1.5rem] border border-primary-200 bg-primary-50 p-6 shadow-sm"
+    >
+      <p
+        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
+      >
+        Why Kwipoo helps here
+      </p>
+      <h2 class="mt-3 text-[1.55rem] font-semibold leading-tight text-surface-950">
+        {data.resourceGuide.proofTitle}
+      </h2>
+      {#if data.resourceGuide.proofIntro}
+        <p class="mt-3 max-w-4xl text-[0.98rem] leading-7 text-brand-body">
+          {data.resourceGuide.proofIntro}
+        </p>
+      {/if}
+
+      <div class="mt-5 grid gap-3 md:grid-cols-3">
+        {#each data.resourceGuide.proofPoints as point (point)}
+          <div
+            class="rounded-[1.1rem] border border-primary-200 bg-white px-4 py-4 text-[0.95rem] leading-6 text-surface-950 shadow-sm"
+          >
+            {point}
+          </div>
+        {/each}
+      </div>
+    </section>
+  {/if}
+
   <section
     class="card rounded-[1.5rem] border border-primary-200 bg-primary-50 p-6 shadow-sm"
   >
     <p
       class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
     >
-      What this guide helps with
+      The problem this guide helps you solve
     </p>
     <p class="mt-3 max-w-4xl text-[1.08rem] leading-7 text-surface-950">
       {data.resourceGuide.summary}
@@ -218,6 +308,8 @@
             <a
               href={resolveResourceHref(guide.slug)}
               class="card card-hover rounded-[1.15rem] border border-primary-200 bg-white p-4 shadow-sm hover:border-primary-300"
+              onclick={() =>
+                trackRelatedGuideClick("resource_guide_inline_related", guide)}
             >
               <p
                 class="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-brand-muted"
@@ -284,7 +376,7 @@
       <h2
         class="mt-3 text-[1.6rem] font-semibold leading-tight text-surface-950"
       >
-        Open Kwipoo and start with the items you search for, pack, or replace
+        Start free in Kwipoo with the items you search for, pack, or replace
         most often.
       </h2>
       <p class="mt-3 max-w-2xl text-[0.98rem] leading-7 text-brand-body">
@@ -292,14 +384,38 @@
         and recurring setups that save you the most time or stress, then expand
         from there.
       </p>
-      <!-- eslint-disable svelte/no-navigation-without-resolve -->
-      <a
-        href={APP_LOGIN_URL}
-        class="btn preset-filled-primary-500 mt-5 inline-flex w-fit rounded-full text-surface-950"
-      >
-        Open Kwipoo
-      </a>
-      <!-- eslint-enable svelte/no-navigation-without-resolve -->
+      <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <Button
+          href={APP_SIGNUP_URL}
+          variant="primary"
+          class="w-full sm:w-auto"
+          analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+          analyticsProperties={createMarketingCtaClickedProperties({
+            location: "resource_guide_bottom",
+            label: "Start Free",
+            destination: APP_SIGNUP_URL,
+            kind: "signup",
+            ...resourceGuideAnalyticsContext,
+          })}
+        >
+          Start Free
+        </Button>
+        <Button
+          href={APP_LOGIN_URL}
+          variant="outline"
+          class="w-full sm:w-auto"
+          analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+          analyticsProperties={createMarketingCtaClickedProperties({
+            location: "resource_guide_bottom",
+            label: "Open App",
+            destination: APP_LOGIN_URL,
+            kind: "login",
+            ...resourceGuideAnalyticsContext,
+          })}
+        >
+          Open App
+        </Button>
+      </div>
     </article>
 
     {#if data.relatedResources.length > 0}
@@ -317,6 +433,8 @@
             <a
               href={resolveResourceHref(guide.slug)}
               class="card card-hover preset-filled-surface-50-950 rounded-[1.15rem] border border-surface-200-800 p-4 shadow-sm hover:border-primary-200-800"
+              onclick={() =>
+                trackRelatedGuideClick("resource_guide_bottom_related", guide)}
             >
               <p
                 class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-surface-300"

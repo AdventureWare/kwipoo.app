@@ -50,8 +50,8 @@
           <h1
             class="text-[1.7rem] font-bold leading-[1.02] text-primary-950 sm:max-w-2xl sm:text-5xl sm:leading-tight lg:text-6xl"
           >
-            Life is busy. <br class="hidden sm:block" />
-            Your stuff shouldn't make it busier
+            Organize what you own <br class="hidden sm:block" />
+            so you can find it, use it, and stop buying it twice
           </h1>
         </MotionReveal>
 
@@ -59,8 +59,9 @@
           <p
             class="mx-0 mb-3 mt-2 max-w-none text-[0.95rem] leading-[1.55] text-brand-body sm:mb-6 sm:mt-5 sm:max-w-xl sm:text-xl"
           >
-            Keep track of what you own, where it lives, and what you need next
-            in one personal inventory app.
+            Kwipoo is a personal inventory app for keeping track of what you
+            own, where it lives, and what you need for storage, trips, hobbies,
+            and everyday life.
           </p>
         </MotionReveal>
 
@@ -72,7 +73,7 @@
           <span
             class="rounded-full border border-brand-border bg-brand-canvas/85 px-3.5 py-2 text-sm font-medium text-brand-ink shadow-sm"
           >
-            Search what you own
+            Track what you own
           </span>
           <span
             class="rounded-full border border-brand-border bg-brand-canvas/85 px-3.5 py-2 text-sm font-medium text-brand-ink shadow-sm"
@@ -82,7 +83,7 @@
           <span
             class="rounded-full border border-brand-border bg-brand-canvas/85 px-3.5 py-2 text-sm font-medium text-brand-ink shadow-sm"
           >
-            Reuse trip and event setups
+            Reuse packing setups
           </span>
         </MotionReveal>
 
@@ -92,41 +93,40 @@
           class="flex max-w-xl flex-col gap-2.5 sm:gap-4"
         >
           <div class="flex flex-col gap-3">
-            <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
-              <div class="w-full sm:max-w-xs">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  href={APP_SIGNUP_URL}
-                  analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
-                  analyticsProperties={createMarketingCtaClickedProperties({
-                    location: "hero",
-                    label: "Create Free Account",
-                    destination: APP_SIGNUP_URL,
-                    kind: "signup",
-                  })}
-                >
-                  Create Free Account
-                </Button>
-              </div>
+            <div class="w-full sm:max-w-xs">
+              <Button
+                variant="primary"
+                size="lg"
+                href={APP_SIGNUP_URL}
+                analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+                analyticsProperties={createMarketingCtaClickedProperties({
+                  location: "hero",
+                  label: "Start Free",
+                  destination: APP_SIGNUP_URL,
+                  kind: "signup",
+                })}
+              >
+                Start Free
+              </Button>
+            </div>
 
-              <div class="w-full sm:w-auto">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  href={APP_LOGIN_URL}
-                  class="sm:min-w-[9.5rem]"
-                  analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
-                  analyticsProperties={createMarketingCtaClickedProperties({
-                    location: "hero",
-                    label: "Open App",
-                    destination: APP_LOGIN_URL,
-                    kind: "login",
-                  })}
-                >
-                  Open App
-                </Button>
-              </div>
+            <div class="flex flex-wrap items-center gap-x-1.5 gap-y-2 text-sm text-brand-muted">
+              <span>Already using Kwipoo?</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                href={APP_LOGIN_URL}
+                class="w-auto px-0 text-sm font-semibold text-primary-700 hover:text-primary-800"
+                analyticsEvent={ANALYTICS_EVENT_NAMES.marketingCtaClicked}
+                analyticsProperties={createMarketingCtaClickedProperties({
+                  location: "hero_existing_user",
+                  label: "Open App",
+                  destination: APP_LOGIN_URL,
+                  kind: "login",
+                })}
+              >
+                Open App
+              </Button>
             </div>
           </div>
 
@@ -136,7 +136,7 @@
             <p
               class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary-700"
             >
-              Pick up where you plan and pack
+              Get the app on your phone
             </p>
             <AppStoreButtons />
           </div>

@@ -129,10 +129,10 @@ test("@smoke homepage renders primary marketing content", async ({ page }) => {
     headingLocator(
       page,
       1,
-      /life is busy\.?\s*your stuff shouldn't make it busier/i,
+      /organize what you own\s*so you can find it, use it, and stop buying it twice/i,
     ),
   ).toBeVisible();
-  await expect(actionLocator(page, /create free account/i)).toBeVisible();
+  await expect(actionLocator(page, /start free/i)).toBeVisible();
   await expectJsonLdScriptsToParse(page);
 });
 
@@ -154,7 +154,7 @@ test("@smoke homepage emits pageview and CTA analytics with the marketing handof
     );
   });
 
-  const primaryCta = actionLocator(page, /create free account/i).first();
+  const primaryCta = actionLocator(page, /start free/i).first();
   await expect(primaryCta).toBeVisible();
   await primaryCta.evaluate((element) => {
     if (element instanceof HTMLAnchorElement) {
@@ -197,7 +197,7 @@ test("@smoke homepage emits pageview and CTA analytics with the marketing handof
   expect(ctaEvent?.properties).toMatchObject({
     source: "marketing_site",
     location: "hero",
-    label: "Create Free Account",
+    label: "Start Free",
     kind: "signup",
   });
 
@@ -220,7 +220,7 @@ test("@smoke homepage keeps the primary CTA and product proof available without 
 }, testInfo) => {
   await page.goto("/");
 
-  const primaryCta = actionLocator(page, /create free account/i);
+  const primaryCta = actionLocator(page, /start free/i);
   const heroImage = imageLocator(page, "Kwipoo app interface");
 
   await expect(primaryCta).toBeVisible();
@@ -289,7 +289,7 @@ test("@smoke resources landing page and guide routes resolve consistently", asyn
       headingLocator(
         page,
         1,
-        /practical guides for using kwipoo in real situations/i,
+        /pick the guide that matches the problem you want to solve/i,
       ),
     ).toBeVisible();
     await expectJsonLdScriptsToParse(page);
@@ -306,6 +306,166 @@ test("@smoke resources landing page and guide routes resolve consistently", asyn
     const guideResponse = await page.goto("/resources/outdoor-adventurers");
     expect(guideResponse?.status()).toBe(404);
   }
+});
+
+test("@smoke resources hub guide clicks emit discovery analytics", async ({
+  page,
+  request,
+}) => {
+  if (!(await resourcesAreAvailable(request))) {
+    test.skip(true, "Resources are not available");
+  }
+
+  await installAnalyticsStub(page);
+  await page.goto("/resources");
+
+  const guideLink = page.getByRole("link", {
+    name: /build a home inventory you can actually keep updated/i,
+  });
+  await expect(guideLink).toBeVisible();
+  await guideLink.click();
+
+  await expect(page).toHaveURL(
+    /\/resources\/home-inventory-that-stays-updated$/,
+  );
+
+  const analyticsEvents = await getAnalyticsEvents(page);
+  const selectionEvent = analyticsEvents.find(
+    (payload) => payload.event === "resource_guide_selected",
+  );
+
+  expect(selectionEvent?.properties).toMatchObject({
+    source: "marketing_site",
+    location: "resources_hub",
+    content_slug: "home-inventory-that-stays-updated",
+    content_title: "Build a home inventory you can actually keep updated",
+    content_audience: "Home organizers and households",
+    content_format: "Guide",
+    content_read_time: "8 min read",
+    destination: "/resources/home-inventory-that-stays-updated",
+  });
+});
+
+test("@smoke resource guide CTA analytics include guide attribution", async ({
+  page,
+  request,
+}) => {
+  if (!(await resourcesAreAvailable(request))) {
+    test.skip(true, "Resources are not available");
+  }
+
+  await installAnalyticsStub(page);
+  await page.goto(
+    "/resources/home-inventory-that-stays-updated?utm_source=search&utm_medium=organic&utm_campaign=resource-proof",
+  );
+
+  const guidePrimaryCta = actionLocator(page, /start free/i).first();
+  await expect(guidePrimaryCta).toBeVisible();
+  await guidePrimaryCta.evaluate((element) => {
+    if (element instanceof HTMLAnchorElement) {
+      element.target = "_blank";
+    }
+  });
+
+  const popupPromise = page
+    .waitForEvent("popup", { timeout: 5_000 })
+    .catch(() => null);
+  await guidePrimaryCta.click();
+  const popup = await popupPromise;
+  await popup?.close();
+
+  await page.waitForFunction(() => {
+    const trackedWindow = window as typeof window & {
+      __kwipooPosthogEvents?: Array<{ event: string }>;
+    };
+
+    return trackedWindow.__kwipooPosthogEvents?.some(
+      (payload) => payload.event === "marketing_cta_clicked",
+    );
+  });
+
+  const analyticsEvents = await getAnalyticsEvents(page);
+  const ctaEvent = analyticsEvents.find(
+    (payload) => payload.event === "marketing_cta_clicked",
+  );
+
+  expect(ctaEvent?.properties).toMatchObject({
+    source: "marketing_site",
+    location: "resource_guide_header",
+    label: "Start Free",
+    kind: "signup",
+    content_slug: "home-inventory-that-stays-updated",
+    content_title: "Build a home inventory you can actually keep updated",
+    content_audience: "Home organizers and households",
+  });
+
+  const ctaDestination = new URL(
+    String(ctaEvent?.properties?.destination ?? ""),
+  );
+  expect(ctaDestination.origin).toBe(APP_URL);
+  expect(ctaDestination.pathname).toBe("/login");
+  expect(ctaDestination.searchParams.get("mode")).toBe("sign_up");
+  expect(ctaDestination.searchParams.get("utm_source")).toBe("search");
+  expect(ctaDestination.searchParams.get("utm_medium")).toBe("organic");
+  expect(ctaDestination.searchParams.get("utm_campaign")).toBe(
+    "resource-proof",
+  );
+  expect(ctaDestination.searchParams.get("landing_path")).toBe(
+    "/resources/home-inventory-that-stays-updated",
+  );
+  expect(ctaDestination.searchParams.get("cta_location")).toBe(
+    "resource_guide_header",
+  );
+  expect(ctaDestination.searchParams.get("cta_kind")).toBe("signup");
+});
+
+test("@smoke resource guide related-guide clicks emit in-guide discovery analytics", async ({
+  page,
+  request,
+}) => {
+  if (!(await resourcesAreAvailable(request))) {
+    test.skip(true, "Resources are not available");
+  }
+
+  await installAnalyticsStub(page);
+  await page.goto("/resources/home-inventory-that-stays-updated");
+
+  const inlineRelatedSection = page.locator("section").filter({
+    has: page.getByRole("heading", {
+      name: /related guides in the same workflow/i,
+    }),
+  });
+  const inlineRelatedGuide = inlineRelatedSection.getByRole("link", {
+    name: /organize storage bins so you can find things later/i,
+  });
+  await expect(inlineRelatedGuide).toBeVisible();
+  await inlineRelatedGuide.click();
+
+  await expect(page).toHaveURL(
+    /\/resources\/organize-storage-bins-find-things-later$/,
+  );
+
+  const analyticsEvents = await getAnalyticsEvents(page);
+  const selectionEvent = analyticsEvents.find(
+    (payload) =>
+      payload.event === "resource_guide_selected" &&
+      payload.properties?.location === "resource_guide_inline_related",
+  );
+
+  expect(selectionEvent?.properties).toMatchObject({
+    source: "marketing_site",
+    location: "resource_guide_inline_related",
+    content_slug: "organize-storage-bins-find-things-later",
+    content_title: "Organize storage bins so you can find things later",
+    content_audience: "Households using bins, totes, and seasonal storage",
+    content_format: "Guide",
+    content_read_time: "7 min read",
+    destination: "/resources/organize-storage-bins-find-things-later",
+    parent_content_slug: "home-inventory-that-stays-updated",
+    parent_content_title:
+      "Build a home inventory you can actually keep updated",
+    parent_content_audience: "Home organizers and households",
+  });
 });
 
 test("@smoke support page renders the support entry points", async ({
@@ -337,7 +497,7 @@ test("@smoke account deletion page renders the account deletion request path", a
   await expectJsonLdScriptsToParse(page);
 });
 
-test("@smoke pricing page renders the draft plan structure", async ({
+test("@smoke pricing page renders the live freemium plan structure", async ({
   page,
   request,
 }) => {
@@ -348,12 +508,16 @@ test("@smoke pricing page renders the draft plan structure", async ({
       headingLocator(
         page,
         1,
-        /placeholder pricing scaffolding for free, premium, and custom plans/i,
+        /free for up to 100 things\. premium when you need real room to grow\./i,
       ),
     ).toBeVisible();
     await expect(headingLocator(page, 3, /^free$/i)).toBeVisible();
     await expect(headingLocator(page, 3, /^premium$/i)).toBeVisible();
     await expect(headingLocator(page, 3, /^custom$/i)).toBeVisible();
+    await expect(actionLocator(page, /buy premium/i)).toBeVisible();
+    await expect(
+      actionLocator(page, /manage( your)? subscription/i),
+    ).toBeVisible();
     await expect(actionLocator(page, /speak to sales/i)).toBeVisible();
     await expectJsonLdScriptsToParse(page);
   } else {
@@ -362,7 +526,7 @@ test("@smoke pricing page renders the draft plan structure", async ({
   }
 });
 
-test("@smoke premium signup flow route resolves to either a wired handoff or a gated 404", async ({
+test("@smoke premium page exposes purchase and management handoffs or a gated 404", async ({
   page,
   request,
 }) => {
@@ -372,13 +536,12 @@ test("@smoke premium signup flow route resolves to either a wired handoff or a g
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: /start the premium signup flow/i,
+        name: /buy premium or manage the subscription you already have/i,
       }),
     ).toBeVisible();
+    await expect(actionLocator(page, /buy premium/i)).toBeVisible();
     await expect(
-      page.getByRole("button", {
-        name: /continue to checkout|create account and upgrade|contact us about premium/i,
-      }),
+      actionLocator(page, /manage( your)? subscription/i),
     ).toBeVisible();
     await expectJsonLdScriptsToParse(page);
   } else {

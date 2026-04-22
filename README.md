@@ -63,6 +63,8 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - The shared client layer tracks pageviews centrally from `src/routes/+layout.svelte` and supports CTA event hooks through the shared button component.
 - Marketing-site handoff links into the app now preserve a lean acquisition payload: `utm_source`, `utm_medium`, `utm_campaign`, `landing_path`, `cta_location`, and `cta_kind`.
 - The environment verification runbook lives in `docs/analytics-environment-verification.md`.
+- The weekly resource-funnel review loop lives in `docs/resource-funnel-weekly-review.md`.
+- The resource-funnel dashboard/query spec lives in `docs/resource-funnel-posthog-spec.md`.
 - Cross-repo metric definitions and validation rules live in `../coordination/contracts/analytics-operating-model.md`.
 
 ## Project Structure

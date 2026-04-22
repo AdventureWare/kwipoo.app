@@ -1,7 +1,12 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
+  import { trackAnalyticsEvent } from "$lib/analytics";
   import FeatureStatusBadge from "$lib/components/ui/feature-status-badge.svelte";
   import { getResourcesHref, resourceGuides } from "$lib/content/resources";
+  import {
+    ANALYTICS_EVENT_NAMES,
+    createResourceGuideSelectedProperties,
+  } from "$lib/analytics/schema";
   import {
     type FeatureBadge,
     FEATURE_BADGE_PRESETS,
@@ -137,6 +142,21 @@
   function resolveResourceHref(slug: string): string {
     return resolvePath(getResourcesHref(slug));
   }
+
+  function trackResourceHubGuideClick(resource: ResourceEntry): void {
+    void trackAnalyticsEvent(
+      ANALYTICS_EVENT_NAMES.resourceGuideSelected,
+      createResourceGuideSelectedProperties({
+        location: "resources_hub",
+        content_slug: resource.slug,
+        content_title: resource.title,
+        content_audience: resource.audience,
+        content_format: resource.format,
+        content_read_time: resource.readTime,
+        destination: resolveResourceHref(resource.slug),
+      }),
+    );
+  }
 </script>
 
 <svelte:head>
@@ -178,19 +198,14 @@
         <h1
           class="max-w-4xl text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.15rem]"
         >
-          Practical guides for using Kwipoo in real situations.
+          Pick the guide that matches the problem you want to solve.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
-          Start with the guide that matches your setup. Each one focuses on a
-          concrete problem, like building a home inventory that stays current,
-          organizing storage bins you can actually trust later, avoiding
-          duplicate purchases before you buy again, building a camping gear
-          checklist you can trust, planning a move with clearer box and
-          essentials tracking, comparing an inventory app with a spreadsheet,
-          deciding what to inventory first, choosing between bin-level and
-          item-level tracking, organizing a storage unit, keeping shared
-          household items organized, or building a repeatable packing system
-          for frequent trips and events.
+          Start with the situation that already costs you time: building a home
+          inventory that stays current, finding what is packed away, avoiding
+          duplicate purchases, planning repeat trips, moving without losing
+          track of essentials, or keeping items straight across home, storage,
+          and travel.
         </p>
       </div>
 
@@ -206,15 +221,12 @@
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            Start with {resourceGuideCount} grounded guides.
+            Start with the workflow that sounds familiar.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            They cover home inventory setup, what to inventory first, bin-level
-            versus item-level tracking, storage bins, storage units,
-            duplicate-purchase prevention, camping and moving checklists,
-            packing-system comparisons, outdoor gear, shared households, and
-            multi-location workflows, with examples tied to real storage and
-            packing habits.
+            These {resourceGuideCount} guides stay practical: what to track
+            first, how to structure places and bins, and where Kwipoo fits when
+            you are ready to set up your own system.
           </p>
         </div>
 
@@ -227,11 +239,9 @@
             Live now
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            Home inventory, inventory app comparisons, storage bins, storage
-            unit organization, first-inventory decisions, bin-versus-item
-            tracking, duplicate-buy prevention, camping and moving checklists,
-            repeatable packing, outdoor gear, households, and home/storage/
-            travel tracking.
+            Home inventory, storage bins, storage units, duplicate-buy
+            prevention, moving checklists, repeatable packing, outdoor gear,
+            households, and multi-location organization.
           </p>
         </div>
       </aside>
@@ -324,6 +334,7 @@
           <a
             href={resolveResourceHref(resource.slug)}
             class="card card-hover rounded-[1.1rem] border border-surface-200 bg-white p-4 shadow-sm hover:border-primary-200"
+            onclick={() => trackResourceHubGuideClick(resource)}
           >
             <p
               class="text-sm font-semibold uppercase tracking-[0.16em] text-brand-muted"
