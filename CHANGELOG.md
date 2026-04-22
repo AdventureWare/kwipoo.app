@@ -1,5 +1,12 @@
 # kwipoo.app
 
+## 0.0.20
+
+### Patch Changes
+
+- ddaa42d: Tighten homepage and resource-page messaging so the primary promise is clearer and search visitors get a stronger start-free path from guides.
+- ddaa42d: Update the pricing and premium pages with live freemium messaging plus buy and manage-subscription actions that hand off into the app billing flow.
+
 ## 0.0.19
 
 ### Patch Changes
