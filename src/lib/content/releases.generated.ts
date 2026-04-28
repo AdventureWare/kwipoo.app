@@ -4,6 +4,60 @@ import type { WebsiteReleaseNote } from "./releases";
 
 export const generatedReleaseNotes: WebsiteReleaseNote[] = [
   {
+    version: "1.9.2",
+    slug: "release-1-9-2",
+    publishedAt: "2026-04-22",
+    title: "Billing checkout and manage deep links from failing",
+    summary:
+      "Prevent billing checkout and manage deep links from failing with a raw error page when Stripe setup is unavailable, and send people back to the billing drawer instead.",
+    highlights: [
+      "Prevent billing checkout and manage deep links from failing with a raw error page when Stripe setup is unavailable, and send people back to the billing drawer instead.",
+    ],
+    details: [
+      "Prevent billing checkout and manage deep links from failing with a raw error page when Stripe setup is unavailable, and send people back to the billing drawer instead.",
+    ],
+    importance: "quiet",
+    platformTargets: ["web", "ios_wrapper", "android_wrapper"],
+  },
+  {
+    version: "1.9.1",
+    slug: "release-1-9-1",
+    publishedAt: "2026-04-22",
+    title: "App-owned checkout and billing-management entry routes",
+    summary:
+      "Add app-owned checkout and billing-management entry routes so the marketing site can send people into authenticated purchase and subscription portal flows.",
+    highlights: [
+      "Add app-owned checkout and billing-management entry routes so the marketing site can send people into authenticated purchase and subscription portal flows.",
+    ],
+    details: [
+      "Add app-owned checkout and billing-management entry routes so the marketing site can send people into authenticated purchase and subscription portal flows.",
+    ],
+    importance: "quiet",
+    platformTargets: ["web", "ios_wrapper", "android_wrapper"],
+  },
+  {
+    version: "1.9.0",
+    slug: "freemium-plans-and-clearer-account-limits",
+    publishedAt: "2026-04-20",
+    title: "Freemium plans and premium upgrades",
+    summary:
+      "Kwipoo now includes a free plan with clear Thing limits, premium upgrades for higher allowances, and clearer account feedback when you hit a billing boundary.",
+    highlights: [
+      "Free accounts can now keep up to 100 Things, with clearer warnings before you hit the limit.",
+      "Premium upgrades unlock higher Thing and storage allowances through the new billing flow.",
+      "Plan status, upload and save errors, and downgrade states are clearer when premium changes or ends.",
+    ],
+    details: [
+      "Thing creation and managed uploads are now enforced server-side so plan limits apply consistently, including after reconnects and retried writes.",
+      "Existing Things and files stay available if premium ends, but new creates or uploads pause until you are back under your active allowance or premium is restored.",
+      "Sign-in and confirmation redirects stay more responsive when auth analytics is slow.",
+    ],
+    importance: "notable",
+    platformTargets: ["web", "ios_wrapper", "android_wrapper"],
+    ctaLabel: "Open What's New",
+    ctaHref: "/updates",
+  },
+  {
     version: "1.8.0",
     slug: "release-1-8-0",
     publishedAt: "2026-04-16",
