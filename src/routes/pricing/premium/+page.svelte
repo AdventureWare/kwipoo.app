@@ -2,8 +2,11 @@
   import { resolve } from "$app/paths";
   import { Button } from "$lib/components";
   import {
+    LIFETIME_OFFER_ENABLED,
+    PREMIUM_ANNUAL_CHECKOUT_URL,
     PREMIUM_CHECKOUT_URL,
     PREMIUM_CONTACT_HREF,
+    PREMIUM_LIFETIME_CHECKOUT_URL,
     PREMIUM_MANAGE_URL,
   } from "$lib/config/billing";
   import { SUPPORT_EMAIL } from "$lib/config/site";
@@ -18,31 +21,84 @@
     title: string;
     description: string;
   };
+  type PurchaseOption = {
+    name: string;
+    eyebrow: string;
+    price: string;
+    cadence: string;
+    description: string;
+    href: string;
+    ctaLabel: string;
+    featured?: boolean;
+    note: string;
+  };
 
-  const premiumSignupTitle = "Kwipoo Premium | Buy or Manage Your Subscription";
+  const premiumSignupTitle = "Kwipoo Premium | Monthly, Annual, and Lifetime";
   const premiumSignupDescription =
-    "Buy Kwipoo Premium for $4.99 per month or manage your existing subscription through the app-owned billing flow.";
+    "Buy Kwipoo Premium for $5 per month, $50 annually, or $80 lifetime access while the early adopter offer is available.";
+
+  const purchaseOptions = [
+    {
+      name: "Monthly",
+      eyebrow: "Flexible",
+      price: "$5",
+      cadence: "per month",
+      description:
+        "Premium capacity with the least upfront commitment. Cancel through the billing portal when needed.",
+      href: PREMIUM_CHECKOUT_URL,
+      ctaLabel: "Buy Monthly",
+      note: "Best when you want to try Premium without committing to a year.",
+    },
+    {
+      name: "Annual",
+      eyebrow: "Best subscription value",
+      price: "$50",
+      cadence: "per year",
+      description:
+        "Same Premium limits with a $10 annual savings compared with paying month to month.",
+      href: PREMIUM_ANNUAL_CHECKOUT_URL,
+      ctaLabel: "Buy Annual",
+      featured: true,
+      note: "A clean fit if Kwipoo is becoming part of your regular organizing system.",
+    },
+    ...(LIFETIME_OFFER_ENABLED
+      ? [
+          {
+            name: "Lifetime",
+            eyebrow: "Early adopter",
+            price: "$80",
+            cadence: "one-time",
+            description:
+              "Pay once for Premium access for the life of Kwipoo, with future updates and fair-use cloud storage included.",
+            href: PREMIUM_LIFETIME_CHECKOUT_URL,
+            ctaLabel: "Buy Lifetime",
+            note: "This offer can close for new buyers later. Existing lifetime buyers keep access.",
+          },
+        ]
+      : []),
+  ] satisfies PurchaseOption[];
 
   const setupCards = [
     {
       title: "Account-aware checkout",
       description:
-        "The website sends you into the app, where sign-in, subscription state, and Stripe checkout stay tied to the right account.",
+        "The website sends you into the app, where sign-in, purchase choice, and Stripe checkout stay tied to the right account.",
     },
     {
       title: "Customer portal access",
       description:
-        "Existing subscribers can open the billing portal from this same handoff instead of hunting around inside the product first.",
+        "Existing subscribers can open the billing portal from this same handoff to update payment details or cancel recurring plans.",
     },
     {
       title: "Grandfathering stays intact",
       description:
-        "Accounts created before the freemium rollout keep their grandfathered access rather than being forced into a paid plan.",
+        "Grandfathered, lifetime, and support-managed access are honored by the app entitlement layer.",
     },
   ] satisfies SetupCard[];
   const premiumChecklist = [
     "If you are new, the flow sends you through account creation first and then returns you to checkout.",
     "If you already have an account, sign in and continue directly into the hosted subscription flow.",
+    "If you choose Lifetime, Stripe records the payment and Kwipoo stores durable account access internally.",
     "If you are already paying, use the manage path to update payment details or cancel in the customer portal.",
   ];
 
@@ -113,12 +169,12 @@
         <h1
           class="max-w-4xl text-[2.5rem] font-semibold leading-tight tracking-tight text-color md:text-[3.15rem]"
         >
-          Buy Premium or manage the subscription you already have.
+          Choose the Premium path that fits how you want to pay.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
           Premium is handled inside the app so checkout, account state, and
-          billing management stay attached to the right user. Use this page to
-          start a new subscription or jump straight to the management path.
+          billing management stay attached to the right user. Pick monthly,
+          annual, or lifetime access and continue through Stripe.
         </p>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -128,7 +184,7 @@
             size="lg"
             class="sm:w-auto"
           >
-            Buy Premium
+            Buy Monthly
           </Button>
           <Button href="/pricing" variant="ghost" size="lg" class="sm:w-auto">
             Back to Pricing
@@ -175,12 +231,91 @@
             Premium plan
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            $4.99 per month
+            $5/month, $50/year, or $80 lifetime while available
           </p>
         </div>
       </aside>
     </div>
   </header>
+
+  <section class="grid gap-5">
+    <div class="space-y-3">
+      <p
+        class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
+      >
+        Purchase Options
+      </p>
+      <h2 class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color">
+        Premium is one product. The payment shape is your choice.
+      </h2>
+      <p class="max-w-4xl text-lg leading-8 text-brand-body">
+        Monthly and annual are subscriptions managed through the customer
+        portal. Lifetime is a one-time early adopter purchase that becomes
+        durable Premium access inside Kwipoo.
+      </p>
+    </div>
+
+    <div
+      class={[
+        "grid gap-4",
+        LIFETIME_OFFER_ENABLED ? "lg:grid-cols-3" : "md:grid-cols-2",
+      ]}
+    >
+      {#each purchaseOptions as option (option.name)}
+        <article
+          class={[
+            "card flex h-full flex-col rounded-[1.5rem] border p-6 shadow-sm",
+            option.featured
+              ? "border-primary-300 bg-linear-to-b from-primary-50 via-white to-surface-50"
+              : "border-surface-200 bg-surface-50",
+          ]}
+        >
+          <div class="space-y-2">
+            <p
+              class={[
+                "text-[0.78rem] font-semibold uppercase tracking-[0.18em]",
+                option.featured ? "text-primary-700" : "text-brand-muted",
+              ]}
+            >
+              {option.eyebrow}
+            </p>
+            <h3 class="text-[1.45rem] font-semibold leading-tight text-surface-950">
+              {option.name}
+            </h3>
+          </div>
+
+          <div class="mt-5 border-t border-surface-200 pt-5">
+            <div class="flex flex-wrap items-end gap-x-3 gap-y-1">
+              <p class="text-[1.9rem] font-semibold leading-none text-surface-950">
+                {option.price}
+              </p>
+              <p class="pb-1 text-sm font-medium uppercase tracking-[0.14em] text-brand-muted">
+                {option.cadence}
+              </p>
+            </div>
+            <p class="mt-4 text-[0.98rem] leading-7 text-brand-body">
+              {option.description}
+            </p>
+          </div>
+
+          <div class="mt-auto pt-6">
+            <!-- eslint-disable svelte/no-navigation-without-resolve -->
+            <Button
+              href={option.href}
+              variant={option.featured ? "primary" : "outline"}
+              class="w-full"
+            >
+              {option.ctaLabel}
+            </Button>
+            <!-- eslint-enable svelte/no-navigation-without-resolve -->
+            <p class="mt-4 text-sm leading-6 text-brand-muted">
+              {option.note}
+            </p>
+          </div>
+        </article>
+      {/each}
+    </div>
+  </section>
 
   <section class="grid gap-5">
     <div class="space-y-3">

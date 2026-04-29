@@ -513,8 +513,9 @@ test("@smoke pricing page renders the live freemium plan structure", async ({
     ).toBeVisible();
     await expect(headingLocator(page, 3, /^free$/i)).toBeVisible();
     await expect(headingLocator(page, 3, /^premium$/i)).toBeVisible();
+    await expect(headingLocator(page, 3, /^lifetime$/i)).toBeVisible();
     await expect(headingLocator(page, 3, /^custom$/i)).toBeVisible();
-    await expect(actionLocator(page, /buy premium/i)).toBeVisible();
+    await expect(actionLocator(page, /choose premium/i)).toBeVisible();
     await expect(
       actionLocator(page, /manage( your)? subscription/i),
     ).toBeVisible();
@@ -536,10 +537,12 @@ test("@smoke premium page exposes purchase and management handoffs or a gated 40
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: /buy premium or manage the subscription you already have/i,
+        name: /choose the premium path that fits how you want to pay/i,
       }),
     ).toBeVisible();
-    await expect(actionLocator(page, /buy premium/i)).toBeVisible();
+    await expect(actionLocator(page, /buy monthly/i)).toBeVisible();
+    await expect(actionLocator(page, /buy annual/i)).toBeVisible();
+    await expect(actionLocator(page, /buy lifetime/i)).toBeVisible();
     await expect(
       actionLocator(page, /manage( your)? subscription/i),
     ).toBeVisible();

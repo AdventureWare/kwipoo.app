@@ -2,6 +2,7 @@
   import { resolve } from "$app/paths";
   import { Button } from "$lib/components";
   import {
+    LIFETIME_OFFER_ENABLED,
     PREMIUM_MANAGE_URL,
     PREMIUM_SIGNUP_PATH,
   } from "$lib/config/billing";
@@ -41,7 +42,7 @@
 
   const pricingTitle = "Kwipoo Pricing | Free, Premium, and Custom Plans";
   const pricingDescription =
-    "Choose Kwipoo Free for up to 100 Things or upgrade to Premium for $4.99 per month and higher inventory and storage limits.";
+    "Choose Kwipoo Free for up to 100 Things, upgrade to Premium for $5 per month or $50 per year, or buy early lifetime access while available.";
   const customPricingHref = `${SUPPORT_EMAIL_MAILTO}?subject=${encodeURIComponent(
     "Kwipoo custom pricing inquiry",
   )}`;
@@ -62,7 +63,7 @@
       ],
       ctaLabel: "Start Free",
       ctaHref: APP_SIGNUP_URL,
-      ctaVariant: "secondary",
+      ctaVariant: "secondary" as const,
       footnote:
         "Free stays useful on its own, and you can upgrade later when you need more room.",
     },
@@ -70,23 +71,48 @@
       name: "Premium",
       eyebrow: "For heavier personal use",
       highlight: "Suggested flagship plan",
-      priceLabel: "$4.99",
-      cadence: "per month",
+      priceLabel: "$5",
+      cadence: "per month or $50/year",
       description:
         "More room for active households, hobby gear, storage projects, and repeat trip planning without running into the free cap.",
       features: [
         "Up to 5,000 Things before you hit the inventory limit",
         "10 GB of storage for richer photos and attachments",
+        "$50 annual plan saves $10 compared with monthly billing",
         "Hosted checkout and customer portal for self-serve billing",
         "Built for ongoing personal and household inventory use",
       ],
-      ctaLabel: "Buy Premium",
+      ctaLabel: "Choose Premium",
       ctaHref: PREMIUM_SIGNUP_PATH,
-      ctaVariant: "primary",
+      ctaVariant: "primary" as const,
       footnote:
         "Existing accounts keep their grandfathered access at no cost; new upgrades use the app-owned billing flow.",
       featured: true,
     },
+    ...(LIFETIME_OFFER_ENABLED
+      ? [
+          {
+            name: "Lifetime",
+            eyebrow: "Early adopter offer",
+            highlight: "Limited-time",
+            priceLabel: "$80",
+            cadence: "one-time",
+            description:
+              "A pay-once option for people who want Premium access without an ongoing subscription.",
+            features: [
+              "Premium Thing and storage limits for one personal account",
+              "Future Kwipoo updates included for the life of the product",
+              "No recurring subscription to manage",
+              "Available for early adopters while the offer remains open",
+            ],
+            ctaLabel: "View Lifetime",
+            ctaHref: PREMIUM_SIGNUP_PATH,
+            ctaVariant: "outline" as const,
+            footnote:
+              "Existing lifetime buyers keep their access if this offer is later closed to new purchases.",
+          },
+        ]
+      : []),
     {
       name: "Custom",
       eyebrow: "For larger or specialized setups",
@@ -102,7 +128,7 @@
       ],
       ctaLabel: "Speak to Sales",
       ctaHref: customPricingHref,
-      ctaVariant: "outline",
+      ctaVariant: "outline" as const,
       footnote:
         "Start here when Free or Premium is not the right fit.",
     },
@@ -113,25 +139,33 @@
       label: "Things",
       free: "Up to 100",
       premium: "Up to 5,000",
-      custom: "Tailored to fit scope",
+      custom: LIFETIME_OFFER_ENABLED
+        ? "Lifetime uses Premium limits"
+        : "Tailored to fit scope",
     },
     {
       label: "Storage",
       free: "250 MB",
       premium: "10 GB",
-      custom: "Shaped to fit the plan",
+      custom: LIFETIME_OFFER_ENABLED
+        ? "10 GB fair-use allowance"
+        : "Shaped to fit the plan",
     },
     {
       label: "Best fit",
       free: "Trying Kwipoo or staying light",
       premium: "Daily personal or household use",
-      custom: "Teams, groups, or complex rollouts",
+      custom: LIFETIME_OFFER_ENABLED
+        ? "Subscription-averse early adopters"
+        : "Teams, groups, or complex rollouts",
     },
     {
       label: "Billing",
       free: "No payment required",
-      premium: "Managed in the app with checkout and portal access",
-      custom: "Quoted conversation",
+      premium: "$5 monthly or $50 annually",
+      custom: LIFETIME_OFFER_ENABLED
+        ? "$80 one-time while available"
+        : "Quoted conversation",
     },
   ] satisfies ComparisonRow[];
 
@@ -197,10 +231,10 @@
           Free for up to 100 Things. Premium when you need real room to grow.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
-          Start with Kwipoo Free at no cost, then move to Premium for $4.99 per
-          month when you need higher Thing limits, more storage, and a managed
-          subscription path. If your setup is bigger than that, talk to us about
-          a custom arrangement.
+          Start with Kwipoo Free at no cost, then move to Premium for $5 per
+          month or $50 per year when you need higher Thing limits and more
+          storage. Early adopters can also choose $80 lifetime access while the
+          offer is open.
         </p>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -213,7 +247,7 @@
             Start Free
           </Button>
           <Button href={PREMIUM_SIGNUP_PATH} variant="outline" size="lg" class="sm:w-auto">
-            Buy Premium
+            Choose Premium
           </Button>
         </div>
         <p class="text-sm leading-6 text-brand-muted">
@@ -257,7 +291,7 @@
             Premium
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            $4.99 per month, self-serve
+            $5/month, $50/year, or $80 lifetime while available
           </p>
         </div>
       </aside>
@@ -278,12 +312,12 @@
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
         Free stays simple. Premium gives active users more room without asking
-        them to change how they organize. Custom is there when the self-serve
-        plans stop fitting.
+        them to change how they organize. Lifetime is available as an early
+        adopter offer for people who would rather pay once.
       </p>
     </div>
 
-    <div class="grid gap-4 xl:grid-cols-3">
+    <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
       {#each pricingTiers as tier (tier.name)}
         <article
           class={[
@@ -428,7 +462,7 @@
               <p
                 class="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-brand-muted"
               >
-                Custom
+                {LIFETIME_OFFER_ENABLED ? "Lifetime" : "Custom"}
               </p>
               <p class="mt-2 text-[0.98rem] leading-7 text-brand-body">
                 {row.custom}
