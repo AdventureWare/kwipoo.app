@@ -9,7 +9,7 @@
   } from "$lib/analytics";
   import { buildMarketingAppHandoffHref } from "$lib/analytics/handoff";
   import type { AnalyticsEventName } from "$lib/analytics/schema";
-  import { isExternalHref } from "$lib/config/site";
+  import { isExternalHref, shouldResolveInternalHref } from "$lib/config/site";
   import type { Snippet } from "svelte";
   import type {
     ClassValue,
@@ -93,7 +93,9 @@
       return undefined;
     }
 
-    const normalizedHref = isExternalHref(href) ? href : resolvePath(href);
+    const normalizedHref = shouldResolveInternalHref(href)
+      ? resolvePath(href)
+      : href;
     const ctaLocation =
       typeof analyticsProperties?.location === "string"
         ? analyticsProperties.location
@@ -129,7 +131,11 @@
   function shouldDelayTrackedNavigation(event: MouseEvent): boolean {
     const currentTarget = event.currentTarget;
 
-    if (!(currentTarget instanceof HTMLAnchorElement) || !resolvedHref || !href) {
+    if (
+      !(currentTarget instanceof HTMLAnchorElement) ||
+      !resolvedHref ||
+      !href
+    ) {
       return false;
     }
 
@@ -164,7 +170,7 @@
         window.location.assign(destinationHref);
       } else {
         // eslint-disable-next-line svelte/no-navigation-without-resolve
-        await goto(resolvePath(destinationHref));
+        await goto(destinationHref);
       }
 
       return;
@@ -182,7 +188,6 @@
     class={classes}
     aria-disabled={disabled}
     tabindex={disabled ? -1 : undefined}
-    role="button"
     onclick={handleClick}
   >
     {@render children()}

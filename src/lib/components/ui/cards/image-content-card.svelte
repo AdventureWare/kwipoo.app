@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { asset } from "$app/paths";
+  import { asset, resolve } from "$app/paths";
   import type { FeatureBadge } from "$lib/types/feature-badges";
+  import { shouldResolveInternalHref } from "$lib/config/site";
   import FeatureStatusBadge from "../feature-status-badge.svelte";
   import Button from "../buttons/button.svelte";
   import Tag from "../tag.svelte";
@@ -40,6 +41,8 @@
     supportingLinkHref,
     imageOnLeft = false,
   }: Props = $props();
+
+  const resolvePath = resolve as unknown as (path: string) => string;
 </script>
 
 <div
@@ -96,7 +99,9 @@
       {#if supportingLinkText && supportingLinkHref}
         <!-- eslint-disable svelte/no-navigation-without-resolve -->
         <a
-          href={supportingLinkHref}
+          href={shouldResolveInternalHref(supportingLinkHref)
+            ? resolvePath(supportingLinkHref)
+            : supportingLinkHref}
           class="inline-flex text-sm font-semibold text-primary-700 transition-colors hover:text-primary-800 hover:underline"
         >
           {supportingLinkText}
@@ -135,7 +140,9 @@
       {#if supportingLinkText && supportingLinkHref}
         <!-- eslint-disable svelte/no-navigation-without-resolve -->
         <a
-          href={supportingLinkHref}
+          href={shouldResolveInternalHref(supportingLinkHref)
+            ? resolvePath(supportingLinkHref)
+            : supportingLinkHref}
           class="inline-flex text-sm font-semibold text-primary-700 transition-colors hover:text-primary-800 hover:underline"
         >
           {supportingLinkText}

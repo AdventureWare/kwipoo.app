@@ -184,7 +184,7 @@
             <Button href={form.mailtoHref} variant="primary" size="md" class="sm:w-auto">
               Open prefilled email
             </Button>
-            <Button href={resolve("/support")} variant="outline" size="md" class="sm:w-auto">
+            <Button href="/support" variant="outline" size="md" class="sm:w-auto">
               Open support page
             </Button>
           </div>
@@ -303,7 +303,7 @@
           <Button type="submit" variant="primary" size="lg" class="sm:w-auto">
             Submit deletion request
           </Button>
-          <Button href={resolve("/privacy-policy")} variant="outline" size="lg" class="sm:w-auto">
+          <Button href="/privacy-policy" variant="outline" size="lg" class="sm:w-auto">
             Review privacy policy
           </Button>
         </div>

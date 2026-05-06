@@ -49,3 +49,7 @@ export function isExternalHref(href: string): boolean {
     href.startsWith("tel:")
   );
 }
+
+export function shouldResolveInternalHref(href: string): boolean {
+  return href.startsWith("/") && !href.startsWith("//");
+}

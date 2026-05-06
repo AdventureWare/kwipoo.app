@@ -41,8 +41,12 @@
   };
 
   const pricingTitle = "Kwipoo Pricing | Free, Premium, and Custom Plans";
-  const pricingDescription =
-    "Choose Kwipoo Free for up to 100 Things, upgrade to Premium for $5 per month or $50 per year, or buy early lifetime access while available.";
+  const premiumPriceSummary = LIFETIME_OFFER_ENABLED
+    ? "$5/month, $50/year, or $80 lifetime while available"
+    : "$5/month or $50/year";
+  const pricingDescription = LIFETIME_OFFER_ENABLED
+    ? "Choose Kwipoo Free for up to 100 Things, upgrade to Premium for $5 per month or $50 per year, or buy early lifetime access while available."
+    : "Choose Kwipoo Free for up to 100 Things, or upgrade to Premium for $5 per month or $50 per year when you need more room.";
   const customPricingHref = `${SUPPORT_EMAIL_MAILTO}?subject=${encodeURIComponent(
     "Kwipoo custom pricing inquiry",
   )}`;
@@ -86,7 +90,7 @@
       ctaHref: PREMIUM_SIGNUP_PATH,
       ctaVariant: "primary" as const,
       footnote:
-        "Existing accounts keep their grandfathered access at no cost; new upgrades use the app-owned billing flow.",
+        "Premium upgrades use Stripe checkout and can be managed from your Kwipoo account.",
       featured: true,
     },
     ...(LIFETIME_OFFER_ENABLED
@@ -129,8 +133,7 @@
       ctaLabel: "Speak to Sales",
       ctaHref: customPricingHref,
       ctaVariant: "outline" as const,
-      footnote:
-        "Start here when Free or Premium is not the right fit.",
+      footnote: "Start here when Free or Premium is not the right fit.",
     },
   ] satisfies PricingTier[];
 
@@ -233,8 +236,9 @@
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
           Start with Kwipoo Free at no cost, then move to Premium for $5 per
           month or $50 per year when you need higher Thing limits and more
-          storage. Early adopters can also choose $80 lifetime access while the
-          offer is open.
+          storage.{#if LIFETIME_OFFER_ENABLED}
+            Early adopters can also choose $80 lifetime access while the offer
+            is open.{/if}
         </p>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -246,18 +250,26 @@
           >
             Start Free
           </Button>
-          <Button href={PREMIUM_SIGNUP_PATH} variant="outline" size="lg" class="sm:w-auto">
+          <Button
+            href={PREMIUM_SIGNUP_PATH}
+            variant="outline"
+            size="lg"
+            class="sm:w-auto"
+          >
             Choose Premium
           </Button>
         </div>
         <p class="text-sm leading-6 text-brand-muted">
           Already paying?
           <!-- eslint-disable svelte/no-navigation-without-resolve -->
-          <a class="font-semibold text-primary-700 transition-colors hover:text-primary-800" href={PREMIUM_MANAGE_URL}>
+          <a
+            class="font-semibold text-primary-700 transition-colors hover:text-primary-800"
+            href={PREMIUM_MANAGE_URL}
+          >
             Manage your subscription
           </a>
           <!-- eslint-enable svelte/no-navigation-without-resolve -->
-          in the app-owned billing flow.
+          in Account settings.
         </p>
       </div>
 
@@ -268,17 +280,16 @@
           <p
             class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
           >
-            Current Status
+            Plan Snapshot
           </p>
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            Premium is live without forcing long-time users into a paid plan.
+            Premium adds room when Free gets tight.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            Existing accounts created before the freemium rollout keep their
-            grandfathered higher limits at no cost. New paid upgrades go through
-            the app-owned checkout and billing portal.
+            Free includes 100 Things and 250 MB of storage. Premium raises that
+            to 5,000 Things and 10 GB, with self-serve billing through Stripe.
           </p>
         </div>
 
@@ -291,7 +302,7 @@
             Premium
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            $5/month, $50/year, or $80 lifetime while available
+            {premiumPriceSummary}
           </p>
         </div>
       </aside>
@@ -308,12 +319,14 @@
       <h2
         class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
       >
-        Pick the lane that matches how much inventory and storage you actually need.
+        Pick the lane that matches how much inventory and storage you actually
+        need.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
         Free stays simple. Premium gives active users more room without asking
-        them to change how they organize. Lifetime is available as an early
-        adopter offer for people who would rather pay once.
+        them to change how they organize.{#if LIFETIME_OFFER_ENABLED}
+          Lifetime is available as an early adopter offer for people who would
+          rather pay once.{/if}
       </p>
     </div>
 
@@ -419,7 +432,10 @@
       <p class="text-sm leading-6 text-brand-muted">
         Existing customers do not need to rebuy here.
         <!-- eslint-disable svelte/no-navigation-without-resolve -->
-        <a class="font-semibold text-primary-700 transition-colors hover:text-primary-800" href={PREMIUM_MANAGE_URL}>
+        <a
+          class="font-semibold text-primary-700 transition-colors hover:text-primary-800"
+          href={PREMIUM_MANAGE_URL}
+        >
           Open subscription management
         </a>
         <!-- eslint-enable svelte/no-navigation-without-resolve -->
@@ -498,8 +514,8 @@
             Premium buys room, not complexity
           </h3>
           <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
-            The upgrade is straightforward: more Things, more storage, and an
-            account-managed billing path.
+            The upgrade is straightforward: more Things, more storage, and
+            billing controls in Account settings.
           </p>
         </div>
         <div class="rounded-[1.1rem] border border-surface-200 bg-white p-4">
@@ -507,8 +523,8 @@
             Existing users keep their footing
           </h3>
           <p class="mt-2 text-[0.96rem] leading-7 text-brand-body">
-            Grandfathered accounts are not forced into paid conversion just
-            because Premium now exists.
+            Accounts with grandfathered access keep their current limits.
+            Standard upgrades stay separate and self-serve.
           </p>
         </div>
       </div>

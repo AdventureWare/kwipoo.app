@@ -29,7 +29,7 @@ export const PREMIUM_LIFETIME_CHECKOUT_URL =
   APP_BILLING_LIFETIME_CHECKOUT_URL;
 export const PREMIUM_MANAGE_URL = APP_BILLING_MANAGE_URL;
 export const LIFETIME_OFFER_ENABLED =
-  publicEnv.PUBLIC_LIFETIME_OFFER_ENABLED !== "false";
+  publicEnv.PUBLIC_LIFETIME_OFFER_ENABLED === "true";
 export const PREMIUM_CONTACT_HREF = `${SUPPORT_EMAIL_MAILTO}?subject=${encodeURIComponent(
   "Kwipoo Premium signup",
 )}`;

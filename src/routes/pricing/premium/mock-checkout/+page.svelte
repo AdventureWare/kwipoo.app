@@ -562,7 +562,7 @@
           </div>
 
           <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button href={resolve("/pricing")} variant="primary" size="lg" class="sm:w-auto">
+            <Button href="/pricing" variant="primary" size="lg" class="sm:w-auto">
               Back to Pricing
             </Button>
             <Button

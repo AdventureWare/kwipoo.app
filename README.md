@@ -47,7 +47,7 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 
 - `PUBLIC_PREMIUM_CHECKOUT_URL`, `PUBLIC_PREMIUM_ANNUAL_CHECKOUT_URL`, and `PUBLIC_PREMIUM_LIFETIME_CHECKOUT_URL` can override the app-owned billing handoff routes.
 - If checkout values are blank, the Premium flow links to the app at `/billing/checkout` with the selected plan query.
-- `PUBLIC_LIFETIME_OFFER_ENABLED=false` hides the early lifetime offer for new purchases without affecting existing app entitlements.
+- `PUBLIC_LIFETIME_OFFER_ENABLED=true` shows the early lifetime offer for new purchases; it is hidden by default and does not affect existing app entitlements.
 - For local testing, you can point `PUBLIC_PREMIUM_CHECKOUT_URL` at `/pricing/premium/mock-checkout` to exercise the mock purchase flow end to end.
 - The marketing site should own the handoff and messaging, not the source of truth for billing state or subscription entitlements.
 

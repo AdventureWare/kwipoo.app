@@ -7,11 +7,18 @@ const DEFAULT_PUBLIC_ENV = {
   PUBLIC_LIFETIME_OFFER_ENABLED: undefined,
 };
 
-async function loadBillingConfig({ checkoutUrl }: { checkoutUrl?: string }) {
+async function loadBillingConfig({
+  checkoutUrl,
+  lifetimeOfferEnabled,
+}: {
+  checkoutUrl?: string;
+  lifetimeOfferEnabled?: string;
+}) {
   vi.resetModules();
   vi.doMock("$env/static/public", () => ({
     ...DEFAULT_PUBLIC_ENV,
     PUBLIC_PREMIUM_CHECKOUT_URL: checkoutUrl,
+    PUBLIC_LIFETIME_OFFER_ENABLED: lifetimeOfferEnabled,
   }));
 
   return import("../../src/lib/config/billing");
@@ -46,6 +53,14 @@ describe("billing config", () => {
     expect(PREMIUM_ANNUAL_CHECKOUT_URL).toContain("plan=premium_annual");
     expect(PREMIUM_LIFETIME_CHECKOUT_URL).toContain("plan=lifetime_premium");
     expect(PREMIUM_MANAGE_URL).toContain("/billing/manage");
+    expect(LIFETIME_OFFER_ENABLED).toBe(false);
+  });
+
+  it("shows the lifetime offer only when explicitly enabled", async () => {
+    const { LIFETIME_OFFER_ENABLED } = await loadBillingConfig({
+      lifetimeOfferEnabled: "true",
+    });
+
     expect(LIFETIME_OFFER_ENABLED).toBe(true);
   });
 

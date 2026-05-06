@@ -192,12 +192,7 @@
             >
               Open prefilled email
             </Button>
-            <Button
-              href={resolve("/support")}
-              variant="outline"
-              size="md"
-              class="sm:w-auto"
-            >
+            <Button href="/support" variant="outline" size="md" class="sm:w-auto">
               Open support page
             </Button>
           </div>
@@ -324,12 +319,7 @@
           <Button type="submit" variant="primary" size="lg" class="sm:w-auto">
             Submit account deletion request
           </Button>
-          <Button
-            href={resolve("/delete-data-form")}
-            variant="outline"
-            size="lg"
-            class="sm:w-auto"
-          >
+          <Button href="/delete-data-form" variant="outline" size="lg" class="sm:w-auto">
             Open delete data request
           </Button>
         </div>

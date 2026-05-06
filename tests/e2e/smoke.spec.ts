@@ -7,6 +7,8 @@ import {
 import { APP_URL } from "../../src/lib/config/site";
 
 const PREVIEW_URL = `http://127.0.0.1:${process.env.KWIPOO_PLAYWRIGHT_PREVIEW_PORT ?? "4173"}`;
+const LIFETIME_OFFER_ENABLED =
+  process.env.PUBLIC_LIFETIME_OFFER_ENABLED === "true";
 
 type AnalyticsCapturePayload = {
   event: string;
@@ -513,7 +515,9 @@ test("@smoke pricing page renders the live freemium plan structure", async ({
     ).toBeVisible();
     await expect(headingLocator(page, 3, /^free$/i)).toBeVisible();
     await expect(headingLocator(page, 3, /^premium$/i)).toBeVisible();
-    await expect(headingLocator(page, 3, /^lifetime$/i)).toBeVisible();
+    if (LIFETIME_OFFER_ENABLED) {
+      await expect(headingLocator(page, 3, /^lifetime$/i)).toBeVisible();
+    }
     await expect(headingLocator(page, 3, /^custom$/i)).toBeVisible();
     await expect(actionLocator(page, /choose premium/i)).toBeVisible();
     await expect(
@@ -542,7 +546,9 @@ test("@smoke premium page exposes purchase and management handoffs or a gated 40
     ).toBeVisible();
     await expect(actionLocator(page, /buy monthly/i)).toBeVisible();
     await expect(actionLocator(page, /buy annual/i)).toBeVisible();
-    await expect(actionLocator(page, /buy lifetime/i)).toBeVisible();
+    if (LIFETIME_OFFER_ENABLED) {
+      await expect(actionLocator(page, /buy lifetime/i)).toBeVisible();
+    }
     await expect(
       actionLocator(page, /manage( your)? subscription/i),
     ).toBeVisible();

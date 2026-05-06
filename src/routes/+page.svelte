@@ -45,15 +45,15 @@
       return APP_LOGIN_URL;
     }
 
-    return resolvePath(getDocsHref(slug));
+    return getDocsHref(slug);
   }
 
   function resolveResourceGuideHref(slug: string): string {
     if (!isSiteSectionEnabled("resources")) {
-      return resolvePath(getResourcesHref());
+      return getResourcesHref();
     }
 
-    return resolvePath(getResourcesHref(slug));
+    return getResourcesHref(slug);
   }
 
   const problemSolutionData = [
@@ -325,7 +325,7 @@
     href: string;
   }
 
-  const resourcesHubHref = resolvePath(getResourcesHref());
+  const resourcesHubHref = getResourcesHref();
   const homepageGuideEntrySlugs = [
     "home-inventory-that-stays-updated",
     "organize-storage-bins-find-things-later",
@@ -347,7 +347,7 @@
         audience: guide.audience,
         title: guide.title,
         summary: guide.summary,
-        href: resolvePath(getResourcesHref(guide.slug)),
+        href: getResourcesHref(guide.slug),
       };
     })
     .filter((entry): entry is HomeGuideEntry => Boolean(entry));
@@ -569,7 +569,7 @@
         </p>
         <!-- eslint-disable svelte/no-navigation-without-resolve -->
         <a
-          href={resourcesHubHref}
+          href={resolvePath(resourcesHubHref)}
           class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary-700 transition-colors duration-150 hover:text-primary-800"
         >
           See all guides
@@ -581,7 +581,7 @@
         {#each homepageGuideEntries as guide (guide.slug)}
           <!-- eslint-disable svelte/no-navigation-without-resolve -->
           <a
-            href={guide.href}
+            href={resolvePath(guide.href)}
             class="brand-outline-card card-hover flex h-full flex-col rounded-[1.5rem] border border-brand-border bg-brand-panel/88 p-5 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 sm:p-6"
           >
             <p

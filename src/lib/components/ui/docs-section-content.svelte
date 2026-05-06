@@ -1,7 +1,7 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { getDocsSubsectionId, type DocsSection } from "$lib/content/docs";
-  import { isExternalHref } from "$lib/config/site";
+  import { shouldResolveInternalHref } from "$lib/config/site";
 
   let {
     section,
@@ -19,7 +19,7 @@
   const resolvePath = resolve as unknown as (path: string) => string;
 
   function getExampleHref(href: string): string {
-    return isExternalHref(href) ? href : resolvePath(href);
+    return shouldResolveInternalHref(href) ? resolvePath(href) : href;
   }
 </script>
 

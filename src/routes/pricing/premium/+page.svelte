@@ -33,9 +33,15 @@
     note: string;
   };
 
-  const premiumSignupTitle = "Kwipoo Premium | Monthly, Annual, and Lifetime";
-  const premiumSignupDescription =
-    "Buy Kwipoo Premium for $5 per month, $50 annually, or $80 lifetime access while the early adopter offer is available.";
+  const premiumSignupTitle = LIFETIME_OFFER_ENABLED
+    ? "Kwipoo Premium | Monthly, Annual, and Lifetime"
+    : "Kwipoo Premium | Monthly and Annual Plans";
+  const premiumSignupDescription = LIFETIME_OFFER_ENABLED
+    ? "Buy Kwipoo Premium for $5 per month, $50 annually, or $80 lifetime access while the early adopter offer is available."
+    : "Buy Kwipoo Premium for $5 per month or $50 annually when you need more inventory and storage room.";
+  const premiumPriceSummary = LIFETIME_OFFER_ENABLED
+    ? "$5/month, $50/year, or $80 lifetime while available"
+    : "$5/month or $50/year";
 
   const purchaseOptions = [
     {
@@ -80,26 +86,31 @@
 
   const setupCards = [
     {
-      title: "Account-aware checkout",
+      title: "Checkout stays tied to your account",
       description:
-        "The website sends you into the app, where sign-in, purchase choice, and Stripe checkout stay tied to the right account.",
+        "Sign in or create an account first, then continue through Stripe so Premium unlocks for the right Kwipoo profile.",
     },
     {
-      title: "Customer portal access",
+      title: "Billing controls stay in Account settings",
       description:
-        "Existing subscribers can open the billing portal from this same handoff to update payment details or cancel recurring plans.",
+        "Subscribers can return to Plan & Billing to update payment details, review the current plan, or cancel recurring access.",
     },
     {
-      title: "Grandfathering stays intact",
-      description:
-        "Grandfathered, lifetime, and support-managed access are honored by the app entitlement layer.",
+      title: "Special access is handled directly",
+      description: LIFETIME_OFFER_ENABLED
+        ? "Grandfathered, lifetime, and support-managed access stay attached to your account without forcing a standard checkout."
+        : "Grandfathered and support-managed access stay attached to your account without forcing a standard checkout.",
     },
   ] satisfies SetupCard[];
   const premiumChecklist = [
-    "If you are new, the flow sends you through account creation first and then returns you to checkout.",
-    "If you already have an account, sign in and continue directly into the hosted subscription flow.",
-    "If you choose Lifetime, Stripe records the payment and Kwipoo stores durable account access internally.",
-    "If you are already paying, use the manage path to update payment details or cancel in the customer portal.",
+    "If you are new, create an account first so Premium can unlock on the right profile.",
+    "If you already have an account, sign in and continue directly to hosted checkout.",
+    ...(LIFETIME_OFFER_ENABLED
+      ? [
+          "If you choose Lifetime, Stripe records the payment and Kwipoo keeps durable Premium access on your account.",
+        ]
+      : []),
+    "If you are already paying, manage payment details or cancellation from Plan & Billing.",
   ];
 
   const premiumSignupStructuredData = {
@@ -172,9 +183,10 @@
           Choose the Premium path that fits how you want to pay.
         </h1>
         <p class="max-w-3xl text-lg leading-8 text-brand-body">
-          Premium is handled inside the app so checkout, account state, and
-          billing management stay attached to the right user. Pick monthly,
-          annual, or lifetime access and continue through Stripe.
+          Sign in or create an account, choose monthly{#if LIFETIME_OFFER_ENABLED},
+            annual, or lifetime access{:else}
+            or annual access{/if}, and continue through Stripe. After purchase,
+          your plan and billing controls live in Account settings.
         </p>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -193,7 +205,10 @@
         <p class="text-sm leading-6 text-brand-muted">
           Already subscribed?
           <!-- eslint-disable svelte/no-navigation-without-resolve -->
-          <a class="font-semibold text-primary-700 transition-colors hover:text-primary-800" href={PREMIUM_MANAGE_URL}>
+          <a
+            class="font-semibold text-primary-700 transition-colors hover:text-primary-800"
+            href={PREMIUM_MANAGE_URL}
+          >
             Manage your subscription
           </a>
           <!-- eslint-enable svelte/no-navigation-without-resolve -->
@@ -208,17 +223,16 @@
           <p
             class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-primary-700"
           >
-            Account-linked billing
+            Account-Linked Billing
           </p>
           <h2
             class="text-[1.4rem] font-semibold leading-tight text-surface-950"
           >
-            The marketing site owns the handoff. The app owns the subscription.
+            Checkout stays tied to your Kwipoo account.
           </h2>
           <p class="text-[0.98rem] leading-7 text-brand-body">
-            That separation keeps billing reliable. The website can explain the
-            plan and capture intent, while the authenticated app handles
-            checkout, cancellation, and state changes without duplicate logic.
+            Choose the Premium option that fits, then continue in the app so
+            billing, plan status, and account access stay connected.
           </p>
         </div>
 
@@ -231,7 +245,7 @@
             Premium plan
           </p>
           <p class="mt-2 text-sm leading-6 text-surface-950">
-            $5/month, $50/year, or $80 lifetime while available
+            {premiumPriceSummary}
           </p>
         </div>
       </aside>
@@ -245,13 +259,16 @@
       >
         Purchase Options
       </p>
-      <h2 class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color">
+      <h2
+        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
+      >
         Premium is one product. The payment shape is your choice.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
         Monthly and annual are subscriptions managed through the customer
-        portal. Lifetime is a one-time early adopter purchase that becomes
-        durable Premium access inside Kwipoo.
+        portal.{#if LIFETIME_OFFER_ENABLED}
+          Lifetime is a one-time early adopter purchase that becomes durable
+          Premium access inside Kwipoo.{/if}
       </p>
     </div>
 
@@ -279,17 +296,23 @@
             >
               {option.eyebrow}
             </p>
-            <h3 class="text-[1.45rem] font-semibold leading-tight text-surface-950">
+            <h3
+              class="text-[1.45rem] font-semibold leading-tight text-surface-950"
+            >
               {option.name}
             </h3>
           </div>
 
           <div class="mt-5 border-t border-surface-200 pt-5">
             <div class="flex flex-wrap items-end gap-x-3 gap-y-1">
-              <p class="text-[1.9rem] font-semibold leading-none text-surface-950">
+              <p
+                class="text-[1.9rem] font-semibold leading-none text-surface-950"
+              >
                 {option.price}
               </p>
-              <p class="pb-1 text-sm font-medium uppercase tracking-[0.14em] text-brand-muted">
+              <p
+                class="pb-1 text-sm font-medium uppercase tracking-[0.14em] text-brand-muted"
+              >
                 {option.cadence}
               </p>
             </div>
@@ -322,15 +345,17 @@
       <p
         class="text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-brand-muted"
       >
-        What This Route Owns
+        How It Works
       </p>
-      <h2 class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color">
-        This page should answer two questions fast: how do I buy, and how do I manage?
+      <h2
+        class="text-[1.9rem] font-semibold leading-tight tracking-tight text-color"
+      >
+        Buy Premium from the right account, then manage it from the same place.
       </h2>
       <p class="max-w-4xl text-lg leading-8 text-brand-body">
-        The buy path sends people into the app-owned checkout flow. The manage
-        path sends paying customers into the billing portal or back to their
-        account billing screen if the subscription is handled another way.
+        The purchase buttons send you to account-linked checkout. The manage
+        link sends subscribers to the billing portal or back to Plan & Billing
+        when access is handled another way.
       </p>
     </div>
 
@@ -339,7 +364,9 @@
         <article
           class="card rounded-[1.35rem] border border-surface-200 bg-surface-50 p-5 shadow-sm"
         >
-          <h3 class="text-[1.2rem] font-semibold leading-tight text-surface-950">
+          <h3
+            class="text-[1.2rem] font-semibold leading-tight text-surface-950"
+          >
             {card.title}
           </h3>
           <p class="mt-3 text-[0.98rem] leading-7 text-brand-body">
