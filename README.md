@@ -60,7 +60,8 @@ Create a local `.env` from `.env.example` when you want to override a flag local
 - In preview and development environments, this key should point at `Kwipoo Staging`, not the production project.
 - `PUBLIC_POSTHOG_HOST` overrides the PostHog API host and defaults to `https://us.i.posthog.com`.
 - `PUBLIC_ANALYTICS_SCRIPT_URL` can load the provider script if it is not already present on `window`.
-- The shared client layer tracks pageviews centrally from `src/routes/+layout.svelte` and supports CTA event hooks through the shared button component.
+- The shared client layer tracks pageviews centrally from `src/routes/+layout.svelte` and supports CTA event hooks through the shared button component, but it does not initialize PostHog or emit events until the visitor accepts optional analytics in the cookie banner.
+- Visitors can change their analytics choice from the footer Cookie Settings control. Global Privacy Control is treated as an analytics opt-out signal.
 - Marketing-site handoff links into the app now preserve a lean acquisition payload: `utm_source`, `utm_medium`, `utm_campaign`, `landing_path`, `cta_location`, and `cta_kind`.
 - The environment verification runbook lives in `docs/analytics-environment-verification.md`.
 - The weekly resource-funnel review loop lives in `docs/resource-funnel-weekly-review.md`.
