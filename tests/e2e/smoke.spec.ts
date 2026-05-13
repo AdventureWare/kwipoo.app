@@ -76,39 +76,52 @@ function footerLocator(page: Page) {
   return page.locator("footer, [role='contentinfo']").first();
 }
 
-async function installAnalyticsStub(page: Page): Promise<void> {
-  await page.addInitScript(() => {
-    const trackedWindow = window as typeof window & {
-      __kwipooPosthogEvents?: AnalyticsCapturePayload[];
-      __kwipooPosthogInit?: {
-        apiKey: string;
-        options?: Record<string, unknown>;
-      } | null;
-      posthog?: {
-        __kwipooInitialized?: boolean;
-        init: (apiKey: string, options?: Record<string, unknown>) => void;
-        capture: (event: string, properties?: Record<string, unknown>) => void;
+async function installAnalyticsStub(
+  page: Page,
+  { consent = true }: { consent?: boolean } = {},
+): Promise<void> {
+  await page.addInitScript(
+    ({ consent }) => {
+      const trackedWindow = window as typeof window & {
+        __kwipooPosthogEvents?: AnalyticsCapturePayload[];
+        __kwipooPosthogInit?: {
+          apiKey: string;
+          options?: Record<string, unknown>;
+        } | null;
+        posthog?: {
+          __kwipooInitialized?: boolean;
+          init: (apiKey: string, options?: Record<string, unknown>) => void;
+          capture: (
+            event: string,
+            properties?: Record<string, unknown>,
+          ) => void;
+        };
       };
-    };
 
-    trackedWindow.__kwipooPosthogEvents = [];
-    trackedWindow.__kwipooPosthogInit = null;
-    trackedWindow.posthog = {
-      __kwipooInitialized: false,
-      init(apiKey, options) {
-        trackedWindow.__kwipooPosthogInit = { apiKey, options };
-        this.__kwipooInitialized = true;
-      },
-      capture(event, properties) {
-        trackedWindow.__kwipooPosthogEvents?.push({
-          event,
-          properties: properties as
-            | Record<string, string | number | boolean | null>
-            | undefined,
-        });
-      },
-    };
-  });
+      if (consent) {
+        window.localStorage.setItem("kwipoo.analyticsConsent", "accepted");
+      }
+
+      trackedWindow.__kwipooPosthogEvents = [];
+      trackedWindow.__kwipooPosthogInit = null;
+      trackedWindow.posthog = {
+        __kwipooInitialized: false,
+        init(apiKey, options) {
+          trackedWindow.__kwipooPosthogInit = { apiKey, options };
+          this.__kwipooInitialized = true;
+        },
+        capture(event, properties) {
+          trackedWindow.__kwipooPosthogEvents?.push({
+            event,
+            properties: properties as
+              | Record<string, string | number | boolean | null>
+              | undefined,
+          });
+        },
+      };
+    },
+    { consent },
+  );
 }
 
 async function getAnalyticsEvents(
@@ -121,6 +134,21 @@ async function getAnalyticsEvents(
 
     return trackedWindow.__kwipooPosthogEvents ?? [];
   });
+}
+
+async function waitForAnalyticsEvent(
+  page: Page,
+  eventName: string,
+): Promise<void> {
+  await page.waitForFunction((eventName) => {
+    const trackedWindow = window as typeof window & {
+      __kwipooPosthogEvents?: Array<{ event: string }>;
+    };
+
+    return trackedWindow.__kwipooPosthogEvents?.some(
+      (payload) => payload.event === eventName,
+    );
+  }, eventName);
 }
 
 test("@smoke homepage renders primary marketing content", async ({ page }) => {
@@ -138,6 +166,21 @@ test("@smoke homepage renders primary marketing content", async ({ page }) => {
   await expectJsonLdScriptsToParse(page);
 });
 
+test("@smoke cookie banner gates optional analytics until consent", async ({
+  page,
+}) => {
+  await installAnalyticsStub(page, { consent: false });
+  await page.goto("/");
+
+  await expect(page.getByText(/cookie choices/i)).toBeVisible();
+  expect(await getAnalyticsEvents(page)).toHaveLength(0);
+
+  await page.getByRole("button", { name: /accept analytics/i }).click();
+  await expect(page.getByText(/cookie choices/i)).toBeHidden();
+
+  await waitForAnalyticsEvent(page, "$pageview");
+});
+
 test("@smoke homepage emits pageview and CTA analytics with the marketing handoff payload", async ({
   page,
 }) => {
@@ -146,15 +189,7 @@ test("@smoke homepage emits pageview and CTA analytics with the marketing handof
     "/?utm_source=newsletter&utm_medium=email&utm_campaign=spring-launch",
   );
 
-  await page.waitForFunction(() => {
-    const trackedWindow = window as typeof window & {
-      __kwipooPosthogEvents?: Array<{ event: string }>;
-    };
-
-    return trackedWindow.__kwipooPosthogEvents?.some(
-      (payload) => payload.event === "$pageview",
-    );
-  });
+  await waitForAnalyticsEvent(page, "$pageview");
 
   const primaryCta = actionLocator(page, /start free/i).first();
   await expect(primaryCta).toBeVisible();
@@ -170,15 +205,7 @@ test("@smoke homepage emits pageview and CTA analytics with the marketing handof
   const popup = await popupPromise;
   await popup?.close();
 
-  await page.waitForFunction(() => {
-    const trackedWindow = window as typeof window & {
-      __kwipooPosthogEvents?: Array<{ event: string }>;
-    };
-
-    return trackedWindow.__kwipooPosthogEvents?.some(
-      (payload) => payload.event === "marketing_cta_clicked",
-    );
-  });
+  await waitForAnalyticsEvent(page, "marketing_cta_clicked");
 
   const analyticsEvents = await getAnalyticsEvents(page);
   const pageviewEvent = analyticsEvents.find(
@@ -320,6 +347,7 @@ test("@smoke resources hub guide clicks emit discovery analytics", async ({
 
   await installAnalyticsStub(page);
   await page.goto("/resources");
+  await waitForAnalyticsEvent(page, "$pageview");
 
   const guideLink = page.getByRole("link", {
     name: /build a home inventory you can actually keep updated/i,
@@ -330,6 +358,7 @@ test("@smoke resources hub guide clicks emit discovery analytics", async ({
   await expect(page).toHaveURL(
     /\/resources\/home-inventory-that-stays-updated$/,
   );
+  await waitForAnalyticsEvent(page, "resource_guide_selected");
 
   const analyticsEvents = await getAnalyticsEvents(page);
   const selectionEvent = analyticsEvents.find(
@@ -360,6 +389,7 @@ test("@smoke resource guide CTA analytics include guide attribution", async ({
   await page.goto(
     "/resources/home-inventory-that-stays-updated?utm_source=search&utm_medium=organic&utm_campaign=resource-proof",
   );
+  await waitForAnalyticsEvent(page, "$pageview");
 
   const guidePrimaryCta = actionLocator(page, /start free/i).first();
   await expect(guidePrimaryCta).toBeVisible();
@@ -376,15 +406,7 @@ test("@smoke resource guide CTA analytics include guide attribution", async ({
   const popup = await popupPromise;
   await popup?.close();
 
-  await page.waitForFunction(() => {
-    const trackedWindow = window as typeof window & {
-      __kwipooPosthogEvents?: Array<{ event: string }>;
-    };
-
-    return trackedWindow.__kwipooPosthogEvents?.some(
-      (payload) => payload.event === "marketing_cta_clicked",
-    );
-  });
+  await waitForAnalyticsEvent(page, "marketing_cta_clicked");
 
   const analyticsEvents = await getAnalyticsEvents(page);
   const ctaEvent = analyticsEvents.find(
@@ -431,6 +453,7 @@ test("@smoke resource guide related-guide clicks emit in-guide discovery analyti
 
   await installAnalyticsStub(page);
   await page.goto("/resources/home-inventory-that-stays-updated");
+  await waitForAnalyticsEvent(page, "$pageview");
 
   const inlineRelatedSection = page.locator("section").filter({
     has: page.getByRole("heading", {
@@ -446,6 +469,7 @@ test("@smoke resource guide related-guide clicks emit in-guide discovery analyti
   await expect(page).toHaveURL(
     /\/resources\/organize-storage-bins-find-things-later$/,
   );
+  await waitForAnalyticsEvent(page, "resource_guide_selected");
 
   const analyticsEvents = await getAnalyticsEvents(page);
   const selectionEvent = analyticsEvents.find(
@@ -618,14 +642,14 @@ test("@smoke homepage footer links and social actions remain accessible on narro
   }
 
   await expect(
-    page.getByRole("link", { name: /privacy policy/i }),
+    footer.getByRole("link", { name: /^privacy policy$/i }),
   ).toBeVisible();
   await expect(footer.getByRole("link", { name: /^support$/i })).toBeVisible();
   await expect(
-    page.getByRole("link", { name: /delete account request/i }),
+    footer.getByRole("link", { name: /delete account request/i }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: /terms & conditions/i }),
+    footer.getByRole("link", { name: /terms & conditions/i }),
   ).toBeVisible();
   await expect(footer.getByLabel(/twitter/i)).toBeVisible();
 });

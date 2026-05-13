@@ -1,6 +1,7 @@
 <script lang="ts">
   import { asset, resolve } from "$app/paths";
   import { TwitterLogo, LinkedinLogo, InstagramLogo } from "phosphor-svelte";
+  import { openAnalyticsConsentSettings } from "$lib/analytics/consent";
   import {
     COMPANY_NAME,
     COMPANY_WEBSITE_URL,
@@ -69,6 +70,14 @@
           Email support
         </a>
         <!-- eslint-enable svelte/no-navigation-without-resolve -->
+
+        <button
+          type="button"
+          class="mt-4 inline-flex text-sm font-semibold text-primary-700 transition-colors duration-200 hover:text-primary-800"
+          onclick={openAnalyticsConsentSettings}
+        >
+          Cookie Settings
+        </button>
       </div>
 
       <div class="col-span-1">

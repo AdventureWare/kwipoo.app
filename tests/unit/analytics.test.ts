@@ -87,8 +87,10 @@ function setWindowPostHog(posthog: MockPostHog): void {
 
 async function loadAnalytics({
   scriptUrl,
+  hasConsent = true,
 }: {
   scriptUrl?: string;
+  hasConsent?: boolean;
 } = {}) {
   mockPostHog = createMockPostHog();
 
@@ -100,6 +102,9 @@ async function loadAnalytics({
     ANALYTICS_SCRIPT_URL: scriptUrl,
     POSTHOG_HOST: "https://us.i.posthog.com",
     POSTHOG_KEY: "phc_test_website_key",
+  }));
+  vi.doMock("$lib/analytics/consent", () => ({
+    hasAnalyticsConsent: () => hasConsent,
   }));
   vi.doMock("posthog-js", () => ({
     default: mockPostHog,
@@ -122,6 +127,7 @@ afterEach(() => {
   vi.resetModules();
   vi.doUnmock("$app/environment");
   vi.doUnmock("$lib/config/analytics");
+  vi.doUnmock("$lib/analytics/consent");
   vi.doUnmock("posthog-js");
 });
 
@@ -175,5 +181,24 @@ describe("analytics initialization", () => {
         'script[data-analytics-src="https://cdn.example.com/posthog-stub.js"]',
       ),
     ).not.toBeNull();
+  });
+
+  it("does not initialize or track before analytics consent", async () => {
+    const { analytics, posthog } = await loadAnalytics({ hasConsent: false });
+
+    await expect(analytics.initializeAnalytics()).resolves.toBe(false);
+    await analytics.trackAnalyticsEvent("marketing_cta_clicked", {
+      label: "Get Started",
+    });
+    analytics.trackPageView({
+      source: "marketing_site",
+      path: "/",
+      url: "https://kwipoo.app/",
+      title: "Kwipoo",
+      navigation_type: "initial_load",
+    });
+
+    expect(posthog.init).not.toHaveBeenCalled();
+    expect(posthog.capture).not.toHaveBeenCalled();
   });
 });

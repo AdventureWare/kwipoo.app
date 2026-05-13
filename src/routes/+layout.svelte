@@ -2,6 +2,7 @@
   import "../app.css";
   import { page } from "$app/state";
   import { Header, Footer } from "$lib/components";
+  import CookieConsent from "$lib/components/analytics/cookie-consent.svelte";
   import MarketingAnalytics from "$lib/components/analytics/marketing-analytics.svelte";
   import { SITE_NAME } from "$lib/config/site";
   import {
@@ -48,4 +49,5 @@
     {@render children()}
   </main>
   <Footer />
+  <CookieConsent />
 </div>

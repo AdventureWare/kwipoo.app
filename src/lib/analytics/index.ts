@@ -12,6 +12,7 @@ import {
   type MarketingCtaClickedInput,
   type MarketingPageViewProperties,
 } from "$lib/analytics/schema";
+import { hasAnalyticsConsent } from "$lib/analytics/consent";
 
 export type AnalyticsEventProperties = Record<
   string,
@@ -27,6 +28,8 @@ type AnalyticsAdapter = {
 type PostHogLike = {
   init: (apiKey: string, options?: Record<string, unknown>) => void;
   capture: (event: string, properties?: Record<string, unknown>) => void;
+  opt_out_capturing?: () => void;
+  reset?: () => void;
   __kwipooInitialized?: boolean;
 };
 
@@ -116,6 +119,7 @@ const postHogAdapter: AnalyticsAdapter = {
         api_host: POSTHOG_HOST,
         autocapture: false,
         capture_pageview: false,
+        disable_session_recording: true,
         person_profiles: "identified_only",
       });
       posthog.__kwipooInitialized = true;
@@ -146,7 +150,7 @@ export function isAnalyticsEnabled(): boolean {
 }
 
 export function initializeAnalytics(): Promise<boolean> {
-  if (!browser || !ANALYTICS_ENABLED) {
+  if (!browser || !ANALYTICS_ENABLED || !hasAnalyticsConsent()) {
     return Promise.resolve(false);
   }
 
@@ -166,7 +170,7 @@ export async function trackAnalyticsEvent(
   event: string,
   properties?: AnalyticsEventProperties,
 ): Promise<void> {
-  if (!browser || !ANALYTICS_ENABLED) {
+  if (!browser || !ANALYTICS_ENABLED || !hasAnalyticsConsent()) {
     return;
   }
 
@@ -180,7 +184,7 @@ export async function trackAnalyticsEvent(
 }
 
 export function trackPageView(properties: MarketingPageViewProperties): void {
-  if (!browser || !ANALYTICS_ENABLED) {
+  if (!browser || !ANALYTICS_ENABLED || !hasAnalyticsConsent()) {
     return;
   }
 
@@ -198,4 +202,15 @@ export function trackCtaClick(properties: MarketingCtaClickedInput): void {
     ANALYTICS_EVENT_NAMES.marketingCtaClicked,
     createMarketingCtaClickedProperties(properties),
   );
+}
+
+export function disableAnalyticsCapture(): void {
+  if (!browser) {
+    return;
+  }
+
+  const posthog = getPostHog();
+
+  posthog?.opt_out_capturing?.();
+  posthog?.reset?.();
 }
